@@ -1,0 +1,1 @@
+<a href="<?=SITE_DIR?>"><img width="140" src="<?=SITE_TEMPLATE_PATH?>/images/terramic_logo.png" height="130"></a>

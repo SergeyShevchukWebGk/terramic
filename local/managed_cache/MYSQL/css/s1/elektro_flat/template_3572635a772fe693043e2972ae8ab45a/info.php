@@ -1,0 +1,1 @@
+<? $arFilesInfo = array( 'FILES' => array("/bitrix/components/bitrix/map.yandex.system/templates/.default/style.css" => "1489124554666","/local/templates/elektro_flat/template_styles.css" => "1507063173225527",), 'CUR_SEL_CNT' => '2772', 'CUR_IE_CNT' => '0'); ?>

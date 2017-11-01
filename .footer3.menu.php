@@ -1,0 +1,25 @@
+<?
+$aMenuLinks = Array(
+	Array(
+		"Пресс-центр", 
+		"javascript:void(0)", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Фотогалерея", 
+		"javascript:void(0)", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Видеогалерея", 
+		"javascript:void(0)", 
+		Array(), 
+		Array(), 
+		"" 
+	)
+);
+?>

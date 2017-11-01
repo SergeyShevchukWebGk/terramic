@@ -1,0 +1,16 @@
+<?
+$PERM["vendors"]["G8"]="W";
+$PERM["vendors"]["*"]="D";
+$PERM["returns"]["*"]="D";
+$PERM["news"]["G8"]="W";
+$PERM["news"]["*"]="D";
+$PERM["reviews"]["G8"]="W";
+$PERM["reviews"]["*"]="D";
+$PERM["warranty"]["*"]="D";
+$PERM["about"]["*"]="D";
+$PERM["promotions"]["8"]="W";
+$PERM["personal"]["8"]="W";
+$PERM["catalog"]["8"]="W";
+$PERM["index.php"]["8"]="W";
+$PERM["/"]["*"]="R";
+?>

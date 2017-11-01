@@ -1,0 +1,62 @@
+<?
+if($INCLUDE_FROM_CACHE!='Y')return false;
+$datecreate = '001509436117';
+$dateexpire = '001545436117';
+$ser_content = 'a:2:{s:7:"CONTENT";s:6954:"
+<script type="text/javascript">	
+	BX.bind(BX("under_order_anch_bx_117848907_819"), "click", function() {		
+		BX.PopupForm =
+		{			
+			popup: null,
+			arParams: {}
+		};
+		BX.PopupForm.popup = BX.PopupWindowManager.create("under_order_s1_bx_117848907_819", null, {
+			autoHide: true,
+			offsetLeft: 0,
+			offsetTop: 0,			
+			overlay: {
+				opacity: 100
+			},
+			draggable: false,
+			closeByEsc: false,
+			closeIcon: { right : "-10px", top : "-10px"},
+			titleBar: {content: BX.create("span", {html: "Заказать товар"})},
+			content: "<div class=\'popup-window-wait\'><i class=\'fa fa-spinner fa-pulse\'></i></div>",			
+			events: {
+				onAfterPopupShow: function()
+				{
+					if(!BX("under_order_s1_bx_117848907_819_form")) {
+						BX.ajax.post(
+							"/local/components/altop/forms/templates/.default/popup.php",
+							{							
+								arParams: {\'POPUP_ID\':\'under_order_s1_bx_117848907_819\',\'FORM_ACTION\':\'/local/components/altop/forms/script.php\',\'PARAMS\':{\'IBLOCK_TYPE\':\'forms\',\'IBLOCK_ID\':\'2\',\'ELEMENT_ID\':\'819\',\'ELEMENT_AREA_ID\':\'bx_117848907_819\',\'ELEMENT_NAME\':\'Пленка тепличная Южанка 6 м,120 мкм, 5 л., синий, 3с.\',\'ELEMENT_PRICE\':\'\',\'BUTTON_ID\':\'under_order_anch_bx_117848907_819\',\'CACHE_TYPE\':\'A\',\'CACHE_TIME\':\'36000000\',\'~IBLOCK_TYPE\':\'forms\',\'~IBLOCK_ID\':\'2\',\'~ELEMENT_ID\':\'819\',\'~ELEMENT_AREA_ID\':\'bx_117848907_819\',\'~ELEMENT_NAME\':\'Пленка тепличная Южанка 6 м,120 мкм, 5 л., синий, 3с.\',\'~ELEMENT_PRICE\':\'\',\'~BUTTON_ID\':\'under_order_anch_bx_117848907_819\',\'~CACHE_TYPE\':\'A\',\'~CACHE_TIME\':\'36000000\',\'SELECT_PROP_DIV\':\'\',\'USE_CAPTCHA\':\'Y\',\'IS_AUTHORIZED\':\'Y\',\'CAPTCHA_CODE\':\'\',\'PHONE_MASK\':\'+9{1,3} (999) 99-99-999\',\'VALIDATE_PHONE_MASK\':\'/[+][0-9]{1,3} [(][0-9]{3}[)] [0-9]{2}[-][0-9]{2}[-][0-9]{3}$/i\',\'PARAMS_STRING\':\'eNq9UstKw0AU_ZUhuFBMax5t7ExXYzLQYNuENhU0lKG-0IUKLYIgKdSNSz_BP5BulKoVf2HyR95M0zatD8SFIWRuzrmvc-90iFEg1z2i60Rxt6qevc2DXZ8p5R4pEuX4onvWS2w8Y11HKZ8SAzBdIwqrshqrByla0nGCF-c4bTAqSYAtouxfcV3fLBVKWNvk4C1xY-5epzVZugQpxL14FY_iTbyIIYpvwHwHYBTfAjSM75B4EE9imPIWEmNVNzQ44H-solwiEq95FcUDMQKXkXhWkRkP8rKgOS_oN1xcW1YELanOrVYQePW0aRN8L88Pj7r8opt8O-cHXCf8SxWQwKZ2hc3GBwOlS4ybqiOKaWnymQ6g_8PskwT9zPRlakOeYPS_XFyBlSF-swMz4_8_SyhkKi5vQSr-4x6SkXyziAz1zSZAcROaspOWPJ877k62K4hvNRm3qR_YFZqm3p3Oz21y2goqXsPdY84CaSQXQMZw23OWhfoVr854jTa3E8SATOv4WlfNCK1ijNcQxjn5TuTBBd2hVdehAeOLkRZEboTr7VDL4fYkQbia_plRuNZGE9uIwlxc-5NpRisbp0o5-lwwwH1QOA,,\'},\'RESULT\':{\'IBLOCK\':{\'ID\':\'2\',\'CODE\':\'under_order_s1\',\'NAME\':\'Заказать товар\',\'PROPERTIES\':[{\'ID\':\'5\',\'TIMESTAMP_X\':\'2017-03-10 08:54:28\',\'IBLOCK_ID\':\'2\',\'NAME\':\'Товар\',\'ACTIVE\':\'Y\',\'SORT\':\'1\',\'CODE\':\'PRODUCT\',\'DEFAULT_VALUE\':\'\',\'PROPERTY_TYPE\':\'S\',\'ROW_COUNT\':\'1\',\'COL_COUNT\':\'30\',\'LIST_TYPE\':\'L\',\'MULTIPLE\':\'N\',\'XML_ID\':\'PRODUCT\',\'FILE_TYPE\':\'\',\'MULTIPLE_CNT\':\'5\',\'TMP_ID\':\'\',\'LINK_IBLOCK_ID\':\'\',\'WITH_DESCRIPTION\':\'N\',\'SEARCHABLE\':\'N\',\'FILTRABLE\':\'N\',\'IS_REQUIRED\':\'N\',\'VERSION\':\'1\',\'USER_TYPE\':\'\',\'USER_TYPE_SETTINGS\':\'\',\'HINT\':\'\'},{\'ID\':\'6\',\'TIMESTAMP_X\':\'2017-03-10 08:54:28\',\'IBLOCK_ID\':\'2\',\'NAME\':\'Имя\',\'ACTIVE\':\'Y\',\'SORT\':\'2\',\'CODE\':\'NAME\',\'DEFAULT_VALUE\':\'\',\'PROPERTY_TYPE\':\'S\',\'ROW_COUNT\':\'1\',\'COL_COUNT\':\'30\',\'LIST_TYPE\':\'L\',\'MULTIPLE\':\'N\',\'XML_ID\':\'NAME\',\'FILE_TYPE\':\'\',\'MULTIPLE_CNT\':\'5\',\'TMP_ID\':\'\',\'LINK_IBLOCK_ID\':\'\',\'WITH_DESCRIPTION\':\'N\',\'SEARCHABLE\':\'N\',\'FILTRABLE\':\'N\',\'IS_REQUIRED\':\'Y\',\'VERSION\':\'1\',\'USER_TYPE\':\'\',\'USER_TYPE_SETTINGS\':\'\',\'HINT\':\'\'},{\'ID\':\'7\',\'TIMESTAMP_X\':\'2017-03-10 08:54:28\',\'IBLOCK_ID\':\'2\',\'NAME\':\'Телефон\',\'ACTIVE\':\'Y\',\'SORT\':\'3\',\'CODE\':\'PHONE\',\'DEFAULT_VALUE\':\'\',\'PROPERTY_TYPE\':\'S\',\'ROW_COUNT\':\'1\',\'COL_COUNT\':\'30\',\'LIST_TYPE\':\'L\',\'MULTIPLE\':\'N\',\'XML_ID\':\'PHONE\',\'FILE_TYPE\':\'\',\'MULTIPLE_CNT\':\'5\',\'TMP_ID\':\'\',\'LINK_IBLOCK_ID\':\'\',\'WITH_DESCRIPTION\':\'N\',\'SEARCHABLE\':\'N\',\'FILTRABLE\':\'N\',\'IS_REQUIRED\':\'Y\',\'VERSION\':\'1\',\'USER_TYPE\':\'\',\'USER_TYPE_SETTINGS\':\'\',\'HINT\':\'\'},{\'ID\':\'8\',\'TIMESTAMP_X\':\'2017-03-10 08:54:28\',\'IBLOCK_ID\':\'2\',\'NAME\':\'Время звонка\',\'ACTIVE\':\'Y\',\'SORT\':\'4\',\'CODE\':\'TIME\',\'DEFAULT_VALUE\':\'\',\'PROPERTY_TYPE\':\'S\',\'ROW_COUNT\':\'1\',\'COL_COUNT\':\'30\',\'LIST_TYPE\':\'L\',\'MULTIPLE\':\'N\',\'XML_ID\':\'TIME\',\'FILE_TYPE\':\'\',\'MULTIPLE_CNT\':\'5\',\'TMP_ID\':\'\',\'LINK_IBLOCK_ID\':\'\',\'WITH_DESCRIPTION\':\'N\',\'SEARCHABLE\':\'N\',\'FILTRABLE\':\'N\',\'IS_REQUIRED\':\'N\',\'VERSION\':\'1\',\'USER_TYPE\':\'\',\'USER_TYPE_SETTINGS\':\'\',\'HINT\':\'\'},{\'ID\':\'9\',\'TIMESTAMP_X\':\'2017-03-10 08:54:28\',\'IBLOCK_ID\':\'2\',\'NAME\':\'Сообщение\',\'ACTIVE\':\'Y\',\'SORT\':\'5\',\'CODE\':\'MESSAGE\',\'DEFAULT_VALUE\':{\'TYPE\':\'TEXT\',\'TEXT\':\'\'},\'PROPERTY_TYPE\':\'S\',\'ROW_COUNT\':\'1\',\'COL_COUNT\':\'30\',\'LIST_TYPE\':\'L\',\'MULTIPLE\':\'N\',\'XML_ID\':\'MESSAGE\',\'FILE_TYPE\':\'\',\'MULTIPLE_CNT\':\'5\',\'TMP_ID\':\'\',\'LINK_IBLOCK_ID\':\'\',\'WITH_DESCRIPTION\':\'N\',\'SEARCHABLE\':\'N\',\'FILTRABLE\':\'N\',\'IS_REQUIRED\':\'N\',\'VERSION\':\'1\',\'USER_TYPE\':\'HTML\',\'USER_TYPE_SETTINGS\':{\'height\':\'61\'},\'HINT\':\'\'}],\'STRING\':\'eNrtls9r2zAUx_-VoHvBduz8UE6urTZi_jVLTpOTCaysuWzQbKcQKGWXwWCwy3bt_oKuEDa2tX-D_B_tSZEXx8lGLoGF9ZBYeU96-r6nj180xjaeTbGFEfVRb4pNjCz5tDHyYp8oE4xfv3h2fpm_vJTfU1NPiNxQTbDaGImP4lZ8h89XcVtcXBfvGsW1eBB38ONKxTAwStI4ISmnhKHeGDt4NsEGDKxWXYCjnjDgNCSMu2GSD5WpC-IMs31kNI9Mo2F0sGNjqyNd4KHHQew9yTfSKFVKCeJzVVQLI9fjdED0ipFeweKUa5NZq0VbpeFn3nJCEyOfnLhZwPOBG2RqCmxT-nTGo5yPknITpuWm8VnuxVm0tlNX7hSs7FCVpqEdAWW8GiiQzw5GIexOk6A0RzqzYRjoWqxrhkhcJzQgOlIkF1mrILn3W5CjA3EovwwUaRQCGkGVV8VWdph3Rnk_9wnzUppwGkdVPbL2jLip13eP15Uu5fC0bpfHT1mekqcZTYlfdUE-A5Ky1RZl6TJG0mpenYopZ4RzGp2ypQ_y6FOZatSbT7C5FcPWXjCESolP4mfxfkcC629jleiDwK9cIvig2Rvthz1rK3vt_bRAW7XAhfghFsUbaIX3O0LYrEHoXDBcXP04OiAKq4ofMdzEsLkVw85eMLSACvGhuAIQoQ824MpwXCdZlNeHHXm0N5uiVHhQTbEU_PiHvEmjvZXG7n6aXCKoEjdcMOCD-FK8BSbvxTex2BFEZ_N-CNKYe_pcJxYhL5mWPH-NjRySIa8NFbHzf-waWUnt_6B2ySUPA_QXfMeweKZyvDifPL94hXoT3DLl4VWhns9_ARBTqaQ,\'},\'ELEMENT\':{\'ID\':\'819\',\'NAME\':\'Пленка тепличная Южанка 6 м,120 мкм, 5 л., синий, 3с.\',\'PREVIEW_PICTURE\':{\'SRC\':\'/upload/resize_cache/iblock/0ea/178_178_1/0eae55c2ec07b72b7c27eb97c56b9463.jpg\',\'WIDTH\':\'178\',\'HEIGHT\':\'125\'}},\'USER\':{\'NAME\':\'Иван Иванов\',\'EMAIL\':\'mol4you@mail.ru\'}},\'MESS\':{\'FORMS_PRICE\':\'Цена\',\'FORMS_CAPTCHA\':\'Код с картинки\',\'FORMS_SEND\':\'Отправить\'}}							},
+							BX.delegate(function(result)
+							{
+								this.setContent(result);
+								var windowSize =  BX.GetWindowInnerSize(),
+								windowScroll = BX.GetWindowScrollPos(),
+								popupHeight = BX("under_order_s1_bx_117848907_819").offsetHeight;
+								BX("under_order_s1_bx_117848907_819").style.top = windowSize.innerHeight/2 - popupHeight/2 + windowScroll.scrollTop + "px";
+							},
+							this)
+						);
+					}					
+				}
+			}			
+		});
+		
+		BX.addClass(BX("under_order_s1_bx_117848907_819"), "pop-up forms full");
+		close = BX.findChildren(BX("under_order_s1_bx_117848907_819"), {className: "popup-window-close-icon"}, true);
+		if(!!close && 0 < close.length) {
+			for(i = 0; i < close.length; i++) {					
+				close[i].innerHTML = "<i class=\'fa fa-times\'></i>";
+			}
+		}
+
+		BX.PopupForm.popup.show();		
+	});
+</script>
+
+";s:4:"VARS";a:2:{s:8:"arResult";a:3:{s:6:"IBLOCK";a:5:{s:2:"ID";s:1:"2";s:4:"CODE";s:14:"under_order_s1";s:4:"NAME";s:27:"Заказать товар";s:10:"PROPERTIES";a:5:{i:0;a:26:{s:2:"ID";s:1:"5";s:11:"TIMESTAMP_X";s:19:"2017-03-10 08:54:28";s:9:"IBLOCK_ID";s:1:"2";s:4:"NAME";s:10:"Товар";s:6:"ACTIVE";s:1:"Y";s:4:"SORT";s:1:"1";s:4:"CODE";s:7:"PRODUCT";s:13:"DEFAULT_VALUE";s:0:"";s:13:"PROPERTY_TYPE";s:1:"S";s:9:"ROW_COUNT";s:1:"1";s:9:"COL_COUNT";s:2:"30";s:9:"LIST_TYPE";s:1:"L";s:8:"MULTIPLE";s:1:"N";s:6:"XML_ID";s:7:"PRODUCT";s:9:"FILE_TYPE";N;s:12:"MULTIPLE_CNT";s:1:"5";s:6:"TMP_ID";N;s:14:"LINK_IBLOCK_ID";N;s:16:"WITH_DESCRIPTION";s:1:"N";s:10:"SEARCHABLE";s:1:"N";s:9:"FILTRABLE";s:1:"N";s:11:"IS_REQUIRED";s:1:"N";s:7:"VERSION";s:1:"1";s:9:"USER_TYPE";N;s:18:"USER_TYPE_SETTINGS";N;s:4:"HINT";N;}i:1;a:26:{s:2:"ID";s:1:"6";s:11:"TIMESTAMP_X";s:19:"2017-03-10 08:54:28";s:9:"IBLOCK_ID";s:1:"2";s:4:"NAME";s:6:"Имя";s:6:"ACTIVE";s:1:"Y";s:4:"SORT";s:1:"2";s:4:"CODE";s:4:"NAME";s:13:"DEFAULT_VALUE";s:0:"";s:13:"PROPERTY_TYPE";s:1:"S";s:9:"ROW_COUNT";s:1:"1";s:9:"COL_COUNT";s:2:"30";s:9:"LIST_TYPE";s:1:"L";s:8:"MULTIPLE";s:1:"N";s:6:"XML_ID";s:4:"NAME";s:9:"FILE_TYPE";N;s:12:"MULTIPLE_CNT";s:1:"5";s:6:"TMP_ID";N;s:14:"LINK_IBLOCK_ID";N;s:16:"WITH_DESCRIPTION";s:1:"N";s:10:"SEARCHABLE";s:1:"N";s:9:"FILTRABLE";s:1:"N";s:11:"IS_REQUIRED";s:1:"Y";s:7:"VERSION";s:1:"1";s:9:"USER_TYPE";N;s:18:"USER_TYPE_SETTINGS";N;s:4:"HINT";N;}i:2;a:26:{s:2:"ID";s:1:"7";s:11:"TIMESTAMP_X";s:19:"2017-03-10 08:54:28";s:9:"IBLOCK_ID";s:1:"2";s:4:"NAME";s:14:"Телефон";s:6:"ACTIVE";s:1:"Y";s:4:"SORT";s:1:"3";s:4:"CODE";s:5:"PHONE";s:13:"DEFAULT_VALUE";s:0:"";s:13:"PROPERTY_TYPE";s:1:"S";s:9:"ROW_COUNT";s:1:"1";s:9:"COL_COUNT";s:2:"30";s:9:"LIST_TYPE";s:1:"L";s:8:"MULTIPLE";s:1:"N";s:6:"XML_ID";s:5:"PHONE";s:9:"FILE_TYPE";N;s:12:"MULTIPLE_CNT";s:1:"5";s:6:"TMP_ID";N;s:14:"LINK_IBLOCK_ID";N;s:16:"WITH_DESCRIPTION";s:1:"N";s:10:"SEARCHABLE";s:1:"N";s:9:"FILTRABLE";s:1:"N";s:11:"IS_REQUIRED";s:1:"Y";s:7:"VERSION";s:1:"1";s:9:"USER_TYPE";N;s:18:"USER_TYPE_SETTINGS";N;s:4:"HINT";N;}i:3;a:26:{s:2:"ID";s:1:"8";s:11:"TIMESTAMP_X";s:19:"2017-03-10 08:54:28";s:9:"IBLOCK_ID";s:1:"2";s:4:"NAME";s:23:"Время звонка";s:6:"ACTIVE";s:1:"Y";s:4:"SORT";s:1:"4";s:4:"CODE";s:4:"TIME";s:13:"DEFAULT_VALUE";s:0:"";s:13:"PROPERTY_TYPE";s:1:"S";s:9:"ROW_COUNT";s:1:"1";s:9:"COL_COUNT";s:2:"30";s:9:"LIST_TYPE";s:1:"L";s:8:"MULTIPLE";s:1:"N";s:6:"XML_ID";s:4:"TIME";s:9:"FILE_TYPE";N;s:12:"MULTIPLE_CNT";s:1:"5";s:6:"TMP_ID";N;s:14:"LINK_IBLOCK_ID";N;s:16:"WITH_DESCRIPTION";s:1:"N";s:10:"SEARCHABLE";s:1:"N";s:9:"FILTRABLE";s:1:"N";s:11:"IS_REQUIRED";s:1:"N";s:7:"VERSION";s:1:"1";s:9:"USER_TYPE";N;s:18:"USER_TYPE_SETTINGS";N;s:4:"HINT";N;}i:4;a:26:{s:2:"ID";s:1:"9";s:11:"TIMESTAMP_X";s:19:"2017-03-10 08:54:28";s:9:"IBLOCK_ID";s:1:"2";s:4:"NAME";s:18:"Сообщение";s:6:"ACTIVE";s:1:"Y";s:4:"SORT";s:1:"5";s:4:"CODE";s:7:"MESSAGE";s:13:"DEFAULT_VALUE";a:2:{s:4:"TYPE";s:4:"TEXT";s:4:"TEXT";s:0:"";}s:13:"PROPERTY_TYPE";s:1:"S";s:9:"ROW_COUNT";s:1:"1";s:9:"COL_COUNT";s:2:"30";s:9:"LIST_TYPE";s:1:"L";s:8:"MULTIPLE";s:1:"N";s:6:"XML_ID";s:7:"MESSAGE";s:9:"FILE_TYPE";N;s:12:"MULTIPLE_CNT";s:1:"5";s:6:"TMP_ID";N;s:14:"LINK_IBLOCK_ID";N;s:16:"WITH_DESCRIPTION";s:1:"N";s:10:"SEARCHABLE";s:1:"N";s:9:"FILTRABLE";s:1:"N";s:11:"IS_REQUIRED";s:1:"N";s:7:"VERSION";s:1:"1";s:9:"USER_TYPE";s:4:"HTML";s:18:"USER_TYPE_SETTINGS";a:1:{s:6:"height";i:61;}s:4:"HINT";N;}}s:6:"STRING";s:852:"eNrtls9r2zAUx_-VoHvBduz8UE6urTZi_jVLTpOTCaysuWzQbKcQKGWXwWCwy3bt_oKuEDa2tX-D_B_tSZEXx8lGLoGF9ZBYeU96-r6nj180xjaeTbGFEfVRb4pNjCz5tDHyYp8oE4xfv3h2fpm_vJTfU1NPiNxQTbDaGImP4lZ8h89XcVtcXBfvGsW1eBB38ONKxTAwStI4ISmnhKHeGDt4NsEGDKxWXYCjnjDgNCSMu2GSD5WpC-IMs31kNI9Mo2F0sGNjqyNd4KHHQew9yTfSKFVKCeJzVVQLI9fjdED0ipFeweKUa5NZq0VbpeFn3nJCEyOfnLhZwPOBG2RqCmxT-nTGo5yPknITpuWm8VnuxVm0tlNX7hSs7FCVpqEdAWW8GiiQzw5GIexOk6A0RzqzYRjoWqxrhkhcJzQgOlIkF1mrILn3W5CjA3EovwwUaRQCGkGVV8VWdph3Rnk_9wnzUppwGkdVPbL2jLip13eP15Uu5fC0bpfHT1mekqcZTYlfdUE-A5Ky1RZl6TJG0mpenYopZ4RzGp2ypQ_y6FOZatSbT7C5FcPWXjCESolP4mfxfkcC629jleiDwK9cIvig2Rvthz1rK3vt_bRAW7XAhfghFsUbaIX3O0LYrEHoXDBcXP04OiAKq4ofMdzEsLkVw85eMLSACvGhuAIQoQ824MpwXCdZlNeHHXm0N5uiVHhQTbEU_PiHvEmjvZXG7n6aXCKoEjdcMOCD-FK8BSbvxTex2BFEZ_N-CNKYe_pcJxYhL5mWPH-NjRySIa8NFbHzf-waWUnt_6B2ySUPA_QXfMeweKZyvDifPL94hXoT3DLl4VWhns9_ARBTqaQ,";}s:7:"ELEMENT";a:3:{s:2:"ID";s:3:"819";s:4:"NAME";s:85:"Пленка тепличная Южанка 6 м,120 мкм, 5 л., синий, 3с.";s:15:"PREVIEW_PICTURE";a:3:{s:3:"SRC";s:78:"/upload/resize_cache/iblock/0ea/178_178_1/0eae55c2ec07b72b7c27eb97c56b9463.jpg";s:5:"WIDTH";i:178;s:6:"HEIGHT";i:125;}}s:4:"USER";a:2:{s:4:"NAME";s:21:"Иван Иванов";s:5:"EMAIL";s:15:"mol4you@mail.ru";}}s:18:"templateCachedData";a:2:{s:12:"additionalJS";s:58:"/local/components/altop/forms/templates/.default/script.js";s:9:"frameMode";b:1;}}}';
+return true;
+?>

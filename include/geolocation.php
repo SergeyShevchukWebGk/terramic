@@ -1,0 +1,50 @@
+<?/*
+<?$APPLICATION->IncludeComponent(
+	"altop:geolocation",
+	"",
+	Array(
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO",
+		"IBLOCK_ID" => "",
+		"IBLOCK_TYPE" => "-",
+		"SHOW_CONFIRM" => "Y",
+		"SHOW_DEFAULT_LOCATIONS" => "Y",
+		"SHOW_TEXT_BLOCK" => "Y",
+		"SHOW_TEXT_BLOCK_TITLE" => "Y",
+		"TEXT_BLOCK_TITLE" => "Не нашли свой город?"
+	)
+);?>
+*/?>
+<div class="telephone">
+	<table cellpadding="1" cellspacing="1">
+	<tbody>
+	<tr>
+		<td>
+			<p>
+ <i class="fa fa-phone"></i>Самара:
+			</p>
+			<p>
+ <i class="fa fa-phone"></i>Краснодар:
+			</p>
+			<p>
+ <i class="fa fa-phone"></i>По всей России:
+			</p>
+		</td>
+		<td>
+			<p>
+				7 (846) 233-50-06
+			</p>
+			<p>
+				7 (861) 212-30-05
+			</p>
+			<p>
+				8 (800) 775-13-53
+			</p>
+		</td>
+	</tr>
+	</tbody>
+	</table>
+</div>
+<br>
