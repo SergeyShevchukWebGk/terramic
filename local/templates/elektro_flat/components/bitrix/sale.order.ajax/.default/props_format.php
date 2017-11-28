@@ -52,23 +52,23 @@ if(!function_exists("PrintPropsForm")) {
 		// echo("</pre>");
 		if(!empty($arSource)) {
 			foreach($arSource as $arProperties) {
-				
+
 				if(!($group==$arProperties['PROPS_GROUP_ID'])):
 					if($group==0):?>
-						<div class="group_el group_id_<?=$arProperties['PROPS_GROUP_ID']?>">
-						<h3><?=$arProperties['GROUP_NAME']?></h3>	
+						<div class="group_el group_id_<?=$arProperties['PROPS_GROUP_ID']?> <?=($arProperties["CODE"] == 'delivery_type')? 'delivery_type':''?>">
+						<h3><?=$arProperties['GROUP_NAME']?></h3>
 					<?else:?>
 						</div>
-						<div class="group_el group_id_<?=$arProperties['PROPS_GROUP_ID']?>">
-						<h3><?=$arProperties['GROUP_NAME']?></h3>	
+						<div class="group_el group_id_<?=$arProperties['PROPS_GROUP_ID']?> <?=($arProperties["CODE"] == 'delivery_type')? 'delivery_type':''?>">
+						<h3><?=$arProperties['GROUP_NAME']?></h3>
 					<?endif;
 					$group = $arProperties['PROPS_GROUP_ID'];
 				endif;
-				?>					
-				
-				<div class="property" data-property-id-row="<?=intval(intval($arProperties["ID"]))?>">
+				?>
+
+				<div class="property <?=($arProperties["CODE"] == 'delivery_type')? 'delivery_type':''?>" data-property-id-row="<?=intval(intval($arProperties["ID"]))?>" >
 					<?if($arProperties["TYPE"] == "CHECKBOX") {?>
-						
+
 						<input type="hidden" name="<?=$arProperties["FIELD_NAME"]?>" value="">
 						<div class="label">
 							<?=$arProperties["NAME"]?>
@@ -85,15 +85,9 @@ if(!function_exists("PrintPropsForm")) {
 							<?endif;?>
 						</div>
 						<div class="clr"></div>
-					
+
 					<?} elseif($arProperties["TYPE"] == "TEXT") {?>
-						<?if ($arProperties["CODE"] == "PASSPORT_SERIES") {
-                            $maxlength = 4;
-                        } else if ($arProperties["CODE"] == "PASSPORT_NUMBER") {
-                            $maxlength = 6;
-                        } else {
-                            $maxlength = 250;
-                        }?>
+
 						<div class="label">
 							<?=$arProperties["NAME"]?>
 							<?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
@@ -101,7 +95,7 @@ if(!function_exists("PrintPropsForm")) {
 							<?endif;?>
 						</div>
 						<div class="block">
-							<input type="text" maxlength="<?= $maxlength ?>" <?if (in_array($arProperties["CODE"], array("PASSPORT_SERIES", "PASSPORT_NUMBER"))) {?>onkeydown="if (event.which > 57 || event.which < 48) {return false;}"<?}?> size="<?=$arProperties["SIZE1"]?>" value="<?=$arProperties["VALUE"]?>" name="<?=$arProperties["FIELD_NAME"]?>" id="<?=$arProperties["FIELD_NAME"]?>" />
+							<input type="text" maxlength="250" size="<?=$arProperties["SIZE1"]?>" value="<?=$arProperties["VALUE"]?>" name="<?=$arProperties["FIELD_NAME"]?>" id="<?=$arProperties["FIELD_NAME"]?>" />
 							<?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
 								<div class="description">
 									<?=$arProperties["DESCRIPTION"]?>
@@ -109,9 +103,9 @@ if(!function_exists("PrintPropsForm")) {
 							<?endif;?>
 						</div>
 						<div class="clr"></div>
-					
+
 					<?} elseif($arProperties["TYPE"] == "SELECT") {?>
-						
+
 						<div class="label">
 							<?=$arProperties["NAME"]?>
 							<?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
@@ -131,9 +125,9 @@ if(!function_exists("PrintPropsForm")) {
 							<?endif;?>
 						</div>
 						<div class="clr"></div>
-					
+
 					<?} elseif($arProperties["TYPE"] == "MULTISELECT") {?>
-						
+
 						<div class="label">
 							<?=$arProperties["NAME"]?>
 							<?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
@@ -153,9 +147,9 @@ if(!function_exists("PrintPropsForm")) {
 							<?endif;?>
 						</div>
 						<div class="clr"></div>
-					
+
 					<?} elseif($arProperties["TYPE"] == "TEXTAREA") {?>
-						
+
 						<div class="label">
 							<?=$arProperties["NAME"]?>
 							<?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
@@ -171,9 +165,9 @@ if(!function_exists("PrintPropsForm")) {
 							<?endif;?>
 						</div>
 						<div class="clr"></div>
-					
+
 					<?} elseif($arProperties["TYPE"] == "LOCATION") {?>
-						
+
 						<div class="label">
 							<?=$arProperties["NAME"]?>
 							<?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
@@ -235,9 +229,9 @@ if(!function_exists("PrintPropsForm")) {
 							<?endif;?>
 						</div>
 						<div class="clr"></div>
-					
+
 					<?} elseif($arProperties["TYPE"] == "RADIO") {?>
-						
+
 						<div class="label">
 							<?=$arProperties["NAME"]?>
 							<?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
@@ -259,9 +253,9 @@ if(!function_exists("PrintPropsForm")) {
 							<?endif;?>
 						</div>
 						<div class="clr"></div>
-					
+
 					<?} elseif($arProperties["TYPE"] == "FILE") {?>
-						
+
 						<div class="label">
 							<?=$arProperties["NAME"]?>
 							<?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
@@ -277,7 +271,7 @@ if(!function_exists("PrintPropsForm")) {
 							<?endif;?>
 						</div>
 						<div class="clr"></div>
-					
+
 					<?}?>
 				</div>
 				<?if(CSaleLocation::isLocationProEnabled()):
@@ -293,7 +287,7 @@ if(!function_exists("PrintPropsForm")) {
 
 					if($arProperties['IS_ZIP'] == 'Y')
 						$propertyAttributes['isZip'] = true;?>
-					
+
 					<script>
 						(window.top.BX || BX).saleOrderAjax.addPropertyDesc(<?=CUtil::PhpToJSObject(array(
 							'id' => intval($arProperties["ID"]),

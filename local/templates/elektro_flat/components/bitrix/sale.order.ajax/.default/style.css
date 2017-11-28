@@ -1,4 +1,4 @@
-.bx-core-dialog-overlay{	
+.bx-core-dialog-overlay{
 	background:rgba(87, 91, 113, 0.4) !important;;
 }
 
@@ -7,6 +7,6 @@
     border: 8px solid #afd8d3;
     border-radius: 8px;
 }
-.group_el{
-
+.delivery_type{
+    display: none;
 }
