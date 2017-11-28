@@ -1,7 +1,7 @@
 <?
 if($INCLUDE_FROM_CACHE!='Y')return false;
-$datecreate = '001509436117';
-$dateexpire = '001545436117';
+$datecreate = '001509609961';
+$dateexpire = '001545609961';
 $ser_content = 'a:2:{s:7:"CONTENT";s:28447:"
 <div class="reviews-collapse reviews-minimized">
 	<a class="btn_buy apuo reviews-collapse-link" id="catalog_review_anch" href="javascript:void(0)" rel="nofollow"><i class="fa fa-pencil"></i><span class="full">Добавить свой отзыв</span><span class="short">Добавить свой отзыв</span></a>

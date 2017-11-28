@@ -1,7 +1,7 @@
 <?
 if($INCLUDE_FROM_CACHE!='Y')return false;
-$datecreate = '001507071891';
-$dateexpire = '001509663891';
+$datecreate = '001510148831';
+$dateexpire = '001512740831';
 $ser_content = 'a:2:{s:7:"CONTENT";s:0:"";s:4:"VARS";a:2:{s:7:"results";a:7:{i:0;a:5:{s:5:"title";s:61:"Включен расширенный вывод ошибок";s:8:"critical";s:5:"HIGHT";s:6:"detail";s:126:"Расширенный вывод ошибок может раскрыть важную информацию о ресурсе";s:14:"recommendation";s:63:"Выключить в файле настроек .settings.php";s:15:"additional_info";s:0:"";}i:1;a:5:{s:5:"title";s:77:"Используются устаревшие модули платформы";s:8:"critical";s:5:"HIGHT";s:6:"detail";s:55:"Доступны новые версии модулей";s:14:"recommendation";s:275:"Рекомендуется своевременно обновлять модули платформы, установить рекомендуемые обновления: <a href="/bitrix/admin/update_system.php" target="_blank">Обновление платформы</a>";s:15:"additional_info";s:406:"Модули для которых доступны обновления:<br>main<br />
 fileman<br />
 iblock<br />

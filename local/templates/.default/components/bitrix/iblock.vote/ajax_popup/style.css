@@ -1,0 +1,50 @@
+.popup-window-content .iblock-vote{
+	font-size:12px;
+	color:#a0a4bc;
+	width: 50%;
+    float: left;
+}
+
+.popup-window-content .iblock-vote table{
+	border:none;
+}
+
+.popup-window-content .iblock-vote table td i{
+	font-size:17px;
+}
+
+.popup-window-content .iblock-vote .star i,
+.popup-window-content .iblock-vote .star-empty i{
+	color:#dee0ee;
+}
+
+.popup-window-content .iblock-vote .star-voted i{
+	color:#f6bc00;
+}
+
+.popup-window-content .iblock-vote .star-over i{
+	color:#ca3507;
+}
+
+.popup-window-content .iblock-vote table td.vote-result{
+	font-size:12px;
+	color:#a0a4bc;
+}
+.pop-up.forms .submit {
+    width: 40% !important;
+    float: right !important;
+}
+.row-raiting{
+	width: 60%;
+    float:left;
+    margin-bottom: 5px;
+}
+.row-raiting .span1{
+    width: 125px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.row-raiting .span2{
+  	display: table-cell;
+    vertical-align: top;
+}

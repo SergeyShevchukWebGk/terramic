@@ -46,7 +46,8 @@ $APPLICATION->SetTitle("Оформление заказа");?>
 		"ADDITIONAL_PICT_PROP_17" => "-",
 		"BASKET_IMAGES_SCALING" => "adaptive",
 		"COMPOSITE_FRAME_MODE" => "A",
-		"COMPOSITE_FRAME_TYPE" => "AUTO"
+		"COMPOSITE_FRAME_TYPE" => "AUTO",
+		"SPOT_LOCATION_BY_GEOIP" => "N"
 	),
 	false
 );?>

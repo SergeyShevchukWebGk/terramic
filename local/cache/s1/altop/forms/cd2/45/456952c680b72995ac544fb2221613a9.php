@@ -1,7 +1,7 @@
 <?
 if($INCLUDE_FROM_CACHE!='Y')return false;
-$datecreate = '001509439083';
-$dateexpire = '001545439083';
+$datecreate = '001509542251';
+$dateexpire = '001545542251';
 $ser_content = 'a:2:{s:7:"CONTENT";s:6974:"
 <script type="text/javascript">	
 	BX.bind(BX("under_order_anch_bx_1182278561_819"), "click", function() {		
