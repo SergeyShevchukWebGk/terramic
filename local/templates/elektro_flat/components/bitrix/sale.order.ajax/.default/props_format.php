@@ -106,13 +106,20 @@ if(!function_exists("PrintPropsForm")) {
 
 					<?} elseif($arProperties["TYPE"] == "SELECT") {?>
 
-						<div class="label">
+						<div class="label  <?=($arProperties["CODE"] == 'agreement')? 'agreement':''?> <?=($arProperties["CODE"] == 'stock')?'stock':''?>">
 							<?=$arProperties["NAME"]?>
 							<?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
 								<span class="star">*</span>
 							<?endif;?>
 						</div>
-						<div class="block">
+                        <?if($arProperties["CODE"] == 'stock' && $_POST["BUYER_STORE"] == 3 ){
+                             $select = 'stock_1';
+                        } else if($arProperties["CODE"] == 'stock' && $_POST["BUYER_STORE"] == 8){
+                             $select = 'stock_2';
+                        } else {
+                             $select = '';
+                        }?>
+						<div class="block <?=($arProperties["CODE"] == 'stock')?'stock':''?> <?=($arProperties["CODE"] == 'agreement')? 'agreement':''?> ">
 							<select name="<?=$arProperties["FIELD_NAME"]?>" id="<?=$arProperties["FIELD_NAME"]?>" size="<?=$arProperties["SIZE1"]?>">
 								<?foreach($arProperties["VARIANTS"] as $arVariants):?>
 									<option value="<?=$arVariants["VALUE"]?>"<?if ($arVariants["SELECTED"] == "Y") echo " selected";?>><?=$arVariants["NAME"]?></option>

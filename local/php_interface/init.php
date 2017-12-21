@@ -1,6 +1,8 @@
 <?if (file_exists($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/settings_solo.php")){
 	require_once ($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/settings_solo.php");}
 
+    include ($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/include/.config.php");
+
 // added by HTMLS.OrderCommentPlus - start
 AddEventHandler("sale", "OnSaleComponentOrderOneStepComplete", "OrderCommentPlus");
 AddEventHandler("sale", "OnSaleComponentOrderComplete", "OrderCommentPlus");
@@ -11,7 +13,7 @@ function OrderCommentPlus($ID, $arFields){
 }
 //\\ added by HTMLS.OrderCommentPlus - start
 
-function xprint($t) {
+function arshow($t) {
     echo '<pre>';
     print_r($t);
     echo '</pre>';
@@ -19,7 +21,7 @@ function xprint($t) {
 // AddEventHandler("sale", "OnSaleComponentOrderOneStepProcess", "OrderDelivery");
 
 
-// //удаление стоимости доставки из заказа, с сохранением примерной стоимости( обработчи удаляет стоимость доставки из визуальной части корзины) 
+// //удаление стоимости доставки из заказа, с сохранением примерной стоимости( обработчи удаляет стоимость доставки из визуальной части корзины)
 // \Bitrix\Main\EventManager::getInstance()->addEventHandler('sale','OnSaleComponentOrderResultPrepared','OrderDelivery');
 
 // function OrderDelivery($order, $arUserResult, $request, &$arParams, &$arResult){

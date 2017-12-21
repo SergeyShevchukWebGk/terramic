@@ -119,6 +119,28 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                             $('.delivery_type select option').attr('selected', 'selected');
                         }
                     }
+
+                    var delivery_id = $('.stock_delivery input:checked').val();
+                    var stock_1 = <?=DELIVERY_KRASNODAR?>;
+                    var stock_2 = <?=DELIVERY_SAMARA?>;
+
+                    $('.agreement select option').removeAttr('selected');
+                    if(delivery_id == stock_1){
+                        $('.stock select option:nth-child(1)').attr("selected", "selected");
+                    } else if(delivery_id == stock_2){
+                        $('.stock select option:nth-child(2)').attr("selected", "selected");
+                    } else {
+                        $('.stock_delivery input:checked').addClass('active');
+                    }
+
+                     // изменение соглашения при выборе способа оплаты
+                    if($('#ID_PAY_SYSTEM_ID_<?=PAY_SISTEM_NDS?>:checked').prop('checked')) {
+                        $('.agreement select option').removeAttr('selected');
+                        $('.agreement select option:nth-child(2)').attr("selected", "selected");
+                    } else {
+                        $('.agreement select option').removeAttr('selected');
+                        $('.agreement select option:nth-child(1)').attr("selected", "selected");
+                    }
                 }
 
                 // добавление свйоство доставки в 1С

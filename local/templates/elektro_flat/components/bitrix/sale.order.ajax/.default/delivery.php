@@ -33,9 +33,24 @@
 		}
 
 		function GetBuyerStore() {
-			BX('BUYER_STORE').value = BX('POPUP_STORE_ID').value;
-			BX('store_desc').innerHTML = BX('POPUP_STORE_NAME').value;
-			BX.show(BX('select_store'));
+            $(function(){
+                BX('BUYER_STORE').value = BX('POPUP_STORE_ID').value;
+                var active_cheed = $('.stock_delivery input:checked').attr('class');
+                  if(active_cheed == 'active'){
+                        var buyer = BX('BUYER_STORE').value;
+                        var buyer_1 = <?=BUYER_STORE_KRASNODAR?>;
+                        var buyer_2 = <?=BUYER_STORE_SAMARA?>;
+                        if(buyer == buyer_1){
+                            $('.stock select option:nth-child(1)').attr("selected", "selected");
+                        } else if(buyer == buyer_2){
+                            $('.stock select option:nth-child(2)').attr("selected", "selected");
+                        }
+
+                  }
+                  $('.stock_delivery input:checked').removeClass('active');
+             //   BX('store_desc').innerHTML = BX('POPUP_STORE_NAME').value;
+              //  BX.show(BX('select_store'));
+            })
 		}
 	</script>
 
@@ -58,6 +73,7 @@
 				array("HIDE_ICONS"=>"Y")
 			);?>
 			<table>
+            <?//arshow($arResult["DELIVERY"])?>
 				<?$width = ($arParams["SHOW_STORES_IMAGES"] == "Y") ? 800 : 750;
 				foreach($arResult["DELIVERY"] as $delivery_id => $arDelivery):
 					if($delivery_id !== 0 && intval($delivery_id) <= 0):
@@ -108,7 +124,7 @@
 							</tr>
 						<?endforeach;
 					else:?>
-						<tr>
+						<tr class="stock_delivery">
 							<td valign="top">
 								<?if(count($arDelivery["STORE"]) > 0):
 									$clickHandler = "onClick = \"fShowStore('".$arDelivery["ID"]."','".$arParams["SHOW_STORES_IMAGES"]."','".$width."','".SITE_ID."');submitForm();\"";
