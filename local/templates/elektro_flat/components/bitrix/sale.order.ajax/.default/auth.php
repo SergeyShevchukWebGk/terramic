@@ -136,9 +136,10 @@
 								<td width="0%"></td>
 							<?endif;?>
 							<td>
-								<?=GetMessage("STOF_LOGIN")?> <span class="sof-req">*</span>
+								<?=GetMessage("STOF_LOGIN")?> <span class="sof-req">*</span> (минимум 3 символа)
 								<br />
 								<input type="text" name="NEW_LOGIN" size="30" value="<?=$arResult["AUTH"]["NEW_LOGIN"]?>"/>
+                                
 							</td>
 						</tr>
 						<tr>
@@ -146,7 +147,7 @@
 								<td width="0%"></td>
 							<?endif;?>
 							<td>
-								<?=GetMessage("STOF_PASSWORD")?> <span class="sof-req">*</span>
+								<?=GetMessage("STOF_PASSWORD")?> <span class="sof-req">*</span> (минимум 6 символов)
 								<br />
 								<input type="password" name="NEW_PASSWORD" size="30"/>
 							</td>
@@ -176,7 +177,13 @@
 									</script>
 								</td>
 							</tr>
-						<?endif;?>
+						<?endif;?>                      
+                            <tr>
+                            <td>
+                                
+                                <p style="width: 318px;">   Пароль должен содержать: латинские символы верхнего регистра (A-Z), латинские символы нижнего регистра (a-z), цифры (0-9).</p>
+                            </td>
+                        </tr>
 						<?if($arResult["AUTH"]["captcha_registration"] == "Y") {?>
 							<tr>
 								<td>
@@ -197,6 +204,7 @@
 								</td>
 							</tr>
 						<?}?>
+                        
 						<tr>
 							<td>
 								<button type="submit" name="submit" class="btn_buy popdef" value="<?=GetMessage("STOF_NEXT_STEP")?>"><?=GetMessage("STOF_NEXT_STEP")?></button>
