@@ -1,1 +1,0 @@
-<? $arFilesInfo = array( 'FILES' => array("/local/templates/elektro_flat/components/bitrix/subscribe.edit/clear/style.css" => "15070631732902",), 'CUR_SEL_CNT' => '26', 'CUR_IE_CNT' => '0'); ?>

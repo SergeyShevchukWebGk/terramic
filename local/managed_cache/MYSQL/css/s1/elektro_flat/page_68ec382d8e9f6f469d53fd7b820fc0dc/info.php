@@ -1,1 +1,0 @@
-<? $arFilesInfo = array( 'FILES' => array("/local/templates/elektro_flat/components/bitrix/sale.personal.order.detail/.default/style.css" => "15070631738628",), 'CUR_SEL_CNT' => '89', 'CUR_IE_CNT' => '0'); ?>

@@ -1,1 +1,0 @@
-<? $arFilesInfo = array( 'FILES' => array("/local/templates/elektro_flat/components/bitrix/sale.basket.basket/.default/script.js" => "150706317314268","/local/templates/elektro_flat/components/bitrix/catalog.bigdata.products/.default/script.js" => "150706317327313",), 'CUR_SEL_CNT' => '0', 'CUR_IE_CNT' => '0'); ?>

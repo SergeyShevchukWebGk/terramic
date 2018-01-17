@@ -99,14 +99,14 @@
 						</tr>
 						<tr>
 							<td>
-								<?=GetMessage("STOF_NAME")?> <span class="sof-req">*</span>
+								<?=GetMessage("STOF_NAME")?> <?/*<span class="sof-req">*</span>*/?>
 								<br />
 								<input type="text" name="NEW_NAME" size="40" value="<?=$arResult["AUTH"]["NEW_NAME"]?>"/>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<?=GetMessage("STOF_LASTNAME")?> <span class="sof-req">*</span>
+								<?=GetMessage("STOF_LASTNAME")?> <?/*<span class="sof-req">*</span>*/?>
 								<br />
 								<input type="text" name="NEW_LAST_NAME" size="40" value="<?=$arResult["AUTH"]["NEW_LAST_NAME"]?>"/>
 							</td>

@@ -1,1 +1,0 @@
-<? $arFilesInfo = array( 'FILES' => array("/local/templates/elektro_flat/components/bitrix/catalog/.default/bitrix/catalog.element/.default/script.js" => "150706317328388",), 'CUR_SEL_CNT' => '0', 'CUR_IE_CNT' => '0'); ?>
