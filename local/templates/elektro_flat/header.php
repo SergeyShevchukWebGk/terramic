@@ -5,32 +5,33 @@ Loc::loadMessages(__FILE__);?>
 <!DOCTYPE html>
 <html lang="<?=LANGUAGE_ID?>">
 <head>
-	<link rel="shortcut icon" type="image/x-icon" href="<?=SITE_TEMPLATE_PATH?>/favicon.ico?v=2" />	
+	<link rel="shortcut icon" type="image/x-icon" href="<?=SITE_TEMPLATE_PATH?>/favicon.ico?v=2" />
 	<?/*<link rel="apple-touch-icon" sizes="57x57" href="<?=SITE_TEMPLATE_PATH?>/images/apple-touch-icon-114.png" />
 	<link rel="apple-touch-icon" sizes="114x114" href="<?=SITE_TEMPLATE_PATH?>/images/apple-touch-icon-114.png" />
 	<link rel="apple-touch-icon" sizes="72x72" href="<?=SITE_TEMPLATE_PATH?>/images/apple-touch-icon-144.png" />
 	<link rel="apple-touch-icon" sizes="144x144" href="<?=SITE_TEMPLATE_PATH?>/images/apple-touch-icon-144.png" />*/?>
 	<?Asset::getInstance()->addString("<meta name='viewport' content='width=device-width, initial-scale=1.0' />");?>
 	<title><?$APPLICATION->ShowTitle()?></title>
-	<?Asset::getInstance()->addCss("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");	
+	<?Asset::getInstance()->addCss("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 	Asset::getInstance()->addCss("https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic-ext");
-	Asset::getInstance()->addCss(SITE_TEMPLATE_PATH."/colors.css");	
+	Asset::getInstance()->addCss(SITE_TEMPLATE_PATH."/colors.css");
 	Asset::getInstance()->addCss(SITE_TEMPLATE_PATH."/js/anythingslider/slider.css");
 	Asset::getInstance()->addCss(SITE_TEMPLATE_PATH."/js/custom-forms/custom-forms.css");
-	Asset::getInstance()->addCss(SITE_TEMPLATE_PATH."/js/fancybox/jquery.fancybox-1.3.1.css");	
-	Asset::getInstance()->addCss(SITE_TEMPLATE_PATH."/js/spectrum/spectrum.css");	
-	CJSCore::Init(array("jquery", "popup"));	
-	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/jquery.cookie.js");	
+	Asset::getInstance()->addCss(SITE_TEMPLATE_PATH."/js/fancybox/jquery.fancybox-1.3.1.css");
+	Asset::getInstance()->addCss(SITE_TEMPLATE_PATH."/js/spectrum/spectrum.css");
+	CJSCore::Init(array("jquery", "popup"));
+	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/jquery.cookie.js");
 	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/moremenu.js");
-	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/jquery.inputmask.bundle.min.js");		
+	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/jquery.inputmask.bundle.min.js");
 	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/anythingslider/jquery.easing.1.2.js");
 	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/anythingslider/jquery.anythingslider.min.js");
 	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/custom-forms/jquery.custom-forms.js");
-	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/fancybox/jquery.fancybox-1.3.1.pack.js");	
-	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/spectrum/spectrum.js");	
-	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/countUp.min.js");	
+	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/fancybox/jquery.fancybox-1.3.1.pack.js");
+	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/spectrum/spectrum.js");
+	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/countUp.min.js");
 	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/countdown/jquery.plugin.js");
-	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/countdown/jquery.countdown.js");	
+	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/countdown/jquery.countdown.js");
+    Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/jquery.maskedinput.min.js");
 	Asset::getInstance()->addString("
 		<script type='text/javascript'>
 			$(function() {
@@ -52,10 +53,44 @@ Loc::loadMessages(__FILE__);?>
 				$.countdown.setDefaults($.countdown.regionalOptions['ru']);
 			});
 		</script>
-	");	
+	");
 	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/main.js");
 	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/script.js");
-	$APPLICATION->ShowHead();?>	
+	$APPLICATION->ShowHead();?>
+    <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script>
+    function ynadex_map (longitude, latitude, adress) {
+        $(function(){
+            $(".popap_map #map").empty();
+            $('.popap_map').show();
+        })
+        var myMap = new ymaps.Map('map', {
+                center: [latitude, longitude],
+                zoom: 12
+            }, {
+                searchControlProvider: 'yandex#search'
+            }),
+
+
+            // Создаём макет содержимого.
+            MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+                '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+            ),
+
+            myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+                balloonContent: adress
+            }, {
+                // Опции.
+                // Необходимо указать данный тип макета.
+                iconLayout: 'default#image',
+
+            })
+
+
+            myMap.geoObjects
+                .add(myPlacemark)
+    };
+    </script>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">
 	<?global $arSetting;?>
@@ -77,7 +112,7 @@ Loc::loadMessages(__FILE__);?>
 						<?$APPLICATION->IncludeComponent("bitrix:main.include", "", array("AREA_FILE_SHOW" => "file", "PATH" => SITE_DIR."include/top_menu.php"), false, array("HIDE_ICONS" => "Y"));?>
 					</div>
 				</div>
-			<?endif;?>			
+			<?endif;?>
 			<header>
 				<div class="center<?=($arSetting['SITE_BACKGROUND']['VALUE'] == 'Y' ? ' inner' : '');?>">
 					<div class="header__row">
@@ -104,7 +139,7 @@ Loc::loadMessages(__FILE__);?>
 					</div>
 
 
-					
+
 				</div>
 				<!-- <div class="header-search">
 					<div class="header_2">
@@ -145,7 +180,7 @@ Loc::loadMessages(__FILE__);?>
 						<?$APPLICATION->IncludeComponent("bitrix:main.include", "", array("AREA_FILE_SHOW" => "file", "PATH" => SITE_DIR."include/sections.php"), false, array("HIDE_ICONS" => "Y"));?>
 					</div>
 					<div class="panel_2">
-						<?$APPLICATION->IncludeComponent("bitrix:menu", "panel", 
+						<?$APPLICATION->IncludeComponent("bitrix:menu", "panel",
 							array(
 								"ROOT_MENU_TYPE" => "top",
 								"MENU_CACHE_TYPE" => "A",
@@ -215,14 +250,14 @@ Loc::loadMessages(__FILE__);?>
 											"ALLOW_MULTI_SELECT" => "N"
 										),
 										false
-									);?>									
+									);?>
 								<?endif;
 							endif;
 							if($arSetting["SMART_FILTER_LOCATION"]["VALUE"] == "VERTICAL"):
 								$APPLICATION->ShowViewContent("filter_vertical");
 							endif;
 							if($arSetting["CATALOG_LOCATION"]["VALUE"] == "HEADER"):?>
-								<?$APPLICATION->IncludeComponent("bitrix:main.include", "", 
+								<?$APPLICATION->IncludeComponent("bitrix:main.include", "",
 									array(
 										"AREA_FILE_SHOW" => "file",
 										"PATH" => SITE_DIR."include/banners_left.php",
@@ -231,7 +266,7 @@ Loc::loadMessages(__FILE__);?>
 									),
 									false,
 									array("HIDE_ICONS" => "Y")
-								);?>													
+								);?>
 								<?if($APPLICATION->GetCurPage(true)!= SITE_DIR."index.php") {?>
 									<?$APPLICATION->IncludeComponent("bitrix:main.include", "",
 										array(
@@ -265,10 +300,10 @@ Loc::loadMessages(__FILE__);?>
 										<span class="text"><?=Loc::getMessage("CR_TITLE_DISCOUNT")?></span>
 									</a>
 								</li>
-							</ul>	
-							*/?>						
+							</ul>
+							*/?>
 							<?if($arSetting["CATALOG_LOCATION"]["VALUE"] == "LEFT"):?>
-								<?$APPLICATION->IncludeComponent("bitrix:main.include", "", 
+								<?$APPLICATION->IncludeComponent("bitrix:main.include", "",
 									array(
 										"AREA_FILE_SHOW" => "file",
 										"PATH" => SITE_DIR."include/banners_left.php",
@@ -277,7 +312,7 @@ Loc::loadMessages(__FILE__);?>
 									),
 									false,
 									array("HIDE_ICONS" => "Y")
-								);?>													
+								);?>
 								<?if($APPLICATION->GetCurPage(true)!= SITE_DIR."index.php") {?>
 									<?$APPLICATION->IncludeComponent("bitrix:main.include", "",
 										array(
@@ -304,14 +339,14 @@ Loc::loadMessages(__FILE__);?>
 									false,
 									array("HIDE_ICONS" => "Y")
 								);?>
-							</div> 
+							</div>
 							-->
 							<div class="subscribe">
 								<div class="h3"><?=Loc::getMessage("SUBSCRIBE");?></div>
 								<p><?=Loc::getMessage("SUBSCRIBE_TEXT");?></p>
-								<?$APPLICATION->IncludeComponent("bitrix:subscribe.form", "left", 
+								<?$APPLICATION->IncludeComponent("bitrix:subscribe.form", "left",
 									array(
-										"USE_PERSONALIZATION" => "Y",	
+										"USE_PERSONALIZATION" => "Y",
 										"PAGE" => SITE_DIR."personal/subscribe/",
 										"SHOW_HIDDEN" => "N",
 										"CACHE_TYPE" => "A",
@@ -395,7 +430,7 @@ Loc::loadMessages(__FILE__);?>
 										false,
 										array("HIDE_ICONS" => "Y")
 									);?>
-								<?endif;								
+								<?endif;
 								if(in_array("TABS", $arSetting["HOME_PAGE"]["VALUE"])):?>
 									<div class="tabs-wrap">
 										<ul class="tabs">
@@ -479,7 +514,7 @@ Loc::loadMessages(__FILE__);?>
 							<div class="body_text" style="<?=($APPLICATION->GetCurPage(true) == SITE_DIR.'index.php') ? 'padding:0px 15px;' : 'padding:0px;';?>">
 								<?if($APPLICATION->GetCurPage(true)!= SITE_DIR."index.php"):?>
 									<div class="breadcrumb-search">
-										<?$APPLICATION->IncludeComponent("bitrix:breadcrumb", ".default", 
+										<?$APPLICATION->IncludeComponent("bitrix:breadcrumb", ".default",
 											array(
 												"START_FROM" => "0",
 												"PATH" => "",
@@ -488,11 +523,11 @@ Loc::loadMessages(__FILE__);?>
 											false,
 											array("HIDE_ICONS" => "Y")
 										);?>
-										<div class="podelitsya">											
+										<div class="podelitsya">
 											<script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
 											<div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="small" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,gplus" data-yashareTheme="counter"></div>
 										</div>
 										<div class="clr"></div>
 									</div>
 									<h1><?=$APPLICATION->ShowTitle(false);?></h1>
-								<?endif;?>		
+								<?endif;?>

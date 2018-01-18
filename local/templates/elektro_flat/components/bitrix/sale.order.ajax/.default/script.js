@@ -453,3 +453,8 @@ $( document ).ready(function() {
 		}
 	});
 });
+
+$(document).ready(function(){
+    $("#ORDER_PROP_14, #ORDER_PROP_20, #ORDER_PROP_15, #ORDER_PROP_3, #ORDER_PROP_46, #ORDER_PROP_33, #ORDER_PROP_28").mask("+7 (999) 999-99-99");
+    $("#ORDER_PROP_35").mask("99 99");
+})

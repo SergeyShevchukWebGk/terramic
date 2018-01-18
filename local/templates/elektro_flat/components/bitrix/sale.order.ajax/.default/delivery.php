@@ -125,53 +125,101 @@
 						<?endforeach;
 					else:?>
 						<tr class="stock_delivery">
-							<td valign="top">
-								<?if(count($arDelivery["STORE"]) > 0):
-									$clickHandler = "onClick = \"fShowStore('".$arDelivery["ID"]."','".$arParams["SHOW_STORES_IMAGES"]."','".$width."','".SITE_ID."');submitForm();\"";
-								else:
-									$clickHandler = "onClick = \"submitForm();\"";
-								endif;?>
-								<input type="radio" id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" name="<?=htmlspecialcharsbx($arDelivery["FIELD_NAME"])?>" value="<?=$arDelivery["ID"]?>"<?if($arDelivery["CHECKED"]=="Y") echo " checked";?> <?=$clickHandler?>/>
-							</td>
-							<td valign="top">
-								<label for="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" onclick="BX('ID_DELIVERY_ID_<?=$arDelivery["ID"]?>').checked=true;submitForm();">
-									<table>
-										<tr>
-											<td valign="top">
-												<?if(!empty($arDelivery["LOGOTIP"]["SRC"])):?>
-													<img src="<?=$arDelivery["LOGOTIP"]["SRC"]?>" width="<?=$arDelivery["LOGOTIP"]["WIDTH"]?>" height="<?=$arDelivery["LOGOTIP"]["HEIGHT"]?>" />
-												<?endif;?>
-											</td>
-											<td valign="top">
-												<div class="name">
-													<?=htmlspecialcharsbx($arDelivery["NAME"])?>
-												</div>
-												<p>
-													<?if(strlen($arDelivery["PERIOD_TEXT"])>0):
-														echo $arDelivery["PERIOD_TEXT"]."<br />";
-													endif;
-													if(DoubleVal($arDelivery["PRICE"]) > 0):
-														echo GetMessage("SALE_DELIV_PRICE")." ".$arDelivery["PRICE_FORMATED"].($arSetting["REFERENCE_PRICE"]["VALUE"] == "Y" && !empty($arSetting["REFERENCE_PRICE_COEF"]["VALUE"]) ? " (".CCurrencyLang::CurrencyFormat($arDelivery["PRICE"] * $arSetting["REFERENCE_PRICE_COEF"]["VALUE"], $arDelivery["CURRENCY"], true).")" : "")."<br />";
-													endif;
-													if(strlen($arDelivery["DESCRIPTION"])>0):
-														echo $arDelivery["DESCRIPTION"]."<br />";
-													endif;
-													if(count($arDelivery["STORE"]) > 0):?>
-														<span id="select_store"<?if(strlen($arResult["STORE_LIST"][$arResult["BUYER_STORE"]]["TITLE"]) <= 0) echo " style=\"display:none;\"";?>>
-															<span class="select_store"><?=GetMessage('SOA_ORDER_GIVE_TITLE');?>: </span>
-															<span class="ora-store" id="store_desc"><?=htmlspecialcharsbx($arResult["STORE_LIST"][$arResult["BUYER_STORE"]]["TITLE"])?></span>
-														</span>
-													<?endif;?>
-												</p>
-											</td>
-										</tr>
-									</table>
-								</label>
-							</td>
-						</tr>
+                            <td valign="top">
+                                <?if(count($arDelivery["STORE"]) > 0):
+                                    $clickHandler = "onClick = \"fShowStore('".$arDelivery["ID"]."','".$arParams["SHOW_STORES_IMAGES"]."','".$width."','".SITE_ID."');submitForm();\"";
+                                else:
+                                    $clickHandler = "onClick = \"submitForm();\"";
+                                endif;?>
+                                <input type="radio" id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" name="<?=htmlspecialcharsbx($arDelivery["FIELD_NAME"])?>" value="<?=$arDelivery["ID"]?>"<?if($arDelivery["CHECKED"]=="Y") echo " checked";?> <?=$clickHandler?>/>
+                            </td>
+                            <td valign="top">
+                                <label class="terminal" for="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" onclick="BX('ID_DELIVERY_ID_<?=$arDelivery["ID"]?>').checked=true;submitForm();">
+                                    <div class="iamage">
+                                    <?if(!empty($arDelivery["LOGOTIP"]["SRC"])):?>
+                                        <img src="<?=$arDelivery["LOGOTIP"]["SRC"]?>" width="<?=$arDelivery["LOGOTIP"]["WIDTH"]?>" height="<?=$arDelivery["LOGOTIP"]["HEIGHT"]?>" />
+                                    <?endif;?>
+                                    </div>
+                                    <div class="name">
+                                        <?=htmlspecialcharsbx($arDelivery["NAME"])?>
+                                    </div>
+
+                                <p>
+                                    <?if(strlen($arDelivery["PERIOD_TEXT"])>0):
+                                        echo $arDelivery["PERIOD_TEXT"]."<br />";
+                                    endif;
+                                    if(DoubleVal($arDelivery["PRICE"]) > 0):
+                                        echo GetMessage("SALE_DELIV_PRICE")." ".$arDelivery["PRICE_FORMATED"].($arSetting["REFERENCE_PRICE"]["VALUE"] == "Y" && !empty($arSetting["REFERENCE_PRICE_COEF"]["VALUE"]) ? " (".CCurrencyLang::CurrencyFormat($arDelivery["PRICE"] * $arSetting["REFERENCE_PRICE_COEF"]["VALUE"], $arDelivery["CURRENCY"], true).")" : "")."<br />";
+                                    endif;
+                                    if(strlen($arDelivery["DESCRIPTION"])>0):
+                                        echo $arDelivery["DESCRIPTION"]."<br />";
+                                    endif;
+                                    if(count($arDelivery["STORE"]) > 0):?>
+                                        <span id="select_store"<?if(strlen($arResult["STORE_LIST"][$arResult["BUYER_STORE"]]["TITLE"]) <= 0) echo " style=\"display:none;\"";?>>
+                                            <span class="select_store"><?=GetMessage('SOA_ORDER_GIVE_TITLE');?>: </span>
+                                            <span class="ora-store" id="store_desc"><?=htmlspecialcharsbx($arResult["STORE_LIST"][$arResult["BUYER_STORE"]]["TITLE"])?></span>
+                                        </span>
+                                    <?endif;?>
+                                </p>
+                                <br>
+                                </label>
+                                <?$ar_delivery = object_to_array(json_decode($arDelivery["CALCULATE_DESCRIPTION"]))?>
+                                <?if($ar_delivery["TREMINAL"]){?>
+                                    <div class="selivery_select">
+                                        <?PrintPropsFormLocation($arProps, $arParams["TEMPLATE_LOCATION"], $ar_delivery["TREMINAL"][0]["address"]);?>
+
+                                        <p>Если в Вашем населенном пункте отсутствуют терминал ТК "Деловые линии",
+                                        система автоматически выберет населенный пункт с терминалом.<br>
+                                        В случае если терминалов несколько, Вам необходимо выбрать один из представленных,
+                                        либо система сделает это автоматически</p>
+                                            <select>
+                                                <option selected
+                                                        data-worktables="<?=$ar_delivery["MAP"]["worktables"]?>"
+                                                        data-longitude="<?=$ar_delivery["MAP"]["longitude"]?>"
+                                                        data-latitude="<?=$ar_delivery["MAP"]["latitude"]?>">
+                                                        <?=$ar_delivery["TREMINAL"][0]["address"]?></option>
+
+                                                <?foreach($ar_delivery["TREMINAL"]["AR_TERMINAL"] as $terminal){ ?>
+                                                    <option
+                                                        data-worktables="<?=$terminal["worktables"]["worktable"][0]["timetable"]?>"
+                                                        data-longitude="<?=$terminal["longitude"]?>"
+                                                        data-latitude="<?=$terminal["latitude"]?>">
+                                                    <?=$terminal["fullAddress"]?></option>
+                                                <?}?>
+                                            </select> <br>
+                                        <span><?=$ar_delivery["MAP"]["worktables"]?></span><br>
+                                        <a href="javascript:void(0)" onclick="ynadex_map(<?=$ar_delivery["MAP"]["longitude"]?>, <?=$ar_delivery["MAP"]["latitude"]?>, '<?=$ar_delivery["TREMINAL"][0]["address"]?>')" class="map_check">Показать на карте</a>
+                                    </div>
+                                    <br>
+                                   <div class="pack_wrap">
+                                       <p>Для сохранности товара мы рекомендуем заказать в транспортной компании дополнительную упаковку.
+                                       Наш магазин не несет ответственность за порчу товара при перевозке траспортной компанией.
+                                       Стоимость дополнительной упаковки (обрешетка) - 1300 руб/м3 (минимальная стоимость 700 руб.)</p>
+                                       <label for="pack_1"><input <?=($_SESSION["PACKING_HARD"] == "")? 'checked':''?> data-id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" class="pack_param" id="pack_1" name="pack" type="radio" value="">Без дополнительной упаковки</label><br>
+                                       <label for="pack_2"><input <?=($_SESSION["PACKING_HARD"] == "Y")? 'checked':''?> data-id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" class="pack_param" id="pack_2" name="pack" type="radio" value="Y">Заказать дополнительную упаковку</label>
+                                   </div>
+                                <?}?>
+                                <?/*if($arDelivery["PERIOD_TEXT"]){?>
+                                    <input type="hidden" name="DELIVERY_PROP_45" id="DELIVERY_PROP_45" value="">
+                                    <div class="selivery_select">
+                                        <?//PrintPropsFormLocation($arProps, $arParams["TEMPLATE_LOCATION"]);?>
+                                        <div class="wrap_terminal">
+                                            <div></div>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                <?}*/?>
+
+
+                            </td>
+                        </tr>
 					<?endif;
 				endforeach;?>
 			</table>
 		</div>
 	</div>
+ <div class="popap_map">
+        <span class="close">x</span>
+        <div id='map'></div>
+    </div>
 <?endif;?>

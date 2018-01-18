@@ -1,6 +1,6 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <h2><?=GetMessage("SOA_TEMPL_PAY_SYSTEM")?></h2>
-<div class="order-info">
+<div class="order-info payment_check">
 	<div class="order-info_in">
 		<table>
 			<?if($arResult["PAY_FROM_ACCOUNT"]=="Y") {?>
@@ -36,7 +36,7 @@
 						<td valign="top">
 							<input type="hidden" name="PAY_SYSTEM_ID" value="<?=$arPaySystem["ID"]?>">
 							<?if($arParams["SHOW_PAYMENT_SERVICES_NAMES"] != "N"):?>
-								<div class="name">									
+								<div class="name">
 									<?=$arPaySystem["PSA_NAME"];?>
 								</div>
 							<?endif;

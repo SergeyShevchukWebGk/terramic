@@ -109,73 +109,124 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     if($('#ID_DELIVERY_ID_3:checked').prop('checked')) {
                         var val_tope = $('.delivery_type select option').val();
                         $('.delivery_type select option').removeAttr('selected')
-                        if(val_tope == '1111'){
+                        if(val_tope == '2222'){
                             $('.delivery_type select option').attr('selected', 'selected');
                         }
                     } else {
                         var val_tope = $('.delivery_type select option').val();
                         $('.delivery_type select option').removeAttr('selected')
-                        if(val_tope == '2222'){
+                        if(val_tope == '1111'){
                             $('.delivery_type select option').attr('selected', 'selected');
                         }
                     }
 
-                    var delivery_id = $('.stock_delivery input:checked').val();
-                    var stock_1 = <?=DELIVERY_KRASNODAR?>;
-                    var stock_2 = <?=DELIVERY_SAMARA?>;
+                        var delivery_id = $('.stock_delivery input:checked').val();
+                        var stock_1 = <?=DELIVERY_KRASNODAR?>;
+                        var stock_2 = <?=DELIVERY_SAMARA?>;
 
-                    $('.agreement select option').removeAttr('selected');
-                    if(delivery_id == stock_1){
-                        $('.stock select option:nth-child(1)').attr("selected", "selected");
-                    } else if(delivery_id == stock_2){
-                        $('.stock select option:nth-child(2)').attr("selected", "selected");
-                    } else {
-                        $('.stock_delivery input:checked').addClass('active');
-                    }
+                        $('.agreement select option').removeAttr('selected');
+                        if(delivery_id == stock_1){
+                            $('.stock select option:nth-child(1)').attr("selected", "selected");
+                        } else if(delivery_id == stock_2){
+                            $('.stock select option:nth-child(2)').attr("selected", "selected");
+                        } else {
+                            $('.stock_delivery input:checked').addClass('active');
+                        }
 
                      // изменение соглашения при выборе способа оплаты
                     if($('#ID_PAY_SYSTEM_ID_<?=PAY_SISTEM_NDS?>:checked').prop('checked')) {
                         $('.agreement select option').removeAttr('selected');
-                        $('.agreement select option:nth-child(2)').attr("selected", "selected");
+                        $('.agreement select option:nth-child(1)').attr("selected", "selected");
                     } else {
                         $('.agreement select option').removeAttr('selected');
-                        $('.agreement select option:nth-child(1)').attr("selected", "selected");
+                        $('.agreement select option:nth-child(2)').attr("selected", "selected");
                     }
-                }
+                    setTimeout(function() {
+                        // добавление адреса терминала
+                        if($('.stock_delivery input:checked')) {
+                            var val_tope = $('.selivery_select select option').val();
+                            var adress_terminal = $('.bx-ui-sls-fake').attr('title');
+                          //  $('.delivery_type select option').removeAttr('selected');
+                            $('.terminals input').val(val_tope);
+                        }
+                    }, 5000);
 
+                    $('body .selivery_select select').change(function(){
+                            var worktables = $('.selivery_select select option:selected').attr('data-worktables');
+                            var longitude = $('.selivery_select select option:selected').attr('data-longitude');
+                            var latitude = $('.selivery_select select option:selected').attr('data-latitude');
+                            var adress = $('.selivery_select select option:selected').text();
+                            $('.selivery_select > span').html(worktables);
+                            $('.selivery_select a.map_check').attr('onclick', "ynadex_map("+longitude+", "+latitude+", '"+adress.replace(/\s{2,}/g, ' ')+"')");
+                            $('.selivery_select .terminals input').val(adress.replace(/\s{2,}/g, ' '));
+                    })
+
+                    $('body').on('click', '.pack_param', function(){
+                        var param = $(this).val();
+                        var id = $(this).attr('data-id');
+                        $.ajax({
+                            type: "POST",
+                            url: "/dellin/delivery_post.php",
+                            data: {param: param, id:id},
+                            success:function(data){
+                                 $('#'+id).click();
+                            }
+                        });
+                    })
+                    var location_val = $('.location_hide .bx-ui-sls-fake').val();
+                    if(location_val == ''){
+                         $('.location_hide').show();
+                    } else {
+                         $('.location_hide').hide();
+                    }
+                    // если не вывелись службы ДЛ
+                    if($('#order_form_content .stock_delivery').length < 3){
+                        setTimeout(function() {
+                            $('#order_form_content .payment_check input:checked').click();
+                        }, 1000); 
+                    }
+                    
+                    $("#ORDER_PROP_14, #ORDER_PROP_20, #ORDER_PROP_15, #ORDER_PROP_3, #ORDER_PROP_46, #ORDER_PROP_33, #ORDER_PROP_28").mask("+7 (999) 999-99-99");
+                    $("#ORDER_PROP_35").mask("99 99");
+                }
+                // если не вывелись службы ДЛ
+                if($('#order_form_content .stock_delivery').length < 3){
+                    setTimeout(function() {
+                        $('#order_form_content .payment_check input:checked').click();
+                    }, 1000);
+                }
                 // добавление свйоство доставки в 1С
                 $(function(){
                     if($('#ID_DELIVERY_ID_3:checked').prop('checked')) {
                         var val_tope = $('.delivery_type select option').val();
                         $('.delivery_type select option').removeAttr('selected')
-                        if(val_tope == '1111'){
+                        if(val_tope == '2222'){
                             $('.delivery_type select option').attr('selected', 'selected');
                         }
                     } else {
                         var val_tope = $('.delivery_type select option').val();
-                        $('.delivery_type select option').removeAttr('selected')
-                        if(val_tope == '2222'){
+                        $('.delivery_type select option').removeAttr('selected');
+                        if(val_tope == '1111'){
                             $('.delivery_type select option').attr('selected', 'selected');
                         }
                     }
-                    $('.bx-ui-sls-fake').keyup(function(){
-                        var city = $(this).attr('title');
-                        $.ajax({
-                            type: "POST",
-                            url: "/dellin/delivery_post.php",
-                            data: {city: city},
-                            success:function(data){
-                                console.log(data);
-                                if(data > 0){
 
-                                }
-                            }
-                        });
+
+
+                    $('.wrap_terminal ').on('click', 'select option:selected', function(){
+                        var value_adress = $(this).html();
+                        $('#DELIVERY_PROP_45').val(value_adress);
                     })
+
+                    $('body').on('click','.close', function(){
+                         $('.popap_map').hide();
+                    });
+
                 })
                 function SetContact(profileId) {
                     BX("profile_change").value = "Y";
                     submitForm();
+
                 }
             </script>
 

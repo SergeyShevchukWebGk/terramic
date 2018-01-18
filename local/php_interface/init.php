@@ -1,22 +1,46 @@
 <?if (file_exists($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/settings_solo.php")){
 	require_once ($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/settings_solo.php");}
 
-    include ($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/include/.config.php");
 
+include ($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/include/.config.php");
+
+define('IBCLICK_CATALOG_ID', 16);
 // added by HTMLS.OrderCommentPlus - start
 AddEventHandler("sale", "OnSaleComponentOrderOneStepComplete", "OrderCommentPlus");
 AddEventHandler("sale", "OnSaleComponentOrderComplete", "OrderCommentPlus");
 function OrderCommentPlus($ID, $arFields){
-	if(CModule::IncludeModuleEx("htmls.ordercomment") < 3){
-		COrderCommentPlus::BuildComment($ID, $arFields);
-	}
+    if(CModule::IncludeModuleEx("htmls.ordercomment") < 3){
+        COrderCommentPlus::BuildComment($ID, $arFields);
+    }
 }
 //\\ added by HTMLS.OrderCommentPlus - start
+
+function logger($data, $file) {
+file_put_contents(
+    $file,
+    var_export($data, 1)."\n",
+    FILE_APPEND
+);
+}
 
 function arshow($t) {
     echo '<pre>';
     print_r($t);
     echo '</pre>';
+}
+
+function object_to_array($data)
+{
+    if (is_array($data) || is_object($data))
+    {
+        $result = array();
+        foreach ($data as $key => $value)
+        {
+            $result[$key] = object_to_array($value);
+        }
+        return $result;
+    }
+    return $data;
 }
 // AddEventHandler("sale", "OnSaleComponentOrderOneStepProcess", "OrderDelivery");
 
