@@ -166,7 +166,7 @@
                                 <?$ar_delivery = object_to_array(json_decode($arDelivery["CALCULATE_DESCRIPTION"]))?>
                                 <?if($ar_delivery["TREMINAL"]){?>
                                     <div class="selivery_select">
-                                        <?PrintPropsFormLocation($arProps, $arParams["TEMPLATE_LOCATION"], $ar_delivery["TREMINAL"][0]["address"]);?>
+                                        <?PrintPropsFormLocation($arProps, $arParams["TEMPLATE_LOCATION"], $ar_delivery["TREMINAL"]["fullAddress"]);?>
 
                                         <p>Если в Вашем населенном пункте отсутствуют терминал ТК "Деловые линии",
                                         система автоматически выберет населенный пункт с терминалом.<br>
@@ -174,10 +174,10 @@
                                         либо система сделает это автоматически</p>
                                             <select>
                                                 <option selected
-                                                        data-worktables="<?=$ar_delivery["MAP"]["worktables"]?>"
-                                                        data-longitude="<?=$ar_delivery["MAP"]["longitude"]?>"
-                                                        data-latitude="<?=$ar_delivery["MAP"]["latitude"]?>">
-                                                        <?=$ar_delivery["TREMINAL"][0]["address"]?></option>
+                                                        data-worktables="<?=$ar_delivery["TREMINAL"]["worktables"]["worktable"][0]["timetable"]?>"
+                                                        data-longitude="<?=$ar_delivery["TREMINAL"]["longitude"]?>"
+                                                        data-latitude="<?=$ar_delivery["TREMINAL"]["latitude"]?>">
+                                                        <?=$ar_delivery["TREMINAL"]["fullAddress"]?></option>
 
                                                 <?foreach($ar_delivery["TREMINAL"]["AR_TERMINAL"] as $terminal){ ?>
                                                     <option
@@ -187,8 +187,8 @@
                                                     <?=$terminal["fullAddress"]?></option>
                                                 <?}?>
                                             </select> <br>
-                                        <span><?=$ar_delivery["MAP"]["worktables"]?></span><br>
-                                        <a href="javascript:void(0)" onclick="ynadex_map(<?=$ar_delivery["MAP"]["longitude"]?>, <?=$ar_delivery["MAP"]["latitude"]?>, '<?=$ar_delivery["TREMINAL"][0]["address"]?>')" class="map_check">Показать на карте</a>
+                                        <span><?=$ar_delivery["TREMINAL"]["worktables"]["worktable"][0]["timetable"]?></span><br>
+                                        <a href="javascript:void(0)" onclick="ynadex_map(<?=$ar_delivery["TREMINAL"]["longitude"]?>, <?=$ar_delivery["TREMINAL"]["latitude"]?>, '<?=$ar_delivery["TREMINAL"]["fullAddress"]?>')" class="map_check">Показать на карте</a>
                                     </div>
                                     <br>
                                    <div class="pack_wrap">

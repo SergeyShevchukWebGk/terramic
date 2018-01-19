@@ -89,6 +89,8 @@ if(!function_exists("PrintPropsForm")) {
                     <?} elseif($arProperties["TYPE"] == "TEXT") {
                         if (in_array($arProperties["CODE"], array("PHONE", "MOBILE_PHONE", "PASSPORT_SERIES", "PASSPORT_NUMBER", "INN", "KPP", "FAX"))) {
                             $is_numeric_field = "Y";
+                        } else {
+                            $is_numeric_field = "N";
                         }
                         if ($arProperties["CODE"] == "INN") {
                             $field_size = 10;
@@ -100,7 +102,8 @@ if(!function_exists("PrintPropsForm")) {
                             $field_size = 6;
                         } else {
                             $field_size = 250;
-                        }?>
+                        }
+                        ?>
                         <?if($arProperties["CODE"] != 'TERMINAL_DL'){?>
                             <div class="label <?=($arProperties["CODE"] == 'TERMINAL_DL')? 'terminals':''?>">
                                 <?=$arProperties["NAME"]?>

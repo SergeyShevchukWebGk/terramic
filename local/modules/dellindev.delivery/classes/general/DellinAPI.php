@@ -693,21 +693,9 @@ class DellinAPI
 
         // получене терминалов оплаты
         if (self::IsDataValid($data, $arOrder, $arConfig)) {
-                $apikey = array(
-                    "appkey" => $data["appKey"],  // ключ регистрации модуля
-                );
-                $data_string = json_encode($apikey);
-
-                $ch = curl_init('https://api.dellin.ru/v2/public/terminals.json');
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                 'Content-Type: application/json',
-                 'Content-Length: ' . strlen($data_string))
-                );
-
-                $result_terminal = object_to_array(json_decode(curl_exec($ch)));
+                // Чтение из файла с городами терминалов
+                $data_terminsl = file_get_contents($_SERVER["DOCUMENT_ROOT"]. '/local/php_interface/include/city_base.txt');
+                $result_terminal = unserialize($data_terminsl);
 
                 if($result_terminal){
                     foreach($result_terminal["city"] as $key => $city){
@@ -717,8 +705,7 @@ class DellinAPI
                     }
                 }
 
-
-                $data_2 = array(
+          /*      $data_2 = array(
                    "appkey" => $data["appKey"],
                    "derivalPoint" => $data["derivalPoint"],
                    "derivalDoor" => false,
@@ -738,26 +725,21 @@ class DellinAPI
                  'Content-Length: ' . strlen($data_price))
                 );
 
-                $result_price = object_to_array(json_decode(curl_exec($ch_2)));
+                $result_price = object_to_array(json_decode(curl_exec($ch_2)));  */
 
                 $ar_terminals = $terminal;  // выбираем город пользователя
 
-                $result["TREMINAL"] = $result_price["arrival"]["terminals"];
-                foreach($city_delivery["terminals"]["terminal"] as $terminal_all){
-                     if($terminal_all["fullAddress"] == $result["TREMINAL"][0]["address"] ){
-                         $result["MAP"]["longitude"] =  $terminal_all["longitude"];
-                         $result["MAP"]["latitude"] =  $terminal_all["latitude"];
-                         $result["MAP"]["worktables"] =  $terminal_all["worktables"]["worktable"][1]["timetable"];
-                     } else {
+                $result["TREMINAL"] = $city_delivery["terminals"]["terminal"][0];
+                foreach($city_delivery["terminals"]["terminal"] as $key => $terminal_all){
+                   //  if($terminal_all["fullAddress"] == $result["TREMINAL"][0]["address"] ){
+                     if($key > 0) {
                         $result["TREMINAL"]["AR_TERMINAL"][] =  $terminal_all;
                      }
                 }
+               // logger($result["TREMINAL"]["AR_TERMINAL"], $_SERVER["DOCUMENT_ROOT"].'/map/log.txt');
 
-                //logger($result["TREMINAL"], $_SERVER["DOCUMENT_ROOT"].'/map/log.txt');
 
                 $result["TREMINAL"] = json_encode($result);
-              //  $delivery["PRICE"] = round($result_price["intercity"]["price"]);
-              //  $delivery["TIME"] = $result_price["time"]["value"];
 
 
             $cache = new CPHPCache();

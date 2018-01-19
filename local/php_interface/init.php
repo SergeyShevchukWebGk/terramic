@@ -119,6 +119,28 @@ function myFunction(\Bitrix\Main\Event $event)
         }
     }
 }
+function export_city(){
+    $apikey = array(
+        "appkey" => "C7DCD1FA-235F-11E7-B703-00505683A6D3",  // ключ регистрации модуля
+    );
+    $data_string = json_encode($apikey);
 
+    $ch = curl_init('https://api.dellin.ru/v2/public/terminals.json');
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+     'Content-Type: application/json',
+     'Content-Length: ' . strlen($data_string))
+    );
+    $filename = $_SERVER["DOCUMENT_ROOT"]. '/local/php_interface/include/city_base.txt';
+    $result_terminal = object_to_array(json_decode(curl_exec($ch)));
+    // Запись.
+    $data = serialize($result_terminal);      // PHP формат сохраняемого значения.
+    //$data = json_encode($bookshelf);  // JSON формат сохраняемого значения.
+    file_put_contents($filename, $data);
+
+    return "export_city();";
+}
 
 ?>
