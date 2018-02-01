@@ -112,15 +112,15 @@ if(!function_exists("PrintPropsForm")) {
                                 <?endif;?>
                             </div>
                             <div class="block <?=($arProperties["CODE"] == 'TERMINAL_DL')? 'terminals':''?>" >
-                                <input type="text" 
-                                    maxlength="<?= $field_size ?>" 
-                                    size="<?=$arProperties["SIZE1"]?>" 
-                                    value="<?//=$arProperties["VALUE"]?>" 
+                                <input type="text"
+                                    maxlength="<?= $field_size ?>"
+                                    size="<?=$arProperties["SIZE1"]?>"
+                                    value="<?=($_POST[$arProperties["FIELD_NAME"]])?$_POST[$arProperties["FIELD_NAME"]]:''?>"
                                     name="<?=$arProperties["FIELD_NAME"]?>"
-                                    placeholder="<?=$arProperties["DEFAULT_VALUE"]?>" 
-                                    id="<?=$arProperties["FIELD_NAME"]?>" 
+                                    placeholder="<?=$arProperties["DEFAULT_VALUE"]?>"
+                                    id="<?=$arProperties["FIELD_NAME"]?>"
                                     <?if ($is_numeric_field == "Y") {?>
-                                        onkeydown = "console.log(event);if (((event.which < 48 || event.which > 57) || event.shiftKey === true) && event.which != 8 && event.which != 9) {event.preventDefault();return false;}"    
+                                        onkeydown = "console.log(event);if (((event.which < 48 || event.which > 57) || event.shiftKey === true) && event.which != 8 && event.which != 9) {event.preventDefault();return false;}"
                                     <?}?>/>
                                 <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
                                     <div class="description">

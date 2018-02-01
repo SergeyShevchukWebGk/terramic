@@ -1,3 +1,10 @@
 .catalog-detail .catalog-detail-properties{
 	padding: 0px !important;
 }
+.catalog-detail-store {
+    clear: both;
+    width: 30% !important;
+}
+.catalog-detail-property {
+    width: 45% !important;
+}

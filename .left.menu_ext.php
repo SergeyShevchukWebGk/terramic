@@ -3,7 +3,8 @@
 if(!CModule::IncludeModule("iblock"))
 	return;	
 
-$arParams["IBLOCK_ID"] = "16";
+//$arParams["IBLOCK_ID"] = "16";
+$arParams["IBLOCK_ID"] = BITRIX_CATALOG_IBLOCK_ID;
 $arParams["DEPTH_LEVEL"] = "4";
 $arParams["CACHE_TIME"] = "36000000";
 

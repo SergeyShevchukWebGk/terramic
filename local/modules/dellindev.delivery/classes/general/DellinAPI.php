@@ -504,7 +504,13 @@ class DellinAPI
             }
         }
 
-        $dl_api_weight["sized"] = $WIDTH;
+        if($WIDTH == 0){
+            $dl_api_weight = self::CalculateWeight($arOrder, $arConfig);
+        } else {
+            $dl_api_weight["sized"] = $WIDTH;
+        }
+
+        logger($dl_api_weight.'   '.$dl_api_volume, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt' );
 
         // Получаем объем.
         if($AMOUNT == 0){

@@ -1,5 +1,12 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
+// проврека для вывода фильтра в списке товаров
+if($arResult["SECTIONS"]){
+    $_SESSION["Filter"] = "N";
+} else {
+    $_SESSION["Filter"] = "Y";
+}
+
 foreach($arResult["SECTIONS"] as $key => $arSection) {
 	if(is_array($arSection["PICTURE"])) {
 		if($arSection["PICTURE"]["WIDTH"] > $arParams["DISPLAY_IMG_WIDTH"] || $arSection["PICTURE"]["HEIGHT"] > $arParams["DISPLAY_IMG_HEIGHT"]) {

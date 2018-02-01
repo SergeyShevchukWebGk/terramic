@@ -6,7 +6,7 @@
 		"RCM_TYPE" => "any",
 		"ID" => "",
 		"IBLOCK_TYPE" => "catalog",
-		"IBLOCK_ID" => "16",
+		"IBLOCK_ID" => "23",
 		"SHOW_FROM_SECTION" => "N",
 		"SECTION_ID" => "",
 		"SECTION_CODE" => "",
@@ -35,7 +35,7 @@
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
 		"SHOW_OLD_PRICE" => "N",
 		"PRICE_CODE" => array(
-			0 => "BASE",
+			0 => "Интернет магазин физ.лицо (Вертянкина)",
 		),
 		"SHOW_PRICE_COUNT" => "1",
 		"PRICE_VAT_INCLUDE" => "Y",
@@ -48,17 +48,13 @@
 		"PRODUCT_PROPS_VARIABLE" => "prop",
 		"PARTIAL_PRODUCT_PROPERTIES" => "N",
 		"USE_PRODUCT_QUANTITY" => "N",
-		"SHOW_PRODUCTS_16" => "Y",
+		"SHOW_PRODUCTS_16" => "N",
 		"PROPERTY_CODE_16" => array(
-			0 => "",
-			1 => "",
 		),
 		"PROPERTY_CODE_MOD" => array(
 			0 => "GUARANTEE",
 		),
 		"CART_PROPERTIES_16" => array(
-			0 => "",
-			1 => "",
 		),
 		"ADDITIONAL_PICT_PROP_16" => "BACKGROUND_IMAGE",
 		"LABEL_PROP_16" => "-",
@@ -78,7 +74,25 @@
 		"OFFER_TREE_PROPS_17" => array(
 			0 => "COLOR",
 			1 => "PROP2",
-		)
+		),
+		"SHOW_PRODUCTS_22" => "N",
+		"PROPERTY_CODE_22" => array(
+		),
+		"CART_PROPERTIES_22" => array(
+		),
+		"ADDITIONAL_PICT_PROP_22" => "MORE_PHOTO",
+		"LABEL_PROP_22" => "-",
+		"SHOW_PRODUCTS_23" => "Y",
+		"PROPERTY_CODE_23" => array(
+			0 => "",
+			1 => "",
+		),
+		"CART_PROPERTIES_23" => array(
+			0 => "",
+			1 => "",
+		),
+		"ADDITIONAL_PICT_PROP_23" => "MORE_PHOTO",
+		"LABEL_PROP_23" => "-"
 	),
 	false
 );?>

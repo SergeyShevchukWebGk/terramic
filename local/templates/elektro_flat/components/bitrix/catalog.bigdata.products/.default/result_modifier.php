@@ -7,7 +7,7 @@ $arSettingBigdata = CElektroinstrument::GetFrontParametrsValues(SITE_ID);
 
 if(!empty($arResult["ITEMS"])) {
 	//ELEMENTS//
-	foreach($arResult["ITEMS"] as $key => $arElement) {
+	foreach($arResult["ITEMS"] as $key => $arElement) { 
 		//CURRENT_DISCOUNT//
 		$arPrice = array();
 		$arResult["ITEMS"][$key]["CURRENT_DISCOUNT"] = array();		

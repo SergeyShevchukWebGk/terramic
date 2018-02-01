@@ -182,10 +182,10 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     // если не вывелись службы ДЛ
                     if($('#order_form_content .stock_delivery').length < 3){
                         setTimeout(function() {
-                            $('#order_form_content .payment_check input:checked').click();
-                        }, 1000); 
+                       //     $('#order_form_content .payment_check input:checked').click();
+                        }, 1000);
                     }
-                    
+
                     $("#ORDER_PROP_14, #ORDER_PROP_20, #ORDER_PROP_15, #ORDER_PROP_3, #ORDER_PROP_46, #ORDER_PROP_33, #ORDER_PROP_28").mask("+7 (999) 999-99-99");
                     $("#ORDER_PROP_35").mask("99 99");
                 }
