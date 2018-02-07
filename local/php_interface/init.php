@@ -5,6 +5,7 @@
 include ($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/include/.config.php");
 
 define('IBCLICK_CATALOG_ID', 16);
+define('PRICE_TYPE_ID', 3);
 // added by HTMLS.OrderCommentPlus - start
 AddEventHandler("sale", "OnSaleComponentOrderOneStepComplete", "OrderCommentPlus");
 AddEventHandler("sale", "OnSaleComponentOrderComplete", "OrderCommentPlus");

@@ -104,7 +104,11 @@ CJSCore::Init(array("fx"));?>
 						<td class="bx_filter_box_name">
 							<div class="sect__name">
 								<div class="sect__text" onclick="smartFilter.hideFilterProps(this)">
-									<span><?=$arItem["NAME"]?></span>
+                                <?if($arItem["ID"] == PRICE_TYPE_ID){?>
+                                    <span>Цена</span>
+                                <?} else {?>
+                                    <span><?=$arItem["NAME"]?></span>
+                                <?}?>
 								</div>
 								<div class="sect__arrow">
 									<i class="fa fa-angle-left"></i>

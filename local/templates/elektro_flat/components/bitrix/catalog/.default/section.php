@@ -132,8 +132,12 @@ if(isset($arCurSection) && !empty($arCurSection)) {
 		<?endif;
 	endif;
 
+    $page = explode('/', $APPLICATION->GetCurPage());
 	//FILTER//
-	if($arParams["USE_FILTER"] == "Y" && $arSetting["SMART_FILTER_VISIBILITY"]["VALUE"] != "DISABLE" && $_SESSION["Filter"] == "Y"):?>
+	if($arParams["USE_FILTER"] == "Y" && $arSetting["SMART_FILTER_VISIBILITY"]["VALUE"] != "DISABLE" && 
+        $_SESSION["Filter"] == "Y" && 
+        ($page[2] != 'aksessuary_1' && $page[2] != 'aksessuary')):?>
+        
 		<?$APPLICATION->IncludeComponent("bitrix:catalog.smart.filter", "elektro",
 			Array(
 				"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],

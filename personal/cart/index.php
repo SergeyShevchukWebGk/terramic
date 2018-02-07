@@ -40,7 +40,7 @@ $APPLICATION->SetTitle("Моя корзина");?>
 		"OFFERS_SORT_ORDER2" => "asc",
 		"OFFERS_LIMIT" => "",
 		"PRICE_CODE" => array(
-			0 => "BASE",
+			0 => "Интернет магазин физ.лицо (Вертянкина)",
 		),
 		"PRICE_VAT_INCLUDE" => "Y",
 		"CONVERT_CURRENCY" => "N",
@@ -61,7 +61,7 @@ $APPLICATION->SetTitle("Моя корзина");?>
 		),
 		"HIDE_NOT_AVAILABLE" => "N",
 		"USE_BIG_DATA" => "Y",
-		"BIG_DATA_RCM_TYPE" => "any",
+		"BIG_DATA_RCM_TYPE" => "personal",
 		"COMPONENT_TEMPLATE" => ".default",
 		"AUTO_CALCULATION" => "Y",
 		"USE_GIFTS" => "Y",
