@@ -23,7 +23,7 @@ $APPLICATION->SetTitle("Моя корзина");?>
 		"SET_TITLE" => "Y",
 		"ACTION_VARIABLE" => "action",
 		"IBLOCK_TYPE" => "catalog",
-		"IBLOCK_ID" => "16",
+		"IBLOCK_ID" => "23",
 		"OFFERS_FIELD_CODE" => array(
 			0 => "",
 			1 => "",
@@ -55,8 +55,9 @@ $APPLICATION->SetTitle("Моя корзина");?>
 		"ELEMENT_SORT_ORDER" => "ASC",
 		"DISPLAY_COMPARE" => "Y",
 		"PROPERTY_CODE_MOD" => array(
-			0 => "GUARANTEE",
-			1 => "",
+			0 => "",
+			1 => "GUARANTEE",
+			2 => "",
 		),
 		"HIDE_NOT_AVAILABLE" => "N",
 		"USE_BIG_DATA" => "Y",
@@ -68,7 +69,7 @@ $APPLICATION->SetTitle("Моя корзина");?>
 		"GIFTS_BLOCK_TITLE" => "Выберите один из подарков",
 		"GIFTS_HIDE_BLOCK_TITLE" => "N",
 		"GIFTS_TEXT_LABEL_GIFT" => "Подарок",
-		"GIFTS_PRODUCT_QUANTITY_VARIABLE" => "undefined",
+		"GIFTS_PRODUCT_QUANTITY_VARIABLE" => "quantity",
 		"GIFTS_PRODUCT_PROPS_VARIABLE" => "prop",
 		"GIFTS_SHOW_OLD_PRICE" => "N",
 		"GIFTS_SHOW_DISCOUNT_PERCENT" => "Y",
@@ -78,7 +79,10 @@ $APPLICATION->SetTitle("Моя корзина");?>
 		"GIFTS_MESS_BTN_DETAIL" => "Подробнее",
 		"GIFTS_PAGE_ELEMENT_COUNT" => "4",
 		"GIFTS_CONVERT_CURRENCY" => "N",
-		"GIFTS_HIDE_NOT_AVAILABLE" => "N"
+		"GIFTS_HIDE_NOT_AVAILABLE" => "N",
+		"CORRECT_RATIO" => "N",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false
 );?>

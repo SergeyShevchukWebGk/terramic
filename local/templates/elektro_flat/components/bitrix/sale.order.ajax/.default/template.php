@@ -109,13 +109,13 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     if($('#ID_DELIVERY_ID_3:checked').prop('checked')) {
                         var val_tope = $('.delivery_type select option').val();
                         $('.delivery_type select option').removeAttr('selected')
-                        if(val_tope == '2222'){
+                        if(val_tope == '1111'){
                             $('.delivery_type select option').attr('selected', 'selected');
                         }
                     } else {
                         var val_tope = $('.delivery_type select option').val();
                         $('.delivery_type select option').removeAttr('selected')
-                        if(val_tope == '1111'){
+                        if(val_tope == '2222'){
                             $('.delivery_type select option').attr('selected', 'selected');
                         }
                     }

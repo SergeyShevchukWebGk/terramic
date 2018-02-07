@@ -115,16 +115,16 @@ if(!function_exists("PrintPropsForm")) {
                                 <input type="text"
                                     maxlength="<?= $field_size ?>"
                                     size="<?=$arProperties["SIZE1"]?>"
-                                    value="<?=($_POST[$arProperties["FIELD_NAME"]])?$_POST[$arProperties["FIELD_NAME"]]:''?>"
+                                    value="<?=$arProperties["VALUE"]//=($arProperties["VALUE"]) ? htmlspecialchars($arProperties["VALUE"]) : $_POST[$arProperties["FIELD_NAME"]]?>"
                                     name="<?=$arProperties["FIELD_NAME"]?>"
-                                    placeholder="<?=$arProperties["DEFAULT_VALUE"]?>"
+                                    placeholder="<?=$arProperties["DESCRIPTION"]?>"
                                     id="<?=$arProperties["FIELD_NAME"]?>"
                                     <?if ($is_numeric_field == "Y") {?>
-                                        onkeydown = "console.log(event);if (((event.which < 48 || event.which > 57) || event.shiftKey === true) && event.which != 8 && event.which != 9) {event.preventDefault();return false;}"
+                                        onkeydown = "if (((event.which < 48 || event.which > 57) || event.shiftKey === true) && event.which != 8 && event.which != 9) {event.preventDefault();return false;}"
                                     <?}?>/>
                                 <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
                                     <div class="description">
-                                        <?=$arProperties["DESCRIPTION"]?>
+                                        <?//=$arProperties["DESCRIPTION"]?>
                                     </div>
                                 <?endif;?>
                             </div>
@@ -155,7 +155,7 @@ if(!function_exists("PrintPropsForm")) {
                             </select>
                             <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
                                 <div class="description">
-                                    <?=$arProperties["DESCRIPTION"]?>
+                                    <?//=$arProperties["DESCRIPTION"]?>
                                 </div>
                             <?endif;?>
                         </div>
@@ -176,7 +176,7 @@ if(!function_exists("PrintPropsForm")) {
                             </select>
                             <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
                                 <div class="description">
-                                    <?=$arProperties["DESCRIPTION"]?>
+                                    <?//=$arProperties["DESCRIPTION"]?>
                                 </div>
                             <?endif;?>
                         </div>
@@ -190,11 +190,11 @@ if(!function_exists("PrintPropsForm")) {
                                     <span class="star">*</span>
                                 <?endif;?>
                             </div>
-                            <div class="block">
-                                <textarea rows="<?=$arProperties["SIZE2"]?>" cols="<?=$arProperties["SIZE1"]?>" name="<?=$arProperties["FIELD_NAME"]?>" id="<?=$arProperties["FIELD_NAME"]?>" placeholder="<?=$arProperties["DEFAULT_VALUE"]?>"><?//=$arProperties["VALUE"]?></textarea>
+                            <div class="block">  
+                                <textarea rows="<?=$arProperties["SIZE2"]?>" cols="<?=$arProperties["SIZE1"]?>" name="<?=$arProperties["FIELD_NAME"]?>" id="<?=$arProperties["FIELD_NAME"]?>" placeholder="<?=$arProperties["DESCRIPTION"]?>"><?//=$arProperties["VALUE"]?></textarea>
                                 <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
                                     <div class="description">
-                                        <?=$arProperties["DESCRIPTION"]?>
+                                        <?//=$arProperties["DESCRIPTION"]?>
                                     </div>
                                 <?endif;?>
                             </div>
@@ -282,7 +282,7 @@ if(!function_exists("PrintPropsForm")) {
                             }?>
                             <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
                                 <div class="description">
-                                    <?=$arProperties["DESCRIPTION"]?>
+                                    <?//=$arProperties["DESCRIPTION"]?>
                                 </div>
                             <?endif;?>
                         </div>
@@ -300,7 +300,7 @@ if(!function_exists("PrintPropsForm")) {
                             <?=showFilePropertyField("ORDER_PROP_".$arProperties["ID"], $arProperties, $arProperties["VALUE"], $arProperties["SIZE1"])?>
                             <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
                                 <div class="description">
-                                    <?=$arProperties["DESCRIPTION"]?>
+                                    <?//=$arProperties["DESCRIPTION"]?>
                                 </div>
                             <?endif;?>
                         </div>
@@ -414,7 +414,7 @@ function PrintPropsFormLocation($arSource = array(), $locationTemplate = ".defau
                 <textarea rows="<?=$arProperties["SIZE2"]?>" cols="<?=$arProperties["SIZE1"]?>" name="<?=$arProperties["FIELD_NAME"]?>" id="<?=$arProperties["FIELD_NAME"]?>"><?=$arProperties["VALUE"]?></textarea>
                 <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
                     <div class="description">
-                        <?=$arProperties["DESCRIPTION"]?>
+                        <?//=$arProperties["DESCRIPTION"]?>
                     </div>
                 <?endif;?>
             </div>
