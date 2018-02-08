@@ -134,12 +134,13 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                         }
 
                      // изменение соглашения при выборе способа оплаты
-                    if($('#ID_PAY_SYSTEM_ID_<?=PAY_SISTEM_NDS?>:checked').prop('checked')) {
-                        $('.agreement select option').removeAttr('selected');
-                        $('.agreement select option:nth-child(1)').attr("selected", "selected");
-                    } else {
+                    var pay_sistem_nds = $('#ID_PAY_SYSTEM_ID_<?=PAY_SISTEM_NDS?>:checked').prop('checked');
+                    if(pay_sistem_nds == true) {
                         $('.agreement select option').removeAttr('selected');
                         $('.agreement select option:nth-child(2)').attr("selected", "selected");
+                    } else {
+                        $('.agreement select option').removeAttr('selected');
+                        $('.agreement select option:nth-child(1)').attr("selected", "selected");
                     }
                     setTimeout(function() {
                         // добавление адреса терминала
@@ -179,10 +180,12 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     } else {
                          $('.location_hide').hide();
                     }
+                    cecked_delivery = $('#order_form_content .payment_check input:checked').attr('data-id');;  
                     // если не вывелись службы ДЛ
-                    if($('#order_form_content .stock_delivery').length < 3){
+                    if($('#order_form_content .stock_delivery').length < 3 && cecked_delivery == ''){
                         setTimeout(function() {
-                       //     $('#order_form_content .payment_check input:checked').click();
+                            $('#order_form_content .payment_check input:checked').click();
+                            $('#order_form_content .payment_check input:checked').attr('data-id', 'yes');
                         }, 1000);
                     }
 

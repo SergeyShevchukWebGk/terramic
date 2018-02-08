@@ -361,6 +361,7 @@ Class DellinDelivery
     function Calculate($profile, $arConfig, $arOrder, $STEP, $TEMP = false)
     {
         $response = DellinAPI::Calculate($arOrder, $arConfig);
+
      /*   $ar_terminal = '';
         foreach($response["TREMINAL"] as $terminal){
             $ar_terminal .= $terminal["address"].';';

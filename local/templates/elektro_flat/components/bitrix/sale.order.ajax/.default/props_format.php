@@ -92,7 +92,7 @@ if(!function_exists("PrintPropsForm")) {
                         } else {
                             $is_numeric_field = "N";
                         }
-                        if ($arProperties["CODE"] == "INN") {
+                        if ($arProperties["CODE"] == "INN" && $arProperties["PERSON_TYPE_ID"] == 2) {
                             $field_size = 10;
                         } else if ($arProperties["CODE"] == "KPP") {
                             $field_size = 9;
@@ -100,6 +100,8 @@ if(!function_exists("PrintPropsForm")) {
                             $field_size = 4;
                         } else if ($arProperties["CODE"] == "PASSPORT_NUMBER") {
                             $field_size = 6;
+                        } else if ($arProperties["CODE"] == "INN" && $arProperties["PERSON_TYPE_ID"] == 3) {
+                            $field_size = 12;
                         } else {
                             $field_size = 250;
                         }
@@ -191,7 +193,7 @@ if(!function_exists("PrintPropsForm")) {
                                 <?endif;?>
                             </div>
                             <div class="block">  
-                                <textarea rows="<?=$arProperties["SIZE2"]?>" cols="<?=$arProperties["SIZE1"]?>" name="<?=$arProperties["FIELD_NAME"]?>" id="<?=$arProperties["FIELD_NAME"]?>" placeholder="<?=$arProperties["DESCRIPTION"]?>"><?//=$arProperties["VALUE"]?></textarea>
+                                <textarea rows="<?=$arProperties["SIZE2"]?>" cols="<?=$arProperties["SIZE1"]?>" name="<?=$arProperties["FIELD_NAME"]?>" id="<?=$arProperties["FIELD_NAME"]?>" placeholder="<?=$arProperties["DESCRIPTION"]?>"><?=$arProperties["VALUE"]?></textarea>
                                 <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
                                     <div class="description">
                                         <?//=$arProperties["DESCRIPTION"]?>

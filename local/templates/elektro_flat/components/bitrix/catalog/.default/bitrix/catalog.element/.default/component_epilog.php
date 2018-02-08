@@ -450,18 +450,23 @@ else:
 	}
 endif;?>
 <div id="catalog-reviews-from" style="display:none;">
-	<?$APPLICATION->IncludeComponent("altop:catalog.reviews", "",
-		array(
-			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-			"IBLOCK_ID" => $arResult["REVIEWS"]["IBLOCK_ID"],
-			"ELEMENT_ID" => $arResult["ID"],
-			"ELEMENT_AREA_ID" => $strMainID,
-			"PRE_MODERATION" => "Y",
-			"CACHE_TYPE" => $arParams["CACHE_TYPE"],
-			"CACHE_TIME" => $arParams["CACHE_TIME"]
-		),
-		false
-	);?>
+	<?$APPLICATION->IncludeComponent(
+	"altop:catalog.reviews", 
+	"reviews", 
+	array(
+		"IBLOCK_TYPE" => "catalog",
+		"IBLOCK_ID" => "18",
+		"ELEMENT_ID" => $arResult["ID"],
+		"ELEMENT_AREA_ID" => $strMainID,
+		"PRE_MODERATION" => "Y",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => $arParams["CACHE_TIME"],
+		"COMPONENT_TEMPLATE" => "reviews",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
+	),
+	false
+);?>
 </div>
 
 <?//STORES//

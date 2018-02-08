@@ -25,7 +25,6 @@ $arItemIDs = array(
 );
 $strObName = "ob".preg_replace("/[^a-zA-Z0-9_]/", "x", $strMainID);
 $templateData["JS_OBJ"] = $strObName;
-
 //JS//?>
 <script type="text/javascript">
 	BX.ready(function() {			
@@ -83,8 +82,9 @@ $templateData["JS_OBJ"] = $strObName;
 		//ACCESSORIES//
 		if(!!BX("accessories-to"))
 			BX("accessories-to").appendChild(BX.style(BX("accessories-from"), "display", ""));
-
+        //={$arResult["REVIEWS"]["IBLOCK_ID"]}
 		//REVIEWS//
+        
 		BX("catalog-reviews-to").appendChild(BX.style(BX("catalog-reviews-from"), "display", ""));
 		var tabReviewsCount = BX.findChild(BX("<?=$arItemIDs['ID']?>"), {"className": "reviews_count"}, true, false),
 			catalogReviewsList = BX.findChild(BX("catalog-reviews-to"), {"className": "catalog-reviews-list"}, true, false);

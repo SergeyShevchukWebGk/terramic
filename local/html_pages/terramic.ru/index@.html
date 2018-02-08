@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<link rel="shortcut icon" type="image/x-icon" href="/local/templates/elektro_flat/favicon.ico?v=2" />
+			<title>Террамик - интернет-магазин товаров для агропромышленного комплекса</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="index, follow" />
+<script type="text/javascript" data-skip-moving="true">(function(w, d) {var v = w.frameCacheVars = {'CACHE_MODE':'HTMLCACHE','storageBlocks':[],'dynamicBlocks':{'iPbi6c':'d41d8cd98f00','callback_s1':'d41d8cd98f00','bigdata':'d41d8cd98f00','already_seen':'d41d8cd98f00','kabinet':'d41d8cd98f00','compare':'13ba779151fa','delay':'80b34c1d5ca0','cart_line':'d41d8cd98f00'},'AUTO_UPDATE':true,'AUTO_UPDATE_TTL':'120'};var inv = false;if (v.AUTO_UPDATE === false){if (v.AUTO_UPDATE_TTL && v.AUTO_UPDATE_TTL > 0){var lm = Date.parse(d.lastModified);if (!isNaN(lm)){var td = new Date().getTime();if ((lm + v.AUTO_UPDATE_TTL * 1000) >= td){w.frameRequestStart = false;w.preventAutoUpdate = true;return;}inv = true;}}else{w.frameRequestStart = false;w.preventAutoUpdate = true;return;}}var r = w.XMLHttpRequest ? new XMLHttpRequest() : (w.ActiveXObject ? new w.ActiveXObject("Microsoft.XMLHTTP") : null);if (!r) { return; }w.frameRequestStart = true;var m = v.CACHE_MODE; var l = w.location; var x = new Date().getTime();var q = "?bxrand=" + x + (l.search.length > 0 ? "&" + l.search.substring(1) : "");var u = l.protocol + "//" + l.host + l.pathname + q;r.open("GET", u, true);r.setRequestHeader("BX-ACTION-TYPE", "get_dynamic");r.setRequestHeader("BX-CACHE-MODE", m);r.setRequestHeader("BX-CACHE-BLOCKS", v.dynamicBlocks ? JSON.stringify(v.dynamicBlocks) : "");if (inv){r.setRequestHeader("BX-INVALIDATE-CACHE", "Y");}try { r.setRequestHeader("BX-REF", d.referrer || "");} catch(e) {}if (m === "APPCACHE"){r.setRequestHeader("BX-APPCACHE-PARAMS", JSON.stringify(v.PARAMS));r.setRequestHeader("BX-APPCACHE-URL", v.PAGE_URL ? v.PAGE_URL : "");}r.onreadystatechange = function() {if (r.readyState != 4) { return; }var a = r.getResponseHeader("BX-RAND");var b = w.BX && w.BX.frameCache ? w.BX.frameCache : false;if (a != x || !((r.status >= 200 && r.status < 300) || r.status === 304 || r.status === 1223 || r.status === 0)){var f = {error:true, reason:a!=x?"bad_rand":"bad_status", url:u, xhr:r, status:r.status};if (w.BX && w.BX.ready){BX.ready(function() {setTimeout(function(){BX.onCustomEvent("onFrameDataRequestFail", [f]);}, 0);});}else{w.frameRequestFail = f;}return;}if (b){b.onFrameDataReceived(r.responseText);if (!w.frameUpdateInvoked){b.update(false);}w.frameUpdateInvoked = true;}else{w.frameDataString = r.responseText;}};r.send();})(window, document);</script>
+
+
+<link href="/local/cache/css/s1/elektro_flat/kernel_main/kernel_main.css?151626832126347" type="text/css"   rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"  rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic-ext" type="text/css"  rel="stylesheet" />
+<link href="/local/cache/css/s1/elektro_flat/template_5d2e97034be3c8e0b7d1088a51b39af9/template_5d2e97034be3c8e0b7d1088a51b39af9.css?1516270515446574" type="text/css"   data-template-style="true"  rel="stylesheet" />
+<script type="text/javascript">if(!window.BX)window.BX={};if(!window.BX.message)window.BX.message=function(mess){if(typeof mess=='object') for(var i in mess) BX.message[i]=mess[i]; return true;};</script>
+<script type="text/javascript">(window.BX||top.BX).message({'JS_CORE_LOADING':'Загрузка...','JS_CORE_NO_DATA':'- Нет данных -','JS_CORE_WINDOW_CLOSE':'Закрыть','JS_CORE_WINDOW_EXPAND':'Развернуть','JS_CORE_WINDOW_NARROW':'Свернуть в окно','JS_CORE_WINDOW_SAVE':'Сохранить','JS_CORE_WINDOW_CANCEL':'Отменить','JS_CORE_WINDOW_CONTINUE':'Продолжить','JS_CORE_H':'ч','JS_CORE_M':'м','JS_CORE_S':'с','JSADM_AI_HIDE_EXTRA':'Скрыть лишние','JSADM_AI_ALL_NOTIF':'Показать все','JSADM_AUTH_REQ':'Требуется авторизация!','JS_CORE_WINDOW_AUTH':'Войти','JS_CORE_IMAGE_FULL':'Полный размер'});</script>
+<script type="text/javascript">(window.BX||top.BX).message({'LANGUAGE_ID':'ru','FORMAT_DATE':'DD.MM.YYYY','FORMAT_DATETIME':'DD.MM.YYYY HH:MI:SS','COOKIE_PREFIX':'BITRIX_SM','SERVER_TZ_OFFSET':'10800','SITE_ID':'s1','SITE_DIR':'/'});</script>
+
+
+<script type="text/javascript"  src="/local/cache/js/s1/elektro_flat/kernel_main/kernel_main.js?1516268321295465"></script>
+<script type="text/javascript" src="/bitrix/js/main/core/core_db.min.js?14984614298699"></script>
+<script type="text/javascript" src="/bitrix/js/main/core/core_frame_cache.min.js?148912453111191"></script>
+<script type="text/javascript" src="/bitrix/js/main/jquery/jquery-1.8.3.min.js?148912453193636"></script>
+<script type="text/javascript">BX.setJSList(['/bitrix/js/main/core/core.js','/bitrix/js/main/core/core_ajax.js','/bitrix/js/main/json/json2.min.js','/bitrix/js/main/core/core_ls.js','/bitrix/js/main/core/core_fx.js','/bitrix/js/main/session.js','/bitrix/js/main/core/core_popup.js','/bitrix/js/main/core/core_window.js','/bitrix/js/main/core/core_date.js','/bitrix/js/main/utils.js','/local/templates/elektro_flat/js/jquery.cookie.js','/local/templates/elektro_flat/js/moremenu.js','/local/templates/elektro_flat/js/jquery.inputmask.bundle.min.js','/local/templates/elektro_flat/js/anythingslider/jquery.easing.1.2.js','/local/templates/elektro_flat/js/anythingslider/jquery.anythingslider.min.js','/local/templates/elektro_flat/js/custom-forms/jquery.custom-forms.js','/local/templates/elektro_flat/js/fancybox/jquery.fancybox-1.3.1.pack.js','/local/templates/elektro_flat/js/spectrum/spectrum.js','/local/templates/elektro_flat/js/countUp.min.js','/local/templates/elektro_flat/js/countdown/jquery.plugin.js','/local/templates/elektro_flat/js/countdown/jquery.countdown.js','/local/templates/elektro_flat/js/jquery.maskedinput.min.js','/local/templates/elektro_flat/js/main.js','/local/templates/elektro_flat/script.js','/local/components/altop/search.title/script.js','/local/components/altop/search.title/templates/.default/script.js','/local/components/altop/forms/templates/.default/script.js','/local/templates/elektro_flat/components/bitrix/catalog.bigdata.products/.default/script.js','/local/templates/elektro_flat/components/bitrix/catalog.section/filtered/script.js','/local/templates/elektro_flat/components/bitrix/sale.basket.basket.line/.default/script.js']); </script>
+<script type="text/javascript">BX.setCSSList(['/bitrix/js/main/core/css/core.css','/bitrix/js/main/core/css/core_popup.css','/bitrix/js/main/core/css/core_date.css','/local/templates/elektro_flat/colors.css','/local/templates/elektro_flat/js/anythingslider/slider.css','/local/templates/elektro_flat/js/custom-forms/custom-forms.css','/local/templates/elektro_flat/js/fancybox/jquery.fancybox-1.3.1.css','/local/templates/elektro_flat/js/spectrum/spectrum.css','/local/components/altop/search.title/templates/.default/style.css','/local/templates/elektro_flat/template_styles.css','/local/templates/elektro_flat/schemes/CUSTOM/colors.css','/local/templates/elektro_flat/custom.css']); </script>
+<script type="text/javascript">
+					(function () {
+						"use strict";
+
+						var counter = function ()
+						{
+							var cookie = (function (name) {
+								var parts = ("; " + document.cookie).split("; " + name + "=");
+								if (parts.length == 2) {
+									try {return JSON.parse(decodeURIComponent(parts.pop().split(";").shift()));}
+									catch (e) {}
+								}
+							})("BITRIX_CONVERSION_CONTEXT_s1");
+
+							if (cookie && cookie.EXPIRE >= BX.message("SERVER_TIME"))
+								return;
+
+							var request = new XMLHttpRequest();
+							request.open("POST", "/bitrix/tools/conversion/ajax_counter.php", true);
+							request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+							request.send(
+								"SITE_ID="+encodeURIComponent("s1")+
+								"&sessid="+encodeURIComponent(BX.bitrix_sessid())+
+								"&HTTP_REFERER="+encodeURIComponent(document.referrer)
+							);
+						};
+
+						if (window.frameRequestStart === true)
+							BX.addCustomEvent("onFrameDataReceived", counter);
+						else
+							BX.ready(counter);
+					})();
+				</script>
+<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
+		<script type='text/javascript'>
+			$(function() {
+				$.countdown.regionalOptions['ru'] = {
+					labels: ['лет', 'месяцев', 'недель', 'дней', 'часов', 'мин.', 'сек.'],
+					labels1: ['год', 'месяц', 'неделя', 'день', 'час', 'мин.', 'сек.'],
+					labels2: ['года', 'месяца', 'недели', 'дня', 'часа', 'мин.', 'сек.'],
+					compactLabels: ['л', 'м', 'н', 'д'],
+					compactLabels1: ['г', 'м', 'н', 'д'],
+					whichLabels: function(amount) {
+						var units = amount % 10;
+						var tens = Math.floor((amount % 100) / 10);
+						return (amount == 1 ? 1 : (units >= 2 && units <= 4 && tens != 1 ? 2 : (units == 1 && tens != 1 ? 1 : 0)));
+					},
+					digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+					timeSeparator: ':',
+					isRTL: false
+				};
+				$.countdown.setDefaults($.countdown.regionalOptions['ru']);
+			});
+		</script>
+	
+
+
+
+<script type="text/javascript"  src="/local/cache/js/s1/elektro_flat/template_d4b1e71bcde282e8fdde0e8184b95735/template_d4b1e71bcde282e8fdde0e8184b95735.js?1516282092352247"></script>
+<script type="text/javascript">var _ba = _ba || []; _ba.push(["aid", "a06e4d43e3124165aa466b674e3a92b9"]); _ba.push(["host", "terramic.ru"]); (function() {var ba = document.createElement("script"); ba.type = "text/javascript"; ba.async = true;ba.src = (document.location.protocol == "https:" ? "https://" : "http://") + "bitrix.info/ba.js";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ba, s);})();</script>
+
+
+    <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script>
+    function ynadex_map (longitude, latitude, adress) {
+        $(function(){
+            $(".popap_map #map").empty();
+            $('.popap_map').show();
+        })
+        var myMap = new ymaps.Map('map', {
+                center: [latitude, longitude],
+                zoom: 12
+            }, {
+                searchControlProvider: 'yandex#search'
+            }),
+
+
+            // ������ ����� �����������.
+            MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+                '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+            ),
+
+            myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+                balloonContent: adress
+            }, {
+                // �����.
+                // ���������� ������� ������ ��� ������.
+                iconLayout: 'default#image',
+
+            })
+
+
+            myMap.geoObjects
+                .add(myPlacemark)
+    };
+    </script>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+		<div id="bxdynamic_iPbi6c_start" style="display:none"></div><div id="bxdynamic_iPbi6c_end" style="display:none"></div>	<div class="bx-panel">
+			</div>
+	<div class="bx-include-empty">
+			</div>
+	<div class="body">
+		<div class="page-wrapper bg-repeat-x bg-repeat-y bg-fixed">
+						<header>
+				<div class="center">
+					<div class="header__row">
+						<div class="header__item header_3">
+							<div class="schedule">
+								<!--<p class="time"><i class="fa fa-clock-o"></i>Время работы:</p><p>ПН-ПТ 09:00 - 22:00<br>СБ-ВС 10:00 - 23:00</p>-->							</div>
+						</div>
+						<div class="header__item header_1">
+							<div class="logo">
+								<a href="/"><img width="140" src="/local/templates/elektro_flat/images/terramic_logo.png" height="130"></a>							</div>
+							<div class="header-search">
+									<div id="altop_search" class="form-box">
+		<form action="/catalog/">
+			<i class="fa fa-search"></i>
+			<input type="text" name="q" id="title-search-input" class="" maxlength="50" autocomplete="off" placeholder="Поиск по товарам, брендам, категориям" value="" />
+			<input type="submit" name="submit" class="" value="Найти" />
+		</form>
+	</div>
+
+<script type="text/javascript">
+	var jsControl = new JCTitleSearch({
+		'WAIT_IMAGE': '/bitrix/themes/.default/images/wait.gif',
+		'AJAX_PAGE' : '/',
+		'CONTAINER_ID': 'altop_search',
+		'INPUT_ID': 'title-search-input',
+		'MIN_QUERY_LEN': 3
+	});
+</script> 							</div>
+						</div>
+						<div class="header__item header_4">
+							<div class="contacts">
+								<div class="telephone">
+	<table cellpadding="1" cellspacing="1">
+	<tbody>
+	<tr>
+		<td>
+			<p>
+ <i class="fa fa-phone"></i>Самара:
+			</p>
+			<p>
+ <i class="fa fa-phone"></i>Краснодар:
+			</p>
+			<p>
+ <i class="fa fa-phone"></i>По всей России:
+			</p>
+		</td>
+		<td>
+			<p>
+				7 (846) 233-50-06
+			</p>
+			<p>
+				7 (861) 212-30-05
+			</p>
+			<p>
+				8 (800) 775-13-53
+			</p>
+		</td>
+	</tr>
+	</tbody>
+	</table>
+</div>
+<br>								<a id="callbackAnch" class="btn_buy apuo callback_anch" href="javascript:void(0)"><span class="cont"><i class="fa fa-phone"></i><span class="text">Заказать звонок</span></span></a>
+								<div id="bxdynamic_callback_s1_start" style="display:none"></div><div id="bxdynamic_callback_s1_end" style="display:none"></div>							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				<!-- <div class="header-search">
+					<div class="header_2">
+							<div id="altop_search" class="form-box">
+		<form action="/catalog/">
+			<i class="fa fa-search"></i>
+			<input type="text" name="q" id="title-search-input" class="" maxlength="50" autocomplete="off" placeholder="Поиск по товарам, брендам, категориям" value="" />
+			<input type="submit" name="submit" class="" value="Найти" />
+		</form>
+	</div>
+
+<script type="text/javascript">
+	var jsControl = new JCTitleSearch({
+		'WAIT_IMAGE': '/bitrix/themes/.default/images/wait.gif',
+		'AJAX_PAGE' : '/',
+		'CONTAINER_ID': 'altop_search',
+		'INPUT_ID': 'title-search-input',
+		'MIN_QUERY_LEN': 3
+	});
+</script> 					</div>
+				</div> -->
+			</header>
+							<div class="top-menu">
+					<div class="center">
+						
+<ul class="store-horizontal">
+	<li class='active'><a href="/">Главная</a></li>
+					<li>
+					<a href="/catalog/">Каталог</a>
+				</li>
+							<li>
+					<a href="/promotions/">Акции</a>
+				</li>
+							<li>
+					<a href="/help/">Помощь покупателю</a>
+				</li>
+							<li>
+					<a href="/requisites/">Реквизиты</a>
+				</li>
+							<li>
+					<a href="/contacts/">Контакты</a>
+				</li>
+			</ul>
+
+<script type="text/javascript">
+	//<![CDATA[
+	$(function() {
+		//MOREMENU//
+		$(".top-menu ul.store-horizontal").moreMenu();
+
+		//DROPDOWN//	
+		$(".top-menu ul.store-horizontal .dropdown:not(.more)").on({		
+			mouseenter: function() {
+				var menu = $(this).closest(".store-horizontal"),
+					menuWidth = menu.outerWidth(),
+					menuLeft = menu.offset().left,
+					menuRight = menuLeft + menuWidth,
+					isParentDropdownMenu = $(this).closest(".dropdown-menu"),					
+					dropdownMenu = $(this).children(".dropdown-menu"),
+					dropdownMenuWidth = dropdownMenu.outerWidth(),					
+					dropdownMenuLeft = isParentDropdownMenu.length > 0 ? $(this).offset().left + $(this).outerWidth() : $(this).offset().left,
+					dropdownMenuRight = dropdownMenuLeft + dropdownMenuWidth;
+				if(dropdownMenuRight > menuRight) {
+					if(isParentDropdownMenu.length > 0) {
+						dropdownMenu.css({"left": "auto", "right": "100%"});
+					} else {
+						dropdownMenu.css({"right": "0"});
+					}
+				}
+				$(this).children(".dropdown-menu").stop(true, true).delay(200).fadeIn(150);
+			},
+			mouseleave: function() {
+				$(this).children(".dropdown-menu").stop(true, true).delay(200).fadeOut(150);
+			}
+		});
+	});
+	//]]>
+</script>					</div>
+				</div>
+						<div class="top_panel">
+				<div class="center">
+					<div class="panel_1">
+						
+<ul class="section-vertical">
+	<li>
+		<a href="javascript:void(0)" class="showsection"><i class="fa fa-bars"></i><span>Каталог</span></a>
+		<div class="catalog-section-list" style="display:none;">
+							<div class="catalog-section">
+											<div class="catalog-section-title" style="margin:0px 0px 4px 0px;">
+							<a href="/catalog/plenka_polietilenovaya/">Пленка полиэтиленовая</a>
+															<span class="showsectionchild"><i class="fa fa-minus"></i><i class="fa fa-plus"></i><i class="fa fa-minus-circle"></i><i class="fa fa-plus-circle"></i></span>
+													</div>
+											<div class="catalog-section-childs" style="display:none;">
+															<div class="catalog-section-child">
+									<a href="/catalog/plenka_teplichnaya/" title="Пленка тепличная">
+										<span class="child">
+											<span class="image">
+																									<img src="/upload/iblock/567/56726264c41165afebeb771d14b0d679.png" width="49" height="49" alt="Пленка тепличная" />
+																							</span>
+											<span class="text-cont">
+												<span class="text">Пленка тепличная</span>
+											</span>
+										</span>
+									</a>
+								</div>
+															<div class="catalog-section-child">
+									<a href="/catalog/plenka_stroitelnaya/" title="Пленка строительная">
+										<span class="child">
+											<span class="image">
+																									<img src="/upload/iblock/fa6/fa686c5fe4a62e74be99ac7f8ea5ae4f.png" width="49" height="49" alt="Пленка строительная" />
+																							</span>
+											<span class="text-cont">
+												<span class="text">Пленка строительная</span>
+											</span>
+										</span>
+									</a>
+								</div>
+															<div class="catalog-section-child">
+									<a href="/catalog/plenka_dlya_mulchirovaniya/" title="Пленка для мульчирования">
+										<span class="child">
+											<span class="image">
+																									<img src="/upload/iblock/11c/11ccdea64e028a3315fa686d69b90554.png" width="49" height="49" alt="Пленка для мульчирования" />
+																							</span>
+											<span class="text-cont">
+												<span class="text">Пленка для мульчирования</span>
+											</span>
+										</span>
+									</a>
+								</div>
+															<div class="catalog-section-child">
+									<a href="/catalog/aksessuary/" title="Аксессуары">
+										<span class="child">
+											<span class="image">
+																									<img src="/upload/iblock/1f6/1f650184652330cf10085444208687ea.png" width="49" height="49" alt="Аксессуары" />
+																							</span>
+											<span class="text-cont">
+												<span class="text">Аксессуары</span>
+											</span>
+										</span>
+									</a>
+								</div>
+														<div class="clr"></div>
+						</div>
+									</div>			
+							<div class="catalog-section">
+											<div class="catalog-section-title" style="margin:0px 0px 4px 0px;">
+							<a href="/catalog/oborudovanie/">Оборудование</a>
+															<span class="showsectionchild"><i class="fa fa-minus"></i><i class="fa fa-plus"></i><i class="fa fa-minus-circle"></i><i class="fa fa-plus-circle"></i></span>
+													</div>
+											<div class="catalog-section-childs" style="display:none;">
+															<div class="catalog-section-child">
+									<a href="/catalog/podves/" title="Подвес">
+										<span class="child">
+											<span class="image">
+																									<img src="/upload/iblock/9c8/9c8edb506d3e45bdddfcd581403d9b1a.png" width="49" height="49" alt="Подвес" />
+																							</span>
+											<span class="text-cont">
+												<span class="text">Подвес</span>
+											</span>
+										</span>
+									</a>
+								</div>
+															<div class="catalog-section-child">
+									<a href="/catalog/poliv/" title="Полив">
+										<span class="child">
+											<span class="image">
+																									<img src="/upload/iblock/adb/adbadb64fddc84f7313e3f8b280445e4.png" width="49" height="49" alt="Полив" />
+																							</span>
+											<span class="text-cont">
+												<span class="text">Полив</span>
+											</span>
+										</span>
+									</a>
+								</div>
+														<div class="clr"></div>
+						</div>
+									</div>			
+							<div class="catalog-section">
+											<div class="catalog-section-title" style="margin:0px 0px 2px 0px;">
+							<a href="/catalog/avtomatizatsiya/">Автоматизация</a>
+													</div>
+									</div>			
+							<div class="catalog-section">
+											<div class="catalog-section-title" style="margin:0px 0px 2px 0px;">
+							<a href="/catalog/teplitsy/">Теплицы</a>
+													</div>
+									</div>			
+					</div>
+	</li>
+</ul>
+
+<script type="text/javascript">
+	//<![CDATA[
+	$(function() {
+		$('.showsection').click(function() {
+			var clickitem = $(this);
+			if(clickitem.parent('li').hasClass('')) {
+				clickitem.parent('li').addClass('active');
+			} else {
+				clickitem.parent('li').removeClass('active');
+			}
+			
+			if($('.showsubmenu').parent('li').hasClass('active')) {
+				$('.showsubmenu').parent('li').removeClass('active');
+				$('.showsubmenu').parent('li').find('ul.submenu').css({'display':'none'});
+			}
+			
+			if($('.showcontacts').parent('li').hasClass('active')) {
+				$('.showcontacts').parent('li').removeClass('active');
+				$('.header_4').css({'display':'none'});
+			}
+			
+			if($('.showsearch').parent('li').hasClass('active')) {
+				$('.showsearch').parent('li').removeClass('active');
+				$('.header_2').css({'display':'none'});
+				$('div.title-search-result').css({'display':'none'});
+			}
+
+			clickitem.parent('li').find('.catalog-section-list').slideToggle();
+		});
+		$('.showsectionchild').click(function() {
+			var clickitem = $(this);
+			if(clickitem.parent('div').hasClass('active')) {
+				clickitem.parent('div').removeClass('active');
+			} else {
+				clickitem.parent('div').addClass('active');
+			}
+			clickitem.parent('div').parent('div').find('.catalog-section-childs').slideToggle();
+		});
+	});
+	//]]>
+</script>					</div>
+					<div class="panel_2">
+						
+<ul class="store-vertical">
+	<li>
+		<a href="javascript:void(0)" class="showsubmenu">Меню</a>
+		<ul class="submenu" style="display:none;">
+			<li>
+				<a href="/" class='root-item-selected'>Главная</a>
+			</li>
+									<li>
+							<a href="/catalog/" class="root-item">Каталог</a>
+						</li>
+											<li>
+							<a href="/promotions/" class="root-item">Акции</a>
+						</li>
+											<li>
+							<a href="/help/" class="root-item">Помощь покупателю</a>
+						</li>
+											<li>
+							<a href="/requisites/" class="root-item">Реквизиты</a>
+						</li>
+											<li>
+							<a href="/contacts/" class="root-item">Контакты</a>
+						</li>
+							</ul>
+	</li>
+</ul>
+
+<script type="text/javascript">
+	//<![CDATA[
+	$(function() {
+		$('.showsubmenu').click(function() {
+			var clickitem = $(this);
+			if(clickitem.parent('li').hasClass('')) {
+				clickitem.parent('li').addClass('active');
+			} else {
+				clickitem.parent('li').removeClass('active');
+			}
+			
+			if($('.showsection').parent('li').hasClass('active')) {
+				$('.showsection').parent('li').removeClass('active');
+				$('.showsection').parent('li').find('.catalog-section-list').css({'display':'none'});
+			}
+			
+			if($('.showcontacts').parent('li').hasClass('active')) {
+				$('.showcontacts').parent('li').removeClass('active');
+				$('.header_4').css({'display':'none'});
+			}
+			
+			if($('.showsearch').parent('li').hasClass('active')) {
+				$('.showsearch').parent('li').removeClass('active');
+				$('.header_2').css({'display':'none'});
+				$('div.title-search-result').css({'display':'none'});
+			}
+
+			clickitem.parent('li').find('ul.submenu').slideToggle();
+		});
+		
+		var lis = $('.submenu').find('li');
+		for(var i = 0; i < lis.length; i++) {
+			if($(lis[i]).hasClass('item-selected')) {
+				$(lis[i]).addClass('active');
+				var ul = $(lis[i]).find('ul:first');
+				$(ul).css({display: 'block'});
+			}
+		}
+		
+		$('.showchild').click(function() {
+			var clickitem = $(this);
+			if(clickitem.parent('span').parent('li').hasClass('active')) {
+				clickitem.parent('span').parent('li').removeClass('active');
+			} else {
+				clickitem.parent('span').parent('li').addClass('active');
+			}
+			clickitem.parent('span').parent('li').find('ul:first').slideToggle();
+		});
+	});
+	//]]>
+</script>					</div>
+					<div class="panel_3">
+						<ul class="contacts-vertical">
+							<li>
+								<a class="showcontacts" href="javascript:void(0)"><i class="fa fa-phone"></i></a>
+							</li>
+						</ul>
+					</div>
+					<div class="panel_4">
+						<ul class="search-vertical">
+							<li>
+								<a class="showsearch" href="javascript:void(0)"><i class="fa fa-search"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="content-wrapper">
+				<div class="center">
+					<div class="content">
+						<div class="left-column">
+																<div class="h3">Каталог товаров</div>
+									
+<ul class="left-menu">
+					<li class="parent">
+					<a href="/catalog/plenka_polietilenovaya/">Пленка полиэтиленовая<span class="arrow"></span></a>
+										<div class="catalog-section-childs">
+						<div class="catalog-section-child">
+				<a href="/catalog/plenka_dlya_teplits/" title="Пленка для теплиц">
+					<span class="child">
+						<span class="image">
+															<img src="/upload/iblock/5eb/5ebf911272d027fd6540551ce74eab7c.png" width="49" height="49" alt="Пленка для теплиц" />
+													</span>						
+						<span class="text-cont">
+							<span class="text">Пленка для теплиц</span>
+						</span>
+					</span>
+				</a>
+			</div>
+					<div class="catalog-section-child">
+				<a href="/catalog/plenka_dlya_mulchirovaniya/" title="Пленка для мульчирования">
+					<span class="child">
+						<span class="image">
+															<img src="/upload/iblock/2c2/2c23f7b02ab9a509a3a9a81d2868435d.png" width="49" height="49" alt="Пленка для мульчирования" />
+													</span>						
+						<span class="text-cont">
+							<span class="text">Пленка для мульчирования</span>
+						</span>
+					</span>
+				</a>
+			</div>
+					<div class="catalog-section-child">
+				<a href="/catalog/plenka_stroitelnaya/" title="Пленка строительная">
+					<span class="child">
+						<span class="image">
+															<img src="/upload/iblock/0ef/0ef99a8e910ae65d0af1f190d97c0f43.png" width="49" height="49" alt="Пленка строительная" />
+													</span>						
+						<span class="text-cont">
+							<span class="text">Пленка строительная</span>
+						</span>
+					</span>
+				</a>
+			</div>
+					<div class="catalog-section-child">
+				<a href="/catalog/aksessuary_1/" title="Аксессуары">
+					<span class="child">
+						<span class="image">
+															<img src="/upload/iblock/fe2/fe258fbdef5a748ac5e96dc30d667b2d.png" width="49" height="49" alt="Аксессуары" />
+													</span>						
+						<span class="text-cont">
+							<span class="text">Аксессуары</span>
+						</span>
+					</span>
+				</a>
+			</div>
+		</div></li>				<li class="parent">
+					<a href="/catalog/oborudovanie/">Оборудование<span class="arrow"></span></a>
+										<div class="catalog-section-childs">
+						<div class="catalog-section-child">
+				<a href="/catalog/poliv/" title="Полив">
+					<span class="child">
+						<span class="image">
+															<img src="/upload/iblock/2ad/2ad86770eab81c16463bb767a55ef584.png" width="49" height="49" alt="Полив" />
+													</span>						
+						<span class="text-cont">
+							<span class="text">Полив</span>
+						</span>
+					</span>
+				</a>
+			</div>
+					<div class="catalog-section-child">
+				<a href="/catalog/podves/" title="Подвес">
+					<span class="child">
+						<span class="image">
+															<img src="/upload/iblock/50e/50e7dfe86a57998b73bd6dfdc7e3b93f.png" width="49" height="49" alt="Подвес" />
+													</span>						
+						<span class="text-cont">
+							<span class="text">Подвес</span>
+						</span>
+					</span>
+				</a>
+			</div>
+		</div></li>				<li>
+					<a href="/catalog/avtomatizatsiya/">Автоматизация</a>
+				</li>
+							<li>
+					<a href="/catalog/teplitsy/">Теплицы</a>
+				</li>
+			</ul>
+
+<script type="text/javascript">
+	//<![CDATA[
+	$(function() {
+				$("ul.left-menu").children(".parent").on({
+			mouseenter: function() {
+									var pos = $(this).position(),
+						dropdownMenu = $(this).children(".catalog-section-childs"),
+						dropdownMenuLeft = pos.left + $(this).width() + 9 + "px",
+						dropdownMenuTop = pos.top - 5 + "px";
+					dropdownMenu.css({"left": dropdownMenuLeft, "top": dropdownMenuTop});
+					dropdownMenu.stop(true, true).delay(200).fadeIn(150);
+							},
+			mouseleave: function() {
+				$(this).children(".catalog-section-childs").stop(true, true).delay(200).fadeOut(150);
+							}
+		});
+	});
+	//]]>
+</script>																																																				<!--
+							<div class="vendors">
+								<div class="h3">Производители</div>
+															</div>
+							-->
+							<div class="subscribe">
+								<div class="h3">Будьте в курсе!</div>
+								<p>Новости, обзоры и акции</p>
+								
+<form action="/personal/subscribe/">
+			<input type="hidden" name="sf_RUB_ID[]" value="1" />
+			<input type="hidden" name="sf_RUB_ID[]" value="2" />
+			<input type="hidden" name="sf_RUB_ID[]" value="3" />
+		<input type="text" name="sf_EMAIL" maxlength="50" value="Email" onfocus="this.value=''" onblur="if (this.value==''){this.value='Email'}" class="text" />
+	<button type="submit" name="submit" class="btn_buy ppp" value="Подписаться">Подписаться</button>
+</form>							</div>
+																				</div>
+						<div class="workarea">
+																
+<script type="text/javascript">
+	$(function() {
+		$(".anythingSlider").anythingSlider({			
+			"expand": true,			
+			"easing": "easeInOutExpo",			
+			"buildStartStop": false,
+			"forwardText": "<i class='fa fa-chevron-right'></i>",
+			"backText": "<i class='fa fa-chevron-left'></i>",
+			"hashTags": false,
+			"autoPlay": true,
+			"autoPlayLocked": true
+		});
+		$(window).resize(function () {
+			currentWidth = $(".center:not(.inner)").first().width();
+			if(currentWidth < "768") {
+				$(".anythingContainer").css({
+					"height": currentWidth * 0.30 + "px"
+				});
+			} else {
+				$(".anythingContainer").removeAttr("style");
+			}
+		});
+		$(window).resize();
+	});
+</script>
+
+<div class="anythingContainer">
+	<ul class="anythingSlider">
+					<li>
+									<a href="javascript:void(0)" style="background:url(/upload/iblock/6bc/6bcf82cc37ea7c0d5fbd1ea611505acc.png) center center no-repeat; background-size:cover;"></a>
+							</li>
+					<li>
+									<a href="/promotions/kvest-agent/" style="background:url(/upload/resize_cache/iblock/57d/958_304_1/57df6ba871913cb4c6698df33c76ab0d.png) center center no-repeat; background-size:cover;"></a>
+							</li>
+			</ul>
+</div>																																		
+<div class="banners-main">	
+	<div class='banners-main__row'>		<a class="banners-main__item" href="/catalog/oborudovanie/" style='width:50%;'>			
+			<span class="banners-main__item-image" style="background-image:url('/upload/iblock/a58/a58a9b5642bb7c7774bdf6f84fea0bcc.png');"></span>
+			<span class="banners-main__item-block-wrap">
+				<span class="banners-main__item-block">
+										
+					<span class="banners-main__item-text">Оборудование</span>					
+									
+				</span>				
+			</span>
+		</a>
+				<a class="banners-main__item" href="/catalog/plenka_polietilenovaya/" style='width:50%;'>			
+			<span class="banners-main__item-image" style="background-image:url('/upload/iblock/362/362e45e267216321c4b125b255ef1efa.png');"></span>
+			<span class="banners-main__item-block-wrap">
+				<span class="banners-main__item-block">
+										
+					<span class="banners-main__item-text">Пленка полиэтиленовая</span>					
+									
+				</span>				
+			</span>
+		</a>
+		</div><div class='banners-main__row'>		<a class="banners-main__item" href="/catalog/avtomatizatsiya/" style='width:50%;'>			
+			<span class="banners-main__item-image" style="background-image:url('/upload/iblock/0d9/0d97a0ddd2ad38ca43f4af9f80ebd66c.png');"></span>
+			<span class="banners-main__item-block-wrap">
+				<span class="banners-main__item-block">
+										
+					<span class="banners-main__item-text">Автоматизация</span>					
+									
+				</span>				
+			</span>
+		</a>
+				<a class="banners-main__item" href="/catalog/teplitsy/" style='width:50%;'>			
+			<span class="banners-main__item-image" style="background-image:url('/upload/iblock/1a2/1a22c765cd566d2f76c7e7e5859b3b70.png');"></span>
+			<span class="banners-main__item-block-wrap">
+				<span class="banners-main__item-block">
+										
+					<span class="banners-main__item-text">Теплицы</span>					
+									
+				</span>				
+			</span>
+		</a>
+		</div></div>																	<div class="tabs-wrap">
+										<ul class="tabs">
+																							<li class="tabs__tab recommend">
+													<a href="javascript:void(0)"><span>Рекомендуем</span></a>
+												</li>
+																						<li class="tabs__tab new">
+												<a href="javascript:void(0)"><span>Новинки</span></a>
+											</li>
+											<li class="tabs__tab hit">
+												<a href="javascript:void(0)"><span>Хиты продаж</span></a>
+											</li>
+											<li class="tabs__tab discount">
+												<a href="javascript:void(0)"><span>Скидки</span></a>
+											</li>
+										</ul>
+																					<div class="tabs__box recommend">
+												<div id="bxdynamic_bigdata_start" style="display:none"></div><div id="bxdynamic_bigdata_end" style="display:none"></div>											</div>
+																				<div class="tabs__box new">
+											<div class="catalog-top">
+																								<a class="all" href="/catalog/newproduct/">Все новинки</a>
+											</div>
+										</div>
+										<div class="tabs__box hit">
+											<div class="catalog-top">
+																								<a class="all" href="/catalog/saleleader/">Все хиты продаж</a>
+											</div>
+										</div>
+										<div class="tabs__box discount">
+											<div class="catalog-top">
+																								<a class="all" href="/catalog/discount/">Все скидки</a>
+											</div>
+										</div>
+									</div>
+															<div class="body_text" style="padding:0px 15px;">
+								<h1 id="pagetitle">Лучшие товары по лучшим ценам!</h1>
+<p>
+	Качество этих марок подтверждают многие промышленные гиганты, которые работают с ними уже не один десяток лет.&nbsp;
+</p>
+ <br>							</div>							
+						</div>
+																																																														</div>
+					
+<div class="subscribe_bottom">
+	<div class="text">
+		<div class="h3">Будьте в курсе!</div>
+		<p>Новости, обзоры и акции</p>
+	</div>
+	<form action="/personal/subscribe/">
+					<input type="hidden" name="sf_RUB_ID[]" value="1" />
+					<input type="hidden" name="sf_RUB_ID[]" value="2" />
+					<input type="hidden" name="sf_RUB_ID[]" value="3" />
+				<input type="text" name="sf_EMAIL" maxlength="50" value="Email" onfocus="this.value=''" onblur="if (this.value==''){this.value='Email'}" class="text" />
+		<button type="submit" name="submit" class="btn_buy ppp" value="Подписаться">Подписаться</button>
+	</form>
+</div>					
+				</div>
+			</div>
+			
+<div id="bxdynamic_already_seen_start" style="display:none"></div><div id="bxdynamic_already_seen_end" style="display:none"></div>			<footer>
+				<div class="center">
+					<div class="footer_menu_soc_pay">
+						<div class="footer_menu">
+							
+<ul>
+			<li>
+			<a href="/help/"><span>Помощь покупателю</span></a>
+		</li>
+			<li>
+			<a href="https://terramic.ru/help/#razdel2"><span>Способы оплаты</span></a>
+		</li>
+			<li>
+			<a href="https://terramic.ru/help/#razdel1"><span>Способы доставки</span></a>
+		</li>
+			<li>
+			<a href="/faq/"><span>Вопросы и ответы</span></a>
+		</li>
+			<li>
+			<a href="https://terramic.ru/help/#razdel3"><span>Как купить</span></a>
+		</li>
+	</ul>							
+<ul>
+			<li>
+			<a href="/catalog/"><span>Каталог продукции</span></a>
+		</li>
+			<li>
+			<a href="/catalog/plenka_polietilenovaya/"><span>Пленка полиэтиленовая</span></a>
+		</li>
+			<li>
+			<a href="/catalog/oborudovanie/"><span>Оборудование</span></a>
+		</li>
+			<li>
+			<a href="/catalog/avtomatizatsiya/"><span>Автоматизация</span></a>
+		</li>
+			<li>
+			<a href="/catalog/teplitsy/"><span>Теплицы</span></a>
+		</li>
+	</ul>														
+<ul>
+			<li>
+			<a href="/requisites/"><span>Реквизиты</span></a>
+		</li>
+	</ul>						</div>
+						<div class="footer_soc_pay">							
+							<div class="footer_soc">
+								
+<div class="h3">Присоединяйтесь</div>
+<ul>
+			<li style='background:#4d739c'>
+							<a target="_blank" href="https://vk.com/terramic" title="Vkontakte" rel="nofollow">
+						
+				<i class="fa fa-vk"></i>
+			</a>
+		</li>
+			<li style='background:#3b5998'>
+							<a target="_blank" href="https://www.facebook.com/ooo.terramic" title="Facebook" rel="nofollow">
+						
+				<i class="fa fa-facebook"></i>
+			</a>
+		</li>
+			<li style='background:#ff6800'>
+							<a href="javascript:void(0)" title="Odnoklassniki">
+						
+				<i class="fa fa-odnoklassniki"></i>
+			</a>
+		</li>
+			<li style='background:#575b71'>
+							<a target="_blank" href="https://www.youtube.com/" title="Youtube" rel="nofollow">
+						
+				<i class="fa fa-youtube"></i>
+			</a>
+		</li>
+	</ul>							</div>
+							<div class="footer_pay">
+																
+<div class="payment_methods">
+	<div class="h3">Способы оплаты</div>
+	<ul>
+					<li>
+									<a href="javascript:void(0)" title="VISA">
+									<img src="/upload/iblock/609/6095160da3f405f7928860d8fe8dca99.png" width="66" height="30" alt="VISA" />
+				</a>
+			</li>
+					<li>
+									<a href="javascript:void(0)" title="MasterCard">
+									<img src="/upload/resize_cache/iblock/dda/66_30_1/ddac04c6d3b32434bbe76434e539c4e1.png" width="66" height="30" alt="MasterCard" />
+				</a>
+			</li>
+					<li>
+									<a href="javascript:void(0)" title="Сбербанк">
+									<img src="/upload/resize_cache/iblock/550/66_30_1/550e630f04d718bc1f73a8403d7ed6db.png" width="66" height="30" alt="Сбербанк" />
+				</a>
+			</li>
+					<li>
+									<a href="javascript:void(0)" title="МИР">
+									<img src="/upload/iblock/d60/d604fae67b6a1552f851220ff2a00af1.png" width="66" height="30" alt="МИР" />
+				</a>
+			</li>
+					<li>
+									<a href="javascript:void(0)" title="Наличный расчет">
+									<img src="/upload/resize_cache/iblock/61e/66_30_1/61ed71f96326b55c58f6f096c5864e2a.png" width="66" height="30" alt="Наличный расчет" />
+				</a>
+			</li>
+					<li>
+									<a href="javascript:void(0)" title="Безналичный расчет">
+									<img src="/upload/resize_cache/iblock/df1/66_30_1/df118452f57622f6118f84c947dfe98b.png" width="66" height="30" alt="Безналичный расчет" />
+				</a>
+			</li>
+					<li>
+									<a href="javascript:void(0)" title="PayKeeper">
+									<img src="/upload/resize_cache/iblock/e2b/247_30_1/e2b1b8303e0f33998a5ed24cec66ab9a.png" width="66" height="30" alt="PayKeeper" />
+				</a>
+			</li>
+			</ul>
+</div>							</div>
+						</div>
+					</div>
+					<div class="footer-bottom">						
+						<div class="footer-bottom__blocks">
+							<div class="footer-bottom__block-wrap fb-left">
+								<div class="footer-bottom__block footer-bottom__copyright">
+									Террамик, 2018<br />Самарская область, с. Кинель-Черкассы, ул.Казакова 37а.								</div>
+								<div class="footer-bottom__block footer-bottom__links">
+									
+<ul>
+			<li>
+			<a href="/contacts/"><span>Контакты</span></a>
+		</li>
+			<li>
+			<a href="/map/"><span>Карта сайта</span></a>
+		</li>
+	</ul>								</div>
+							</div>
+						</div>
+						<div class="footer-bottom__blocks">							
+							<div class="footer-bottom__block-wrap fb-right">
+								<div class="footer-bottom__block footer-bottom__counter" id="bx-composite-banner">
+								
+								</div>
+								<div class="footer-bottom__block footer-bottom__counter">
+																	</div>
+								<div class="footer-bottom__block footer-bottom__counter">
+																	</div>
+								<div class="footer-bottom__block footer-bottom__design">
+																	</div>
+							</div>
+						</div>						
+					</div>
+					<div class="foot_panel_all">
+						<div class="foot_panel">
+							<div class="foot_panel_1">
+								
+<div class="kabinet" id="kabinet">
+	<div id="bxdynamic_kabinet_start" style="display:none"></div><div id="bxdynamic_kabinet_end" style="display:none"></div></div>								
+<div class="compare_line">
+	<div id="bxdynamic_compare_start" style="display:none"></div>		<a href="/catalog/compare/?action=COMPARE" title="Сравнение" rel="nofollow">
+			<i class="fa fa-bar-chart"></i>
+			<span class="text">Сравнение</span>
+			<span class="qnt_cont">
+				<span class="qnt">0</span>
+			</span>
+		</a>
+	<div id="bxdynamic_compare_end" style="display:none"></div></div>								
+<div class="delay_line">
+	<div id="bxdynamic_delay_start" style="display:none"></div>		<a href="/personal/cart/?delay=Y" title="Список желаний" rel="nofollow">
+			<i class="fa fa-heart"></i>
+			<span class="text">Список желаний</span>
+			<span class="qnt_cont">
+				<span class="qnt">
+					0				</span>
+			</span>
+		</a>
+	<div id="bxdynamic_delay_end" style="display:none"></div></div>							</div>
+							<div class="foot_panel_2">
+								
+<script type="text/javascript">
+	var cart_line1 = new BitrixSmallCart;
+</script>
+
+<div class="cart_line" id="cart_line1">
+	<div id="bxdynamic_cart_line_start" style="display:none"></div><div id="bxdynamic_cart_line_end" style="display:none"></div></div>
+
+<script type="text/javascript">
+	cart_line1.siteId       = "s1";
+	cart_line1.cartId       = "cart_line1";
+	cart_line1.ajaxPath     = "/bitrix/components/bitrix/sale.basket.basket.line/ajax.php";	
+	cart_line1.templateName = ".default";
+	cart_line1.arParams     =  {'PATH_TO_BASKET':'/personal/cart/','PATH_TO_ORDER':'/personal/order/make/','HIDE_ON_BASKET_PAGES':'N','COUNT_DISCOUNT_4_ALL_QUANTITY':'N','CACHE_TYPE':'A','SHOW_NUM_PRODUCTS':'Y','SHOW_TOTAL_PRICE':'Y','SHOW_EMPTY_VALUES':'Y','SHOW_PERSONAL_LINK':'N','PATH_TO_PERSONAL':'/personal/','SHOW_AUTHOR':'N','PATH_TO_REGISTER':'/login/','PATH_TO_AUTHORIZE':'/login/','PATH_TO_PROFILE':'/personal/','SHOW_PRODUCTS':'N','SHOW_DELAY':'Y','SHOW_NOTAVAIL':'Y','SHOW_IMAGE':'Y','SHOW_PRICE':'Y','SHOW_SUMMARY':'Y','POSITION_FIXED':'N','POSITION_VERTICAL':'top','POSITION_HORIZONTAL':'right','AJAX':'N','~PATH_TO_BASKET':'/personal/cart/','~PATH_TO_ORDER':'/personal/order/make/','~HIDE_ON_BASKET_PAGES':'N','~COUNT_DISCOUNT_4_ALL_QUANTITY':'N','~CACHE_TYPE':'A','~SHOW_NUM_PRODUCTS':'Y','~SHOW_TOTAL_PRICE':'Y','~SHOW_EMPTY_VALUES':'Y','~SHOW_PERSONAL_LINK':'N','~PATH_TO_PERSONAL':'/personal/','~SHOW_AUTHOR':'N','~PATH_TO_REGISTER':'/login/','~PATH_TO_AUTHORIZE':'/login/','~PATH_TO_PROFILE':'/personal/','~SHOW_PRODUCTS':'N','~SHOW_DELAY':'Y','~SHOW_NOTAVAIL':'Y','~SHOW_IMAGE':'Y','~SHOW_PRICE':'Y','~SHOW_SUMMARY':'Y','~POSITION_FIXED':'N','~POSITION_VERTICAL':'top','~POSITION_HORIZONTAL':'right','~AJAX':'N','cartId':'cart_line1'};
+	cart_line1.activate();
+</script>								
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+					</div>
+	</div>
+</body>
+</html><!--d32fd2b8fca28a27368fcfcba5d1e1ea-->

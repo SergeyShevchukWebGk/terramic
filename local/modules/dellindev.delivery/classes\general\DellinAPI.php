@@ -105,10 +105,8 @@ class DellinAPI
 
         if ($cache->InitCache($life_time, $cache_id)) {
             $cache_data = $cache->GetVars();
-            $kladr_code = $cache_data['VALUE'];    
-
-        } else {    
-
+            $kladr_code = $cache_data['VALUE'];
+        } else {
             $db_vars = CSaleLocation::GetList(false, array("CODE" => $bx_location_to_id));
             $bx_location = $db_vars->Fetch();
             $dl_locations = empty($bx_location) ? array() : self::SearchCity($bx_location['CITY_NAME']);
@@ -520,6 +518,7 @@ class DellinAPI
         } else {
             $dl_api_volume["sized"] = $AMOUNT;
         }
+        logger($dl_api_weight["sized"].'__'.$WIDTH.'   '.$dl_api_volume["sized"].'_'.$AMOUNT, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt' );
 
       //
         // Формируем данные для отправки.
@@ -671,12 +670,11 @@ class DellinAPI
 
         $is_small_goods_price = $arConfig['IS_SMALL_GOODS_PRICE']['VALUE'] == 'Y';
         $is_try_small_goods_price_calculate = $arConfig['TRY_SMALL_GOODS_PRICE_CALCULATE']['VALUE'] == 'Y';
+
         if ($response->price > 0 || ($is_small_goods_price && $response->small->price > 0)) {
             // Доставка межгород
             $total_price = $response->price;
-        logger($response, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt' );
 
-        logger($total_price, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt' );
             if ($is_small_goods_price) {
                 if ($response->small->price > 0) {
                     $total_price = $response->small->price + $response->small->insurance + $response->small->notify->price;
@@ -712,7 +710,7 @@ class DellinAPI
                          }
                     }
                 }
-
+                logger($result_terminal, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt' );
           /*      $data_2 = array(
                    "appkey" => $data["appKey"],
                    "derivalPoint" => $data["derivalPoint"],
@@ -752,7 +750,7 @@ class DellinAPI
             $cache_id = 'DELLIN_CALCULATE|' . serialize($data) . '&' . serialize($arConfig);
             if ($cache->InitCache($life_time, $cache_id)) {
                 $cache_data = $cache->GetVars();
-                $result = $cache_data['VALUE'];  
+                $result = $cache_data['VALUE'];
             } else {
                 $http_client = new HttpClient();
                 $http_client->setHeader('Content-Type', 'application/json', true);
@@ -773,6 +771,7 @@ class DellinAPI
                 $cache->EndDataCache(array('VALUE' => $result));
             }
         }
+
         return $result;
     }
 }
