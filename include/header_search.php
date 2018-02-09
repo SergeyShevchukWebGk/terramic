@@ -6,7 +6,7 @@
 		"INPUT_ID" => "title-search-input",
 		"CONTAINER_ID" => "altop_search",
 		"IBLOCK_TYPE" => "catalog",
-		"IBLOCK_ID" => "16",
+		"IBLOCK_ID" => "23",
 		"PAGE" => "/catalog/",
 		"NUM_CATEGORIES" => "1",
 		"TOP_COUNT" => "7",
@@ -14,9 +14,10 @@
 		"USE_LANGUAGE_GUESS" => "Y",
 		"CHECK_DATES" => "N",
 		"PROPERTY_CODE_MOD" => array(
-			0 => "GUARANTEE",
-			1 => "ARTNUMBER",
-			2 => "",
+			0 => "",
+			1 => "GUARANTEE",
+			2 => "ARTNUMBER",
+			3 => "",
 		),
 		"OFFERS_FIELD_CODE" => array(
 			0 => "",
@@ -36,6 +37,8 @@
 		"SHOW_PRICE" => "Y",
 		"PRICE_CODE" => array(
 			0 => "BASE",
+			1 => "Интернет магазин Юр.лицо (Террамик)",
+			2 => "Интернет магазин физ.лицо (Вертянкина)",
 		),
 		"PRICE_VAT_INCLUDE" => "Y",
 		"SHOW_ADD_TO_CART" => "Y",
@@ -59,4 +62,4 @@
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false
-);?> 
+);?>

@@ -20,7 +20,13 @@ if (intval($USER->GetID()) <= 0 || \Bitrix\Im\User::getInstance()->isConnector()
 }
 IncludeModuleLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/im/install/public/desktop_app/index.php");
 
-if (!isset($_GET['BXD_API_VERSION']) && strpos($_SERVER['HTTP_USER_AGENT'], 'BitrixDesktop') === false)
+if (isset($_GET['IFRAME']) == 'Y')
+{
+	$APPLICATION->IncludeComponent("bitrix:im.messenger", "iframe", Array(
+		"CONTEXT" => "FULLSCREEN",
+	), false, Array("HIDE_ICONS" => "Y"));
+}
+else if (!isset($_GET['BXD_API_VERSION']) && strpos($_SERVER['HTTP_USER_AGENT'], 'BitrixDesktop') === false)
 {
 	$APPLICATION->IncludeComponent("bitrix:im.messenger", "fullscreen", Array(
 		"CONTEXT" => "FULLSCREEN",

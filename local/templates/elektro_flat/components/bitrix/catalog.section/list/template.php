@@ -112,7 +112,7 @@ global $arSetting,$arSettingsSolo;
 						<div class="article_rating">
 							<?//ARTICLE//?>
 							<div class="article">
-								<?=GetMessage("CATALOG_ELEMENT_ARTNUMBER")?><?=!empty($arElement["PROPERTIES"]["ARTNUMBER"]["VALUE"]) ? $arElement["PROPERTIES"]["ARTNUMBER"]["VALUE"] : "-";?>
+								<?=GetMessage("CATALOG_ELEMENT_ARTNUMBER")?><?=!empty($arElement["PROPERTIES"]["CML2_ARTICLE"]["VALUE"]) ? $arElement["PROPERTIES"]["CML2_ARTICLE"]["VALUE"] : "-";?>
 							</div>
 							<?//RATING//?>
 							<div class="rating">

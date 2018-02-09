@@ -46,6 +46,12 @@ if(count($arResult["SECTIONS"]) < 1)
 							<?endif;
 							if(is_array($arItem["LOGO_2"]) && count($arItem["LOGO_2"]) > 0):?>
 								<img src="<?=$arItem['LOGO_2']['SRC']?>" width="<?=$arItem['LOGO_2']['WIDTH']?>" height="<?=$arItem['LOGO_2']['HEIGHT']?>" alt="<?=$arItem['NAME']?>" />
+							<?endif;
+							if(is_array($arItem["LOGO_3"]) && count($arItem["LOGO_3"]) > 0):?>
+								<img src="<?=$arItem['LOGO_3']['SRC']?>" width="<?=$arItem['LOGO_3']['WIDTH']?>" height="<?=$arItem['LOGO_3']['HEIGHT']?>" alt="<?=$arItem['NAME']?>" />
+							<?endif;
+							if(is_array($arItem["LOGO_4"]) && count($arItem["LOGO_4"]) > 0):?>
+								<img src="<?=$arItem['LOGO_4']['SRC']?>" width="<?=$arItem['LOGO_4']['WIDTH']?>" height="<?=$arItem['LOGO_4']['HEIGHT']?>" alt="<?=$arItem['NAME']?>" />
 							<?endif;?>
 						</div>
 						<div class="payment-item-url<?=empty($arItem['PROPERTY_URL_VALUE']) ? ' no-url' : ''?>">

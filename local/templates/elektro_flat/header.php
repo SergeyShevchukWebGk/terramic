@@ -57,40 +57,42 @@ Loc::loadMessages(__FILE__);?>
 	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/main.js");
 	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/script.js");
 	$APPLICATION->ShowHead();?>
-    <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <script>
-    function ynadex_map (longitude, latitude, adress) {
-        $(function(){
-            $(".popap_map #map").empty();
-            $('.popap_map').show();
-        })
-        var myMap = new ymaps.Map('map', {
-                center: [latitude, longitude],
-                zoom: 12
-            }, {
-                searchControlProvider: 'yandex#search'
-            }),
+	<?if(stristr($APPLICATION->GetCurDir(), '/contacts/') === FALSE) {?>
+	    <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+	    <script>
+	    function ynadex_map (longitude, latitude, adress) {
+	        $(function(){
+	            $(".popap_map #map").empty();
+	            $('.popap_map').show();
+	        })
+	        var myMap = new ymaps.Map('map', {
+	                center: [latitude, longitude],
+	                zoom: 12
+	            }, {
+	                searchControlProvider: 'yandex#search'
+	            }),
 
 
-            // Создаём макет содержимого.
-            MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
-                '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
-            ),
+	            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+	            MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+	                '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+	            ),
 
-            myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
-                balloonContent: adress
-            }, {
-                // Опции.
-                // Необходимо указать данный тип макета.
-                iconLayout: 'default#image',
+	            myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+	                balloonContent: adress
+	            }, {
+	                // пїЅпїЅпїЅпїЅпїЅ.
+	                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
+	                iconLayout: 'default#image',
 
-            })
+	            })
 
 
-            myMap.geoObjects
-                .add(myPlacemark)
-    };
-    </script>
+	            myMap.geoObjects
+	                .add(myPlacemark)
+	    };
+	    </script>
+	<?}?>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">
 	<?global $arSetting;?>

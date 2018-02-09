@@ -99,7 +99,8 @@ body #map{
     margin-left: 110px;
     margin-top: 20px;
 }
-.location_hide{
+.location_hide,
+.organization{
     display: none;
 }
 .stock_delivery .selivery_select .label{

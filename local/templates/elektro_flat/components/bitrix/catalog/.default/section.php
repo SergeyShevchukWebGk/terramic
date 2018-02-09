@@ -134,10 +134,10 @@ if(isset($arCurSection) && !empty($arCurSection)) {
 
     $page = explode('/', $APPLICATION->GetCurPage());
 	//FILTER//
-	if($arParams["USE_FILTER"] == "Y" && $arSetting["SMART_FILTER_VISIBILITY"]["VALUE"] != "DISABLE" && 
-        $_SESSION["Filter"] == "Y" && 
+	if($arParams["USE_FILTER"] == "Y" && $arSetting["SMART_FILTER_VISIBILITY"]["VALUE"] != "DISABLE" &&
+        $_SESSION["Filter"] == "Y" &&
         ($page[2] != 'aksessuary_1' && $page[2] != 'aksessuary')):?>
-        
+
 		<?$APPLICATION->IncludeComponent("bitrix:catalog.smart.filter", "elektro",
 			Array(
 				"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
@@ -217,7 +217,7 @@ if($obCache->InitCache($arParams["CACHE_TIME"], $cache_id, $cache_dir)) {
 <?//SORT//
 $arAvailableSort = array(
 	"default" => Array("sort", "asc"),
-	"price" => Array("PROPERTY_MINIMUM_PRICE", "asc"),
+	"price" => Array("catalog_PRICE_3", "asc"),
 	"rating" => Array("PROPERTY_rating", "desc"),
 );
 
@@ -228,7 +228,7 @@ if($_REQUEST["sort"]) {
 	$APPLICATION->set_cookie("sort", $sort, false, "/", SITE_SERVER_NAME);
 }
 if($_REQUEST["sort"] == "price") {
-	$sort = "PROPERTY_MINIMUM_PRICE";
+	$sort = "catalog_PRICE_3";
 	$APPLICATION->set_cookie("sort", $sort, false, "/", SITE_SERVER_NAME);
 }
 if($_REQUEST["sort"] == "rating") {

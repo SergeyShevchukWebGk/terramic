@@ -2,8 +2,8 @@
 $APPLICATION->SetTitle("Каталог товаров");?>
 
 <?$APPLICATION->IncludeComponent(
-	"bitrix:catalog", 
-	".default", 
+	"bitrix:catalog",
+	".default",
 	array(
 		"PATH_TO_SHIPPING" => "/delivery/",
 		"DISPLAY_IMG_WIDTH" => "178",

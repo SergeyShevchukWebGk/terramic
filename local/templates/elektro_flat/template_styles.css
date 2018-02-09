@@ -3323,8 +3323,8 @@ footer{
 }
 
 .payments-section-list ul li .payment-item-logo{
-	width:142px;
-	padding:0px 0px 0px 20px;
+    padding: 5px 0px 0px 20px;
+    float: right;
 }
 
 .payments-section-list ul li .payment-item-logo img{
@@ -3334,8 +3334,7 @@ footer{
 }
 
 .payments-section-list ul li .payment-item-url{
-	width:75px;
-	padding:0px 0px 0px 14px;
+	
 }
 
 /***VENDORS***/

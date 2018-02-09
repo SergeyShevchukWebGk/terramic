@@ -12,7 +12,7 @@ foreach($arResult["SECTIONS"] as $key => $arSection) {
 $iblockId = array_unique($iblockId);
 
 /***SECTIONS_ITEMS***/
-$rsElements = CIBlockElement::GetList(array("SORT" => "ASC", "NAME" => "ASC"), array("IBLOCK_ID" => $iblockId, "SECTION_ID" => $sectionId, "INCLUDE_SUBSECTIONS" => "N", "ACTIVE" => "Y"), false, false, array("ID", "IBLOCK_ID", "IBLOCK_SECTION_ID", "NAME", "PREVIEW_TEXT", "PROPERTY_LOGO_1", "PROPERTY_LOGO_2", "PROPERTY_URL"));
+$rsElements = CIBlockElement::GetList(array("SORT" => "ASC", "NAME" => "ASC"), array("IBLOCK_ID" => $iblockId, "SECTION_ID" => $sectionId, "INCLUDE_SUBSECTIONS" => "N", "ACTIVE" => "Y"), false, false, array("ID", "IBLOCK_ID", "IBLOCK_SECTION_ID", "NAME", "PREVIEW_TEXT", "PROPERTY_LOGO_1", "PROPERTY_LOGO_2", "PROPERTY_LOGO_3", "PROPERTY_LOGO_4", "PROPERTY_URL"));
 while($obElement = $rsElements->GetNextElement()) {
 	$arItem = $obElement->GetFields();	
 
@@ -31,15 +31,45 @@ while($obElement = $rsElements->GetNextElement()) {
 		);				
 	}
 
-	if(isset($arItem["PROPERTY_LOGO_2_VALUE"]) && $arItem["PROPERTY_LOGO_2_VALUE"] > 0) {
+    if(isset($arItem["PROPERTY_LOGO_2_VALUE"]) && $arItem["PROPERTY_LOGO_2_VALUE"] > 0) {
+        $arFileTmp = CFile::ResizeImageGet(
+            $arItem["PROPERTY_LOGO_2_VALUE"],
+            array("width" => 66, "height" => 30),
+            BX_RESIZE_IMAGE_PROPORTIONAL,
+            true
+        );
+
+        $arItem["LOGO_2"] = array(
+            "SRC" => $arFileTmp["src"],
+            "WIDTH" => $arFileTmp["width"],
+            "HEIGHT" => $arFileTmp["height"],
+        );
+    }
+
+    if(isset($arItem["PROPERTY_LOGO_3_VALUE"]) && $arItem["PROPERTY_LOGO_3_VALUE"] > 0) {
+        $arFileTmp = CFile::ResizeImageGet(
+            $arItem["PROPERTY_LOGO_3_VALUE"],
+            array("width" => 66, "height" => 30),
+            BX_RESIZE_IMAGE_PROPORTIONAL,
+            true
+        );
+
+        $arItem["LOGO_3"] = array(
+            "SRC" => $arFileTmp["src"],
+            "WIDTH" => $arFileTmp["width"],
+            "HEIGHT" => $arFileTmp["height"],
+        );
+    }
+
+	if(isset($arItem["PROPERTY_LOGO_4_VALUE"]) && $arItem["PROPERTY_LOGO_4_VALUE"] > 0) {
 		$arFileTmp = CFile::ResizeImageGet(
-			$arItem["PROPERTY_LOGO_2_VALUE"],
+			$arItem["PROPERTY_LOGO_4_VALUE"],
 			array("width" => 66, "height" => 30),
 			BX_RESIZE_IMAGE_PROPORTIONAL,
 			true
 		);
 
-		$arItem["LOGO_2"] = array(
+		$arItem["LOGO_4"] = array(
 			"SRC" => $arFileTmp["src"],
 			"WIDTH" => $arFileTmp["width"],
 			"HEIGHT" => $arFileTmp["height"],

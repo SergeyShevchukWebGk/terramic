@@ -45,6 +45,6 @@
 		"PAGER_SHOW_ALL" => "N",
 		"AJAX_OPTION_ADDITIONAL" => ""
 	),
-	false,
+	false, 
 	array("HIDE_ICONS" => isset($arPayIcFilter["HIDE_ICONS"]) && $arPayIcFilter["HIDE_ICONS"] == "Y" ? "Y" : "N")	
 );?>

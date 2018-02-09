@@ -26,16 +26,26 @@ $APPLICATION->SetTitle("Контакты");?><h2>
  <?$APPLICATION->IncludeComponent(
 	"bitrix:map.yandex.view",
 	".default",
-	Array(
+	array(
 		"COMPONENT_TEMPLATE" => ".default",
-		"CONTROLS" => array(0=>"ZOOM",1=>"TYPECONTROL",2=>"SCALELINE",),
+		"CONTROLS" => array(
+			0 => "ZOOM",
+			1 => "TYPECONTROL",
+			2 => "SCALELINE",
+		),
 		"INIT_MAP_TYPE" => "MAP",
-		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.44690848043717;s:10:\"yandex_lon\";d:51.50868554232785;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:51.508707;s:3:\"LAT\";d:53.446806;s:4:\"TEXT\";s:27:\"ООО «ТЕРРАМИК»\";}}}",
+		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.44690848043428;s:10:\"yandex_lon\";d:51.508685542328;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:51.508707;s:3:\"LAT\";d:53.446806;s:4:\"TEXT\";s:27:\"ООО «ТЕРРАМИК»\";}}}",
 		"MAP_HEIGHT" => "350",
 		"MAP_ID" => "1",
 		"MAP_WIDTH" => "100%",
-		"OPTIONS" => array(0=>"ENABLE_DBLCLICK_ZOOM",1=>"ENABLE_DRAGGING",)
-	)
+		"OPTIONS" => array(
+			0 => "ENABLE_DBLCLICK_ZOOM",
+			1 => "ENABLE_DRAGGING",
+		),
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
+	),
+	false
 );?> <br>
 <hr>
  <br>

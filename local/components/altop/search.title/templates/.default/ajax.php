@@ -19,7 +19,7 @@ global $arSetting;
 
 <?//CATALOG_SEARCH//
 if(!empty($arResult["CATEGORIES"])):?>
-	<a href="javascript:void(0)" class="search_close"><i class="fa fa-times"></i></a>		
+	<a href="javascript:void(0)" class="search_close"><i class="fa fa-times"></i></a>
 	<div id="catalog_search">
 		<?foreach($arResult["CATEGORIES"] as $category_id => $arCategory):
 			foreach($arCategory["ITEMS"] as $i => $arElement):
@@ -27,7 +27,7 @@ if(!empty($arResult["CATEGORIES"])):?>
 				$arItemIDs = array(
 					"ID" => $strMainID,
 					"BTN_BUY" => $strMainID."_btn_buy"
-				);						
+				);
 				if($category_id === "all"):
 					//SEARCH_ALL//
 					if($arParams["SHOW_ALL_RESULTS"]=="Y"):?>
@@ -35,7 +35,7 @@ if(!empty($arResult["CATEGORIES"])):?>
 					<?endif;
 				elseif(isset($arElement["ICON"])):
 					//SEARCH_ITEM//?>
-					<div class="tvr_search">						
+					<div class="tvr_search">
 						<?//ITEM_PREVIEW_PICTURE//?>
 						<a class="image" href="<?=$arElement['URL']?>">
 							<?if(is_array($arElement["PREVIEW_PICTURE"])):?>
@@ -59,7 +59,7 @@ if(!empty($arResult["CATEGORIES"])):?>
 									<?endforeach;?>
 								</div>
 							<?endif;?>
-						</div>						
+						</div>
 						<?//TOTAL_OFFERS_ITEM_PRICE//
 						if($arParams["SHOW_PRICE"]=="Y"):
 							//TOTAL_OFFERS_PRICE//
@@ -83,14 +83,14 @@ if(!empty($arResult["CATEGORIES"])):?>
 
 								<div class="search_price">
 									<?if($arElement["TOTAL_OFFERS"]["MIN_PRICE"]["DISCOUNT_VALUE"] <= 0):?>
-										<span class="no-price">											
+										<span class="no-price">
 											<span class="unit">
 												<?=GetMessage("CATALOG_ELEMENT_NO_PRICE")?>
 												<br />
 												<span><?=(!empty($arElement["TOTAL_OFFERS"]["MIN_PRICE"]["CATALOG_MEASURE_NAME"])) ? GetMessage("CATALOG_ELEMENT_UNIT")." ".$arElement["TOTAL_OFFERS"]["MIN_PRICE"]["CATALOG_MEASURE_NAME"] : "";?></span>
 											</span>
-										</span>													
-									<?else:?>										
+										</span>
+									<?else:?>
 										<span class="price">
 											<?=($arElement["TOTAL_OFFERS"]["FROM"] == "Y") ? "<span class='from'>".GetMessage("CATALOG_ELEMENT_FROM")."</span>" : "";?>
 											<?=number_format($arElement["TOTAL_OFFERS"]["MIN_PRICE"]["DISCOUNT_VALUE"], $price["DECIMALS"], $price["DEC_POINT"], $price["THOUSANDS_SEP"]);
@@ -99,11 +99,11 @@ if(!empty($arResult["CATEGORIES"])):?>
 													<?=number_format($arElement["TOTAL_OFFERS"]["MIN_PRICE"]["DISCOUNT_VALUE"] * $arSetting["REFERENCE_PRICE_COEF"]["VALUE"], $price["REFERENCE_DECIMALS"], $price["DEC_POINT"], $price["THOUSANDS_SEP"]);?>
 												</span>
 											<?endif;?>
-											<span class="unit">												
+											<span class="unit">
 												<?=$currency?>
 												<span><?=(!empty($arElement["TOTAL_OFFERS"]["MIN_PRICE"]["CATALOG_MEASURE_NAME"])) ? GetMessage("CATALOG_ELEMENT_UNIT")." ".$arElement["TOTAL_OFFERS"]["MIN_PRICE"]["CATALOG_MEASURE_NAME"] : "";?></span>
-											</span>											
-										</span>									
+											</span>
+										</span>
 									<?endif;?>
 								</div>
 							<?//ITEM_PRICE//
@@ -111,7 +111,7 @@ if(!empty($arResult["CATEGORIES"])):?>
 								foreach($arElement["PRICES"] as $code=>$arPrice):
 									if($arPrice["MIN_PRICE"] == "Y"):
 										if($arPrice["CAN_ACCESS"]):
-											
+
 											$price = CCurrencyLang::GetCurrencyFormat($arPrice["CURRENCY"], "ru");
 											if(empty($price["THOUSANDS_SEP"])):
 												$price["THOUSANDS_SEP"] = " ";
@@ -120,7 +120,7 @@ if(!empty($arResult["CATEGORIES"])):?>
 											if($price["HIDE_ZERO"] == "Y"):
 												if($arSetting["REFERENCE_PRICE"]["VALUE"] == "Y" && !empty($arSetting["REFERENCE_PRICE_COEF"]["VALUE"])):
 													if(round($arPrice["DISCOUNT_VALUE"] * $arSetting["REFERENCE_PRICE_COEF"]["VALUE"], $price["DECIMALS"]) == round($arPrice["DISCOUNT_VALUE"] * $arSetting["REFERENCE_PRICE_COEF"]["VALUE"], 0)):
-														$price["REFERENCE_DECIMALS"] = 0;													
+														$price["REFERENCE_DECIMALS"] = 0;
 													endif;
 												endif;
 												if(round($arPrice["DISCOUNT_VALUE"], $price["DECIMALS"]) == round($arPrice["DISCOUNT_VALUE"], 0)):
@@ -137,8 +137,8 @@ if(!empty($arResult["CATEGORIES"])):?>
 															<br />
 															<span><?=(!empty($arElement["CATALOG_MEASURE_NAME"])) ? GetMessage("CATALOG_ELEMENT_UNIT")." ".$arElement["CATALOG_MEASURE_NAME"] : "";?></span>
 														</span>
-													</span>																
-												<?else:?>													
+													</span>
+												<?else:?>
 													<span class="price">
 														<?=number_format($arPrice["DISCOUNT_VALUE"], $price["DECIMALS"], $price["DEC_POINT"], $price["THOUSANDS_SEP"]);
 														if($arSetting["REFERENCE_PRICE"]["VALUE"] == "Y" && !empty($arSetting["REFERENCE_PRICE_COEF"]["VALUE"])):?>
@@ -149,16 +149,16 @@ if(!empty($arResult["CATEGORIES"])):?>
 														<span class="unit">
 															<?=$currency?>
 															<span><?=(!empty($arElement["CATALOG_MEASURE_NAME"])) ? GetMessage("CATALOG_ELEMENT_UNIT")." ".$arElement["CATALOG_MEASURE_NAME"] : "";?></span>
-														</span>														
+														</span>
 													</span>
 												<?endif;?>
 											</div>
-										
+
 										<?endif;
 									endif;
 								endforeach;
 							endif;
-						endif;						
+						endif;
 						//OFFERS_ITEM_BUY//
 						if($arParams["SHOW_ADD_TO_CART"]=="Y"):
 							//OFFERS_BUY//
@@ -168,7 +168,7 @@ if(!empty($arResult["CATEGORIES"])):?>
 										<form action="<?=$APPLICATION->GetCurPage()?>" class="add2basket_form">
 											<a href="javascript:void(0)" class="minus" onclick="if (BX('quantity_<?=$arItemIDs["ID"]?>').value > <?=$arElement["TOTAL_OFFERS"]["MIN_PRICE"]["CATALOG_MEASURE_RATIO"]?>) BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)-<?=$arElement["TOTAL_OFFERS"]["MIN_PRICE"]["CATALOG_MEASURE_RATIO"]?>;"><span>-</span></a>
 											<input type="text" id="quantity_<?=$arItemIDs['ID']?>" name="quantity" class="quantity" value="<?=$arElement['TOTAL_OFFERS']['MIN_PRICE']['CATALOG_MEASURE_RATIO']?>"/>
-											<a href="javascript:void(0)" class="plus" onclick="BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)+<?=$arElement["TOTAL_OFFERS"]["MIN_PRICE"]["CATALOG_MEASURE_RATIO"]?>;"><span>+</span></a>			
+											<a href="javascript:void(0)" class="plus" onclick="BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)+<?=$arElement["TOTAL_OFFERS"]["MIN_PRICE"]["CATALOG_MEASURE_RATIO"]?>;"><span>+</span></a>
 											<button type="button" class="btn_buy" name="add2basket" value="<?=GetMessage('CATALOG_ELEMENT_ADD_TO_CART')?>" onclick="OpenPropsPopupSearch('<?=$arItemIDs["ID"]?>'<?=($arSetting["OFFERS_VIEW"]["VALUE"] == "LIST" ? ", true" : "");?>);"><i class="fa fa-shopping-cart"></i></button>
 										</form>
 									</div>
@@ -193,14 +193,14 @@ if(!empty($arResult["CATEGORIES"])):?>
 													<?if(!isset($arElement["SELECT_PROPS"]) || empty($arElement["SELECT_PROPS"])):?>
 														<input type="hidden" name="ID" value="<?=$arElement['ITEM_ID']?>"/>
 														<?$props = array();
-														if(!empty($arElement["PROPERTIES"]["ARTNUMBER"]["VALUE"])):			
+														if(!empty($arElement["PROPERTIES"]["ARTNUMBER"]["VALUE"])):
 															$props[] = array(
 																"NAME" => $arElement["PROPERTIES"]["ARTNUMBER"]["NAME"],
 																"CODE" => $arElement["PROPERTIES"]["ARTNUMBER"]["CODE"],
 																"VALUE" => $arElement["PROPERTIES"]["ARTNUMBER"]["VALUE"]
-															);												
+															);
 														endif;
-														if(!empty($arElement["DISPLAY_PROPERTIES"])):										
+														if(!empty($arElement["DISPLAY_PROPERTIES"])):
 															foreach($arElement["DISPLAY_PROPERTIES"] as $propOffer) {
 																$props[] = array(
 																	"NAME" => $propOffer["NAME"],
@@ -211,7 +211,7 @@ if(!empty($arResult["CATEGORIES"])):?>
 														endif;
 														$props = !empty($props) ? strtr(base64_encode(addslashes(gzcompress(serialize($props),9))), '+/=', '-_,') : "";?>
 														<input type="hidden" name="PROPS" value="<?=$props?>" />
-													<?endif;?>															
+													<?endif;?>
 													<button type="button" class="btn_buy" name="add2basket" value="<?=GetMessage('CATALOG_ELEMENT_ADD_TO_CART')?>"<?=(isset($arElement["SELECT_PROPS"]) && !empty($arElement["SELECT_PROPS"]) ? " onclick=\"OpenPropsPopupSearch('".$arItemIDs["ID"]."')\"" : " id='".$arItemIDs["BTN_BUY"]."'");?>><i class="fa fa-shopping-cart"></i></button>
 												</form>
 											<?endif;?>
@@ -225,11 +225,11 @@ if(!empty($arResult["CATEGORIES"])):?>
 												<a class="btn_buy apuo" id="under_order_anch_<?=$arItemIDs['ID']?>" href="javascript:void(0)" rel="nofollow"><i class="fa fa-clock-o"></i><span><?=GetMessage("CATALOG_ELEMENT_UNDER_ORDER")?></span></a>
 											</div>
 										</div>
-									<?endif;												
+									<?endif;
 								endif;
 							endif;
-						endif;?>										
-					</div>							
+						endif;?>
+					</div>
 				<?endif;
 			endforeach;
 		endforeach;?>
@@ -265,9 +265,9 @@ if(!empty($arResult["CATEGORIES"])):?>
 			endif;
 		endforeach;
 	endforeach;
-	
-	//POPUP_JS//	
-	$popupParams["MESS"] = array(	
+
+	//POPUP_JS//
+	$popupParams["MESS"] = array(
 		"CATALOG_ELEMENT_ARTNUMBER" => GetMessage("CATALOG_ELEMENT_ARTNUMBER"),
 		"CATALOG_ELEMENT_NO_PRICE" => GetMessage("CATALOG_ELEMENT_NO_PRICE"),
 		"CATALOG_ELEMENT_SKIDKA" => GetMessage("CATALOG_ELEMENT_SKIDKA"),
@@ -278,25 +278,25 @@ if(!empty($arResult["CATEGORIES"])):?>
 		"CATALOG_ELEMENT_ADDED" => GetMessage("CATALOG_ELEMENT_ADDED"),
 		"CATALOG_ELEMENT_ASK_PRICE_FULL" => GetMessage("CATALOG_ELEMENT_ASK_PRICE_FULL"),
 		"CATALOG_ELEMENT_ASK_PRICE_SHORT" => GetMessage("CATALOG_ELEMENT_ASK_PRICE_SHORT"),
-		"CATALOG_ELEMENT_UNDER_ORDER" => GetMessage("CATALOG_ELEMENT_UNDER_ORDER"),									
+		"CATALOG_ELEMENT_UNDER_ORDER" => GetMessage("CATALOG_ELEMENT_UNDER_ORDER"),
 		"CATALOG_ELEMENT_OFFERS_LIST" => GetMessage("CATALOG_ELEMENT_OFFERS_LIST"),
 		"CATALOG_ELEMENT_OFFERS_LIST_IMAGE" => GetMessage("CATALOG_ELEMENT_OFFERS_LIST_IMAGE"),
 		"CATALOG_ELEMENT_OFFERS_LIST_NAME" => GetMessage("CATALOG_ELEMENT_OFFERS_LIST_NAME"),
 		"CATALOG_ELEMENT_OFFERS_LIST_PRICE" => GetMessage("CATALOG_ELEMENT_OFFERS_LIST_PRICE"),
 		"CATALOG_ELEMENT_BOC_SHORT" => GetMessage("CATALOG_ELEMENT_BOC_SHORT")
-	);	
-	$popupParams["SKU_PROPS"] = strtr(base64_encode(addslashes(gzcompress(serialize($arResult["SKU_PROPS"]),9))), '+/=', '-_,');	
-	$popupParams["PARAMS"] = strtr(base64_encode(addslashes(gzcompress(serialize($arParams),9))), '+/=', '-_,');	
-	$popupParams["SETTINGS"] = strtr(base64_encode(addslashes(gzcompress(serialize($arSetting),9))), '+/=', '-_,');	
+	);
+	$popupParams["SKU_PROPS"] = strtr(base64_encode(addslashes(gzcompress(serialize($arResult["SKU_PROPS"]),9))), '+/=', '-_,');
+	$popupParams["PARAMS"] = strtr(base64_encode(addslashes(gzcompress(serialize($arParams),9))), '+/=', '-_,');
+	$popupParams["SETTINGS"] = strtr(base64_encode(addslashes(gzcompress(serialize($arSetting),9))), '+/=', '-_,');
 	foreach($arResult["CATEGORIES"] as $category_id => $arCategory):
 		foreach($arCategory["ITEMS"] as $key => $arElement):
 			$strMainID = $this->GetEditAreaId($arElement["ITEM_ID"]);
 			$arItemIDs = array(
-				"ID" => $strMainID,				
+				"ID" => $strMainID,
 				"BTN_BUY" => $strMainID."_btn_buy"
 			);
-			$strObName = "ob".preg_replace("/[^a-zA-Z0-9_]/", "x", $strMainID);			
-			if($arElement["OFFERS"] || $arElement["SELECT_PROPS"]):				
+			$strObName = "ob".preg_replace("/[^a-zA-Z0-9_]/", "x", $strMainID);
+			if($arElement["OFFERS"] || $arElement["SELECT_PROPS"]):
 				//POPUP//
 				$popupParams["STR_MAIN_ID"] = $strMainID;
 				$popupParams["ELEMENT"] = strtr(base64_encode(addslashes(gzcompress(serialize($arElement),9))), '+/=', '-_,');?>
@@ -323,16 +323,16 @@ if(!empty($arResult["CATEGORIES"])):?>
 				);?>
 				<script type="text/javascript">
 					var <?=$strObName;?> = new JCCatalogSectionSearch(<?=CUtil::PhpToJSObject($arJSParams, false, true);?>);
-				</script>			
+				</script>
 			<?endif;
 		endforeach;
 	endforeach;
 
-	//JS//?>	
+	//JS//?>
 	<script type="text/javascript">
-		BX.message({			
+		BX.message({
 			SEARCH_ADDITEMINCART_ADDED: "<?=GetMessageJS('CATALOG_ELEMENT_ADDED')?>",
-			SEARCH_POPUP_WINDOW_TITLE: "<?=GetMessageJS('CATALOG_ELEMENT_ADDITEMINCART_TITLE')?>",			
+			SEARCH_POPUP_WINDOW_TITLE: "<?=GetMessageJS('CATALOG_ELEMENT_ADDITEMINCART_TITLE')?>",
 			SEARCH_POPUP_WINDOW_BTN_CLOSE: "<?=GetMessageJS('CATALOG_ELEMENT_ADDITEMINCART_BTN_CLOSE')?>",
 			SEARCH_POPUP_WINDOW_BTN_ORDER: "<?=GetMessageJS('CATALOG_ELEMENT_ADDITEMINCART_BTN_ORDER')?>",
 			SEARCH_SITE_DIR: "<?=SITE_DIR?>"
@@ -354,7 +354,7 @@ if(!empty($arResult["CATEGORIES"])):?>
 					}
 				}
 				BX.PropsSet =
-				{			
+				{
 					popup: null,
 					arParams: {}
 				};
@@ -372,11 +372,11 @@ if(!empty($arResult["CATEGORIES"])):?>
 					content: "<div class='popup-window-wait'><i class='fa fa-spinner fa-pulse'></i></div>",
 					events: {
 						onAfterPopupShow: function()
-						{													
+						{
 							if(!BX(visual_id + "_info")) {
 								BX.ajax.post(
 									"<?=$this->GetFolder();?>/popup.php",
-									{							
+									{
 										arParams:curSetParams
 									},
 									BX.delegate(function(result)
@@ -392,21 +392,21 @@ if(!empty($arResult["CATEGORIES"])):?>
 							} else {
 								qntItems = BX.findChildren(BX(visual_id), {className: "quantity"}, true);
 								if(!!qntItems && 0 < qntItems.length) {
-									for(i = 0; i < qntItems.length; i++) {					
+									for(i = 0; i < qntItems.length; i++) {
 										qntItems[i].value = BX("quantity_" + visual_id).value;
 									}
 								}
 							}
 						}
 					}
-				});			
+				});
 				BX.addClass(BX(visual_id), "pop-up more_options");
 				if(offers_list == true) {
 					BX.addClass(BX(visual_id), "offers-list");
 				}
 				close = BX.findChildren(BX(visual_id), {className: "popup-window-close-icon"}, true);
 				if(!!close && 0 < close.length) {
-					for(i = 0; i < close.length; i++) {					
+					for(i = 0; i < close.length; i++) {
 						close[i].innerHTML = "<i class='fa fa-times'></i>";
 					}
 				}
@@ -415,6 +415,6 @@ if(!empty($arResult["CATEGORIES"])):?>
 		}
 	</script>
 <?else:?>
-	<a href="javascript:void(0)" class="pop-up-close search_close"><i class="fa fa-times"></i></a>	
-	<div id="catalog_search_empty"><?=GetMessage("CATALOG_EMPTY_RESULT")?></div>			
+	<a href="javascript:void(0)" class="pop-up-close search_close"><i class="fa fa-times"></i></a>
+	<div id="catalog_search_empty"><?=GetMessage("CATALOG_EMPTY_RESULT")?></div>
 <?endif;?>

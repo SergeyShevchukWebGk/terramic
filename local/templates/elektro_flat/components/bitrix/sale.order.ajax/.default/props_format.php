@@ -136,7 +136,11 @@ if(!function_exists("PrintPropsForm")) {
                         <?if($arProperties["ID"] == 42){
                             $_prop_nds = "N";
                         }?>
-                        <div class="label  <?=($arProperties["CODE"] == 'agreement')? 'agreement':''?> <?=($arProperties["CODE"] == 'stock')?'stock':''?>">
+                        <div class="label  
+                            <?=($arProperties["CODE"] == 'agreement')? 'agreement':''?> 
+                            <?=($arProperties["CODE"] == 'stock')?'stock':''?>
+                            <?=($arProperties["CODE"] == 'organization')?'organization':''?>
+                        ">
                             <?=$arProperties["NAME"]?>
                             <?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
                                 <span class="star">*</span>
@@ -149,7 +153,11 @@ if(!function_exists("PrintPropsForm")) {
                         } else {
                              $select = '';
                         }?>
-                        <div class="block <?=($arProperties["CODE"] == 'stock')?'stock':''?> <?=($arProperties["CODE"] == 'agreement')? 'agreement':''?> ">
+                        <div class="block 
+                            <?=($arProperties["CODE"] == 'stock')?'stock':''?> 
+                            <?=($arProperties["CODE"] == 'agreement')? 'agreement':''?> 
+                            <?=($arProperties["CODE"] == 'organization')? 'organization':''?> 
+                        ">
                             <select name="<?=$arProperties["FIELD_NAME"]?>" <?=($arProperties["CODE"] == 'agreement')? 'onclick="return false"':''?> id="<?=$arProperties["FIELD_NAME"]?>" size="<?=$arProperties["SIZE1"]?>">
                                 <?foreach($arProperties["VARIANTS"] as $arVariants):?>
                                     <option <?=($arVariants["VALUE"] == $select)? 'selected':''?> value="<?=$arVariants["VALUE"]?>"<?if ($arVariants["SELECTED"] == "Y") echo " selected";?>><?=$arVariants["NAME"]?></option>

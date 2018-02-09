@@ -138,9 +138,13 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     if(pay_sistem_nds == true) {
                         $('.agreement select option').removeAttr('selected');
                         $('.agreement select option:nth-child(2)').attr("selected", "selected");
+                        $('.organization select option').removeAttr("selected", "selected");
+                        $('.organization select option:nth-child(2)').attr("selected", "selected");
                     } else {
                         $('.agreement select option').removeAttr('selected');
                         $('.agreement select option:nth-child(1)').attr("selected", "selected");
+                        $('.organization select option').removeAttr("selected", "selected");
+                        $('.organization select option:nth-child(1)').attr("selected", "selected");
                     }
                     setTimeout(function() {
                         // добавление адреса терминала

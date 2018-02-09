@@ -41,6 +41,8 @@ $APPLICATION->SetTitle("Моя корзина");?>
 		"OFFERS_LIMIT" => "",
 		"PRICE_CODE" => array(
 			0 => "Интернет магазин физ.лицо (Вертянкина)",
+			1 => "BASE",
+			2 => "Интернет магазин Юр.лицо (Террамик)",
 		),
 		"PRICE_VAT_INCLUDE" => "Y",
 		"CONVERT_CURRENCY" => "N",

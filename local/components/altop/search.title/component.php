@@ -70,8 +70,8 @@ if(!empty($query) && $_REQUEST["ajax_call"] === "y" && (!isset($_REQUEST["INPUT_
 		$obTitle = new CSearch;
 		$str_query = $arResult["alt_query"] ? $arResult["alt_query"] : $arResult["query"];
 		$obTitle->Search(array("QUERY" => $str_query), $aSort, $exFILTER);
-		
-		while($ar = $obTitle->Fetch()) {			
+
+		while($ar = $obTitle->Fetch()) {
 			$j++;
 			if($j > $arParams["TOP_COUNT"]) {
 				$params = array("q" => $arResult["alt_query"]? $arResult["alt_query"]: $arResult["query"]);
@@ -133,8 +133,8 @@ if(!empty($query) && $_REQUEST["ajax_call"] === "y" && (!isset($_REQUEST["INPUT_
 		$obTitle = new CSearch;
 		$str_other_query = $arResult["alt_query"] ? $arResult["alt_query"] : $arResult["query"];
 		$obTitle->Search(array("QUERY" => $str_other_query), $aSort, $arOthersFilter);
-		
-		while($ar = $obTitle->Fetch()) {			
+
+		while($ar = $obTitle->Fetch()) {
 			$j++;
 			if($j > $arParams["TOP_COUNT"]) {
 				//it's really hard to make it working
@@ -149,7 +149,7 @@ if(!empty($query) && $_REQUEST["ajax_call"] === "y" && (!isset($_REQUEST["INPUT_
 					"ITEM_ID" => $ar["ITEM_ID"],
 				);
 			}
-		}		
+		}
 
 		if(!$j) {
 			unset($arResult["CATEGORIES"]["others"]);
