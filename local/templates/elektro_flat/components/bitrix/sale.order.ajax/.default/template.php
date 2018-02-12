@@ -43,6 +43,46 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
             }
         } else {?>
             <script type="text/javascript">
+                function setCookie(name, value, options) {
+                  options = options || {};
+
+                  var expires = options.expires;
+
+                  if (typeof expires == "number" && expires) {
+                    var d = new Date();
+                    d.setTime(d.getTime() + expires * 1000);
+                    expires = options.expires = d;
+                  }
+                  if (expires && expires.toUTCString) {
+                    options.expires = expires.toUTCString();
+                  }
+
+                  value = encodeURIComponent(value);
+
+                  var updatedCookie = name + "=" + value;
+
+                  for (var propName in options) {
+                    updatedCookie += "; " + propName;
+                    var propValue = options[propName];
+                    if (propValue !== true) {
+                      updatedCookie += "=" + propValue;
+                    }
+                  }
+
+                  document.cookie = updatedCookie;
+                }
+                function getCookie(name) {
+                  var matches = document.cookie.match(new RegExp(
+                    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+                  ));
+                  return matches ? decodeURIComponent(matches[1]) : undefined;
+                }
+                function deleteCookie(name) {
+                  setCookie(name, "", {
+                    expires: -1
+                  })
+                }
+                deleteCookie('data-check');
                 <?if(CSaleLocation::isLocationProEnabled()):
                     $city = \Bitrix\Sale\Location\TypeTable::getList(array('filter' => array('=CODE' => 'CITY'), 'select' => array('ID')))->fetch();?>
 
@@ -146,6 +186,7 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                         $('.organization select option').removeAttr("selected", "selected");
                         $('.organization select option:nth-child(1)').attr("selected", "selected");
                     }
+                    
                     setTimeout(function() {
                         // добавление адреса терминала
                         if($('.stock_delivery input:checked')) {
@@ -178,6 +219,19 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                             }
                         });
                     })
+                    
+                    // получение области города
+                    var region = $('.bx-ui-sls-fake').attr('title');
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "/dellin/null_location.php",
+                        data: {region: region},
+                        success:function(data){
+
+                        }
+                    });
+                        
                     var location_val = $('.location_hide .bx-ui-sls-fake').val();
                     if(location_val == ''){
                          $('.location_hide').show();
@@ -185,25 +239,27 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                          $('.location_hide').hide();
                     }
                     
-                    cecked_delivery = $('#order_form_content .payment_check input:checked').attr('data-id');;  
                     // если не вывелись службы ДЛ      
-                    if($('#order_form_content .stock_delivery').length < 3 && cecked_delivery != 'yes'){
+                    if($('#order_form_content .stock_delivery').length < 3 && getCookie('data-check') != 'yes'){
                         setTimeout(function() {
                             $('#order_form_content .payment_check input:checked').click();
-                            $('#order_form_content .payment_check input:checked').attr('data-id', 'yes');
+                            document.cookie = "data-check=yes";
+                         //   $('#order_form_content .payment_check input:checked').attr('data-id', 'yes');
+                            
                         }, 1000);
+                    } else if($('#order_form_content .stock_delivery').length < 3){
+                        $('.location_hide').show();
                     }
 
                     $("#ORDER_PROP_14, #ORDER_PROP_20, #ORDER_PROP_15, #ORDER_PROP_3, #ORDER_PROP_46, #ORDER_PROP_33, #ORDER_PROP_28").mask("+7 (999) 999-99-99");
                     $("#ORDER_PROP_35").mask("99 99");
                 }
                 
-                var check = $('#ID_DELIVERY_ID_3').attr('data-check');
                 // если не вывелись службы ДЛ
-                if($('#order_form_content .stock_delivery').length < 3 && check != 'yes'){
+                if($('#order_form_content .stock_delivery').length < 3 && getCookie('data-check') != 'yes'){
                     setTimeout(function() {
                         submitForm();
-                        $('#ID_DELIVERY_ID_3').attr('data-check', 'yes');
+                        document.cookie = "data-check=yes";
                     }, 1000);
                 }
                 

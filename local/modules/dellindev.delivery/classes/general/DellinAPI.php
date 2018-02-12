@@ -674,9 +674,6 @@ class DellinAPI
         if ($response->price > 0 || ($is_small_goods_price && $response->small->price > 0)) {
             // Доставка межгород
             $total_price = $response->price;
-        logger($response, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt' );
-
-        logger($total_price, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt' );
             if ($is_small_goods_price) {
                 if ($response->small->price > 0) {
                     $total_price = $response->small->price + $response->small->insurance + $response->small->notify->price;
@@ -706,13 +703,32 @@ class DellinAPI
                 $data_terminsl = file_get_contents($_SERVER["DOCUMENT_ROOT"]. '/local/php_interface/include/city_base.txt');
                 $result_terminal = unserialize($data_terminsl);
                 if($result_terminal){
-                    foreach($result_terminal["city"] as $key => $city){
+                    foreach($result_terminal["city"] as $key => $city){ 
                          if($data["arrivalPoint"] == $city["code"]){
                               $city_delivery = $city;  // выбираем город пользователя
                          }
                     }
                 }
+                
+                if(empty($city_delivery)){
+                   foreach($result_terminal["city"] as $key => $city){ 
+                       foreach($city["terminals"]["terminal"] as $terminal){           
+                         $region = explode(', ', $terminal["fullAddress"]);
+                         $location_new = strstr(trim($region[1]), " - ", true);
+                         if(mb_strtolower(trim($region[1])) == mb_strtolower($_SESSION["REGION_LOCATION"]) && empty($city_delivery)){
+                              $city_delivery = $city;  // выбираем город пользователя
+                         } else if(mb_strtolower($location_new) == mb_strtolower($_SESSION["REGION_LOCATION"]) && empty($city_delivery)){
+                              $city_delivery = $city;  // выбираем город пользователя
+                         }        
 
+                       }
+
+                    }  
+                }
+                if($city_delivery){
+                    $result["STATUS"] = "ОК";
+                }
+                
           /*      $data_2 = array(
                    "appkey" => $data["appKey"],
                    "derivalPoint" => $data["derivalPoint"],
@@ -735,7 +751,7 @@ class DellinAPI
 
                 $result_price = object_to_array(json_decode(curl_exec($ch_2)));  */
                // $ar_terminals = $terminal;  // выбираем город пользователя
-
+               
                 $result["TREMINAL"] = $city_delivery["terminals"]["terminal"][0];     
                 foreach($city_delivery["terminals"]["terminal"] as $key => $terminal_all){
                    //  if($terminal_all["fullAddress"] == $result["TREMINAL"][0]["address"] ){
@@ -743,7 +759,7 @@ class DellinAPI
                         $result["TREMINAL"]["AR_TERMINAL"][] =  $terminal_all;
                      }
                 }
-                
+              //  logger($result, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt' );
                 $result["TREMINAL"] = json_encode($result);
 
 
