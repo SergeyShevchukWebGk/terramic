@@ -324,7 +324,12 @@ while ($arProps = $db_props->Fetch()) {
   if($iGroup == 5 || $iGroup == 3){
     $element++;
   }
-   if($iGroup == 5 || $iGroup == 3){
+  
+   if(($iGroup == 5 || $iGroup == 3) && 
+       !empty($arProps["VALUE"]) && 
+       $arProps["CODE"] != 'LOCATION' && 
+       $arProps["CODE"] != 'stock' && 
+       $arProps["CODE"] != 'agreement'){ 
       if($element > 1){
           if($arProps["CODE"] == 'COMPANY_ADR' || $arProps["CODE"] == "COMPANY_ADR_ACT"){
               $str = ', <br>';

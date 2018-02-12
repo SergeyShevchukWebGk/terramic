@@ -32,6 +32,7 @@
 .agreement{
     position: relative;
     display: none;
+  
 }
 .agreement:after{
     content: '';

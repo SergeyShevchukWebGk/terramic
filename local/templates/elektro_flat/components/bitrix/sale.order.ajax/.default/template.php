@@ -184,9 +184,10 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     } else {
                          $('.location_hide').hide();
                     }
+                    
                     cecked_delivery = $('#order_form_content .payment_check input:checked').attr('data-id');;  
-                    // если не вывелись службы ДЛ
-                    if($('#order_form_content .stock_delivery').length < 3 && cecked_delivery == ''){
+                    // если не вывелись службы ДЛ      
+                    if($('#order_form_content .stock_delivery').length < 3 && cecked_delivery != 'yes'){
                         setTimeout(function() {
                             $('#order_form_content .payment_check input:checked').click();
                             $('#order_form_content .payment_check input:checked').attr('data-id', 'yes');
@@ -196,12 +197,29 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     $("#ORDER_PROP_14, #ORDER_PROP_20, #ORDER_PROP_15, #ORDER_PROP_3, #ORDER_PROP_46, #ORDER_PROP_33, #ORDER_PROP_28").mask("+7 (999) 999-99-99");
                     $("#ORDER_PROP_35").mask("99 99");
                 }
+                
+                var check = $('#ID_DELIVERY_ID_3').attr('data-check');
                 // если не вывелись службы ДЛ
-                if($('#order_form_content .stock_delivery').length < 3){
+                if($('#order_form_content .stock_delivery').length < 3 && check != 'yes'){
                     setTimeout(function() {
-                        $('#order_form_content .payment_check input:checked').click();
+                        submitForm();
+                        $('#ID_DELIVERY_ID_3').attr('data-check', 'yes');
                     }, 1000);
                 }
+                
+                var pay_sistem_nds = $('#ID_PAY_SYSTEM_ID_<?=PAY_SISTEM_NDS?>:checked').prop('checked');
+                if(pay_sistem_nds == true) {
+                    $('.agreement select option').removeAttr('selected');
+                    $('.agreement select option:nth-child(2)').attr("selected", "selected");
+                    $('.organization select option').removeAttr("selected", "selected");
+                    $('.organization select option:nth-child(2)').attr("selected", "selected");
+                } else {
+                    $('.agreement select option').removeAttr('selected');
+                    $('.agreement select option:nth-child(1)').attr("selected", "selected");
+                    $('.organization select option').removeAttr("selected", "selected");
+                    $('.organization select option:nth-child(1)').attr("selected", "selected");
+                }
+                    
                 // добавление свйоство доставки в 1С
                 $(function(){
                     if($('#ID_DELIVERY_ID_3:checked').prop('checked')) {
