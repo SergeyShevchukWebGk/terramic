@@ -329,21 +329,29 @@ while ($arProps = $db_props->Fetch()) {
        !empty($arProps["VALUE"]) && 
        $arProps["CODE"] != 'LOCATION' && 
        $arProps["CODE"] != 'stock' && 
+       $arProps["CODE"] != 'FAX' && 
+       $arProps["CODE"] != 'organization' && 
        $arProps["CODE"] != 'agreement'){ 
       if($element > 1){
-          if($arProps["CODE"] == 'COMPANY_ADR' || $arProps["CODE"] == "COMPANY_ADR_ACT"){
+          if($arProps["CODE"] == 'COMPANY_ADR'){
               $str = ', <br>';
+              $value_company = $arProps["VALUE"];
           } else {
-              $str = ', ';
+              $str = ', <br>';
           }
       }
+      if($arProps["CODE"] == 'COMPANY_ADR_ACT' && mb_strlen($arProps["VALUE"]) < 2){
+        $str = ', <br>';
+        $arProps["VALUE"] = $value_company;
+      }
       $element++;
+      
       if($arProps["CODE"] == "COMPANY"){
         echo $str. htmlspecialchars($arProps["VALUE"]);
       } else {
         echo $str. $arProps["NAME"].": ". htmlspecialchars($arProps["VALUE"]);
       }
-   }
+   } 
 }?>
 </p>
 
@@ -749,16 +757,17 @@ for ($n = 1; $n <= $rowsCnt; $n++):
 CModule::IncludeModule('iblock');
 $WIDTH = 0;
 $AMOUNT = 0;
+$AMOUNT_2 = 0;
 $dbBasketItems = CSaleBasket::GetList(
         array(),
         array( "ORDER_ID" => $_GET["ORDER_ID"]),
         false,
         false,
         array('PRODUCT_ID')
-    );
+    );  
 while ($arItems = $dbBasketItems->Fetch()){
     $res = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "CML2_TRAITS"));
-    while ($ob = $res->GetNext()){
+    while ($ob = $res->GetNext()){                               
         if($ob["DESCRIPTION"] == "Вес"){
             $WIDTH += $ob["VALUE"];
         } else if($ob["DESCRIPTION"] == "объем"){
@@ -766,8 +775,20 @@ while ($arItems = $dbBasketItems->Fetch()){
         }
 
     }
-
-}
+    if($AMOUNT <= 0){
+        $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "OBEM_M3_8"));
+        while ($am = $amount_number->Fetch()){
+            
+            $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]))*10;                               
+         //   $number = floatval($am["VALUE_ENUM"]);         
+            $AMOUNT_2 += $number;   
+                  
+        } 
+    }
+}  
+if($AMOUNT_2 > 0){
+    $AMOUNT = $AMOUNT_2;
+} 
 ?>
 <div class="params">
     <b><?=GetMessage('SALE_HPS_BILL_WEIGHT')?></b><span class="parametrs"><?=$WIDTH?></span><br>
