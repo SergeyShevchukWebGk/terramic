@@ -22,7 +22,7 @@ Loc::loadMessages(__FILE__);
         border: 1px solid;
         font-size: 14px;
         margin-left: 10px;
-        width: 56px;
+        min-width: 57px;
         display: block;
         float: right;
         text-align: center;
@@ -776,17 +776,21 @@ while ($arItems = $dbBasketItems->Fetch()){
 
     }
     if($AMOUNT <= 0){
-        $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "OBEM_M3_8"));
-        while ($am = $amount_number->Fetch()){
-            
-            $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]))*10;                               
-         //   $number = floatval($am["VALUE_ENUM"]);         
-            $AMOUNT_2 += $number;   
-                  
-        } 
+        $i = 0;
+        while( $i < 11){  // перебираем все свойства с объемами товара
+            $i++;
+            $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "OBEM_M3_".$i));
+                while ($am = $amount_number->Fetch()){
+                    if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
+                        $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]))*10;                               
+                        $AMOUNT_2 += $number;   
+                    }
+                } 
+        }
     }
 }  
 if($AMOUNT_2 > 0){
+    $AMOUNT_2 = $AMOUNT_2 / 10;
     $AMOUNT = $AMOUNT_2;
 } 
 ?>

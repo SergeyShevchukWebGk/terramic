@@ -242,8 +242,9 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     console.log(getCookie('data-check'));  
                     if($('#order_form_content .stock_delivery').length < 3 || getCookie('data-check') != 'yes'){
                         setTimeout(function() {
-                            $('#order_form_content .payment_check input:checked').click();
+                       //     $('#order_form_content .payment_check input:checked').click();
                             document.cookie = "data-check=yes";
+                            submitForm();
                          //   $('#order_form_content .payment_check input:checked').attr('data-id', 'yes');
                             
                         }, 1000);
@@ -254,7 +255,7 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                 }
                 
                 // если не вывелись службы ДЛ
-                if($('#order_form_content .stock_delivery').length < 3 && getCookie('data-check') != 'yes'){
+                if($('#order_form_content .stock_delivery').length < 3 || getCookie('data-check') != 'yes'){
                     setTimeout(function() {
                         submitForm();
                         document.cookie = "data-check=yes";

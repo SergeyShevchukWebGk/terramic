@@ -715,7 +715,15 @@ class DellinAPI
                        foreach($city["terminals"]["terminal"] as $terminal){           
                          $region = explode(', ', $terminal["fullAddress"]);
                          $location_new = strstr(trim($region[1]), " - ", true);
+                         
+                         if(!$location_new){
+                            $location_new = strstr(trim($region[1]), " г", true);
+                         } 
+
+                         
                          if(mb_strtolower(trim($region[1])) == mb_strtolower($_SESSION["REGION_LOCATION"]) && empty($city_delivery)){
+                              $city_delivery = $city;  // выбираем город пользователя
+                         }if(mb_strtolower(trim($region[2])) == mb_strtolower($_SESSION["REGION_LOCATION"]) && empty($city_delivery)){
                               $city_delivery = $city;  // выбираем город пользователя
                          } else if(mb_strtolower($location_new) == mb_strtolower($_SESSION["REGION_LOCATION"]) && empty($city_delivery)){
                               $city_delivery = $city;  // выбираем город пользователя
@@ -759,7 +767,7 @@ class DellinAPI
                         $result["TREMINAL"]["AR_TERMINAL"][] =  $terminal_all;
                      }
                 }
-              //  logger($result, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt' );
+                
                 $result["TREMINAL"] = json_encode($result);
 
 
