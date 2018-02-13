@@ -239,7 +239,6 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     }
                     
                     // если не вывелись службы ДЛ    
-                    console.log(getCookie('data-check'));  
                     if($('#order_form_content .stock_delivery').length < 3 || getCookie('data-check') != 'yes'){
                         setTimeout(function() {
                        //     $('#order_form_content .payment_check input:checked').click();

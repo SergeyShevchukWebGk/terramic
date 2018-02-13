@@ -709,7 +709,6 @@ class DellinAPI
                          }
                     }
                 }
-                
                 if(empty($city_delivery)){
                    foreach($result_terminal["city"] as $key => $city){ 
                        foreach($city["terminals"]["terminal"] as $terminal){           
@@ -719,11 +718,10 @@ class DellinAPI
                          if(!$location_new){
                             $location_new = strstr(trim($region[1]), " г", true);
                          } 
-
                          
                          if(mb_strtolower(trim($region[1])) == mb_strtolower($_SESSION["REGION_LOCATION"]) && empty($city_delivery)){
                               $city_delivery = $city;  // выбираем город пользователя
-                         }if(mb_strtolower(trim($region[2])) == mb_strtolower($_SESSION["REGION_LOCATION"]) && empty($city_delivery)){
+                         } else if(mb_strtolower(trim($region[1])) == mb_strtolower($_SESSION["REGION_LOCATION_2"]) && empty($city_delivery)){
                               $city_delivery = $city;  // выбираем город пользователя
                          } else if(mb_strtolower($location_new) == mb_strtolower($_SESSION["REGION_LOCATION"]) && empty($city_delivery)){
                               $city_delivery = $city;  // выбираем город пользователя
