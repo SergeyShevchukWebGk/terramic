@@ -232,23 +232,21 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                         }
                     });
                         
-                    var location_val = $('.location_hide .bx-ui-sls-fake').val();
-                    if(location_val == ''){
+                    if($('#order_form_content .stock_delivery').length < 3){
                          $('.location_hide').show();
                     } else {
                          $('.location_hide').hide();
                     }
                     
-                    // если не вывелись службы ДЛ      
-                    if($('#order_form_content .stock_delivery').length < 3 && getCookie('data-check') != 'yes'){
+                    // если не вывелись службы ДЛ    
+                    console.log(getCookie('data-check'));  
+                    if($('#order_form_content .stock_delivery').length < 3 || getCookie('data-check') != 'yes'){
                         setTimeout(function() {
                             $('#order_form_content .payment_check input:checked').click();
                             document.cookie = "data-check=yes";
                          //   $('#order_form_content .payment_check input:checked').attr('data-id', 'yes');
                             
                         }, 1000);
-                    } else if($('#order_form_content .stock_delivery').length < 3){
-                        $('.location_hide').show();
                     }
 
                     $("#ORDER_PROP_14, #ORDER_PROP_20, #ORDER_PROP_15, #ORDER_PROP_3, #ORDER_PROP_46, #ORDER_PROP_33, #ORDER_PROP_28").mask("+7 (999) 999-99-99");

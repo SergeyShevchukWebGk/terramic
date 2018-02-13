@@ -47,22 +47,25 @@ if(is_array($arElementsNew) && !empty($arElementsNew)) {
 	$searchFilter = array(
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],		
 		"ACTIVE" => "Y",
-		"ID" => $arElementsNew
+		"ID" => $arElementsNew,
+        ">CATALOG_QUANTITY" => 0
 	);
 
 	//COUNT//
 	$cache_id = md5(serialize($searchFilter));
 	$cache_dir = "/catalog/search/amount";
 	$obCache = new CPHPCache();
+    
 	if($obCache->InitCache($arParams["CACHE_TIME"], $cache_id, $cache_dir)) {
 		$count = $obCache->GetVars();
+        
 	} elseif($obCache->StartDataCache()) {
 		global $CACHE_MANAGER;
 		$CACHE_MANAGER->StartTagCache($cache_dir);
 		$CACHE_MANAGER->RegisterTag("iblock_id_".$arParams["IBLOCK_ID"]);
 		$count = CIBlockElement::GetList(array(), $searchFilter, array(), false);
 		$CACHE_MANAGER->EndTagCache();
-		$obCache->EndDataCache($count);
+		$obCache->EndDataCache($count);  
 	}?>
 	
 	<div class="count_items">
