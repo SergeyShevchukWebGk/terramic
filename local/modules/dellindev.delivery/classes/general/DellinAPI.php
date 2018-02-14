@@ -711,7 +711,10 @@ class DellinAPI
                 }
                 if(empty($city_delivery)){
                    foreach($result_terminal["city"] as $key => $city){ 
-                       foreach($city["terminals"]["terminal"] as $terminal){           
+                       foreach($city["terminals"]["terminal"] as $terminal){     
+                         $city_map = CSaleLocation::GetByID($_REQUEST["ORDER_PROP_31"]);  // получаем id выбранного пользователем города
+                         $region_user = str_replace("область", "обл", $city_map["REGION_NAME"]);
+                                  
                          $region = explode(', ', $terminal["fullAddress"]);
                          $location_new = strstr(trim($region[1]), " - ", true);
                          
@@ -719,11 +722,9 @@ class DellinAPI
                             $location_new = strstr(trim($region[1]), " г", true);
                          } 
                          
-                         if(mb_strtolower(trim($region[1])) == mb_strtolower($_SESSION["REGION_LOCATION"]) && empty($city_delivery)){
+                         if(mb_strtolower(trim($region[1])) == mb_strtolower($region_user) && empty($city_delivery)){
                               $city_delivery = $city;  // выбираем город пользователя
-                         } else if(mb_strtolower(trim($region[1])) == mb_strtolower($_SESSION["REGION_LOCATION_2"]) && empty($city_delivery)){
-                              $city_delivery = $city;  // выбираем город пользователя
-                         } else if(mb_strtolower($location_new) == mb_strtolower($_SESSION["REGION_LOCATION"]) && empty($city_delivery)){
+                         } else if(mb_strtolower($location_new) == mb_strtolower($region_user) && empty($city_delivery)){
                               $city_delivery = $city;  // выбираем город пользователя
                          }        
 
@@ -734,7 +735,6 @@ class DellinAPI
                 if($city_delivery){
                     $result["STATUS"] = "ОК";
                 }
-                
           /*      $data_2 = array(
                    "appkey" => $data["appKey"],
                    "derivalPoint" => $data["derivalPoint"],
@@ -765,36 +765,37 @@ class DellinAPI
                         $result["TREMINAL"]["AR_TERMINAL"][] =  $terminal_all;
                      }
                 }
-                
+               
                 $result["TREMINAL"] = json_encode($result);
+                 
+                $cache = new CPHPCache();
+                $life_time = 10*60;
+                $cache_id = 'DELLIN_CALCULATE|' . serialize($data) . '&' . serialize($arConfig);
+                if ($cache->InitCache($life_time, $cache_id)) {
+                    $cache_data = $cache->GetVars();
+                    $result = $cache_data['VALUE'];  
+                } else {
+                    $http_client = new HttpClient();
+                    $http_client->setHeader('Content-Type', 'application/json', true);
+                    try {
+                        $response = json_decode($http_client->post(self::$calculator_url, json_encode($data)));
 
-
-            $cache = new CPHPCache();
-            $life_time = 10*60;
-            $cache_id = 'DELLIN_CALCULATE|' . serialize($data) . '&' . serialize($arConfig);
-            if ($cache->InitCache($life_time, $cache_id)) {
-                $cache_data = $cache->GetVars();
-                $result = $cache_data['VALUE'];  
-            } else {
-                $http_client = new HttpClient();
-                $http_client->setHeader('Content-Type', 'application/json', true);
-                try {
-                    $response = json_decode($http_client->post(self::$calculator_url, json_encode($data)));
-
-                    if (isset($response->errors)) {
-                        $result['BODY'] = self::GetResponseErrors($response->errors);
-                    } elseif ($price = self::CalculatePrice($response, $arConfig)) {
-                        $result['STATUS'] = 'OK';
-                        $result['BODY'] = array($price, $response->time->nominativeю);
+                        if (isset($response->errors)) {
+                            $result['BODY'] = self::GetResponseErrors($response->errors);
+                        } elseif ($price = self::CalculatePrice($response, $arConfig)) {
+                            $result['STATUS'] = 'OK';
+                            $result['BODY'] = array($price, $response->time->nominativeю);
+                        }
+                    } catch (Exception $e) {
+                        $result['BODY'] = GetMessage('DELLIN_CONNECTION_ERROR');
                     }
-                } catch (Exception $e) {
-                    $result['BODY'] = GetMessage('DELLIN_CONNECTION_ERROR');
-                }
 
-                $cache->StartDataCache($life_time, $cache_id);
-                $cache->EndDataCache(array('VALUE' => $result));
-            }
-        }
+                    $cache->StartDataCache($life_time, $cache_id);
+                    $cache->EndDataCache(array('VALUE' => $result));   
+                }    
+
+        }            
+  
         return $result;
     }
 }

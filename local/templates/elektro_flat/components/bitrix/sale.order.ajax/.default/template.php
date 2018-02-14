@@ -219,18 +219,6 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                             }
                         });
                     })
-                    
-                    // получение области города
-                    var region = $('.bx-ui-sls-fake').attr('title');
-                    
-                    $.ajax({
-                        type: "POST",
-                        url: "/dellin/null_location.php",
-                        data: {region: region},
-                        success:function(data){
-
-                        }
-                    });
                         
                     if($('#order_form_content .stock_delivery').length < 3){
                          $('.location_hide').show();
