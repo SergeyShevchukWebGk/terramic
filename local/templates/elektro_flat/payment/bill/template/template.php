@@ -757,7 +757,6 @@ for ($n = 1; $n <= $rowsCnt; $n++):
 CModule::IncludeModule('iblock');
 $WIDTH = 0;
 $AMOUNT = 0;
-$AMOUNT_2 = 0;
 $dbBasketItems = CSaleBasket::GetList(
         array(),
         array( "ORDER_ID" => $_GET["ORDER_ID"]),
@@ -766,33 +765,29 @@ $dbBasketItems = CSaleBasket::GetList(
         array('PRODUCT_ID')
     );  
 while ($arItems = $dbBasketItems->Fetch()){
-    $res = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "CML2_TRAITS"));
-    while ($ob = $res->GetNext()){                               
-        if($ob["DESCRIPTION"] == "Вес"){
-            $WIDTH += $ob["VALUE"];
-        } else if($ob["DESCRIPTION"] == "объем"){
-            $AMOUNT += $ob["VALUE"];
-        }
-
+    while( $i < 11){  // перебираем все свойства с объемами товара
+        $i++;
+        $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "VES_KG_".$i));
+            while ($am = $amount_number->Fetch()){
+                if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
+                    $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]));                               
+                    $WIDTH += $number;   
+                }
+            } 
     }
-    if($AMOUNT <= 0){
-        $i = 0;
-        while( $i < 11){  // перебираем все свойства с объемами товара
-            $i++;
-            $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "OBEM_M3_".$i));
-                while ($am = $amount_number->Fetch()){
-                    if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
-                        $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]))*10;                               
-                        $AMOUNT_2 += $number;   
-                    }
-                } 
-        }
+    $i = 0;
+    while( $i < 11){  // перебираем все свойства с объемами товара
+        $i++;
+        $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "OBEM_M3_".$i));
+            while ($am = $amount_number->Fetch()){
+                if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
+                    $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]))*10;                               
+                    $AMOUNT += $number;   
+                }
+            } 
     }
 }  
-if($AMOUNT_2 > 0){
-    $AMOUNT_2 = $AMOUNT_2 / 10;
-    $AMOUNT = $AMOUNT_2;
-} 
+
 ?>
 <div class="params">
     <b><?=GetMessage('SALE_HPS_BILL_WEIGHT')?></b><span class="parametrs"><?=$WIDTH?></span><br>
