@@ -326,31 +326,31 @@ while ($arProps = $db_props->Fetch()) {
   }
   
    if(($iGroup == 5 || $iGroup == 3) && 
-       !empty($arProps["VALUE"]) && 
+       (!empty($arProps["VALUE"]) || $arProps["CODE"] == 'COMPANY_ADR_ACT') && 
        $arProps["CODE"] != 'LOCATION' && 
        $arProps["CODE"] != 'stock' && 
        $arProps["CODE"] != 'FAX' && 
        $arProps["CODE"] != 'organization' && 
        $arProps["CODE"] != 'agreement'){ 
-      if($element > 1){
-          if($arProps["CODE"] == 'COMPANY_ADR'){
-              $str = ', <br>';
-              $value_company = $arProps["VALUE"];
-          } else {
-              $str = ', <br>';
+          if($element > 1){
+              if($arProps["CODE"] == 'COMPANY_ADR'){
+                  $str = ', <br>';
+                  $value_company = $arProps["VALUE"];
+              } else {
+                  $str = ', <br>';
+              }
           }
-      }
-      if($arProps["CODE"] == 'COMPANY_ADR_ACT' && mb_strlen($arProps["VALUE"]) < 2){
-        $str = ', <br>';
-        $arProps["VALUE"] = $value_company;
-      }
-      $element++;
-      
-      if($arProps["CODE"] == "COMPANY"){
-        echo $str. htmlspecialchars($arProps["VALUE"]);
-      } else {
-        echo $str. $arProps["NAME"].": ". htmlspecialchars($arProps["VALUE"]);
-      }
+          if($arProps["CODE"] == 'COMPANY_ADR_ACT' && empty($arProps["VALUE"])){
+            $str = ', <br>';
+            $arProps["VALUE"] = $value_company;
+          }
+          $element++;
+          
+          if($arProps["CODE"] == "COMPANY"){
+            echo $str. htmlspecialchars($arProps["VALUE"]);
+          } else {
+            echo $str. $arProps["NAME"].": ". htmlspecialchars($arProps["VALUE"]);
+          }
    } 
 }?>
 </p>
@@ -719,7 +719,7 @@ for ($n = 1; $n <= $rowsCnt; $n++):
 <?endfor;?>
 </table>
 <br>
-<div style="float: left;">
+<div style="float: left;width: 54%;">
 <?if ($params['BILL_TOTAL_SHOW'] == 'Y'):?>
     <?=Loc::getMessage(
             'SALE_HPS_BILL_BASKET_TOTAL',
@@ -765,10 +765,11 @@ $dbBasketItems = CSaleBasket::GetList(
         array('PRODUCT_ID')
     );  
 while ($arItems = $dbBasketItems->Fetch()){
-    while( $i < 11){  // перебираем все свойства с объемами товара
-        $i++;
-        $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "VES_KG_".$i));
-            while ($am = $amount_number->Fetch()){
+    $k = 0;
+    while( $k < 12){  // перебираем все свойства с объемами товара
+        $k++;
+        $width_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "VES_KG_".$k));
+            while ($am = $width_number->Fetch()){
                 if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
                     $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]));                               
                     $WIDTH += $number;   
@@ -776,18 +777,20 @@ while ($arItems = $dbBasketItems->Fetch()){
             } 
     }
     $i = 0;
-    while( $i < 11){  // перебираем все свойства с объемами товара
+    while( $i < 12){  // перебираем все свойства с объемами товара
         $i++;
         $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "OBEM_M3_".$i));
             while ($am = $amount_number->Fetch()){
                 if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
-                    $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]))*10;                               
+                    $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"])) * 10;                               
                     $AMOUNT += $number;   
                 }
             } 
     }
 }  
-
+if($AMOUNT > 0.001){
+    $AMOUNT = $AMOUNT / 10;
+}
 ?>
 <div class="params">
     <b><?=GetMessage('SALE_HPS_BILL_WEIGHT')?></b><span class="parametrs"><?=$WIDTH?></span><br>

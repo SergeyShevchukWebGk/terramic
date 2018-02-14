@@ -495,9 +495,10 @@ class DellinAPI
         $WIDTH = 0;
         $AMOUNT = 0;
         foreach($arOrder["ITEMS"] as $item){
-            while( $i < 11){  // перебираем все свойства с объемами товара
-                $i++;
-                $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $item["PRODUCT_ID"], array(), array("CODE" => "VES_KG_".$i));
+            $k = 0;
+            while( $k < 11){  // перебираем все свойства с объемами товара
+                $k++;
+                $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $item["PRODUCT_ID"], array(), array("CODE" => "VES_KG_".$k));
                     while ($am = $amount_number->Fetch()){
                         if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
                             $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]));                               
@@ -529,6 +530,9 @@ class DellinAPI
         if($AMOUNT == 0){
             $dl_api_volume = self::CalculateVolume($arOrder, $arConfig);
         } else {
+            if($AMOUNT > 0.001){
+                $AMOUNT = $AMOUNT / 10;
+            }
             $dl_api_volume["sized"] = $AMOUNT;
         }
 
@@ -723,19 +727,19 @@ class DellinAPI
                 if(empty($city_delivery)){
                    foreach($result_terminal["city"] as $key => $city){ 
                        foreach($city["terminals"]["terminal"] as $terminal){ 
-                         if(!empty($_REQUEST["ORDER_PROP_".LOCATION_ID_1])){
-                            $city_map = CSaleLocation::GetByID($_REQUEST["ORDER_PROP_".LOCATION_ID_1]);  // получаем id выбранного пользователем города
-                         } else if(!empty($_REQUEST["ORDER_PROP_".LOCATION_ID_2])){
-                            $city_map = CSaleLocation::GetByID($_REQUEST["ORDER_PROP_".LOCATION_ID_2]);  // получаем id выбранного пользователем города
-                         }  else if(!empty($_REQUEST["ORDER_PROP_".LOCATION_ID_3])){
-                            $city_map = CSaleLocation::GetByID($_REQUEST["ORDER_PROP_".LOCATION_ID_3]);  // получаем id выбранного пользователем города
+                         if (!empty( $_REQUEST["ORDER_PROP_" . LOCATION_ID_1])){
+                            $city_map = CSaleLocation::GetByID($_REQUEST["ORDER_PROP_" . LOCATION_ID_1]);  // получаем id выбранного пользователем города
+                         } else if (!empty($_REQUEST["ORDER_PROP_" . LOCATION_ID_2])){
+                            $city_map = CSaleLocation::GetByID($_REQUEST["ORDER_PROP_" . LOCATION_ID_2]);  // получаем id выбранного пользователем города
+                         }  else if (!empty($_REQUEST["ORDER_PROP_" . LOCATION_ID_3])){
+                            $city_map = CSaleLocation::GetByID($_REQUEST["ORDER_PROP_" . LOCATION_ID_3]);  // получаем id выбранного пользователем города
                          }   
                          $region_user = str_replace("область", "обл", $city_map["REGION_NAME"]);
                          logger($_REQUEST, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt');         
                          $region = explode(', ', $terminal["fullAddress"]);
                          $location_new = strstr(trim($region[1]), " - ", true);
                          
-                         if(!$location_new){
+                         if( !$location_new ){
                             $location_new = strstr(trim($region[1]), " г", true);
                          } 
                          
@@ -784,7 +788,8 @@ class DellinAPI
                 }
                 $terminals["TREMINAL"] = $result["TREMINAL"];
                 
-                 
+                $result["TREMINAL"] = json_encode($terminals);
+                
                 $cache = new CPHPCache();
                 $life_time = 10*60;
                 $cache_id = 'DELLIN_CALCULATE|' . serialize($data) . '&' . serialize($arConfig);
@@ -810,7 +815,6 @@ class DellinAPI
                     $cache->StartDataCache($life_time, $cache_id);
                     $cache->EndDataCache(array('VALUE' => $result));   
                 }    
-                $result["TREMINAL"] = json_encode($terminals);
         }            
   
         return $result;

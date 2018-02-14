@@ -2,12 +2,12 @@
     background:rgba(87, 91, 113, 0.4) !important;;
 }
 
-.group_id_2,.group_id_8,.group_id_9{
+/*.group_id_2,.group_id_8,.group_id_9{
     background-color: #afd8d3;
     border: 8px solid #afd8d3;
     border-radius: 8px;
-}
-.delivery_type{
+}    */
+.property.delivery_type{
     display: none;
 }
 

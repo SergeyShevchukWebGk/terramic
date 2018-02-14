@@ -55,12 +55,10 @@ if(!function_exists("PrintPropsForm")) {
 
                 if(!($group==$arProperties['PROPS_GROUP_ID'])):
                     if($group==0):?>
-                        <div class="group_el group_id_<?=$arProperties['PROPS_GROUP_ID']?> <?=($arProperties["CODE"] == 'delivery_type')? 'delivery_type':''?>">
-                        <h3><?=$arProperties['GROUP_NAME']?></h3>
+                        <div class="group_el group_id_<?=$arProperties['PROPS_GROUP_ID']?> ">
                     <?else:?>
                         </div>
-                        <div class="group_el group_id_<?=$arProperties['PROPS_GROUP_ID']?> <?=($arProperties["CODE"] == 'delivery_type')? 'delivery_type':''?>">
-                        <h3><?=$arProperties['GROUP_NAME']?></h3>
+                        <div class="group_el group_id_<?=$arProperties['PROPS_GROUP_ID']?> ">
                     <?endif;
                     $group = $arProperties['PROPS_GROUP_ID'];
                 endif;
