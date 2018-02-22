@@ -113,7 +113,7 @@ if(isset($arCurSection) && !empty($arCurSection)) {
 			"VIEW_MODE" => "",
 			"SHOW_PARENT_NAME" => "",
 			"SECTION_URL" => "",
-			"CACHE_TYPE" => $arParams["CACHE_TYPE"],
+			"CACHE_TYPE" => "N",
 			"CACHE_TIME" => $arParams["CACHE_TIME"],
 			"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
 			"ADD_SECTIONS_CHAIN" => (isset($arParams["ADD_SECTIONS_CHAIN"]) ? $arParams["ADD_SECTIONS_CHAIN"] : ""),
@@ -134,7 +134,8 @@ if(isset($arCurSection) && !empty($arCurSection)) {
 
     $page = explode('/', $APPLICATION->GetCurPage());
 	//FILTER//
-	if($arParams["USE_FILTER"] == "Y" && $arSetting["SMART_FILTER_VISIBILITY"]["VALUE"] != "DISABLE" &&
+	if($arParams["USE_FILTER"] == "Y" && 
+        $arSetting["SMART_FILTER_VISIBILITY"]["VALUE"] != "DISABLE" &&
         $_SESSION["Filter"] == "Y" &&
         ($page[2] != 'aksessuary_1' && $page[2] != 'aksessuary')):?>
 

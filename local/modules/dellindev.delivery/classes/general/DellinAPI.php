@@ -501,7 +501,8 @@ class DellinAPI
                 $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $item["PRODUCT_ID"], array(), array("CODE" => "VES_KG_".$k));
                     while ($am = $amount_number->Fetch()){
                         if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
-                            $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]));                               
+                            $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]));  
+                            $number = $number * $item["QUANTITY"];                                                         
                             $WIDTH += $number;   
                         }
                     } 
@@ -512,13 +513,15 @@ class DellinAPI
                 $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $item["PRODUCT_ID"], array(), array("CODE" => "OBEM_M3_".$i));
                     while ($am = $amount_number->Fetch()){
                         if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
-                            $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]))*10;                               
-                            $AMOUNT += $number;   
+                            $number_am = floatval(str_replace(",", ".", $am["VALUE_ENUM"]))*10; 
+                            $number_am = $number_am * $item["QUANTITY"];                                                          
+                            $AMOUNT += $number_am;   
                         }
                     } 
             }
         }
-
+            logger($WIDTH, $_SERVER["DOCUMENT_ROOT"]. '/map/log.txt');
+            logger($AMOUNT, $_SERVER["DOCUMENT_ROOT"]. '/map/log.txt');
         if($WIDTH == 0){
             $dl_api_weight = self::CalculateWeight($arOrder, $arConfig);
         } else {
@@ -735,7 +738,6 @@ class DellinAPI
                             $city_map = CSaleLocation::GetByID($_REQUEST["ORDER_PROP_" . LOCATION_ID_3]);  // получаем id выбранного пользователем города
                          }   
                          $region_user = str_replace("область", "обл", $city_map["REGION_NAME"]);
-                         logger($_REQUEST, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt');         
                          $region = explode(', ', $terminal["fullAddress"]);
                          $location_new = strstr(trim($region[1]), " - ", true);
                          

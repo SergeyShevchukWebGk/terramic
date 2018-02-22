@@ -271,13 +271,13 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 						if(isset($arResult["OFFERS"]) && !empty($arResult["OFFERS"]) && $arSetting["OFFERS_VIEW"]["VALUE"] != "LIST"):
 							foreach($arResult["OFFERS"] as $key => $arOffer):?>
 								<div id="article_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" class="article hidden">
-									<?=GetMessage("CATALOG_ELEMENT_ARTNUMBER")?><?=!empty($arOffer["PROPERTIES"]["ARTNUMBER"]["VALUE"]) ? $arOffer["PROPERTIES"]["ARTNUMBER"]["VALUE"] : "-";?>
+									<?=GetMessage("CATALOG_ELEMENT_ARTNUMBER")?><?=!empty($arOffer["PROPERTIES"]["CML2_ARTICLE"]["VALUE"]) ? $arOffer["PROPERTIES"]["CML2_ARTICLE"]["VALUE"] : "-";?>
 								</div>
 							<?endforeach;
 						//DETAIL_ARTICLE//
 						else:?>
 							<div class="article">
-								<?=GetMessage("CATALOG_ELEMENT_ARTNUMBER")?><?=!empty($arResult["PROPERTIES"]["ARTNUMBER"]["VALUE"]) ? $arResult["PROPERTIES"]["ARTNUMBER"]["VALUE"] : "-";?>
+								<?=GetMessage("CATALOG_ELEMENT_ARTNUMBER")?><?=!empty($arResult["PROPERTIES"]["CML2_ARTICLE"]["VALUE"]) ? $arResult["PROPERTIES"]["CML2_ARTICLE"]["VALUE"] : "-";?>
 							</div>
 						<?endif;?>
 					</div>
@@ -1145,7 +1145,7 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 									<?//OFFERS_LIST_NAME//?>
 									<span class="name"><?=(isset($arOffer["NAME"]) && !empty($arOffer["NAME"])) ? $arOffer["NAME"] : $arResult["NAME"];?></span>
 									<?//OFFERS_LIST_ARTNUMBER//?>
-									<span class="article"><?=GetMessage("CATALOG_ELEMENT_ARTNUMBER")?><?=!empty($arOffer["PROPERTIES"]["ARTNUMBER"]["VALUE"]) ? $arOffer["PROPERTIES"]["ARTNUMBER"]["VALUE"] : "-";?></span>
+									<span class="article"><?=GetMessage("CATALOG_ELEMENT_ARTNUMBER")?><?=!empty($arOffer["PROPERTIES"]["CML2_ARTICLE"]["VALUE"]) ? $arOffer["PROPERTIES"]["CML2_ARTICLE"]["VALUE"] : "-";?></span>
 								</div>								
 								<?//OFFERS_LIST_PROPS//
 								$i = 1;

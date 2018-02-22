@@ -762,7 +762,7 @@ $dbBasketItems = CSaleBasket::GetList(
         array( "ORDER_ID" => $_GET["ORDER_ID"]),
         false,
         false,
-        array('PRODUCT_ID')
+        array('PRODUCT_ID', "QUANTITY")
     );  
 while ($arItems = $dbBasketItems->Fetch()){
     $k = 0;
@@ -771,7 +771,8 @@ while ($arItems = $dbBasketItems->Fetch()){
         $width_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "VES_KG_".$k));
             while ($am = $width_number->Fetch()){
                 if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
-                    $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]));                               
+                    $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]));   
+                    $number = $number * $arItems["QUANTITY"];                            
                     $WIDTH += $number;   
                 }
             } 
@@ -782,8 +783,9 @@ while ($arItems = $dbBasketItems->Fetch()){
         $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "OBEM_M3_".$i));
             while ($am = $amount_number->Fetch()){
                 if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
-                    $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"])) * 10;                               
-                    $AMOUNT += $number;   
+                    $number_am = floatval(str_replace(",", ".", $am["VALUE_ENUM"])) * 10; 
+                    $number_am = $number_am * $arItems["QUANTITY"];                                                          
+                    $AMOUNT += $number_am;   
                 }
             } 
     }
