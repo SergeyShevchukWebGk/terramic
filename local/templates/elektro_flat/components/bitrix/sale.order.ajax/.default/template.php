@@ -83,6 +83,7 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                   })
                 }
                 deleteCookie('data-check');
+
                 <?if(CSaleLocation::isLocationProEnabled()):
                     $city = \Bitrix\Sale\Location\TypeTable::getList(array('filter' => array('=CODE' => 'CITY'), 'select' => array('ID')))->fetch();?>
 
@@ -149,13 +150,13 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     if($('#ID_DELIVERY_ID_3:checked').prop('checked')) {
                         var val_tope = $('.delivery_type select option').val();
                         $('.delivery_type select option').removeAttr('selected')
-                        if(val_tope == '1111'){
+                        if(val_tope == '2222'){
                             $('.delivery_type select option').attr('selected', 'selected');
                         }
                     } else {
                         var val_tope = $('.delivery_type select option').val();
                         $('.delivery_type select option').removeAttr('selected')
-                        if(val_tope == '2222'){
+                        if(val_tope == '1111'){
                             $('.delivery_type select option').attr('selected', 'selected');
                         }
                     }
@@ -186,16 +187,6 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                         $('.organization select option').removeAttr("selected", "selected");
                         $('.organization select option:nth-child(1)').attr("selected", "selected");
                     }
-                    
-                    setTimeout(function() {
-                        // добавление адреса терминала
-                        if($('.stock_delivery input:checked')) {
-                            var val_tope = $('.selivery_select select option').val();
-                            var adress_terminal = $('.bx-ui-sls-fake').attr('title');
-                          //  $('.delivery_type select option').removeAttr('selected');
-                            $('.terminals input').val(val_tope);
-                        }
-                    }, 5000);
 
                     $('body .selivery_select select').change(function(){
                             var worktables = $('.selivery_select select option:selected').attr('data-worktables');
@@ -204,7 +195,7 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                             var adress = $('.selivery_select select option:selected').text();
                             $('.selivery_select > span').html(worktables);
                             $('.selivery_select a.map_check').attr('onclick', "ynadex_map("+longitude+", "+latitude+", '"+adress.replace(/\s{2,}/g, ' ')+"')");
-                            $('.selivery_select .terminals input').val(adress.replace(/\s{2,}/g, ' '));
+                         //   $('.selivery_select .terminals input').val(adress.replace(/\s{2,}/g, ' '));
                     })
 
                     $('body').on('click', '.pack_param', function(){
@@ -239,6 +230,11 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
 
                     $("#ORDER_PROP_14, #ORDER_PROP_20, #ORDER_PROP_15, #ORDER_PROP_3, #ORDER_PROP_46, #ORDER_PROP_33, #ORDER_PROP_28").mask("+7 (999) 999-99-99");
                     $("#ORDER_PROP_35").mask("99 99");
+                    
+                    var check_delivery = $('table .stock_delivery input:checked').attr('data-for');
+                    $('.'+check_delivery).click();
+                     $('.'+check_delivery+' .table_d').prop('checked', true);
+
                 }
                 
                 // если не вывелись службы ДЛ
@@ -261,7 +257,7 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     $('.organization select option').removeAttr("selected", "selected");
                     $('.organization select option:nth-child(1)').attr("selected", "selected");
                 }
-                    
+   
                 // добавление свйоство доставки в 1С
                 $(function(){
                     if($('#ID_DELIVERY_ID_3:checked').prop('checked')) {
@@ -278,8 +274,6 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                         }
                     }
 
-
-
                     $('.wrap_terminal ').on('click', 'select option:selected', function(){
                         var value_adress = $(this).html();
                         $('#DELIVERY_PROP_45').val(value_adress);
@@ -288,12 +282,19 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     $('body').on('click','.close', function(){
                          $('.popap_map').hide();
                     });
+                    
+                    $('body').on('click', 'div.stock_delivery', function(){
+                       // $('div.stock_delivery .terminal input').prop('checked', false);
+                        $(this).children('.table_d').prop('checked', true);
+                        $('div.stock_delivery table').hide();
+                        $(this).children('table').show();
+                    })
+
 
                 })
                 function SetContact(profileId) {
                     BX("profile_change").value = "Y";
                     submitForm();
-
                 }
             </script>
 
@@ -361,9 +362,27 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
             array(),
             false
         );?>
-        <?$APPLICATION->IncludeComponent("bitrix:sale.location.selector.search", ".default",
-            array(),
-            false
-        );?>
+        <?$APPLICATION->IncludeComponent(
+	"bitrix:sale.location.selector.search", 
+	"geolocation", 
+	array(
+		"COMPONENT_TEMPLATE" => "geolocation",
+		"ID" => "",
+		"CODE" => "",
+		"INPUT_NAME" => "LOCATION",
+		"PROVIDE_LINK_BY" => "id",
+		"FILTER_BY_SITE" => "N",
+		"SHOW_DEFAULT_LOCATIONS" => "N",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "36000000",
+		"JS_CONTROL_GLOBAL_ID" => "",
+		"JS_CALLBACK" => "",
+		"SUPPRESS_ERRORS" => "N",
+		"INITIALIZE_BY_GLOBAL_EVENT" => "",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
+	),
+	false
+);?>
     </div>
 <?endif?>

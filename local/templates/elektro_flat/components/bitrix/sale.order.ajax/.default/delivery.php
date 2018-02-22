@@ -72,58 +72,123 @@
                 $components,
                 array("HIDE_ICONS"=>"Y")
             );?>
-            <table>
-            <?//arshow($arResult["DELIVERY"])?>
+            
+             <div class="stock_delivery sm">
+                <div valign="top">
+                    <label class="terminal image_1">
+                        <input type="radio" name="type" class="table_d"/>
+                        <img src="/local/templates/elektro_flat/images/logotip.jpg" >
+                        Доставка транспортной компанией со кслада "Самара"
+                        <b>Вы можете заказать доставку вашего заказа транспортной компанией</b>
+                    </label>
+                </div>
+                <table>
                 <?$width = ($arParams["SHOW_STORES_IMAGES"] == "Y") ? 800 : 750;
-                foreach($arResult["DELIVERY"] as $delivery_id => $arDelivery):
-                    if($delivery_id !== 0 && intval($delivery_id) <= 0):
-                        foreach($arDelivery["PROFILES"] as $profile_id => $arProfile):?>
-                            <tr>
-                                <td valign="top">
-                                    <input type="radio" class="delivery_check" data-code="<?=$arProfile["CODE"]?>" id="ID_DELIVERY_<?=$delivery_id?>_<?=$profile_id?>" name="<?=htmlspecialcharsbx($arProfile["FIELD_NAME"])?>" value="<?=$delivery_id.":".$profile_id;?>" <?=$arProfile["CHECKED"] == "Y" ? "checked=\"checked\"" : "";?> onclick="submitForm();" />
-                                </td>
-                                <td valign="top">
-                                    <label for="ID_DELIVERY_<?=$delivery_id?>_<?=$profile_id?>">
-                                        <table>
-                                            <tr>
-                                                <td valign="top">
-                                                    <?if(!empty($arDelivery["LOGOTIP"]["SRC"])):?>
-                                                        <img src="<?=$arDelivery["LOGOTIP"]["SRC"]?>" width="<?=$arDelivery["LOGOTIP"]["WIDTH"]?>" height="<?=$arDelivery["LOGOTIP"]["HEIGHT"]?>" />
-                                                    <?endif;?>
-                                                </td>
-                                                <td valign="top">
-                                                    <div class="name">
-                                                        <?=htmlspecialcharsbx($arDelivery["TITLE"])?> - <?=htmlspecialcharsbx($arProfile["TITLE"])?>
-                                                    </div>
-                                                    <p>
-                                                        <?if(strlen($arProfile["DESCRIPTION"]) > 0) {
-                                                            echo nl2br($arProfile["DESCRIPTION"]);
-                                                        }?>
-                                                        <?$APPLICATION->IncludeComponent('bitrix:sale.ajax.delivery.calculator', '',
-                                                            array(
-                                                                "NO_AJAX" => $arParams["DELIVERY_NO_AJAX"],
-                                                                "DELIVERY" => $delivery_id,
-                                                                "PROFILE" => $profile_id,
-                                                                "ORDER_WEIGHT" => $arResult["ORDER_WEIGHT"],
-                                                                "ORDER_PRICE" => $arResult["ORDER_PRICE"],
-                                                                "LOCATION_TO" => $arResult["USER_VALS"]["DELIVERY_LOCATION"],
-                                                                "LOCATION_ZIP" => $arResult["USER_VALS"]["DELIVERY_LOCATION_ZIP"],
-                                                                "CURRENCY" => $arResult["BASE_LANG_CURRENCY"],
-                                                                "ITEMS" => $arResult["BASKET_ITEMS"],
-                                                                "EXTRA_PARAMS_CALLBACK" => $extraParams
-                                                            ),
-                                                            null,
-                                                            array('HIDE_ICONS' => 'Y')
-                                                        );?>
-                                                    </p>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </label>
-                                </td>
-                            </tr>
-                        <?endforeach;
-                    else:?>
+                foreach($arResult["DELIVERY"] as $delivery_id => $arDelivery){?>
+                
+                 <?if($arDelivery["SORT"] == 28){?>
+                    <tr class="stock_delivery">
+                    <td valign="top">
+                        <?if(count($arDelivery["STORE"]) > 0):
+                            $clickHandler = "onClick = \"fShowStore('".$arDelivery["ID"]."','".$arParams["SHOW_STORES_IMAGES"]."','".$width."','".SITE_ID."');submitForm();\"";
+                        else:
+                            $clickHandler = "onClick = \"submitForm();\"";
+                        endif;?>
+                        <input type="radio" data-for="sm" id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" name="<?=htmlspecialcharsbx($arDelivery["FIELD_NAME"])?>" value="<?=$arDelivery["ID"]?>"<?if($arDelivery["CHECKED"]=="Y") echo " checked";?> <?=$clickHandler?>/>
+                    </td>
+                    <td valign="top">
+                    <?
+                    ?>
+                        <label class="terminal" for="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" onclick="BX('ID_DELIVERY_ID_<?=$arDelivery["ID"]?>').checked=true;submitForm();">
+                            <div class="iamage">
+                            <?if(!empty($arDelivery["LOGOTIP"]["SRC"])):?>
+                                <img src="<?=$arDelivery["LOGOTIP"]["SRC"]?>"  />
+                            <?endif;?>
+                            </div>
+                            <div class="name">
+                                <?=htmlspecialcharsbx($arDelivery["NAME"])?>
+                            </div>
+
+                         <?if($arDelivery["CHECKED"] == "Y"){?>
+                        <p>
+                            <?if(strlen($arDelivery["PERIOD_TEXT"])>0):
+                            //    echo $arDelivery["PERIOD_TEXT"]."<br />";
+                            endif;
+                            if(DoubleVal($arDelivery["PRICE"]) > 0):
+                            //    echo GetMessage("SALE_DELIV_PRICE")." ".$arDelivery["PRICE_FORMATED"].($arSetting["REFERENCE_PRICE"]["VALUE"] == "Y" && !empty($arSetting["REFERENCE_PRICE_COEF"]["VALUE"]) ? " (".CCurrencyLang::CurrencyFormat($arDelivery["PRICE"] * $arSetting["REFERENCE_PRICE_COEF"]["VALUE"], $arDelivery["CURRENCY"], true).")" : "")."<br />";
+                            endif;
+                            if(strlen($arDelivery["DESCRIPTION"])>0):
+                                echo $arDelivery["DESCRIPTION"]."<br />";
+                            endif;
+                            if(count($arDelivery["STORE"]) > 0):?>
+                                <span id="select_store"<?if(strlen($arResult["STORE_LIST"][$arResult["BUYER_STORE"]]["TITLE"]) <= 0) echo " style=\"display:none;\"";?>>
+                                    <span class="select_store"><?=GetMessage('SOA_ORDER_GIVE_TITLE');?>: </span>
+                                    <span class="ora-store" id="store_desc"><?=htmlspecialcharsbx($arResult["STORE_LIST"][$arResult["BUYER_STORE"]]["TITLE"])?></span>
+                                </span>
+                            <?endif;?>
+                        </p>
+                        <br>
+                        </label>
+                        <?
+                            PrintPropsFormLocation($arProps, $arParams["TEMPLATE_LOCATION"], "Самара");
+                        }?>
+                                
+                        <?$ar_delivery = object_to_array(json_decode($arDelivery["CALCULATE_DESCRIPTION"]))?>
+                        <?if($ar_delivery["TREMINAL"]){?>
+                            <div class="selivery_select">
+
+                                <p>Если в Вашем населенном пункте отсутствуют терминал ТК "Деловые линии",
+                                система автоматически выберет населенный пункт с терминалом.<br>
+                                В случае если терминалов несколько, Вам необходимо выбрать один из представленных,
+                                либо система сделает это автоматически</p>
+                                    <select>
+                                        <option selected
+                                                data-worktables="<?=$ar_delivery["TREMINAL"]["worktables"]["worktable"][0]["timetable"]?>"
+                                                data-longitude="<?=$ar_delivery["TREMINAL"]["longitude"]?>"
+                                                data-latitude="<?=$ar_delivery["TREMINAL"]["latitude"]?>">
+                                                <?=$ar_delivery["TREMINAL"]["fullAddress"]?></option>
+
+                                        <?foreach($ar_delivery["TREMINAL"]["AR_TERMINAL"] as $terminal){ ?>
+                                            <option
+                                                data-worktables="<?=$terminal["worktables"]["worktable"][0]["timetable"]?>"
+                                                data-longitude="<?=$terminal["longitude"]?>"
+                                                data-latitude="<?=$terminal["latitude"]?>">
+                                            <?=$terminal["fullAddress"]?></option>
+                                        <?}?>
+                                    </select> <br>
+                                <span><?=$ar_delivery["TREMINAL"]["worktables"]["worktable"][0]["timetable"]?></span><br>
+                                <a href="javascript:void(0)" onclick="ynadex_map(<?=$ar_delivery["TREMINAL"]["longitude"]?>, <?=$ar_delivery["TREMINAL"]["latitude"]?>, '<?=$ar_delivery["TREMINAL"]["fullAddress"]?>')" class="map_check">Показать на карте</a>
+                            </div>
+                            <br>
+                           <div class="pack_wrap">
+                               <p>Для сохранности товара мы рекомендуем заказать в транспортной компании дополнительную упаковку.
+                               Наш магазин не несет ответственность за порчу товара при перевозке траспортной компанией.
+                               Стоимость дополнительной упаковки (обрешетка) - 1300 руб/м3 (минимальная стоимость 700 руб.)</p>
+                               <label for="pack_1"><input <?=($_SESSION["PACKING_HARD"] == "")? 'checked':''?> data-id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" class="pack_param" id="pack_1" name="pack" type="radio" value="">Без дополнительной упаковки</label><br>
+                               <label for="pack_2"><input <?=($_SESSION["PACKING_HARD"] == "Y")? 'checked':''?> data-id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" class="pack_param" id="pack_2" name="pack" type="radio" value="Y">Заказать дополнительную упаковку</label>
+                           </div>
+                        <?}?>
+                        </td>
+                    </tr> 
+                     <?}?>  
+                <?}?>
+                </table>
+            </div>
+            <div class="stock_delivery kr">
+                <div valign="top">
+                    <label class="terminal image_1">
+                        <input type="radio" name="type" class="table_d"/>
+                        <img src="/local/templates/elektro_flat/images/logotip.jpg" >
+                        Доставка транспортной компанией со кслада "Краснодар"
+                        <b>Вы можете заказать доставку вашего заказа транспортной компанией</b>
+                    </label>
+                </div>
+                <table>
+                <?$width = ($arParams["SHOW_STORES_IMAGES"] == "Y") ? 800 : 750;
+                foreach($arResult["DELIVERY"] as $delivery_id => $arDelivery){
+                    ?>
+                    <?if($arDelivery["SORT"] == 24){?>
+                   
                         <tr class="stock_delivery">
                             <td valign="top">
                                 <?if(count($arDelivery["STORE"]) > 0):
@@ -131,9 +196,11 @@
                                 else:
                                     $clickHandler = "onClick = \"submitForm();\"";
                                 endif;?>
-                                <input type="radio" id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" name="<?=htmlspecialcharsbx($arDelivery["FIELD_NAME"])?>" value="<?=$arDelivery["ID"]?>"<?if($arDelivery["CHECKED"]=="Y") echo " checked";?> <?=$clickHandler?>/>
+                                <input type="radio" data-for="kr" id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" name="<?=htmlspecialcharsbx($arDelivery["FIELD_NAME"])?>" value="<?=$arDelivery["ID"]?>"<?if($arDelivery["CHECKED"]=="Y") echo " checked";?> <?=$clickHandler?>/>
                             </td>
                             <td valign="top">
+                            <?
+                            ?>
                                 <label class="terminal" for="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" onclick="BX('ID_DELIVERY_ID_<?=$arDelivery["ID"]?>').checked=true;submitForm();">
                                     <div class="iamage">
                                     <?if(!empty($arDelivery["LOGOTIP"]["SRC"])):?>
@@ -144,12 +211,13 @@
                                         <?=htmlspecialcharsbx($arDelivery["NAME"])?>
                                     </div>
 
+                                <?if($arDelivery["CHECKED"] == "Y"){?>
                                 <p>
                                     <?if(strlen($arDelivery["PERIOD_TEXT"])>0):
-                                        echo $arDelivery["PERIOD_TEXT"]."<br />";
+                                     //   echo $arDelivery["PERIOD_TEXT"]."<br />";
                                     endif;
                                     if(DoubleVal($arDelivery["PRICE"]) > 0):
-                                        echo GetMessage("SALE_DELIV_PRICE")." ".$arDelivery["PRICE_FORMATED"].($arSetting["REFERENCE_PRICE"]["VALUE"] == "Y" && !empty($arSetting["REFERENCE_PRICE_COEF"]["VALUE"]) ? " (".CCurrencyLang::CurrencyFormat($arDelivery["PRICE"] * $arSetting["REFERENCE_PRICE_COEF"]["VALUE"], $arDelivery["CURRENCY"], true).")" : "")."<br />";
+                                  //      echo GetMessage("SALE_DELIV_PRICE")." ".$arDelivery["PRICE_FORMATED"].($arSetting["REFERENCE_PRICE"]["VALUE"] == "Y" && !empty($arSetting["REFERENCE_PRICE_COEF"]["VALUE"]) ? " (".CCurrencyLang::CurrencyFormat($arDelivery["PRICE"] * $arSetting["REFERENCE_PRICE_COEF"]["VALUE"], $arDelivery["CURRENCY"], true).")" : "")."<br />";
                                     endif;
                                     if(strlen($arDelivery["DESCRIPTION"])>0):
                                         echo $arDelivery["DESCRIPTION"]."<br />";
@@ -163,12 +231,14 @@
                                 </p>
                                 <br>
                                 </label>
+                                <?
+                                    PrintPropsFormLocation($arProps, $arParams["TEMPLATE_LOCATION"], "Краснодар");
+                                }?>
                                 
                                 <?$ar_delivery = object_to_array(json_decode($arDelivery["CALCULATE_DESCRIPTION"]))?>
                                 <?//arshow($ar_delivery)?>
                                 <?if($ar_delivery["TREMINAL"]){?>
                                     <div class="selivery_select">
-                                        <?PrintPropsFormLocation($arProps, $arParams["TEMPLATE_LOCATION"], $ar_delivery["TREMINAL"]["fullAddress"]);?>
 
                                         <p>Если в Вашем населенном пункте отсутствуют терминал ТК "Деловые линии",
                                         система автоматически выберет населенный пункт с терминалом.<br>
@@ -201,27 +271,68 @@
                                        <label for="pack_2"><input <?=($_SESSION["PACKING_HARD"] == "Y")? 'checked':''?> data-id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" class="pack_param" id="pack_2" name="pack" type="radio" value="Y">Заказать дополнительную упаковку</label>
                                    </div>
                                 <?}?>
-                                <?/*if($arDelivery["PERIOD_TEXT"]){?>
-                                    <input type="hidden" name="DELIVERY_PROP_45" id="DELIVERY_PROP_45" value="">
-                                    <div class="selivery_select">
-                                        <?//PrintPropsFormLocation($arProps, $arParams["TEMPLATE_LOCATION"]);?>
-                                        <div class="wrap_terminal">
-                                            <div></div>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                <?}*/?>
-
-
                             </td>
                         </tr>
-                    <?endif;
-                endforeach;?>
-            </table>
-        </div>
-    </div>
- <div class="popap_map">
+                         <?}?>
+                    <?};?>
+                    </table>
+                </div>
+                <table>
+                <?$width = ($arParams["SHOW_STORES_IMAGES"] == "Y") ? 800 : 750;
+                foreach($arResult["DELIVERY"] as $delivery_id => $arDelivery){?>
+                
+                 <?if($arDelivery["SORT"] != 28 && $arDelivery["SORT"] != 24){?>
+                    <tr class="stock_delivery pickup">
+                    <td valign="top">
+                        <?if(count($arDelivery["STORE"]) > 0):
+                            $clickHandler = "onClick = \"fShowStore('".$arDelivery["ID"]."','".$arParams["SHOW_STORES_IMAGES"]."','".$width."','".SITE_ID."');submitForm();\"";
+                        else:
+                            $clickHandler = "onClick = \"submitForm();\"";
+                        endif;?>
+                        <input type="radio" data-for="sm" id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" name="<?=htmlspecialcharsbx($arDelivery["FIELD_NAME"])?>" value="<?=$arDelivery["ID"]?>"<?if($arDelivery["CHECKED"]=="Y") echo " checked";?> <?=$clickHandler?>/>
+                    </td>
+                    <td valign="top">
+                    <?
+                    ?>
+                        <label class="terminal" for="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" onclick="BX('ID_DELIVERY_ID_<?=$arDelivery["ID"]?>').checked=true;submitForm();">
+                            <div class="">
+                            <?if(!empty($arDelivery["LOGOTIP"]["SRC"])):?>
+                                <img src="<?=$arDelivery["LOGOTIP"]["SRC"]?>" width="<?=$arDelivery["LOGOTIP"]["WIDTH"]?>" height="<?=$arDelivery["LOGOTIP"]["HEIGHT"]?>" />
+                            <?endif;?>
+                            </div>
+                            <div class="name">
+                                <?=htmlspecialcharsbx($arDelivery["NAME"])?>
+                            </div>
+
+                        <b>
+                            <?if(strlen($arDelivery["PERIOD_TEXT"])>0):
+                                echo $arDelivery["PERIOD_TEXT"]."<br />";
+                            endif;
+                            if(DoubleVal($arDelivery["PRICE"]) > 0):
+                          //      echo GetMessage("SALE_DELIV_PRICE")." ".$arDelivery["PRICE_FORMATED"].($arSetting["REFERENCE_PRICE"]["VALUE"] == "Y" && !empty($arSetting["REFERENCE_PRICE_COEF"]["VALUE"]) ? " (".CCurrencyLang::CurrencyFormat($arDelivery["PRICE"] * $arSetting["REFERENCE_PRICE_COEF"]["VALUE"], $arDelivery["CURRENCY"], true).")" : "")."<br />";
+                            endif;
+                            if(strlen($arDelivery["DESCRIPTION"])>0):
+                                echo $arDelivery["DESCRIPTION"]."<br />";
+                            endif;
+                            if(count($arDelivery["STORE"]) > 0):?>
+                                <span id="select_store"<?if(strlen($arResult["STORE_LIST"][$arResult["BUYER_STORE"]]["TITLE"]) <= 0) echo " style=\"display:none;\"";?>>
+                                    <span class="select_store"><?=GetMessage('SOA_ORDER_GIVE_TITLE');?>: </span>
+                                    <span class="ora-store" id="store_desc"><?=htmlspecialcharsbx($arResult["STORE_LIST"][$arResult["BUYER_STORE"]]["TITLE"])?></span>
+                                </span>
+                            <?endif;?>
+                        </b>
+                        <br>
+                        </label>
+                        </td>
+                    </tr> 
+                     <?}?>  
+                <?}?>
+                </table>
+            </div>
+    <div class="popap_map">
         <span class="close">x</span>
         <div id='map'></div>
     </div>
+</div>
 <?endif;?>
+

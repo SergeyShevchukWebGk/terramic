@@ -12,12 +12,11 @@
 }
 
 .terminal img{
-    float: left;
     margin-top: 3px;
 }
 .terminal > div{
     float: left;
-    margin-left: 15px;
+    margin-left: 11px;
 }
 .selivery_select{
     float: left;
@@ -32,7 +31,6 @@
 .agreement{
     position: relative;
     display: none;
-  
 }
 .agreement:after{
     content: '';
@@ -51,17 +49,18 @@ span.sof-req {
 }
 .stock,
 .terminals{
+
     display: none;
 }
 .order-info_in .terminal p{
     float: left;
-    margin-left: 110px;
-    clear: both;
+    margin-left: 10px;
 }
 .terminal .iamage{
-    width: 80px;
+    width: 150px;
     text-align: center;
     float: left;
+    height: 40px;
 }
 body #map{
     width: 400px;
@@ -104,6 +103,31 @@ body #map{
 .organization{
     display: none;
 }
+.order-info_in > .stock_delivery{
+    clear: both;   
+    padding-bottom: 10px;
+}
+.order-info_in > .stock_delivery .terminal{
+    font-weight: bold;
+}
+.order-info_in > .stock_delivery b{
+    clear: both;
+    display: block;
+    margin-left: 100px;
+    position: relative;
+    top: -8px;
+}
+.pickup.stock_delivery b{
+    clear: both;
+    display: block;
+    margin-left: 65px;
+    position: relative;
+    top: -8px;
+}
+.order-info_in > .stock_delivery table{
+    display: none;
+    margin-left: 90px;
+}
 .stock_delivery .selivery_select .label{
     float: left;
 }
@@ -130,4 +154,33 @@ body #map{
 input[type='text']::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
     opacity: 0.5;
+}
+.order-info_in > .stock_delivery .image_1 input{
+    float: left;
+}
+.order-info_in > .stock_delivery .image_1 img{
+    padding: 0 20px;
+}
+.order-info_in .star{
+    color: red;
+    position: relative;
+    top: 0;
+}
+.order-info_in .location-block-wrapper{
+    clear: both;
+    float: left;
+    margin-left: 205px;
+    margin-top: 10px;
+}
+.order-info_in .block label{
+    margin-left: 200px;
+    clear: both;
+}
+.order-info_in .block > p{
+    margin-left: 30px;
+    margin-left: 205px;
+    clear: both;
+}
+.stock_delivery > td{
+    height: 70px;
 }

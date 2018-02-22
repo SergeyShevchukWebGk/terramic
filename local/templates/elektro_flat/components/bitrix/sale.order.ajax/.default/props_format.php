@@ -346,15 +346,10 @@ if(!function_exists("PrintPropsForm")) {
     }
 function PrintPropsFormLocation($arSource = array(), $locationTemplate = ".default", $adress) {
     foreach($arSource as $arProperties) {    ?>
+        <?if($arProperties["TYPE"] == "LOCATION") {?>
 
-       <?if($arProperties["TYPE"] == "LOCATION") {?>
-        <div class="label" >
-            <?=$arProperties["NAME"]?>
-            <?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
-                <span class="star">*</span>
-            <?endif;?>
-        </div>
         <div class="block" >
+            <label><input type="radio" checked /><?=GetMessage('DELIVERY_PICKUP')?></label> <br>
             <?$value = 0;
             if(is_array($arProperties["VARIANTS"]) && count($arProperties["VARIANTS"]) > 0) {
                 foreach($arProperties["VARIANTS"] as $arVariant) {
@@ -371,9 +366,8 @@ function PrintPropsFormLocation($arSource = array(), $locationTemplate = ".defau
             }
 
             if($locationTemplateP == 'steps'):?>
-                <input type="hidden" id="LOCATION_ALT_PROP_DISPLAY_MANUAL[<?=intval($arProperties["ID"])?>]" name="LOCATION_ALT_PROP_DISPLAY_MANUAL[<?=intval($arProperties["ID"])?>]" value="<?=($_REQUEST['LOCATION_ALT_PROP_DISPLAY_MANUAL'][intval($arProperties["ID"])] ? '1' : '0')?>" />
+                <input placeholder="<?=$arProperties["DESCRIPTION"]?>" type="hidden" id="LOCATION_ALT_PROP_DISPLAY_MANUAL[<?=intval($arProperties["ID"])?>]" name="LOCATION_ALT_PROP_DISPLAY_MANUAL[<?=intval($arProperties["ID"])?>]" value="<?=($_REQUEST['LOCATION_ALT_PROP_DISPLAY_MANUAL'][intval($arProperties["ID"])] ? '1' : '0')?>" />
             <?endif?>
-
             <?CSaleLocation::proxySaleAjaxLocationsComponent(
                 array(
                     "AJAX_CALL" => "N",
@@ -404,13 +398,17 @@ function PrintPropsFormLocation($arSource = array(), $locationTemplate = ".defau
             )?>
             <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
                 <div class="description">
-                    <?=$arProperties["DESCRIPTION"]?>
+                    <?//=$arProperties["DESCRIPTION"]?>
                 </div>
             <?endif;?>
+            <span class="star">*</span>
+            <p><?=GetMessage('DELIVERY_TEXT')?></p>
+
         </div>
         <div class="clr"></div>
 
         <?}?>
+        
         <?if($arProperties["CODE"] == "ADDRESS"){?>
             <div class="label">
                 <?=$arProperties["NAME"]?>
@@ -428,21 +426,9 @@ function PrintPropsFormLocation($arSource = array(), $locationTemplate = ".defau
             </div>
             <div class="clr"></div>
         <?} else if($arProperties["CODE"] == 'TERMINAL_DL'){ ?>
-            <div class="label terminals">
-                <?=$arProperties["NAME"]?>
-                <?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
-                    <span class="star">*</span>
-                <?endif;?>
-            </div>
             <div class="block terminals" >
-                <input type="text" maxlength="250" size="<?=$arProperties["SIZE1"]?>" value="<?=$adress?>" name="<?=$arProperties["FIELD_NAME"]?>" id="<?=$arProperties["FIELD_NAME"]?>" />
-                <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
-                    <div class="description">
-                        <?=$arProperties["DESCRIPTION"]?>
-                    </div>
-                <?endif;?>
+                <input type="text" maxlength="250" style=" margin-top: 10px; " size="<?=$arProperties["SIZE1"]?>" value="<?=$adress?>" name="<?=$arProperties["FIELD_NAME"]?>" />
             </div>
-            <div class="clr"></div>
         <?}
         ?>
 
