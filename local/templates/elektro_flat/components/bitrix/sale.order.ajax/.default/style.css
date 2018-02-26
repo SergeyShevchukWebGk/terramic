@@ -99,7 +99,6 @@ body #map{
     margin-left: 110px;
     margin-top: 20px;
 }
-.location_hide,
 .organization{
     display: none;
 }
@@ -169,7 +168,6 @@ textarea::-webkit-input-placeholder {
 .order-info_in .location-block-wrapper{
     clear: both;
     float: left;
-    margin-left: 205px;
     margin-top: 10px;
 }
 .order-info_in .block label{
@@ -183,4 +181,10 @@ textarea::-webkit-input-placeholder {
 }
 .stock_delivery > td{
     height: 70px;
+}
+.stock_delivery .star {
+    top: -6px;
+}
+#order_form_content .stock_delivery .terminal_vs > input{
+    margin-left: 205px;
 }

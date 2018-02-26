@@ -104,7 +104,7 @@ if(!function_exists("PrintPropsForm")) {
                             $field_size = 250;
                         }
                         ?>
-                        <?if($arProperties["CODE"] != 'TERMINAL_DL'){?>
+                        <?if($arProperties["CODE"] != 'TERMINAL_DL' && $arProperties["CODE"] != 'TERMINALS'){?>
                             <div class="label <?=($arProperties["CODE"] == 'TERMINAL_DL')? 'terminals':''?>">
                                 <?=$arProperties["NAME"]?>
                                 <?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
@@ -346,7 +346,7 @@ if(!function_exists("PrintPropsForm")) {
     }
 function PrintPropsFormLocation($arSource = array(), $locationTemplate = ".default", $adress) {
     foreach($arSource as $arProperties) {    ?>
-        <?if($arProperties["TYPE"] == "LOCATION") {?>
+        <?/*if($arProperties["TYPE"] == "LOCATION") {?>
 
         <div class="block" >
             <label><input type="radio" checked /><?=GetMessage('DELIVERY_PICKUP')?></label> <br>
@@ -407,8 +407,7 @@ function PrintPropsFormLocation($arSource = array(), $locationTemplate = ".defau
         </div>
         <div class="clr"></div>
 
-        <?}?>
-        
+        <?}*/?>
         <?if($arProperties["CODE"] == "ADDRESS"){?>
             <div class="label">
                 <?=$arProperties["NAME"]?>
@@ -427,7 +426,18 @@ function PrintPropsFormLocation($arSource = array(), $locationTemplate = ".defau
             <div class="clr"></div>
         <?} else if($arProperties["CODE"] == 'TERMINAL_DL'){ ?>
             <div class="block terminals" >
-                <input type="text" maxlength="250" style=" margin-top: 10px; " size="<?=$arProperties["SIZE1"]?>" value="<?=$adress?>" name="<?=$arProperties["FIELD_NAME"]?>" />
+                <label><input type="radio" checked /><?=GetMessage('DELIVERY_PICKUP')?></label> <br>
+                <input type="text" maxlength="250" style=" margin-top: 10px; " placeholder="<?=$arProperties["DESCRIPTION"]?>" size="<?=$arProperties["SIZE1"]?>" value="<?=$adress?>" name="<?=$arProperties["FIELD_NAME"]?>" />
+                <span class="star">*</span>
+                <p><?=GetMessage('DELIVERY_TEXT')?></p>
+            </div>
+        <?} 
+        if($arProperties["CODE"] == 'TERMINALS'){ ?>
+            <div class="block terminal_vs" >
+                <label><input type="radio" checked /><?=GetMessage('DELIVERY_PICKUP')?></label> <br>
+                <input type="text" maxlength="250" style=" margin-top: 10px; " placeholder="<?=$arProperties["DESCRIPTION"]?>" size="<?=$arProperties["SIZE1"]?>" value="" name="<?=$arProperties["FIELD_NAME"]?>" />
+                <span class="star">*</span>
+                <p><?=GetMessage('DELIVERY_TEXT')?></p>
             </div>
         <?}
         ?>

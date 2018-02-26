@@ -212,9 +212,9 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     })
                         
                     if($('#order_form_content .stock_delivery').length < 3){
-                         $('.location_hide').show();
+                       //  $('.location_hide').show();
                     } else {
-                         $('.location_hide').hide();
+                       //  $('.location_hide').hide();
                     }
                     
                     // если не вывелись службы ДЛ    
