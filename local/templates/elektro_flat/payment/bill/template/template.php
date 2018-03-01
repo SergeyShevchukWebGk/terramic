@@ -355,7 +355,7 @@ while ($arProps = $db_props->Fetch()) {
 }?>
 </p>
 
-<?if($arOrder["PAY_SYSTEM_ID"] == PAY_SISTEM_NDS){
+<?if(["PAY_SYSTEM_ID"] == PAY_SISTEM_NDS){
     echo GetMessage('PAY_SISTEM_TEXT_NDS');
 } else {
     echo GetMessage('PAY_SISTEM_TEXT_NO_NDS');
@@ -366,15 +366,15 @@ while ($arProps = $db_props->Fetch()) {
 //выборка по нескольким свойствам (TERMINAL_DL):
 $dbOrderProps = CSaleOrderPropsValue::GetList(
         array("SORT" => "ASC"),
-        array("ORDER_ID" => $_GET["ORDER_ID"], "CODE"=>array("TERMINAL_DL"))
+        array("ORDER_ID" => $_GET["ORDER_ID"], "CODE"=>array("TERMINALS"))
     );
     while ($arOrderProps = $dbOrderProps->GetNext()){
         $adress_dekivery = $arOrderProps;
     };
-
+$arDeliv = CSaleDelivery::GetByID($arOrder["DELIVERY_ID"]);
 
 if($params["DELIVERY_NAME"] != 'Самовывоз'){?>
-    <b style=" font-size: 14px; "><?=GetMessage('SALE_HPS_BILL_DELIVERY_NAME')?></b> <br>
+    <b style=" font-size: 14px; "><?=GetMessage('SALE_HPS_BILL_DELIVERY_NAME'). ' '. $arDeliv["NAME"]?></b> <br>
     <b><?=GetMessage('SALE_HPS_BILL_DELIVERY_POST')?> <span style=" text-decoration: underline; "><?=$adress_dekivery["VALUE"]?></span></b>
     <?
 } else { ?>

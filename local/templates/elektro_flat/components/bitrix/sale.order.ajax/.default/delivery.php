@@ -106,7 +106,7 @@
                             <?endif;?>
                             </div>
                             <div class="name">
-                                <?=htmlspecialcharsbx($arDelivery["NAME"])?>
+                                Доставка транспортной компанией <?=htmlspecialcharsbx($arDelivery["NAME"])?>
                             </div>
 
                          <?if($arDelivery["CHECKED"] == "Y"){?>
@@ -208,7 +208,7 @@
                                     <?endif;?>
                                     </div>
                                     <div class="name">
-                                        <?=htmlspecialcharsbx($arDelivery["NAME"])?>
+                                        Доставка транспортной компанией <?=htmlspecialcharsbx($arDelivery["NAME"])?>
                                     </div>
 
                                 <?if($arDelivery["CHECKED"] == "Y"){?>
