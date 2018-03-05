@@ -209,7 +209,7 @@ if(!function_exists("PrintPropsForm")) {
                             <div class="clr"></div>
                            <?}?>
                     <?} elseif($arProperties["TYPE"] == "LOCATION") {?>
-
+                       <?/*?>
                         <div class="label location_hide" >
                             <?=$arProperties["NAME"]?>
                             <?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
@@ -271,7 +271,7 @@ if(!function_exists("PrintPropsForm")) {
                             <?endif;?>
                         </div>
                         <div class="clr"></div>
-
+                      <?*/?>
                     <?} elseif($arProperties["TYPE"] == "RADIO") {?>
 
                         <div class="label">
@@ -426,7 +426,6 @@ function PrintPropsFormLocation($arSource = array(), $locationTemplate = ".defau
             <div class="clr"></div>
         <?} else if($arProperties["CODE"] == 'TERMINAL_DL'){ ?>
             <div class="block terminals" >
-                <label><input type="radio" checked /><?=GetMessage('DELIVERY_PICKUP')?></label> <br>
                 <input type="text" maxlength="250" style=" margin-top: 10px; " placeholder="<?=$arProperties["DESCRIPTION"]?>" size="<?=$arProperties["SIZE1"]?>" value="<?=$adress?>" name="<?=$arProperties["FIELD_NAME"]?>" />
                 <span class="star">*</span>
                 <p><?=GetMessage('DELIVERY_TEXT')?></p>
@@ -434,7 +433,6 @@ function PrintPropsFormLocation($arSource = array(), $locationTemplate = ".defau
         <?} 
         if($arProperties["CODE"] == 'TERMINALS'){ ?>
             <div class="block terminal_vs" >
-                <label><input type="radio" checked /><?=GetMessage('DELIVERY_PICKUP')?></label> <br>
                 <input type="text" maxlength="250" style=" margin-top: 10px; " placeholder="<?=$arProperties["DESCRIPTION"]?>" size="<?=$arProperties["SIZE1"]?>" value="" name="<?=$arProperties["FIELD_NAME"]?>" />
                 <span class="star">*</span>
                 <p><?=GetMessage('DELIVERY_TEXT')?></p>
@@ -446,4 +444,75 @@ function PrintPropsFormLocation($arSource = array(), $locationTemplate = ".defau
     }
 }
 
+
+function PrintLocation($arSource = array(), $locationTemplate = ".default") {
+    foreach($arSource as $arProperties) {    ?>
+        <?if($arProperties["TYPE"] == "LOCATION") {?>
+        <div class="label location_hide" >
+            <?=$arProperties["NAME"]?>
+            <?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
+                <span class="star">*</span>
+            <?endif;?>
+        </div>
+        <div class="block" >
+            <?$value = 0;
+            if(is_array($arProperties["VARIANTS"]) && count($arProperties["VARIANTS"]) > 0) {
+                foreach($arProperties["VARIANTS"] as $arVariant) {
+                    if($arVariant["SELECTED"] == "Y") {
+                        $value = $arVariant["ID"];
+                        break;
+                    }
+                }
+            }
+
+            if(CSaleLocation::isLocationProMigrated()) {
+                $locationTemplateP = $locationTemplate == 'popup' ? 'search' : 'steps';
+                $locationTemplateP = $_REQUEST['PERMANENT_MODE_STEPS'] == 1 ? 'steps' : $locationTemplateP;
+            }
+
+            if($locationTemplateP == 'steps'):?>
+                <input placeholder="<?=$arProperties["DESCRIPTION"]?>" type="hidden" id="LOCATION_ALT_PROP_DISPLAY_MANUAL[<?=intval($arProperties["ID"])?>]" name="LOCATION_ALT_PROP_DISPLAY_MANUAL[<?=intval($arProperties["ID"])?>]" value="<?=($_REQUEST['LOCATION_ALT_PROP_DISPLAY_MANUAL'][intval($arProperties["ID"])] ? '1' : '0')?>" />
+            <?endif?>
+            <?CSaleLocation::proxySaleAjaxLocationsComponent(
+                array(
+                    "AJAX_CALL" => "N",
+                    "COUNTRY_INPUT_NAME" => "COUNTRY",
+                    "REGION_INPUT_NAME" => "REGION",
+                    "CITY_INPUT_NAME" => $arProperties["FIELD_NAME"],
+                    "CITY_OUT_LOCATION" => "Y",
+                    "LOCATION_VALUE" => $value,
+                    "ORDER_PROPS_ID" => $arProperties["ID"],
+                    "ONCITYCHANGE" => ($arProperties["IS_LOCATION"] == "Y" || $arProperties["IS_LOCATION4TAX"] == "Y") ? "submitForm()" : "",
+                    "SIZE1" => $arProperties["SIZE1"],
+                ),
+                array(
+                    "ID" => $value,
+                    "CODE" => "",
+                    "SHOW_DEFAULT_LOCATIONS" => "Y",
+                    "JS_CALLBACK" => "submitFormProxy",
+                    "JS_CONTROL_DEFERRED_INIT" => intval($arProperties["ID"]),
+                    "JS_CONTROL_GLOBAL_ID" => intval($arProperties["ID"]),
+                    "DISABLE_KEYBOARD_INPUT" => 'Y',
+                    "PRECACHE_LAST_LEVEL" => "Y",
+                    "PRESELECT_TREE_TRUNK" => "Y",
+                    "SUPPRESS_ERRORS" => "Y"
+                ),
+                $locationTemplateP,
+                true,
+                'location-block-wrapper'
+            )?>
+            <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
+                <div class="description">
+                    <?//=$arProperties["DESCRIPTION"]?>
+                </div>
+            <?endif;?>
+            <p><?=GetMessage('TEXT_LOCATION')?></p>
+        </div>
+        <div class="clr"></div>
+
+        <?}?>
+
+        <?
+    }
+}
 }?>

@@ -331,13 +331,14 @@ while ($arProps = $db_props->Fetch()) {
        $arProps["CODE"] != 'stock' && 
        $arProps["CODE"] != 'FAX' && 
        $arProps["CODE"] != 'organization' && 
+       $arProps["CODE"] != 'delivery_type' && 
        $arProps["CODE"] != 'agreement'){ 
           if($element > 1){
               if($arProps["CODE"] == 'COMPANY_ADR'){
                   $str = ', <br>';
                   $value_company = $arProps["VALUE"];
               } else {
-                  $str = ', <br>';
+                //  $str = ', <br>';
               }
           }
           if($arProps["CODE"] == 'COMPANY_ADR_ACT' && empty($arProps["VALUE"])){
@@ -356,9 +357,9 @@ while ($arProps = $db_props->Fetch()) {
 </p>
 
 <?if(["PAY_SYSTEM_ID"] == PAY_SISTEM_NDS){
-    echo GetMessage('PAY_SISTEM_TEXT_NDS');
-} else {
     echo GetMessage('PAY_SISTEM_TEXT_NO_NDS');
+} else {
+    echo GetMessage('PAY_SISTEM_TEXT_NDS');
 }?>
 <br>
 <br>
@@ -366,16 +367,17 @@ while ($arProps = $db_props->Fetch()) {
 //выборка по нескольким свойствам (TERMINAL_DL):
 $dbOrderProps = CSaleOrderPropsValue::GetList(
         array("SORT" => "ASC"),
-        array("ORDER_ID" => $_GET["ORDER_ID"], "CODE"=>array("TERMINALS"))
+        array("ORDER_ID" => $_GET["ORDER_ID"], "CODE"=>array("LOCATION"))
     );
     while ($arOrderProps = $dbOrderProps->GetNext()){
         $adress_dekivery = $arOrderProps;
+        $location_adress = CSaleLocation::GetByID($adress_dekivery["VALUE"]);
     };
 $arDeliv = CSaleDelivery::GetByID($arOrder["DELIVERY_ID"]);
-
+  
 if($params["DELIVERY_NAME"] != 'Самовывоз'){?>
     <b style=" font-size: 14px; "><?=GetMessage('SALE_HPS_BILL_DELIVERY_NAME'). ' '. $arDeliv["NAME"]?></b> <br>
-    <b><?=GetMessage('SALE_HPS_BILL_DELIVERY_POST')?> <span style=" text-decoration: underline; "><?=$adress_dekivery["VALUE"]?></span></b>
+    <b><?=GetMessage('SALE_HPS_BILL_DELIVERY_POST')?> <span style=" text-decoration: underline; "><?=$location_adress["COUNTRY_NAME"]?>, <?=$location_adress["REGION_NAME"]?>, <?=$location_adress["CITY_NAME"]?></span></b>
     <?
 } else { ?>
     <b style=" font-size: 14px; ">САМОВЫВОЗ</b>
@@ -767,8 +769,12 @@ $dbBasketItems = CSaleBasket::GetList(
 while ($arItems = $dbBasketItems->Fetch()){
     $k = 0;
     while( $k < 12){  // перебираем все свойства с объемами товара
-        $k++;
-        $width_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "VES_KG_".$k));
+        if($k == 0){
+            $params_width = 'VES_KG'; 
+        } else {
+            $params_width = "VES_KG_".$k;
+        }
+        $width_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => $params_width));
             while ($am = $width_number->Fetch()){
                 if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
                     $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]));   
@@ -776,11 +782,16 @@ while ($arItems = $dbBasketItems->Fetch()){
                     $WIDTH += $number;   
                 }
             } 
+    $k++;
     }
     $i = 0;
     while( $i < 12){  // перебираем все свойства с объемами товара
-        $i++;
-        $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => "OBEM_M3_".$i));
+        if($k == 0){
+            $params_amount = 'OBEM_M3'; 
+        } else {
+            $params_amount = "OBEM_M3_".$i;
+        }
+        $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => $params_amount));
             while ($am = $amount_number->Fetch()){
                 if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
                     $number_am = floatval(str_replace(",", ".", $am["VALUE_ENUM"])) * 10; 
@@ -788,6 +799,7 @@ while ($arItems = $dbBasketItems->Fetch()){
                     $AMOUNT += $number_am;   
                 }
             } 
+    $i++;
     }
 }  
 if($AMOUNT > 0.001){

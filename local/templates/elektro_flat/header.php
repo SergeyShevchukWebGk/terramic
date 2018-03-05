@@ -238,21 +238,27 @@ Loc::loadMessages(__FILE__);?>
 							<?else:
 								if($arSetting["CATALOG_LOCATION"]["VALUE"] == "LEFT"):?>
 									<div class="h3"><?=Loc::getMessage("BASE_HEADER");?></div>
-									<?$APPLICATION->IncludeComponent("bitrix:menu", $arSetting["CATALOG_VIEW"]["VALUE"] == "FOUR_LEVELS" ? "tree" : "sections",
-										array(
-											"ROOT_MENU_TYPE" => "left",
-											"MENU_CACHE_TYPE" => "A",
-											"MENU_CACHE_TIME" => "36000000",
-											"MENU_CACHE_USE_GROUPS" => "Y",
-											"MENU_CACHE_GET_VARS" => array(),
-											"MAX_LEVEL" => "4",
-											"CHILD_MENU_TYPE" => "left",
-											"USE_EXT" => "Y",
-											"DELAY" => "N",
-											"ALLOW_MULTI_SELECT" => "N"
-										),
-										false
-									);?>
+									<?$APPLICATION->IncludeComponent(
+	"bitrix:menu", 
+	"sections", 
+	array(
+		"ROOT_MENU_TYPE" => "left",
+		"MENU_CACHE_TYPE" => "A",
+		"MENU_CACHE_TIME" => "36000000",
+		"MENU_CACHE_USE_GROUPS" => "N",
+		"MENU_CACHE_GET_VARS" => array(
+		),
+		"MAX_LEVEL" => "4",
+		"CHILD_MENU_TYPE" => "left",
+		"USE_EXT" => "Y",
+		"DELAY" => "N",
+		"ALLOW_MULTI_SELECT" => "N",
+		"COMPONENT_TEMPLATE" => "sections",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
+	),
+	false
+);?>
 								<?endif;
 							endif;
 							if($arSetting["SMART_FILTER_LOCATION"]["VALUE"] == "VERTICAL"):

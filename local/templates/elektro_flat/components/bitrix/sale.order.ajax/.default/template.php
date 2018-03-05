@@ -161,7 +161,7 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                         }
                     }
 
-                        var delivery_id = $('.stock_delivery input:checked').val();
+                        var delivery_id = $('.stock_delivery input:checked').attr('data-delivery');
                         var stock_1 = <?=DELIVERY_KRASNODAR?>;
                         var stock_2 = <?=DELIVERY_SAMARA?>;
 
@@ -198,18 +198,6 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                          //   $('.selivery_select .terminals input').val(adress.replace(/\s{2,}/g, ' '));
                     })
 
-                    $('body').on('click', '.pack_param', function(){
-                        var param = $(this).val();
-                        var id = $(this).attr('data-id');
-                        $.ajax({
-                            type: "POST",
-                            url: "/dellin/delivery_post.php",
-                            data: {param: param, id:id},
-                            success:function(data){
-                                 $('#'+id).click();
-                            }
-                        });
-                    })
                         
                     if($('#order_form_content .stock_delivery').length < 3){
                        //  $('.location_hide').show();
@@ -218,7 +206,7 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     }
                     
                     // если не вывелись службы ДЛ    
-                    if($('#order_form_content .stock_delivery').length < 3 || getCookie('data-check') != 'yes'){
+                  /*  if($('#order_form_content .stock_delivery').length < 3 || getCookie('data-check') != 'yes'){
                         setTimeout(function() {
                        //     $('#order_form_content .payment_check input:checked').click();
                             document.cookie = "data-check=yes";
@@ -226,24 +214,33 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                          //   $('#order_form_content .payment_check input:checked').attr('data-id', 'yes');
                             
                         }, 1000);
-                    }
+                    }      */
 
                     $("#ORDER_PROP_14, #ORDER_PROP_20, #ORDER_PROP_15, #ORDER_PROP_3, #ORDER_PROP_46, #ORDER_PROP_33, #ORDER_PROP_28").mask("+7 (999) 999-99-99");
                     $("#ORDER_PROP_35").mask("99 99");
                     
                     var check_delivery = $('table .stock_delivery input:checked').attr('data-for');
-                    $('.'+check_delivery).click();
                      $('.'+check_delivery+' .table_d').prop('checked', true);
-
+                     $('.'+check_delivery+' > table').show();
+                     
+                     
+                    var check_pickap =  $('.stock_delivery.pickup input').is(':checked');
+                    if(check_pickap){
+                        $('.stock_delivery > table').hide();
+                        $('.stock_delivery .terminal input').prop('checked', false);
+                    } else {
+                        $('.stock_delivery.pickup input').prop('checked', false);
+                    };
                 }
                 
+
                 // если не вывелись службы ДЛ
-                if($('#order_form_content .stock_delivery').length < 3 || getCookie('data-check') != 'yes'){
+              /*  if($('#order_form_content .stock_delivery').length < 3 || getCookie('data-check') != 'yes'){
                     setTimeout(function() {
                         submitForm();
                         document.cookie = "data-check=yes";
                     }, 1000);
-                }
+                }    */
                 
                 var pay_sistem_nds = $('#ID_PAY_SYSTEM_ID_<?=PAY_SISTEM_NDS?>:checked').prop('checked');
                 if(pay_sistem_nds == true) {
@@ -288,8 +285,16 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                         $(this).children('.table_d').prop('checked', true);
                         $('div.stock_delivery table').hide();
                         $(this).children('table').show();
+                        if($(this).children('.table_d').context.spellcheck){
+                            $('.stock_delivery.pickup input').prop('checked', false);
+                        }
                     })
-
+                     // подстановка пункта выдаче при выбооре самовывоза 
+                    $('body').on('click', '.store_row', function(){
+                       // $('div.stock_delivery .terminal input').prop('checked', false);
+                        var name = $('.store_row.checked .name').text();
+                        $('body #select_store .ora-store').text(name);
+                    })
 
                 })
                 function SetContact(profileId) {
@@ -316,16 +321,27 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
 
             include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/person_type.php");
             include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/props.php");
+
             if($arParams["DELIVERY_TO_PAYSYSTEM"] == "p2d") {
                 include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/paysystem.php");
+                include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/summary.php");
                 include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/delivery.php");
             } else {
-                include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/delivery.php");
                 include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/paysystem.php");
+                include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/summary.php");
+                include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/delivery.php");
             }
-
-            include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/summary.php");
-
+            ?>
+            <h2><?=GetMessage("SOA_TEMPL_SUM_ADIT_INFO")?></h2>
+            <div class="order-info">
+                <div class="order-info_in">
+                    <label><?=GetMessage("SOA_TEMPL_SUM_COMMENTS")?></label>
+                    <br />
+                    <textarea rows="5" cols="100" name="ORDER_DESCRIPTION" id="ORDER_DESCRIPTION"><?=$arResult["USER_VALS"]["ORDER_DESCRIPTION"]?></textarea>
+                    <input type="hidden" name="" value="" />
+                </div>
+            </div>
+            <?
             if($_POST["is_ajax_post"] != "Y") {?>
                     </div>
                     <input type="hidden" name="confirmorder" id="confirmorder" value="Y">

@@ -109,13 +109,14 @@
 		</div>
 	</div>
 </div>
-
-<h2><?=GetMessage("SOA_TEMPL_SUM_ADIT_INFO")?></h2>
-<div class="order-info">
-	<div class="order-info_in">
-		<label><?=GetMessage("SOA_TEMPL_SUM_COMMENTS")?></label>
-		<br />
-		<textarea rows="5" cols="100" name="ORDER_DESCRIPTION" id="ORDER_DESCRIPTION"><?=$arResult["USER_VALS"]["ORDER_DESCRIPTION"]?></textarea>
-		<input type="hidden" name="" value="" />
-	</div>
+<div class="cart-items" style="margin:0px 0px 10px 0px;">
+    <div class="equipment-order">
+        <div class="tbody">
+            <div class="tr wrap">
+            <b class="delivery_text"><?=GetMessage('TEXT_PARAMS')?></b>
+                <div class="cart-item-name"><b><?=GetMessage("WEIGHT")?></b>    <?=$arResult["WIDTH"]?> кг</div>
+                <div class="cart-item-price"><b><?=GetMessage("AMOUNT")?></b>    <?=$arResult["AMOUNT"]?> м3</div>
+            </div>
+        </div>
+    </div>
 </div>

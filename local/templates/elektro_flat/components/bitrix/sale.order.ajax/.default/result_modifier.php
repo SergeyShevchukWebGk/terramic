@@ -77,4 +77,47 @@ if(!$USER->IsAuthorized() && CModule::IncludeModule("socialservices")) {
     if(!empty($arServices)) {
         $arResult["AUTH_SERVICES"] = $arServices;
     }
-}?>
+}
+
+// Выведем актуальную корзину для текущего пользователя
+CModule::IncludeModule('iblock');
+foreach ($arResult["BASKET_ITEMS"] as $arItems){
+    $k = 0;
+    while( $k < 12){  // перебираем все свойства с объемами товара
+        if($k == 0){
+            $params_width = 'VES_KG'; 
+        } else {
+            $params_width = "VES_KG_".$k;
+        }
+        $width_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => $params_width));
+            while ($am = $width_number->Fetch()){
+                if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
+                    $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]));   
+                    $number = $number * $arItems["QUANTITY"];                            
+                    $arResult["WIDTH"] += $number;   
+                }
+            } 
+    $k++;
+    }
+    $i = 0;
+    while( $i < 12){  // перебираем все свойства с объемами товара
+        if($k == 0){
+            $params_amount = 'OBEM_M3'; 
+        } else {
+            $params_amount = "OBEM_M3_".$i;
+        }
+        $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => $params_amount));
+            while ($am = $amount_number->Fetch()){
+                if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
+                    $number_am = floatval(str_replace(",", ".", $am["VALUE_ENUM"])) * 10; 
+                    $number_am = $number_am * $arItems["QUANTITY"];                                                          
+                    $arResult["AMOUNT"] += $number_am;   
+                }
+            } 
+    $i++;
+    }
+}  
+if($arResult["AMOUNT"] > 0.001){
+    $arResult["AMOUNT"] = $arResult["AMOUNT"] / 10;
+}
+?>

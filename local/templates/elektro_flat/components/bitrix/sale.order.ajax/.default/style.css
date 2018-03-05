@@ -176,7 +176,6 @@ textarea::-webkit-input-placeholder {
 }
 .order-info_in .block > p{
     margin-left: 30px;
-    margin-left: 205px;
     clear: both;
 }
 .stock_delivery > td{
@@ -188,3 +187,17 @@ textarea::-webkit-input-placeholder {
 #order_form_content .stock_delivery .terminal_vs > input{
     margin-left: 205px;
 }
+.stock_delivery .terminal > div > p{
+    margin-left: 160px; 
+}
+.cart-items .delivery_text{
+    float: left;
+    margin-right: 100px; 
+}
+body .cart-items .tbody .tr.wrap{
+    padding: 10px; 
+}
+body .cart-items .tbody .tr.wrap .cart-item-price{
+    width: 160px; 
+}
+    

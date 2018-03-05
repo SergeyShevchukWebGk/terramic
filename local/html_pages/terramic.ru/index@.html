@@ -379,7 +379,113 @@
 					<div class="content">
 						<div class="left-column">
 																<div class="h3">Каталог товаров</div>
-																																																													<!--
+									
+<ul class="left-menu">
+					<li class="parent">
+					<a href="/catalog/plenka_polietilenovaya/">Пленка полиэтиленовая<span class="arrow"></span></a>
+										<div class="catalog-section-childs">
+						<div class="catalog-section-child">
+				<a href="/catalog/plenka_dlya_teplits/" title="Пленка для теплиц">
+					<span class="child">
+						<span class="image">
+															<img src="/upload/iblock/5eb/5ebf911272d027fd6540551ce74eab7c.png" width="49" height="49" alt="Пленка для теплиц" />
+													</span>						
+						<span class="text-cont">
+							<span class="text">Пленка для теплиц</span>
+						</span>
+					</span>
+				</a>
+			</div>
+					<div class="catalog-section-child">
+				<a href="/catalog/plenka_dlya_mulchirovaniya/" title="Пленка для мульчирования">
+					<span class="child">
+						<span class="image">
+															<img src="/upload/iblock/2c2/2c23f7b02ab9a509a3a9a81d2868435d.png" width="49" height="49" alt="Пленка для мульчирования" />
+													</span>						
+						<span class="text-cont">
+							<span class="text">Пленка для мульчирования</span>
+						</span>
+					</span>
+				</a>
+			</div>
+					<div class="catalog-section-child">
+				<a href="/catalog/plenka_stroitelnaya/" title="Пленка строительная">
+					<span class="child">
+						<span class="image">
+															<img src="/upload/iblock/0ef/0ef99a8e910ae65d0af1f190d97c0f43.png" width="49" height="49" alt="Пленка строительная" />
+													</span>						
+						<span class="text-cont">
+							<span class="text">Пленка строительная</span>
+						</span>
+					</span>
+				</a>
+			</div>
+					<div class="catalog-section-child">
+				<a href="/catalog/aksessuary_1/" title="Аксессуары">
+					<span class="child">
+						<span class="image">
+															<img src="/upload/iblock/fe2/fe258fbdef5a748ac5e96dc30d667b2d.png" width="49" height="49" alt="Аксессуары" />
+													</span>						
+						<span class="text-cont">
+							<span class="text">Аксессуары</span>
+						</span>
+					</span>
+				</a>
+			</div>
+		</div></li>				<li class="parent">
+					<a href="/catalog/oborudovanie/">Оборудование<span class="arrow"></span></a>
+										<div class="catalog-section-childs">
+						<div class="catalog-section-child">
+				<a href="/catalog/poliv/" title="Полив">
+					<span class="child">
+						<span class="image">
+															<img src="/upload/iblock/2ad/2ad86770eab81c16463bb767a55ef584.png" width="49" height="49" alt="Полив" />
+													</span>						
+						<span class="text-cont">
+							<span class="text">Полив</span>
+						</span>
+					</span>
+				</a>
+			</div>
+					<div class="catalog-section-child">
+				<a href="/catalog/podves/" title="Подвес">
+					<span class="child">
+						<span class="image">
+															<img src="/upload/iblock/50e/50e7dfe86a57998b73bd6dfdc7e3b93f.png" width="49" height="49" alt="Подвес" />
+													</span>						
+						<span class="text-cont">
+							<span class="text">Подвес</span>
+						</span>
+					</span>
+				</a>
+			</div>
+		</div></li>				<li>
+					<a href="/catalog/avtomatizatsiya/">Автоматизация</a>
+				</li>
+							<li>
+					<a href="/catalog/teplitsy/">Теплицы</a>
+				</li>
+			</ul>
+
+<script type="text/javascript">
+	//<![CDATA[
+	$(function() {
+				$("ul.left-menu").children(".parent").on({
+			mouseenter: function() {
+									var pos = $(this).position(),
+						dropdownMenu = $(this).children(".catalog-section-childs"),
+						dropdownMenuLeft = pos.left + $(this).width() + 9 + "px",
+						dropdownMenuTop = pos.top - 5 + "px";
+					dropdownMenu.css({"left": dropdownMenuLeft, "top": dropdownMenuTop});
+					dropdownMenu.stop(true, true).delay(200).fadeIn(150);
+							},
+			mouseleave: function() {
+				$(this).children(".catalog-section-childs").stop(true, true).delay(200).fadeOut(150);
+							}
+		});
+	});
+	//]]>
+</script>																																																				<!--
 							<div class="vendors">
 								<div class="h3">Производители</div>
 															</div>
@@ -735,4 +841,4 @@
 					</div>
 	</div>
 </body>
-</html><!--a3fa2bb0773b6e011dd28d15eb4e2bef-->
+</html><!--2ed04bd6d0d3760f10d1e5707b8a16b3-->
