@@ -165,6 +165,22 @@ $APPLICATION->IncludeComponent(
 				);?>
 			</div>
 		</div>
+                 <?$APPLICATION->IncludeComponent(
+                  "bitrix:main.userconsent.request",
+                  "",
+                  array(
+                      "ID" => 1,
+                      "IS_CHECKED" => "Y",
+                      "AUTO_SAVE" => "Y",
+                      "IS_LOADED" => $arParams["USER_CONSENT_IS_LOADED"],
+                      "REPLACE" => array(
+                       'button_caption' => 'Регистрация',
+                       'fields' => array('Имя','Фамилия','Email')
+                      ),
+                  )
+                 );?>
+             <br>
+             <br>
 		<div class="bx-authform-formgroup-container">
 			<input type="submit" class="btn btn-primary" name="Register" value="<?=GetMessage("AUTH_REGISTER")?>" />
 		</div>

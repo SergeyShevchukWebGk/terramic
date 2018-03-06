@@ -2,7 +2,7 @@
 $APPLICATION->SetTitle("Мой профиль");?>
 
 <?$APPLICATION->IncludeComponent("bitrix:main.profile", "",
-	Array(
+    Array(
         "USER_PROPERTY_NAME" => "",
         "SET_TITLE" => "N", 
         "AJAX_MODE" => "N", 
@@ -13,7 +13,7 @@ $APPLICATION->SetTitle("Мой профиль");?>
         "AJAX_OPTION_STYLE" => "Y", 
         "AJAX_OPTION_HISTORY" => "N" 
     ),
-	false
+    false
 );?> 
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

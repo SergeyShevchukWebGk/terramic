@@ -341,6 +341,23 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     <input type="hidden" name="" value="" />
                 </div>
             </div>
+            <?if ($arParams['USER_CONSENT'] == 'Y'):?>
+                 <?$APPLICATION->IncludeComponent(
+                  "bitrix:main.userconsent.request",
+                  "",
+                  array(
+                      "ID" => $arParams["USER_CONSENT_ID"],
+                      "IS_CHECKED" => $arParams["USER_CONSENT_IS_CHECKED"],
+                      "AUTO_SAVE" => "Y",
+                      "IS_LOADED" => $arParams["USER_CONSENT_IS_LOADED"],
+                      "REPLACE" => array(
+                       'button_caption' => 'Оформить заказ',
+                       'fields' => array('ФИО','Номер паспорта','Серия паспорта','Email', 'Телефон')
+                      ),
+                  )
+                 );?>
+             <br>
+            <?endif;?>
             <?
             if($_POST["is_ajax_post"] != "Y") {?>
                     </div>

@@ -207,6 +207,24 @@
 
                         <tr>
                             <td>
+                            <div style="width: 330px;">
+                                <?$APPLICATION->IncludeComponent(
+                                      "bitrix:main.userconsent.request",
+                                      "",
+                                      array(
+                                          "ID" => 1,
+                                          "IS_CHECKED" => "Y",
+                                          "AUTO_SAVE" => "Y",
+                                          "IS_LOADED" => "N",
+                                          "REPLACE" => array(
+                                           'button_caption' => 'Продолжить оформление заказа',
+                                           'fields' => array('Имя','Фамилия','Email')
+                                          ),
+                                      )
+                                     );?>
+                                 <br>
+                                 <br>
+                            </div>
                                 <button type="submit" name="submit" class="btn_buy popdef" value="<?=GetMessage("STOF_NEXT_STEP")?>"><?=GetMessage("STOF_NEXT_STEP")?></button>
                                 <input type="hidden" name="do_register" value="Y">
                             </td>

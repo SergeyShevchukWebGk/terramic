@@ -37,8 +37,8 @@ $APPLICATION->SetTitle("Оформление заказа");?>
 		"SHOW_NOT_CALCULATED_DELIVERIES" => "L",
 		"SHOW_VAT_PRICE" => "Y",
 		"USE_PRELOAD" => "Y",
-		"USER_CONSENT" => "N",
-		"USER_CONSENT_ID" => "0",
+		"USER_CONSENT" => "Y",
+		"USER_CONSENT_ID" => "1",
 		"USER_CONSENT_IS_CHECKED" => "Y",
 		"USER_CONSENT_IS_LOADED" => "Y",
 		"ACTION_VARIABLE" => "action",
@@ -47,7 +47,9 @@ $APPLICATION->SetTitle("Оформление заказа");?>
 		"BASKET_IMAGES_SCALING" => "adaptive",
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
-		"SPOT_LOCATION_BY_GEOIP" => "N"
+		"SPOT_LOCATION_BY_GEOIP" => "N",
+		"ADDITIONAL_PICT_PROP_22" => "-",
+		"ADDITIONAL_PICT_PROP_23" => "-"
 	),
 	false
 );?>
