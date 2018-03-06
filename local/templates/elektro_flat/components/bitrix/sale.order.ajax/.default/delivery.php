@@ -85,7 +85,6 @@
                 <table>
                 <?$width = ($arParams["SHOW_STORES_IMAGES"] == "Y") ? 800 : 750;
                 foreach($arResult["DELIVERY"] as $delivery_id => $arDelivery){?>
-                
                  <?if($arDelivery["SORT"] == 28){?>
                     <tr class="stock_delivery">
                     <td valign="top">

@@ -119,9 +119,9 @@ if(!function_exists("PrintPropsForm")) {
                                     name="<?=$arProperties["FIELD_NAME"]?>"
                                     placeholder="<?=$arProperties["DESCRIPTION"]?>"
                                     id="<?=$arProperties["FIELD_NAME"]?>"
-                                    <?if ($is_numeric_field == "Y") {?>
+                                    <?/*if ($is_numeric_field == "Y") {?>
                                         onkeydown = "if (((event.which < 48 || event.which > 57) || event.shiftKey === true) && event.which != 8 && event.which != 9) {event.preventDefault();return false;}"
-                                    <?}?>/>
+                                    <?}*/?>/>
                                 <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
                                     <div class="description">
                                         <?//=$arProperties["DESCRIPTION"]?>
