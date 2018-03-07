@@ -170,7 +170,7 @@ $APPLICATION->IncludeComponent(
                   "",
                   array(
                       "ID" => 1,
-                      "IS_CHECKED" => "Y",
+                      "IS_CHECKED" => "N",
                       "AUTO_SAVE" => "Y",
                       "IS_LOADED" => $arParams["USER_CONSENT_IS_LOADED"],
                       "REPLACE" => array(

@@ -213,7 +213,7 @@
                                       "",
                                       array(
                                           "ID" => 1,
-                                          "IS_CHECKED" => "Y",
+                                          "IS_CHECKED" => "N",
                                           "AUTO_SAVE" => "Y",
                                           "IS_LOADED" => "N",
                                           "REPLACE" => array(

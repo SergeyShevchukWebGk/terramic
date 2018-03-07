@@ -39,7 +39,7 @@ $APPLICATION->SetTitle("Оформление заказа");?>
 		"USE_PRELOAD" => "Y",
 		"USER_CONSENT" => "Y",
 		"USER_CONSENT_ID" => "1",
-		"USER_CONSENT_IS_CHECKED" => "Y",
+		"USER_CONSENT_IS_CHECKED" => "N",
 		"USER_CONSENT_IS_LOADED" => "Y",
 		"ACTION_VARIABLE" => "action",
 		"ADDITIONAL_PICT_PROP_16" => "-",
