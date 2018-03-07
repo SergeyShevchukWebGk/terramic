@@ -57,6 +57,23 @@ Loc::loadMessages(__FILE__);?>
 	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/js/main.js");
 	Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/script.js");
 	$APPLICATION->ShowHead();?>
+    <script>
+    $(document).ready(function(){              
+        $(".quantity").on("change", function(){
+            var y = parseInt($(this).data("measure"));
+            if(y % 22 == 0 || y % 20 == 0 || y % 18 == 0 || y % 16 == 0 || y % 14 == 0 || y % 12 == 0 || y % 9 == 0 ){
+            var myDate = parseInt($(this).data("measure"));
+            var x = parseInt($(this).val());
+            var id = parseInt($(this).data("item"));           
+                         if(x % y != 0){
+                            x = parseInt(x) + parseInt(y) - parseInt(x%y);
+                            $(this).val(x);   
+                         }
+        }
+            });
+       });
+       </script>
+    
 	<?if(stristr($APPLICATION->GetCurDir(), '/contacts/') === FALSE) {?>
 	    <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 	    <script>

@@ -439,7 +439,7 @@ global $arSetting,$arSettingsSolo;
 											<form action="<?=SITE_DIR?>ajax/add2basket.php" class="add2basket_form">
 										<?endif;?>
 											<a href="javascript:void(0)" class="minus" onclick="if (BX('quantity_<?=$arItemIDs["ID"]?>').value > <?=$arElement["CATALOG_MEASURE_RATIO"]?>) BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)-<?=$arElement["CATALOG_MEASURE_RATIO"]?>;"><span>-</span></a>
-											<input type="text" id="quantity_<?=$arItemIDs['ID']?>" name="quantity" class="quantity" value="<?=$arElement['CATALOG_MEASURE_RATIO']?>"/>
+											<input type="text" id="quantity_<?=$arItemIDs['ID']?>" data-item="quantity_<?=$arItemIDs['ID']?>" data-measure="<?=$arElement['CATALOG_MEASURE_RATIO']?>" name="quantity" class="quantity" value="<?=$arElement['CATALOG_MEASURE_RATIO']?>"/>
 											<a href="javascript:void(0)" class="plus" onclick="BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)+<?=$arElement["CATALOG_MEASURE_RATIO"]?>;"><span>+</span></a>
 											<?if(!isset($arElement["SELECT_PROPS"]) || empty($arElement["SELECT_PROPS"])):?>
 												<input type="hidden" name="ID" value="<?=$arElement['ID']?>" />

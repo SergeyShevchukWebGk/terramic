@@ -782,7 +782,7 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 														<form action="<?=SITE_DIR?>ajax/add2basket.php" class="add2basket_form">
 															<div class="qnt_cont">
 																<a href="javascript:void(0)" class="minus" onclick="if (BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value > <?=$arOffer["CATALOG_MEASURE_RATIO"]?>) BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value)-<?=$arOffer["CATALOG_MEASURE_RATIO"]?>;"><span>-</span></a>
-																<input type="text" id="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" name="quantity" class="quantity" value="<?=$arOffer['CATALOG_MEASURE_RATIO']?>"/>
+																<input type="text" id="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" data-item="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" data-measure="<?=$arOffer['CATALOG_MEASURE_RATIO']?>" name="quantity" class="quantity" value="<?=$arOffer['CATALOG_MEASURE_RATIO']?>"/>
 																<a href="javascript:void(0)" class="plus" onclick="BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value)+<?=$arOffer["CATALOG_MEASURE_RATIO"]?>;"><span>+</span></a>
 															</div>
 															<input type="hidden" name="ID" class="offer_id" value="<?=$arOffer['ID']?>" />
@@ -881,7 +881,7 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 											<form action="<?=SITE_DIR?>ajax/add2basket.php" class="add2basket_form">
 												<div class="qnt_cont">
 													<a href="javascript:void(0)" class="minus" onclick="if(BX('quantity_<?=$arItemIDs["ID"]?>').value > <?=$arResult["CATALOG_MEASURE_RATIO"]?>) BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)-<?=$arResult["CATALOG_MEASURE_RATIO"]?>;"><span>-</span></a>
-													<input type="text" id="quantity_<?=$arItemIDs['ID']?>" name="quantity" class="quantity" value="<?=$arResult['CATALOG_MEASURE_RATIO']?>"/>
+													<input type="text" id="quantity_<?=$arItemIDs['ID']?>" data-item="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" data-measure="<?=$arResult['CATALOG_MEASURE_RATIO']?>" name="quantity" class="quantity" value="<?=$arResult['CATALOG_MEASURE_RATIO']?>"/>
 													<a href="javascript:void(0)" class="plus" onclick="BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)+<?=$arResult["CATALOG_MEASURE_RATIO"]?>;"><span>+</span></a>
 												</div>
 												<input type="hidden" name="ID" class="id" value="<?=$arResult['ID']?>" />
@@ -1313,7 +1313,7 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 												<form action="<?=SITE_DIR?>ajax/add2basket.php" class="add2basket_form">
 													<div class="qnt_cont">
 														<a href="javascript:void(0)" class="minus" onclick="if (BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value > <?=$arOffer["CATALOG_MEASURE_RATIO"]?>) BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value)-<?=$arOffer["CATALOG_MEASURE_RATIO"]?>;"><span>-</span></a>
-														<input type="text" id="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" name="quantity" class="quantity" value="<?=$arOffer['CATALOG_MEASURE_RATIO']?>"/>
+														<input type="text" id="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" data-item="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" data-measure="<?=$arOffer['CATALOG_MEASURE_RATIO']?>" name="quantity" class="quantity" value="<?=$arOffer['CATALOG_MEASURE_RATIO']?>"/>
 														<a href="javascript:void(0)" class="plus" onclick="BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value)+<?=$arOffer["CATALOG_MEASURE_RATIO"]?>;"><span>+</span></a>
 													</div>
 													<input type="hidden" name="ID" class="offer_id" value="<?=$arOffer['ID']?>" />

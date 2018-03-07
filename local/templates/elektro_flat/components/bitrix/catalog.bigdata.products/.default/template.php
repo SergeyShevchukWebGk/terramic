@@ -67,6 +67,20 @@ if(!empty($arResult["ITEMS"])):
 					return false;
 				}
 			});
+            $(document).ready(function(){              
+        $(".quantity").on("change", function(){
+            var y = parseInt($(this).data("measure"));
+            if(y % 22 == 0 || y % 20 == 0 || y % 18 == 0 || y % 16 == 0 || y % 14 == 0 || y % 12 == 0 || y % 9 == 0 ){
+            var myDate = parseInt($(this).data("measure"));
+            var x = parseInt($(this).val());
+            var id = parseInt($(this).data("item"));           
+                         if(x % y != 0){
+                            x = parseInt(x) + parseInt(y) - parseInt(x%y);
+                            $(this).val(x);   
+                         }
+        }
+            });
+       });
 		});
 		//]]>
 	</script>
@@ -474,7 +488,7 @@ if(!empty($arResult["ITEMS"])):
 													<form action="<?=SITE_DIR?>ajax/add2basket.php" class="add2basket_form">
 												<?endif;?>
 													<a href="javascript:void(0)" class="minus" onclick="if (BX('quantity_<?=$arItemIDs["ID"]?>').value > <?=$arItem["CATALOG_MEASURE_RATIO"]?>) BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)-<?=$arItem["CATALOG_MEASURE_RATIO"]?>;"><span>-</span></a>
-													<input type="text" id="quantity_<?=$arItemIDs['ID']?>" name="quantity" class="quantity" value="<?=$arItem['CATALOG_MEASURE_RATIO']?>"/>
+													<input type="text" id="quantity_<?=$arItemIDs['ID']?>" data-item="quantity_<?=$arItemIDs["ID"]?>" data-measure="<?=$arItem["CATALOG_MEASURE_RATIO"]?>" name="quantity" class="quantity" value="<?=$arItem['CATALOG_MEASURE_RATIO']?>"/>
 													<a href="javascript:void(0)" class="plus" onclick="BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)+<?=$arItem["CATALOG_MEASURE_RATIO"]?>;"><span>+</span></a>
 													<?if(!isset($arItem["SELECT_PROPS"]) || empty($arItem["SELECT_PROPS"])):?>
 														<input type="hidden" name="ID" value="<?=$arItem['ID']?>" />
