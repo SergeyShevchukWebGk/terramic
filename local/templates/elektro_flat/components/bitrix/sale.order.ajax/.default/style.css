@@ -200,4 +200,6 @@ body .cart-items .tbody .tr.wrap{
 body .cart-items .tbody .tr.wrap .cart-item-price{
     width: 160px; 
 }
-    
+.transport_service{
+    display: none;
+}

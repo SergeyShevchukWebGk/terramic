@@ -84,6 +84,7 @@
                 </div>
                 <table>
                 <?$width = ($arParams["SHOW_STORES_IMAGES"] == "Y") ? 800 : 750;
+                $i = 1;
                 foreach($arResult["DELIVERY"] as $delivery_id => $arDelivery){?>
                  <?if($arDelivery["SORT"] == 28){?>
                     <tr class="stock_delivery">
@@ -93,7 +94,7 @@
                         else:
                             $clickHandler = "onClick = \"submitForm();\"";
                         endif;?>
-                        <input type="radio" data-delivery="<?=DELIVERY_SAMARA?>" data-for="sm" id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" name="<?=htmlspecialcharsbx($arDelivery["FIELD_NAME"])?>" value="<?=$arDelivery["ID"]?>"<?if($arDelivery["CHECKED"]=="Y") echo " checked";?> <?=$clickHandler?>/>
+                        <input type="radio" data-sort="<?=$i++?>" data-delivery="<?=DELIVERY_SAMARA?>" data-for="sm" id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" name="<?=htmlspecialcharsbx($arDelivery["FIELD_NAME"])?>" value="<?=$arDelivery["ID"]?>"<?if($arDelivery["CHECKED"]=="Y") echo " checked";?> <?=$clickHandler?>/>
                     </td>
                     <td valign="top">
                     <?
@@ -184,10 +185,10 @@
                 </div>
                 <table>
                 <?$width = ($arParams["SHOW_STORES_IMAGES"] == "Y") ? 800 : 750;
+                $i = 1;
                 foreach($arResult["DELIVERY"] as $delivery_id => $arDelivery){
                     ?>
                     <?if($arDelivery["SORT"] == 24){?>
-                   
                         <tr class="stock_delivery">
                             <td valign="top">
                                 <?if(count($arDelivery["STORE"]) > 0):
@@ -195,7 +196,7 @@
                                 else:
                                     $clickHandler = "onClick = \"submitForm();\"";
                                 endif;?>
-                                <input type="radio" data-delivery="<?=DELIVERY_KRASNODAR?>" data-for="kr" id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" name="<?=htmlspecialcharsbx($arDelivery["FIELD_NAME"])?>" value="<?=$arDelivery["ID"]?>"<?if($arDelivery["CHECKED"]=="Y") echo " checked";?> <?=$clickHandler?>/>
+                                <input type="radio" data-sort="<?=$i++?>" data-delivery="<?=DELIVERY_KRASNODAR?>" data-for="kr" id="ID_DELIVERY_ID_<?=$arDelivery["ID"]?>" name="<?=htmlspecialcharsbx($arDelivery["FIELD_NAME"])?>" value="<?=$arDelivery["ID"]?>"<?if($arDelivery["CHECKED"]=="Y") echo " checked";?> <?=$clickHandler?>/>
                             </td>
                             <td valign="top">
                             <?

@@ -40,7 +40,7 @@ $APPLICATION->SetTitle("Оформление заказа");?>
 		"USER_CONSENT" => "Y",
 		"USER_CONSENT_ID" => "1",
 		"USER_CONSENT_IS_CHECKED" => "N",
-		"USER_CONSENT_IS_LOADED" => "Y",
+		"USER_CONSENT_IS_LOADED" => "N",
 		"ACTION_VARIABLE" => "action",
 		"ADDITIONAL_PICT_PROP_16" => "-",
 		"ADDITIONAL_PICT_PROP_17" => "-",

@@ -207,7 +207,8 @@
 
                         <tr>
                             <td>
-                            <div style="width: 330px;">
+                            <div style="width: 330px;"> 
+                                <span class="star_userconsent">*</span>
                                 <?$APPLICATION->IncludeComponent(
                                       "bitrix:main.userconsent.request",
                                       "",

@@ -9,6 +9,21 @@ define('PRICE_TYPE_ID', 3);
 define('LOCATION_ID_1', 34);  // свйоство города физ лица
 define('LOCATION_ID_2', 18);   // свйоство города юр лица
 define('LOCATION_ID_3', 31);  // свйоство города ип
+define('PERSON_TYPE_1', 1);  // тип плательщика 1
+define('PERSON_TYPE_2', 2);  // тип плательщика 2
+define('PERSON_TYPE_3', 3);  // тип плательщика 3
+
+
+define('DELIVERY_BAYKAL_1', 31);  // служба доставки байкал сервис
+define('DELIVERY_BAYKAL_2', 28);  // служба доставки байкал сервис
+define('DELIVERY_PEK_1', 29);  // служба доставки пэк
+define('DELIVERY_PEK_2', 26);  // служба доставки пэк
+define('DELIVERY_KIT_1', 30);  // служба доставки КИТ
+define('DELIVERY_KIT_2', 27);  // служба доставки КИТ
+define('DELIVERY_DL_1', 34);  // служба доставки Деловые линии
+define('DELIVERY_DL_2', 35);  // служба доставки Деловые линии
+
+
 // added by HTMLS.OrderCommentPlus - start
 AddEventHandler("sale", "OnSaleComponentOrderOneStepComplete", "OrderCommentPlus");
 AddEventHandler("sale", "OnSaleComponentOrderComplete", "OrderCommentPlus");
@@ -86,6 +101,7 @@ function object_to_array($data)
 //     }
 
 // }
+
  //удаление стоимости доставки из заказа, с сохранением примерной стоимости( обработчи удаляет стоимость доставки из способов оплаты и из самого заказа, при этом сохраняет визуальное представления стомисоти)
 \Bitrix\Main\EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved', 'myFunction');
 function myFunction(\Bitrix\Main\Event $event)
@@ -115,6 +131,7 @@ function myFunction(\Bitrix\Main\Event $event)
                 );
 
                 $propertyCollection = $order->getPropertyCollection();
+
                 $emailPropValue = $propertyCollection->getUserEmail()->getValue();
 
                 $event = new CEvent;
@@ -147,4 +164,6 @@ function export_city(){
     return "export_city();";
 }
 
+
+ 
 ?>

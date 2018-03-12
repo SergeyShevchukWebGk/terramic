@@ -231,6 +231,23 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     } else {
                         $('.stock_delivery.pickup input').prop('checked', false);
                     };
+                    
+                    var check_val = $('table .stock_delivery input:checked').attr('data-sort');
+                    // проставление транспортной компании
+                     if(check_val == 1){
+                        $('.transport_service select option').removeAttr('selected');
+                        $('.transport_service select option:nth-child(3)').attr("selected", "selected");
+                     } else if(check_val == 2){
+                        $('.transport_service select option').removeAttr('selected');
+                        $('.transport_service select option:nth-child(1)').attr("selected", "selected");
+                     } else if(check_val == 3){
+                        $('.transport_service select option').removeAttr('selected');
+                        $('.transport_service select option:nth-child(4)').attr("selected", "selected");
+                     } else if(check_val == 4){
+                        $('.transport_service select option').removeAttr('selected');
+                        $('.transport_service select option:nth-child(2)').attr("selected", "selected");
+                     }
+                    
                 }
                 
 
@@ -295,8 +312,50 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                         var name = $('.store_row.checked .name').text();
                         $('body #select_store .ora-store').text(name);
                     })
-
+                    
+                    var check_val = $('table .stock_delivery input:checked').attr('data-sort');
+                    // проставление транспортной компании
+                     if(check_val == 1){
+                        $('.transport_service select option').removeAttr('selected');
+                        $('.transport_service select option:nth-child(3)').attr("selected", "selected");
+                     } else if(check_val == 2){
+                        $('.transport_service select option').removeAttr('selected');
+                        $('.transport_service select option:nth-child(1)').attr("selected", "selected");
+                     } else if(check_val == 3){
+                        $('.transport_service select option').removeAttr('selected');
+                        $('.transport_service select option:nth-child(4)').attr("selected", "selected");
+                     } else if(check_val == 4){
+                        $('.transport_service select option').removeAttr('selected');
+                        $('.transport_service select option:nth-child(2)').attr("selected", "selected");
+                     }
                 })
+                BX.ready(function () {
+
+                    var submitBtn = BX('fire_event');
+                    BX.bind(submitBtn, 'click', function(){
+                        BX.onCustomEvent('my-event-name', []);
+                    });
+
+                    if (!BX.UserConsent)
+                    {
+                        return;
+                    }
+                    var control = BX.UserConsent.load(BX('ORDER_FORM'));
+                    if (!control)
+                    {
+                        return;
+                    }
+                    
+                    BX.addCustomEvent(
+                        control,
+                        BX.UserConsent.events.save,
+                        function (data) {
+                            submitForm('Y');
+                        }
+                    );
+                    
+                });
+
                 function SetContact(profileId) {
                     BX("profile_change").value = "Y";
                     submitForm();
@@ -342,14 +401,16 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                 </div>
             </div>
             <?if ($arParams['USER_CONSENT'] == 'Y'):?>
+                <span class="star_userconsent">*</span>
                  <?$APPLICATION->IncludeComponent(
                   "bitrix:main.userconsent.request",
                   "",
                   array(
                       "ID" => $arParams["USER_CONSENT_ID"],
                       "IS_CHECKED" => $arParams["USER_CONSENT_IS_CHECKED"],
-                      "AUTO_SAVE" => "Y",
+                      "AUTO_SAVE" => "N",          
                       "IS_LOADED" => $arParams["USER_CONSENT_IS_LOADED"],
+                      "SUBMIT_EVENT_NAME" => "my-event-name",
                       "REPLACE" => array(
                        'button_caption' => 'Оформить заказ',
                        'fields' => array('ФИО','Номер паспорта','Серия паспорта','Email', 'Телефон')
@@ -366,7 +427,7 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     <input type="hidden" name="is_ajax_post" id="is_ajax_post" value="Y">
                     <input type="hidden" name="json" value="Y">
                     <div align="left">
-                        <button name="submitbutton" class="btn_buy popdef bt3" onclick="submitForm('Y'); return false;" value="<?=GetMessage('SOA_TEMPL_BUTTON')?>"><?=GetMessage("SOA_TEMPL_BUTTON")?></button>
+                        <button name="submitbutton" id="fire_event" class="btn_buy popdef bt3" onclick=" return false;" value="<?=GetMessage('SOA_TEMPL_BUTTON')?>"><?=GetMessage("SOA_TEMPL_BUTTON")?></button>
                     </div>
                 </form>
                 <?if($arParams["DELIVERY_NO_AJAX"] == "N") {?>

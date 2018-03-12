@@ -165,6 +165,7 @@ $APPLICATION->IncludeComponent(
 				);?>
 			</div>
 		</div>
+                <span class="star_userconsent">*</span>
                  <?$APPLICATION->IncludeComponent(
                   "bitrix:main.userconsent.request",
                   "",

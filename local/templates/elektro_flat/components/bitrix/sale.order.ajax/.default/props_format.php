@@ -138,6 +138,7 @@ if(!function_exists("PrintPropsForm")) {
                             <?=($arProperties["CODE"] == 'agreement')? 'agreement':''?> 
                             <?=($arProperties["CODE"] == 'stock')?'stock':''?>
                             <?=($arProperties["CODE"] == 'organization')?'organization':''?>
+                            <?=($arProperties["CODE"] == ' TRANSPORTATION_SERVICE')? 'transport_service':''?> 
                         ">
                             <?=$arProperties["NAME"]?>
                             <?if($arProperties["REQUIED_FORMATED"]=="Y"):?>
@@ -155,6 +156,7 @@ if(!function_exists("PrintPropsForm")) {
                             <?=($arProperties["CODE"] == 'stock')?'stock':''?> 
                             <?=($arProperties["CODE"] == 'agreement')? 'agreement':''?> 
                             <?=($arProperties["CODE"] == 'organization')? 'organization':''?> 
+                            <?=($arProperties["CODE"] == ' TRANSPORTATION_SERVICE')? 'transport_service':''?> 
                         ">
                             <select name="<?=$arProperties["FIELD_NAME"]?>" <?=($arProperties["CODE"] == 'agreement')? 'onclick="return false"':''?> id="<?=$arProperties["FIELD_NAME"]?>" size="<?=$arProperties["SIZE1"]?>">
                                 <?foreach($arProperties["VARIANTS"] as $arVariants):?>

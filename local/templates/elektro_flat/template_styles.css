@@ -12235,3 +12235,10 @@ table.compare-grid .delay .catalog-item-delayed i:nth-child(2){
 		display:table-cell !important;
 	}
 }
+.star_userconsent {
+    font-size: 14px;
+    font-weight: 700;
+    color: #cc0000;
+    top: -2px;
+    position: relative;
+}
