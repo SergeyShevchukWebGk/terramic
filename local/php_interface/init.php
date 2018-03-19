@@ -6,6 +6,8 @@ include ($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/include/.config.php");
 
 define('IBCLICK_CATALOG_ID', 23);  // основной каталог товаров
 define('PRICE_TYPE_ID', 3);
+define('PAY_SISTEM_NDS', 11); // оплата со счета с НДС
+define('PRICE_TYPE_ID', 3);
 define('LOCATION_ID_1', 34);  // свйоство города физ лица
 define('LOCATION_ID_2', 18);   // свйоство города юр лица
 define('LOCATION_ID_3', 31);  // свйоство города ип

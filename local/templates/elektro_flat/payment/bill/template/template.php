@@ -355,11 +355,10 @@ while ($arProps = $db_props->Fetch()) {
    } 
 }?>
 </p>
-
-<?if(["PAY_SYSTEM_ID"] == PAY_SISTEM_NDS){
-    echo GetMessage('PAY_SISTEM_TEXT_NO_NDS');
-} else {
+<?if($arOrder["PAY_SYSTEM_ID"] == PAY_SISTEM_NDS){
     echo GetMessage('PAY_SISTEM_TEXT_NDS');
+} else {
+    echo GetMessage('PAY_SISTEM_TEXT_NO_NDS');
 }?>
 <br>
 <br>
@@ -374,13 +373,42 @@ $dbOrderProps = CSaleOrderPropsValue::GetList(
         $location_adress = CSaleLocation::GetByID($adress_dekivery["VALUE"]);
     };
 $arDeliv = CSaleDelivery::GetByID($arOrder["DELIVERY_ID"]);
-  
+
 if($params["DELIVERY_NAME"] != 'Самовывоз'){?>
     <b style=" font-size: 14px; "><?=GetMessage('SALE_HPS_BILL_DELIVERY_NAME'). ' '. $arDeliv["NAME"]?></b> <br>
     <b><?=GetMessage('SALE_HPS_BILL_DELIVERY_POST')?> <span style=" text-decoration: underline; "><?=$location_adress["COUNTRY_NAME"]?>, <?=$location_adress["REGION_NAME"]?>, <?=$location_adress["CITY_NAME"]?></span></b>
     <?
 } else { ?>
-    <b style=" font-size: 14px; ">САМОВЫВОЗ</b>
+<?//выборка по нескольким свойствам (TERMINAL_DL):
+    $dbOrderProps = CSaleOrderPropsValue::GetList(
+        array("SORT" => "ASC"),
+        array("ORDER_ID" => $_GET["ORDER_ID"], "CODE"=>array("stock"))
+    );
+    if ($arOrderProps = $dbOrderProps->GetNext()){
+        $arVal = CSaleOrderPropsVariant::GetByValue($arOrderProps["ORDER_PROPS_ID"], $arOrderProps["VALUE"]);
+    };
+  
+$order = \Bitrix\Sale\Order::load($_GET['ORDER_ID']);
+
+/** @var \Bitrix\Sale\ShipmentCollection $shipmentCollection */
+$shipmentCollection = $order->getShipmentCollection();
+/** @var \Bitrix\Sale\Shipment $shipment */
+
+foreach ($shipmentCollection as $key => $shipment) {
+   
+    $shipment->getStoreId();
+        if($shipment != 0){
+            $rsStore = CCatalogStore::GetList(array(), array('STORE_ID' => $shipment), false, false, array()); 
+            if ($arStore = $rsStore->Fetch()){   
+                $store = $arStore;
+            }
+
+        }
+  
+}      
+    ?>
+    
+    <b style=" font-size: 14px; ">САМОВЫВОЗ <?=$store["ADDRESS"]?></b>
 <?}?>
 
 <?
