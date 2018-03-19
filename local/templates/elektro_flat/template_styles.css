@@ -2008,7 +2008,7 @@ button[name="banners-main__item-button"]:after{
 
 .catalog-item-card .buy_more a.minus,
 .catalog-item-card .buy_more a.plus{
-	width:22px;
+	width:17px; /*was 22*/
 	height:23px;
 	float:left;
 	display:table;
@@ -2025,7 +2025,7 @@ button[name="banners-main__item-button"]:after{
 }
 
 .catalog-item-card .buy_more input[name="quantity"]{
-	width:32px;
+	width:42px;    /*was 32*/
 	height:19px;
 	float:left;
 	margin:0px;
@@ -7488,7 +7488,7 @@ table.compare-grid .delay .catalog-item-delayed i:nth-child(2){
 
 .cart-items .equipment .tbody .cart-item-quantity a.minus,
 .cart-items .equipment .tbody .cart-item-quantity a.plus{
-	width:22px;
+	width:17px;
 	height:23px;
 	float:left;
 	display:table;
@@ -7505,7 +7505,7 @@ table.compare-grid .delay .catalog-item-delayed i:nth-child(2){
 }
 
 .cart-items .equipment .tbody .cart-item-quantity input[class="quantity"]{
-	width:32px;
+	width:42px;
 	height:19px;
 	float:left;
 	margin:0px;
