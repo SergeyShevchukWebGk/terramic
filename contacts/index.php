@@ -8,7 +8,7 @@ $APPLICATION->SetTitle("Контакты");?><h2>
 	 Адрес: Самарская область, с. Кинель-Черкассы, ул.Казакова 37а.
 </p>
 <p>
-	 Тел.: +7 (846) 604-71-00
+	 Тел.: +7 (846) 233-52-03
 </p>
 <p>
 	 Часы работы:
@@ -26,26 +26,18 @@ $APPLICATION->SetTitle("Контакты");?><h2>
  <?$APPLICATION->IncludeComponent(
 	"bitrix:map.yandex.view",
 	".default",
-	array(
+	Array(
 		"COMPONENT_TEMPLATE" => ".default",
-		"CONTROLS" => array(
-			0 => "ZOOM",
-			1 => "TYPECONTROL",
-			2 => "SCALELINE",
-		),
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO",
+		"CONTROLS" => array(0=>"ZOOM",1=>"TYPECONTROL",2=>"SCALELINE",),
 		"INIT_MAP_TYPE" => "MAP",
 		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.44690848043428;s:10:\"yandex_lon\";d:51.508685542328;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:51.508707;s:3:\"LAT\";d:53.446806;s:4:\"TEXT\";s:27:\"ООО «ТЕРРАМИК»\";}}}",
 		"MAP_HEIGHT" => "350",
 		"MAP_ID" => "1",
 		"MAP_WIDTH" => "100%",
-		"OPTIONS" => array(
-			0 => "ENABLE_DBLCLICK_ZOOM",
-			1 => "ENABLE_DRAGGING",
-		),
-		"COMPOSITE_FRAME_MODE" => "A",
-		"COMPOSITE_FRAME_TYPE" => "AUTO"
-	),
-	false
+		"OPTIONS" => array(0=>"ENABLE_DBLCLICK_ZOOM",1=>"ENABLE_DRAGGING",)
+	)
 );?> <br>
 <hr>
  <br>
@@ -60,7 +52,7 @@ $APPLICATION->SetTitle("Контакты");?><h2>
 	 Адрес: Самарская область, с. Кинель-Черкассы, ул.Казакова 37а.
 </p>
 <p>
-	 Тел.: +7 (846) 604-71-00
+	 Тел.: +7 (846) 233-52-03
 </p>
 <p>
 	 Часы работы:
@@ -99,7 +91,7 @@ $APPLICATION->SetTitle("Контакты");?><h2>
  Адрес: Краснодарский край, Усть-Лабинский район, станица Воронежская, ул.Садовая 5а<br>
  <br>
 <p>
-	 Тел.: +7 (861) 212-30-05, +7(918) 976-08-80
+	 Тел.: +7 (861) 212-12-01, +7(918) 976-08-80
 </p>
 <p>
 	 Часы работы:
