@@ -199,17 +199,50 @@ else
 								</div>
 
 								<table class="order-recipient <?=$accountHashNumber?>" style="display:none;">
-									<?if(!empty($val["ORDER"]["ORDER_PROPS"])) {										
+									<?if(!empty($val["ORDER"]["ORDER_PROPS"])) {	
+                                        //выборка по нескольким свойствам (TERMINAL_DL): 
+                                         $order = \Bitrix\Sale\Order::load($val["ORDER"]["ACCOUNT_NUMBER"]);
+                                        /** @var \Bitrix\Sale\ShipmentCollection $shipmentCollection */
+                                        $shipmentCollection = $order->getShipmentCollection();
+                                        /** @var \Bitrix\Sale\Shipment $shipment */
+                                        // получаем адрес склада самовывоза
+                                        foreach ($shipmentCollection as $key => $shipment) { 
+                                           
+                                            $shipment->getStoreId();
+                                                if($shipment != 0){
+                                                    $rsStore = CCatalogStore::GetList(array(), array('STORE_ID' => $shipment), false, false, array()); 
+                                                    if ($arStore = $rsStore->Fetch()){   
+                                                        $store = $arStore;
+                                                    }
+
+                                                }
+                                                                              
+                                        }                                
 										foreach($val["ORDER"]["ORDER_PROPS"] as $orderProps) {?>
 											<tr>
-												<td class="field-name"><?=$orderProps["NAME"]?>:</td>
+												<td class="field-name"><?
+                                                    if($orderProps["CODE"] == "stock" || $orderProps["CODE"] == "delivery_type" || $orderProps["CODE"] == "LOCATION" || $orderProps["CODE"] == "ZIP"){
+                                                        if($val["ORDER"]["DELIVERY_ID"] == DELIVERY_STOCK){
+                                                            echo $orderProps["NAME"].':';     
+                                                        }
+                                                    } else {
+                                                        echo $orderProps["NAME"].':'; 
+                                                    }?></td>
 												<td class="field-value">
 													<?if($orderProps["TYPE"] == "CHECKBOX") {
 														if($orderProps["VALUE"] == "Y")
 															echo GetMessage("STPOL_YES");
 														else
 															echo GetMessage("STPOL_NO");
-													} else {
+													} else if($orderProps["CODE"] == "stock" ){
+                                                        if($val["ORDER"]["DELIVERY_ID"] == DELIVERY_STOCK){
+                                                            echo $store["ADDRESS"];
+                                                        }
+                                                    } else if($orderProps["CODE"] == "delivery_type" || $orderProps["CODE"] == "LOCATION" || $orderProps["CODE"] == "ZIP"){
+                                                        if($val["ORDER"]["DELIVERY_ID"] == DELIVERY_STOCK){
+                                                            echo $orderProps["VALUE"];
+                                                        }
+                                                    } else {
 														echo $orderProps["VALUE"];
 													}?>
 												</td>

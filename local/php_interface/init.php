@@ -7,13 +7,13 @@ include ($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/include/.config.php");
 define('IBCLICK_CATALOG_ID', 23);  // основной каталог товаров
 define('PRICE_TYPE_ID', 3);
 define('PAY_SISTEM_NDS', 11); // оплата со счета с НДС
-define('PRICE_TYPE_ID', 3);
 define('LOCATION_ID_1', 34);  // свйоство города физ лица
 define('LOCATION_ID_2', 18);   // свйоство города юр лица
 define('LOCATION_ID_3', 31);  // свйоство города ип
 define('PERSON_TYPE_1', 1);  // тип плательщика 1
 define('PERSON_TYPE_2', 2);  // тип плательщика 2
 define('PERSON_TYPE_3', 3);  // тип плательщика 3
+define('DELIVERY_STOCK', 3);  // самовывоз
 
 
 define('DELIVERY_BAYKAL_1', 31);  // служба доставки байкал сервис
