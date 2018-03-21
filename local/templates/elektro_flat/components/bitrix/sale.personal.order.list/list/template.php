@@ -65,7 +65,7 @@ else
 									<div class="cart-item-payment">
 										<?if(IntVal($val["ORDER"]["PAY_SYSTEM_ID"]) > 0):
 											echo $arResult["INFO"]["PAY_SYSTEM"][$val["ORDER"]["PAY_SYSTEM_ID"]]["NAME"];			
-											if(isset($val["ORDER"]["PSA_ACTION_FILE"]) && !empty($val["ORDER"]["PSA_ACTION_FILE"])):?>
+											if(isset($val["ORDER"]["PSA_ACTION_FILE"]) && !empty($val["ORDER"]["PSA_ACTION_FILE"]) && $val["ORDER"]["PAYED"] != "Y"):?>
 												<br />
 												<a href="<?=$val["ORDER"]["PSA_ACTION_FILE"]?>" target="_blank"><?=GetMessage("STPOL_REPEAT_PAY")?></a>
 											<?endif;
@@ -208,10 +208,10 @@ else
                                         // получаем адрес склада самовывоза
                                         foreach ($shipmentCollection as $key => $shipment) { 
                                            
-                                            $shipment->getStoreId();
-                                                if($shipment != 0){
-                                                    $rsStore = CCatalogStore::GetList(array(), array('STORE_ID' => $shipment), false, false, array()); 
-                                                    if ($arStore = $rsStore->Fetch()){   
+                                            $ship_id = $shipment->getStoreId();
+                                                if($ship_id != 0){  
+                                                    $rsStore = CCatalogStore::GetList(array(), array('ID' => $ship_id), false, false, array()); 
+                                                    while ($arStore = $rsStore->Fetch()){   
                                                         $store = $arStore;
                                                     }
 
@@ -219,35 +219,43 @@ else
                                                                               
                                         }                                
 										foreach($val["ORDER"]["ORDER_PROPS"] as $orderProps) {?>
+                                        <?if($orderProps["CODE"] != "delivery_type"){?>
 											<tr>
-												<td class="field-name"><?
-                                                    if($orderProps["CODE"] == "stock" || $orderProps["CODE"] == "delivery_type" || $orderProps["CODE"] == "LOCATION" || $orderProps["CODE"] == "ZIP"){
+												<?
+                                                    if($orderProps["CODE"] == "stock" ){
                                                         if($val["ORDER"]["DELIVERY_ID"] == DELIVERY_STOCK){
-                                                            echo $orderProps["NAME"].':';     
+                                                            ?><td class="field-name"><?echo $orderProps["NAME"].':';?></td><?     
+                                                        }
+                                                    } else if($orderProps["CODE"] == "LOCATION" || $orderProps["CODE"] == "ZIP"){
+                                                        if($val["ORDER"]["DELIVERY_ID"] != DELIVERY_STOCK){
+                                                            ?><td class="field-name"><?echo $orderProps["NAME"].':';?></td><?      
                                                         }
                                                     } else {
-                                                        echo $orderProps["NAME"].':'; 
-                                                    }?></td>
-												<td class="field-value">
+                                                        ?><td class="field-name"><?echo $orderProps["NAME"].':';?></td><?  
+                                                    }?>
+												
 													<?if($orderProps["TYPE"] == "CHECKBOX") {
+                                                        ?><td class="field-value"><?
 														if($orderProps["VALUE"] == "Y")
 															echo GetMessage("STPOL_YES");
 														else
 															echo GetMessage("STPOL_NO");
+                                                        ?></td><?
 													} else if($orderProps["CODE"] == "stock" ){
                                                         if($val["ORDER"]["DELIVERY_ID"] == DELIVERY_STOCK){
-                                                            echo $store["ADDRESS"];
+                                                            ?><td class="field-value"><?echo $store["ADDRESS"];?></td><?
                                                         }
-                                                    } else if($orderProps["CODE"] == "delivery_type" || $orderProps["CODE"] == "LOCATION" || $orderProps["CODE"] == "ZIP"){
-                                                        if($val["ORDER"]["DELIVERY_ID"] == DELIVERY_STOCK){
-                                                            echo $orderProps["VALUE"];
+                                                    } else if($orderProps["CODE"] == "LOCATION" || $orderProps["CODE"] == "ZIP"){
+                                                        if($val["ORDER"]["DELIVERY_ID"] != DELIVERY_STOCK){
+                                                            ?><td class="field-value"><?echo $orderProps["VALUE"];?></td><?
                                                         }
                                                     } else {
-														echo $orderProps["VALUE"];
+														?><td class="field-value"><?echo $orderProps["VALUE"];?></td><?
 													}?>
-												</td>
+												
 											</tr>
 										<?}
+                                        }
 									}?>
 									<?if(strlen($val["ORDER"]["USER_DESCRIPTION"])>0):?>
 										<tr>

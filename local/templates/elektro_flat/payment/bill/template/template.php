@@ -396,9 +396,9 @@ $shipmentCollection = $order->getShipmentCollection();
 
 foreach ($shipmentCollection as $key => $shipment) {
    
-    $shipment->getStoreId();
-        if($shipment != 0){
-            $rsStore = CCatalogStore::GetList(array(), array('STORE_ID' => $shipment), false, false, array()); 
+    $ship_id = $shipment->getStoreId();
+        if($ship_id != 0){
+            $rsStore = CCatalogStore::GetList(array(), array('ID' => $ship_id), false, false, array()); 
             if ($arStore = $rsStore->Fetch()){   
                 $store = $arStore;
             }

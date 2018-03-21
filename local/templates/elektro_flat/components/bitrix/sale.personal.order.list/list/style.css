@@ -283,10 +283,13 @@ table.order-recipient td{
 }
 
 table.order-recipient td.field-name{
-	font-weight:700;
-	text-align:right;
-	width:160px;
-	padding:3px 3px 3px 5px;
+    font-weight:700;
+    text-align:right;
+    width:160px;
+    padding:3px 3px 3px 5px;
+}
+table.order-recipient td.field-name:first-letter{
+	text-transform: capitalize;
 }
 
 table.order-recipient td.field-value{
