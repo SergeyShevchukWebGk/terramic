@@ -7,6 +7,7 @@ include ($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/include/.config.php");
 define('IBCLICK_CATALOG_ID', 23);  // основной каталог товаров
 define('PRICE_TYPE_ID', 3);
 define('PAY_SISTEM_NDS', 11); // оплата со счета с НДС
+define('PAY_SISTEM_CARD', 10); // оплата картой
 define('LOCATION_ID_1', 34);  // свйоство города физ лица
 define('LOCATION_ID_2', 18);   // свйоство города юр лица
 define('LOCATION_ID_3', 31);  // свйоство города ип
@@ -26,6 +27,12 @@ define('DELIVERY_DL_1', 34);  // служба доставки Деловые л
 define('DELIVERY_DL_2', 35);  // служба доставки Деловые линии
 
 
+define('NEW_ORDER_STATUS_INDIVIDUAL_CARD_PAY', 'a');  // статус для новых заказов физлиц оплачивающих картой
+define('ORDER_STATUS_PAY_PROCESSING', 'G');  // статус для новых заказов физлиц оплачивающих картой
+
+
+
+
 // added by HTMLS.OrderCommentPlus - start
 AddEventHandler("sale", "OnSaleComponentOrderOneStepComplete", "OrderCommentPlus");
 AddEventHandler("sale", "OnSaleComponentOrderComplete", "OrderCommentPlus");
@@ -35,6 +42,27 @@ function OrderCommentPlus($ID, $arFields){
     }
 }
 //\\ added by HTMLS.OrderCommentPlus - start
+
+AddEventHandler("sale", "OnBeforeOrderAdd", "newOrderStatusIndividual"); //простановка статуса "A" для новых неоплаченых заказов физлиц
+AddEventHandler("sale", "OnSalePayOrder", "orderStausChangeIndividualCardPay"); //простановка статуса "G" для оплаченых заказов физлиц с карты
+function newOrderStatusIndividual(&$arFields){ //простановка статуса "A" для новых неоплаченых заказов физлиц
+    if ($arFields['PERSON_TYPE_ID'] == PERSON_TYPE_1 && $arFields['PAY_SYSTEM_ID'] == PAY_SISTEM_CARD) {
+        $arFields["STATUS_ID"] = NEW_ORDER_STATUS_INDIVIDUAL_CARD_PAY;
+    }
+
+}
+
+function orderStausChangeIndividualCardPay($ID, $val) { //простановка статуса "G" для оплаченых заказов физлиц с карты
+    if ($val == "Y") {
+        $arOrder = Array("ID"=>"DESC");
+        $arFilter = Array("ID" => $ID, "PERSON_TYPE_ID" => PERSON_TYPE_1, 'PAY_SYSTEM_ID' => PAY_SISTEM_CARD, "STATUS_ID" => NEW_ORDER_STATUS_INDIVIDUAL_CARD_PAY, 'PAYED' => "Y");
+
+        $db_sale = CSaleOrder::GetList($arOrder, $arFilter);
+        if ($ar_sale = $db_sale->Fetch()) {
+            CSaleOrder::StatusOrder($ID, ORDER_STATUS_PAY_PROCESSING);
+        }
+    }
+}
 
 function logger($data, $file) {
 file_put_contents(
@@ -167,5 +195,5 @@ function export_city(){
 }
 
 
- 
+
 ?>
