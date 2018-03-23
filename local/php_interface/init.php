@@ -45,21 +45,17 @@ function OrderCommentPlus($ID, $arFields){
 
 AddEventHandler("sale", "OnBeforeOrderAdd", "newOrderStatusIndividual"); //простановка статуса "A" для новых неоплаченых заказов физлиц
 AddEventHandler("sale", "OnSalePayOrder", "orderStausChangeIndividualCardPay"); //простановка статуса "G" для оплаченых заказов физлиц с карты
-function newOrderStatusIndividual(&$arFields)
-{
+function newOrderStatusIndividual(&$arFields){ //простановка статуса "A" для новых неоплаченых заказов физлиц
     if ($arFields['PERSON_TYPE_ID'] == PERSON_TYPE_1 && $arFields['PAY_SYSTEM_ID'] == PAY_SISTEM_CARD) {
         $arFields["STATUS_ID"] = NEW_ORDER_STATUS_INDIVIDUAL_CARD_PAY;
     }
 
 }
 
-function orderStausChangeIndividualCardPay($ID, $val) {
+function orderStausChangeIndividualCardPay($ID, $val) { //простановка статуса "G" для оплаченых заказов физлиц с карты
     if ($val == "Y") {
         $arOrder = Array("ID"=>"DESC");
         $arFilter = Array("ID" => $ID, "PERSON_TYPE_ID" => PERSON_TYPE_1, 'PAY_SYSTEM_ID' => PAY_SISTEM_CARD, "STATUS_ID" => NEW_ORDER_STATUS_INDIVIDUAL_CARD_PAY, 'PAYED' => "Y");
-        // $arGroupBy = false;
-        // $arNavStartParams = false;
-        // $arSelectFields = array();
 
         $db_sale = CSaleOrder::GetList($arOrder, $arFilter);
         if ($ar_sale = $db_sale->Fetch())
@@ -67,8 +63,6 @@ function orderStausChangeIndividualCardPay($ID, $val) {
             CSaleOrder::StatusOrder($ID, ORDER_STATUS_PAY_PROCESSING);
         }
     }
-
-
 }
 
 function logger($data, $file) {
