@@ -58,8 +58,7 @@ function orderStausChangeIndividualCardPay($ID, $val) { //простановка
         $arFilter = Array("ID" => $ID, "PERSON_TYPE_ID" => PERSON_TYPE_1, 'PAY_SYSTEM_ID' => PAY_SISTEM_CARD, "STATUS_ID" => NEW_ORDER_STATUS_INDIVIDUAL_CARD_PAY, 'PAYED' => "Y");
 
         $db_sale = CSaleOrder::GetList($arOrder, $arFilter);
-        if ($ar_sale = $db_sale->Fetch())
-        {
+        if ($ar_sale = $db_sale->Fetch()) {
             CSaleOrder::StatusOrder($ID, ORDER_STATUS_PAY_PROCESSING);
         }
     }
