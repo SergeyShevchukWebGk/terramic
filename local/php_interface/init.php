@@ -25,6 +25,8 @@ define('DELIVERY_KIT_1', 30);  // служба доставки КИТ
 define('DELIVERY_KIT_2', 27);  // служба доставки КИТ
 define('DELIVERY_DL_1', 34);  // служба доставки Деловые линии
 define('DELIVERY_DL_2', 35);  // служба доставки Деловые линии
+define('STOCK_LOCATION_ID', 4592);  // склад в краснодаре
+define('STOCK_LOCATION_ID_2', 4593);  // склад в самаре
 
 
 define('NEW_ORDER_STATUS_INDIVIDUAL_CARD_PAY', 'a');  // статус для новых заказов физлиц оплачивающих картой

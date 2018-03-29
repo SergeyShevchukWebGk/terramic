@@ -458,15 +458,22 @@ function PrintLocation($arSource = array(), $locationTemplate = ".default") {
         </div>
         <div class="block" >
             <?$value = 0;
+            //
+
             if(is_array($arProperties["VARIANTS"]) && count($arProperties["VARIANTS"]) > 0) {
                 foreach($arProperties["VARIANTS"] as $arVariant) {
                     if($arVariant["SELECTED"] == "Y") {
                         $value = $arVariant["ID"];
                         break;
                     }
+                    
                 }
             }
-
+            if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 8){
+                 $value = STOCK_LOCATION_ID;
+            } else  if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 3){
+                 $value = STOCK_LOCATION_ID_2;
+            };
             if(CSaleLocation::isLocationProMigrated()) {
                 $locationTemplateP = $locationTemplate == 'popup' ? 'search' : 'steps';
                 $locationTemplateP = $_REQUEST['PERMANENT_MODE_STEPS'] == 1 ? 'steps' : $locationTemplateP;

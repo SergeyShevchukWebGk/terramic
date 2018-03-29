@@ -11,6 +11,9 @@ $APPLICATION->SetTitle("Контакты");?><h2>
 	 Тел.: +7 (846) 233-52-03
 </p>
 <p>
+	 E-mail: <a href="mailto:zakaz@terramic.ru">zakaz@terramic.ru</a>
+</p>
+<p>
 	 Часы работы:
 </p>
 <p>
@@ -55,6 +58,9 @@ $APPLICATION->SetTitle("Контакты");?><h2>
 	 Тел.: +7 (846) 233-52-03
 </p>
 <p>
+	 E-mail: <a href="mailto:zakaz@terramic.ru">zakaz@terramic.ru</a><br>
+</p>
+<p>
 	 Часы работы:
 </p>
 <p>
@@ -91,7 +97,10 @@ $APPLICATION->SetTitle("Контакты");?><h2>
  Адрес: Краснодарский край, Усть-Лабинский район, станица Воронежская, ул.Садовая 5а<br>
  <br>
 <p>
-	 Тел.: +7 (861) 212-12-01, +7(918) 976-08-80
+	 Тел.: +7 (861) 212-12-01
+</p>
+<p>
+	 E-mail: <a href="mailto:zakaz@terramic.ru">zakaz@terramic.ru</a><br>
 </p>
 <p>
 	 Часы работы:
