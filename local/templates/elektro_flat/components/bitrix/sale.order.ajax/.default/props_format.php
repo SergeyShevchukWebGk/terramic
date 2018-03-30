@@ -470,9 +470,9 @@ function PrintLocation($arSource = array(), $locationTemplate = ".default") {
                 }
             }
             if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 8){
-                 $value = STOCK_LOCATION_ID;
-            } else  if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 3){
                  $value = STOCK_LOCATION_ID_2;
+            } else  if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 3){
+                 $value = STOCK_LOCATION_ID;
             };
             if(CSaleLocation::isLocationProMigrated()) {
                 $locationTemplateP = $locationTemplate == 'popup' ? 'search' : 'steps';
