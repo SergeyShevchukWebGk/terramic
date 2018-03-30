@@ -17,7 +17,7 @@ if(isset($_REQUEST["backurl"]) && strlen($_REQUEST["backurl"]) > 0)
 <ul>
 	<li><a href="order/">Ознакомиться с состоянием заказов</a></li>
 	<li><a href="cart/">Посмотреть содержимое корзины</a></li>
-	<li><a href="cart/">Посмотреть список желаний</a></li>
+	<li><a href="cart/?delay=Y">Посмотреть список желаний</a></li>
 
 	<li><a href="order/?filter_history=Y">Посмотреть историю заказов</a></li>
 </ul>
