@@ -247,7 +247,7 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                         $('.transport_service select option').removeAttr('selected');
                         $('.transport_service select option:nth-child(2)').attr("selected", "selected");
                      }
-                    
+
                 }
                 
 
@@ -328,6 +328,13 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                         $('.transport_service select option').removeAttr('selected');
                         $('.transport_service select option:nth-child(2)').attr("selected", "selected");
                      }
+                     // переключение складов при выборе
+                     $('body').on('click', '.store_row', function(){
+                         GetBuyerStore();
+                         submitForm('N'); 
+                     })
+                                          
+                    //  
                 })
                 BX.ready(function () {
 
