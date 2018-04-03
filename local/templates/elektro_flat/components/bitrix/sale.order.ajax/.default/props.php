@@ -16,7 +16,8 @@ include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/props_format.php");?>
                 <?}
             }    
         }?>
-        <?if(!empty($arResult["ORDER_PROP"]["USER_PROFILES"])) {?>
+        <??>
+        <?if(!empty($arResult["ORDER_PROP"]["USER_PROFILES"]) && $arResult["ORDER_DATA"]["PERSON_TYPE_ID"] != PERSON_TYPE_1) {?>
             <div class="user_profile">
                 <div class="label">
                     <?if($arParams["ALLOW_NEW_PROFILE"] == "Y"):
