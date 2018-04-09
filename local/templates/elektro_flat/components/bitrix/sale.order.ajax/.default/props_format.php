@@ -206,9 +206,12 @@ if(!function_exists("PrintPropsForm")) {
                                  $value = 'Самарская область, с. Кинель-Черкассы, ул.Казакова 37а.';
                             } else  if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 3 && $arProperties["CODE"] == 'COMPANY_ADR_ACT'){
                                  $value = 'Краснодарский край, Усть-Лабинский район, станица Воронежская, ул.Садовая 5а';
-                            };?>
+                            } else if($_POST["DELIVERY_ID"] != DELIVERY_STOCK && $arProperties["CODE"] == 'COMPANY_ADR_ACT'){
+                                 $value = ' ';
+                            };
+                            ?>
                             <div class="block">  
-                                <textarea rows="<?=$arProperties["SIZE2"]?>" cols="<?=$arProperties["SIZE1"]?>" name="<?=$arProperties["FIELD_NAME"]?>" id="<?=$arProperties["FIELD_NAME"]?>" placeholder="<?=$arProperties["DESCRIPTION"]?>"><?=($value)?$value:$arProperties["VALUE"]?></textarea>
+                                <textarea rows="<?=$arProperties["SIZE2"]?>" cols="<?=$arProperties["SIZE1"]?>" name="<?=$arProperties["FIELD_NAME"]?>" id="<?=$arProperties["FIELD_NAME"]?>" placeholder="<?=$arProperties["DESCRIPTION"]?>"><?=($value )?$value:$arProperties["VALUE"]?></textarea>
                                 <?if(strlen(trim($arProperties["DESCRIPTION"])) > 0):?>
                                     <div class="description">
                                         <?//=$arProperties["DESCRIPTION"]?>
@@ -476,11 +479,11 @@ function PrintLocation($arSource = array(), $locationTemplate = ".default") {
                     
                 }
             }
-            if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 8){
+            /*if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 8){
                  $value = STOCK_LOCATION_ID_2;
             } else  if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 3){
                  $value = STOCK_LOCATION_ID;
-            };
+            };    */
             if(CSaleLocation::isLocationProMigrated()) {
                 $locationTemplateP = $locationTemplate == 'popup' ? 'search' : 'steps';
                 $locationTemplateP = $_REQUEST['PERMANENT_MODE_STEPS'] == 1 ? 'steps' : $locationTemplateP;

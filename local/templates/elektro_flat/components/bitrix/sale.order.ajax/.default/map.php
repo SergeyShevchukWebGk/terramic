@@ -101,9 +101,10 @@ $showImages = (isset($_REQUEST["showImages"]) && $_REQUEST["showImages"] == "Y")
 							<?$i = 1;
 							$countCount = count($arStore);
 							$arDefaultStore = array_shift(array_values($arStore));
-
+                            
 							foreach($arStore as $val) {
-								$checked = ($val["ID"] == $arDefaultStore["ID"]) ? "checked" : "";?>
+                                //$checked = ($val["ID"] == $arDefaultStore["ID"]) ? "checked" : "";
+								$checked = ($val["ID"] == $_POST["BUYER_STORE"]) ? "checked" : "";?>
 								<tr class="store_row <?=$checked?>" id="row_<?=$val["ID"]?>" onclick="setChangeStore(<?=$val["ID"]?>);">
 									<?if($showImages) {?>
 										<td class="image">

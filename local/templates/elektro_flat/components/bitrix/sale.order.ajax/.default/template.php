@@ -309,7 +309,8 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                      // подстановка пункта выдаче при выбооре самовывоза 
                     $('body').on('click', '.store_row', function(){
                        // $('div.stock_delivery .terminal input').prop('checked', false);
-                        var name = $('.store_row.checked .name').text();
+                        var name = $('.store_row.checked .name').text();      
+
                         $('body #select_store .ora-store').text(name);
                     })
                     

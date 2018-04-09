@@ -267,7 +267,7 @@ $width = $pageWidth - $margin['left'] - $margin['right'];
 <?
 // file_put_contents($_SERVER['DOCUMENT_ROOT'].'/SSSSS.TXT', print_r($params,1));
 // file_put_contents($_SERVER['DOCUMENT_ROOT'].'/sfffS.TXT', print_r($arResult,1));
-$arOrder = CSaleOrder::GetByID($_GET["ORDER_ID"]);
+$arOrder = CSaleOrder::GetByID($_REQUEST["ORDER_ID"]);
 
 ?>
 <p style=" line-height: 1.4; margin: 10px 0; ">
@@ -313,7 +313,7 @@ endif;
 
 <?
 // Выведем все свойства заказа с кодом $ID, сгруппированые по группам свойств
-$db_props = CSaleOrderPropsValue::GetOrderProps($_GET["ORDER_ID"]);
+$db_props = CSaleOrderPropsValue::GetOrderProps($_REQUEST["ORDER_ID"]);
 $iGroup = -1;
 $element = 0;
 echo GetMessage('SALE_HPS_BILL_BUYER'). ' ';
@@ -366,7 +366,7 @@ while ($arProps = $db_props->Fetch()) {
 //выборка по нескольким свойствам (TERMINAL_DL):
 $dbOrderProps = CSaleOrderPropsValue::GetList(
         array("SORT" => "ASC"),
-        array("ORDER_ID" => $_GET["ORDER_ID"], "CODE"=>array("LOCATION"))
+        array("ORDER_ID" => $_REQUEST["ORDER_ID"], "CODE"=>array("LOCATION"))
     );
     while ($arOrderProps = $dbOrderProps->GetNext()){
         $adress_dekivery = $arOrderProps;
@@ -382,13 +382,13 @@ if($params["DELIVERY_NAME"] != 'Самовывоз'){?>
 <?//выборка по нескольким свойствам (TERMINAL_DL):
     $dbOrderProps = CSaleOrderPropsValue::GetList(
         array("SORT" => "ASC"),
-        array("ORDER_ID" => $_GET["ORDER_ID"], "CODE"=>array("stock"))
+        array("ORDER_ID" => $_REQUEST["ORDER_ID"], "CODE"=>array("stock"))
     );
     if ($arOrderProps = $dbOrderProps->GetNext()){
         $arVal = CSaleOrderPropsVariant::GetByValue($arOrderProps["ORDER_PROPS_ID"], $arOrderProps["VALUE"]);
     };
   
-$order = \Bitrix\Sale\Order::load($_GET['ORDER_ID']);
+$order = \Bitrix\Sale\Order::load($_REQUEST['ORDER_ID']);
 
 /** @var \Bitrix\Sale\ShipmentCollection $shipmentCollection */
 $shipmentCollection = $order->getShipmentCollection();
@@ -789,7 +789,7 @@ $WIDTH = 0;
 $AMOUNT = 0;
 $dbBasketItems = CSaleBasket::GetList(
         array(),
-        array( "ORDER_ID" => $_GET["ORDER_ID"]),
+        array( "ORDER_ID" => $_REQUEST["ORDER_ID"]),
         false,
         false,
         array('PRODUCT_ID', "QUANTITY")

@@ -213,7 +213,9 @@ function MontageBasketAdd(&$arFields) {
                     "VALUE" => $arFields["PRODUCT_ID"].rand(0,1000)
                   );
                   $arFields["PROPS"][] = $arProps;  
-                  
+                    $ratio = CCatalogMeasureRatio::getList(Array(), array('IBLOCK_ID'=>$arFields["IBLOCK_ID"], 'PRODUCT_ID'=>$arFields["PRODUCT_ID"]), false, false, array());
+                    $ar_fields = $ratio->Fetch();
+                        
                     $prop_element = CIBlockElement::GetByID(1064)->GetNext();
                     $rsPrices = CPrice::GetList(array(), array( 'PRODUCT_ID' => 1064,'CATALOG_GROUP_ID' => 3));
                     if ($arPrice = $rsPrices->Fetch()) {
@@ -231,7 +233,7 @@ function MontageBasketAdd(&$arFields) {
                             "PRODUCT_PROVIDER_CLASS" => $arFields["PRODUCT_PROVIDER_CLASS"],
                           );        
                           $arField["PROPS"][] = $arProps; 
-                          if($arFields["PRODUCT_ID"] != 1064 && $arFields["QUANTITY"] >= 10){
+                          if($arFields["PRODUCT_ID"] != 1064 && $arFields["QUANTITY"] >= $ar_fields["RATIO"] * 10){
                             $id = CSaleBasket::Add($arField);  
                           } 
                     }  
@@ -246,7 +248,9 @@ function MontageBasketAdd(&$arFields) {
                         "VALUE" => $arFields["PRODUCT_ID"].rand(0,1000)
                       );
                       $arFields["PROPS"][] = $arProps; 
-                      
+                        $ratio = CCatalogMeasureRatio::getList(Array(), array('IBLOCK_ID'=>$arFields["IBLOCK_ID"], 'PRODUCT_ID'=>$arFields["PRODUCT_ID"]), false, false, array());
+                        $ar_fields = $ratio->Fetch();
+                        
                         $prop_element = CIBlockElement::GetByID(1064)->GetNext();
                         $rsPrices = CPrice::GetList(array(), array( 'PRODUCT_ID' => 1064,'CATALOG_GROUP_ID' => 3));
                         if ($arPrice = $rsPrices->Fetch()) {
@@ -264,7 +268,7 @@ function MontageBasketAdd(&$arFields) {
                                 "PRODUCT_PROVIDER_CLASS" => $arFields["PRODUCT_PROVIDER_CLASS"],
                               );
                           //    $arField["PROPS"][] = $arProps; 
-                              if($arFields["PRODUCT_ID"] != 1064 && $arFields["QUANTITY"] >= 10){
+                              if($arFields["PRODUCT_ID"] != 1064 && $arFields["QUANTITY"] >= $ar_fields["RATIO"] * 10){
                                 $id = CSaleBasket::Add($arField);  
                               } 
                         }  
@@ -291,7 +295,7 @@ function MontageBasketUpdate($ID, &$arFields){
                         $prop_element = CIBlockElement::GetByID(1064)->GetNext();
                         $summ_quantity = $arFields["QUANTITY"] / $ar_fields["RATIO"];
                           
-                            if($arFields["QUANTITY"] >= 10 && $ar_fields["RATIO"] < 10 && $arFields["QUANTITY"] <= 18){
+                            if($arFields["QUANTITY"] >= $ar_fields["RATIO"] * 10 && $ar_fields["RATIO"] < $ar_fields["RATIO"] * 10 && $arFields["QUANTITY"] <= $ar_fields["RATIO"] * 10){
 
                                 $arField = array(
                                 "PRODUCT_ID" => $prop_element["ID"],
@@ -310,7 +314,7 @@ function MontageBasketUpdate($ID, &$arFields){
                               if($arFields["PRODUCT_ID"] != 1064 ){
                                 $id = CSaleBasket::Add($arField);  
                               }                          
-                            } else if($arFields["QUANTITY"] < 10 && $ar_fields["RATIO"] < 10 && $arFields["PRODUCT_ID"] != 1064){
+                            } else if($arFields["QUANTITY"] < $ar_fields["RATIO"] * 10 && $ar_fields["RATIO"] < $ar_fields["RATIO"] * 10 && $arFields["PRODUCT_ID"] != 1064){
                             
                                     $dbBasketItems = CSaleBasket::GetList(
                                             array(
@@ -346,7 +350,7 @@ function MontageBasketUpdate($ID, &$arFields){
                         //    logger($arFields, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt');
                             $summ_quantity = $arFields["QUANTITY"] / $ar_fields["RATIO"];
                             
-                                if($arFields["QUANTITY"] >= 10 && $ar_fields["RATIO"] < 10 && $arFields["QUANTITY"] <= 18){
+                                if($arFields["QUANTITY"] >= $ar_fields["RATIO"] * 10 && $ar_fields["RATIO"] < $ar_fields["RATIO"] * 10 && $arFields["QUANTITY"] <= $ar_fields["RATIO"] * 10){
                                     $arField = array(
                                     "PRODUCT_ID" => $prop_element["ID"],
                                     "PRICE" => $arPrice["PRICE"],
@@ -364,7 +368,7 @@ function MontageBasketUpdate($ID, &$arFields){
                                   if($arFields["PRODUCT_ID"] != 1064 ){
                                     $id = CSaleBasket::Add($arField);  
                                   }                           
-                            } else if($arFields["QUANTITY"] < 10 && $ar_fields["RATIO"] < 10 && $arFields["PRODUCT_ID"] != 1064){
+                            } else if($arFields["QUANTITY"] < $ar_fields["RATIO"] * 10 && $ar_fields["RATIO"] < $ar_fields["RATIO"] * 10 && $arFields["PRODUCT_ID"] != 1064){
                                         $dbBasketItems = CSaleBasket::GetList(
                                                 array(
                                                         "NAME" => "ASC",
