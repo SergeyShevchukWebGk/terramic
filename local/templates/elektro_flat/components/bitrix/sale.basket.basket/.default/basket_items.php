@@ -96,10 +96,11 @@ use Bitrix\Sale\DiscountCouponsManager;?>
 								$ratio = isset($arBasketItems["MEASURE_RATIO"]) ? $arBasketItems["MEASURE_RATIO"] : 0;
 								$useFloatQuantity = ($arParams["QUANTITY_FLOAT"] == "Y") ? true : false;
 								$useFloatQuantityJS = ($useFloatQuantity ? "true" : "false");?>
-								<div class="cart-item-quantity">									
+								<div class="cart-item-quantity">		
+                                						
 									<div style="float:right;" class="buy_more">
 										<a href="javascript:void(0)" class="minus" onclick="setQuantity(<?=$arBasketItems['ID']?>, <?=$arBasketItems['MEASURE_RATIO']?>, 'down', <?=$useFloatQuantityJS?>);"><span>-</span></a>
-										<input type="text" name="QUANTITY_<?=$arBasketItems["ID"]?>" id="QUANTITY_<?=$arBasketItems["ID"]?>" class="quantity" value="<?=$arBasketItems["QUANTITY"]?>" onchange="updateQuantity('QUANTITY_<?=$arBasketItems["ID"]?>', '<?=$arBasketItems["ID"]?>', <?=$ratio?>, <?=$useFloatQuantityJS?>)" />
+										<input type="text" <?=($arBasketItems["QUANTITY_WRAP"] == "N")? 'disabled':''?> name="QUANTITY_<?=$arBasketItems["ID"]?>" id="QUANTITY_<?=$arBasketItems["ID"]?>" class="quantity" value="<?=$arBasketItems["QUANTITY"]?>" onchange="updateQuantity('QUANTITY_<?=$arBasketItems["ID"]?>', '<?=$arBasketItems["ID"]?>', <?=$ratio?>, <?=$useFloatQuantityJS?>)" />
 										<a href="javascript:void(0)" class="plus" onclick="setQuantity(<?=$arBasketItems['ID']?>, <?=$arBasketItems['MEASURE_RATIO']?>, 'up', <?=$useFloatQuantityJS?>);"><span>+</span></a>
 									</div>
 								</div>

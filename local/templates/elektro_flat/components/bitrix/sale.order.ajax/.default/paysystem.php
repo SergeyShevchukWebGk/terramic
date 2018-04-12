@@ -25,6 +25,9 @@
 					</td>
 				</tr>
 			<?}?>
+            <?if(empty($_POST["PAY_SYSTEM_ID"])){
+                $_POST["PAY_SYSTEM_ID"] = $_SESSION["PAY_SISTEM_CHECKED"];
+            }?>
 			<?foreach($arResult["PAY_SYSTEM"] as $arPaySystem) {
 				if(count($arResult["PAY_SYSTEM"]) == 1) {?>
 					<tr>
@@ -47,8 +50,12 @@
 					</tr>
 				<? } else { ?>
 					<tr>
+                  
 						<td valign="top">
-							<input type="radio" id="ID_PAY_SYSTEM_ID_<?= $arPaySystem["ID"] ?>" name="PAY_SYSTEM_ID" value="<?= $arPaySystem["ID"] ?>"<?if ($arPaySystem["CHECKED"]=="Y") echo " checked=\"checked\"";?> onclick="submitForm();">
+                        <?if($arPaySystem["ID"] == $_POST["PAY_SYSTEM_ID"] || (empty($_POST["PAY_SYSTEM_ID"]))){
+                             $_SESSION["PAY_SISTEM_CHECKED"] = $arPaySystem["ID"];
+                        }?>
+							<input type="radio" id="ID_PAY_SYSTEM_ID_<?= $arPaySystem["ID"] ?>" name="PAY_SYSTEM_ID" value="<?= $arPaySystem["ID"] ?>"<?if ($arPaySystem["ID"] == $_POST["PAY_SYSTEM_ID"] || (empty($_POST["PAY_SYSTEM_ID"]) && $arPaySystem["CHECKED"]=="Y")) echo " checked=\"checked\"";?> onclick="submitForm();">
 						</td>
 						<td valign="top">
 							<label for="ID_PAY_SYSTEM_ID_<?=$arPaySystem["ID"]?>" onclick="BX('ID_PAY_SYSTEM_ID_<?=$arPaySystem["ID"]?>').checked=true;submitForm();">

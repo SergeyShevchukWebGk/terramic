@@ -87,6 +87,22 @@ if(is_array($arResult["ITEMS"]["AnDelCanBuy"])) {
 				endif;
 			endif;
 		endif;
+        
+        $arItem["QUANTITY_WRAP"] = '';
+        CModule::IncludeModule("iblock");
+        $element = CIBlockElement::GetByID($arItem["PRODUCT_ID"])->Fetch();
+        if($element["IBLOCK_SECTION_ID"] == SECTION_ID_FILM){
+            $arItem["QUANTITY_WRAP"] = "N";
+        } else {
+            $ar_section = CIBlockSection::GetByID($element["IBLOCK_SECTION_ID"]);
+            if($section = $ar_section->GetNext()){
+                if($section["IBLOCK_SECTION_ID"] == SECTION_ID_FILM){
+                   $arItem["QUANTITY_WRAP"] = "N"; 
+                }
+            }       
+        }
+         
+        $arResult["ITEMS"]["AnDelCanBuy"][$key]["QUANTITY_WRAP"] = $arItem["QUANTITY_WRAP"];
 		$arResult["ITEMS"]["AnDelCanBuy"][$key]["item_HIDE_ZERO"] = $price["HIDE_ZERO"];
 		$arResult["ITEMS"]["AnDelCanBuy"][$key]["item_DEC_POINT"] = $price["DEC_POINT"];
 		$arResult["ITEMS"]["AnDelCanBuy"][$key]["item_THOUSANDS_SEP"] = $price["THOUSANDS_SEP"];
