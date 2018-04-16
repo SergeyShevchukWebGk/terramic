@@ -160,7 +160,12 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                             $('.delivery_type select option').attr('selected', 'selected');
                         }
                     }
-
+                        /*
+                        if($('.stock_delivery input:checked').val() == 31)
+                        {
+                            $('.stock_delivery input:checked').val(28);  
+                        } 
+                        */
                         var delivery_id = $('.stock_delivery input:checked').attr('data-delivery');
                         var stock_1 = <?=DELIVERY_KRASNODAR?>;
                         var stock_2 = <?=DELIVERY_SAMARA?>;

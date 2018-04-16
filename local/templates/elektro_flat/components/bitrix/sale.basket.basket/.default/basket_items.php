@@ -116,17 +116,20 @@ use Bitrix\Sale\DiscountCouponsManager;?>
 										<span class="curr"><?=$arBasketItems["item_CURRENCY"]?></span>
 									</span>
 								<?endif;?>
-							</div>							
+							</div>		
+                            					
 							<?if(in_array("DELAY", $arParams["COLUMNS_LIST"])):?>
-								<div class="cart-item-actions">								
-									<div class="delay">
-										<a class="setaside" href="<?=str_replace("#ID#", $arBasketItems["ID"], $arUrlTempl["delay"])?>" title="<?=GetMessage("SALE_OTLOG")?>"><i class="fa fa-heart-o"></i></a>
-									</div>
-									<?if(in_array("DELETE", $arParams["COLUMNS_LIST"])):?>
-										<div class="delete">
-											<a class="deleteitem" href="<?=str_replace("#ID#", $arBasketItems["ID"], $arUrlTempl["delete"])?>" onclick="//return DeleteFromCart(this);" title="<?=GetMessage("SALE_DELETE_PRD")?>"><i class="fa fa-trash-o"></i></a>
-										</div>
-									<?endif;?>
+								<div class="cart-item-actions">				
+                                    <?if($arBasketItems["PROPS"][0]["CODE"] != "ID"){?>				
+									    <div class="delay">
+										    <a class="setaside" href="<?=str_replace("#ID#", $arBasketItems["ID"], $arUrlTempl["delay"])?>" title="<?=GetMessage("SALE_OTLOG")?>"><i class="fa fa-heart-o"></i></a>
+									    </div>
+									    <?if(in_array("DELETE", $arParams["COLUMNS_LIST"])):?>
+										    <div class="delete">
+											    <a class="deleteitem" href="<?=str_replace("#ID#", $arBasketItems["ID"], $arUrlTempl["delete"])?>" onclick="//return DeleteFromCart(this);" title="<?=GetMessage("SALE_DELETE_PRD")?>"><i class="fa fa-trash-o"></i></a>
+										    </div>
+									    <?endif;?>
+                                    <?}?>
 								</div>
 							<?endif;?>
 						</div>

@@ -4,7 +4,6 @@ if(!CModule::IncludeModule("iblock")  || !CModule::IncludeModule("catalog") || !
 	return;
 
 global $arSetting;
-
 /***BASKET_ITEMS***/
 if(is_array($arResult["ITEMS"]["AnDelCanBuy"])) {
 	foreach($arResult["ITEMS"]["AnDelCanBuy"] as $key => $arItem) {		

@@ -3,6 +3,13 @@
 <?if(count($arResult["PERSON_TYPE"]) > 1) {?>
 	<?if(empty($_POST["PERSON_TYPE"])){
         $_POST["PERSON_TYPE"] = $_SESSION["PERSON_TYPE_CHECKED"];
+        ?>
+        <script type="text/javascript">
+            $(function(){
+                submitForm('N');     
+            })
+        </script>
+        <?
     }?>
 	<h2><?=GetMessage("SOA_TEMPL_PERSON_TYPE")?></h2>
 	<div class="person_type">
