@@ -199,9 +199,8 @@ function export_city(){
     return "export_city();";
 }
 
-// разделяем товар раздела пленки
+// разделяем товар раздела пленки и добавляем к ней шпулю
 AddEventHandler("sale", "OnBeforeBasketAdd", "MontageBasketAdd");
-
 
 function MontageBasketAdd(&$arFields) {
     // Выведем актуальную корзину для текущего пользователя
@@ -214,11 +213,12 @@ function MontageBasketAdd(&$arFields) {
                     "CODE" => "id_product",          
                     "VALUE" => $arFields["PRODUCT_ID"].rand(0,1000)
                   );
+                  // добаялем свойство для ункальности элемента в корзине
                   $arFields["PROPS"][] = $arProps;  
                     $ratio = CCatalogMeasureRatio::getList(Array(), array('IBLOCK_ID'=>$arFields["IBLOCK_ID"], 'PRODUCT_ID'=>$arFields["PRODUCT_ID"]), false, false, array());
                     $ar_fields = $ratio->Fetch();
                         
-                    $prop_element = CIBlockElement::GetByID(ELEMENT_ID_SPOOL)->GetNext();
+                    $prop_element = CIBlockElement::GetByID(ELEMENT_ID_SPOOL)->GetNext();  // берем необходимые данные из элемента шпуля
                     $rsPrices = CPrice::GetList(array(), array( 'PRODUCT_ID' => ELEMENT_ID_SPOOL,'CATALOG_GROUP_ID' => 3));
                     if ($arPrice = $rsPrices->Fetch()) {
                             $arField = array(
@@ -235,8 +235,8 @@ function MontageBasketAdd(&$arFields) {
                             "PRODUCT_PROVIDER_CLASS" => $arFields["PRODUCT_PROVIDER_CLASS"],
                           );        
                           $arField["PROPS"][] = array("NAME" => "ID", "VALUE" => $arFields["PRODUCT_ID"]); 
-                          if($arFields["PRODUCT_ID"] != ELEMENT_ID_SPOOL && $arFields["QUANTITY"] > $ar_fields["RATIO"] * 10){
-                            $id = CSaleBasket::Add($arField);  
+                          if($arFields["PRODUCT_ID"] != ELEMENT_ID_SPOOL && $arFields["QUANTITY"] > $ar_fields["RATIO"] * 10){ // проверяем коэффициент количества пленки с метрожом дя добавления
+                            $id = CSaleBasket::Add($arField); // добавляем шпулю в корзине с привязкой по id элемента пленки 
                           } 
                     }  
 
@@ -313,7 +313,8 @@ function MontageBasketUpdate($ID, &$arFields){
                                 "NAME" => $prop_element["NAME"],
                                 "PRODUCT_PROVIDER_CLASS" => $arFields["PRODUCT_PROVIDER_CLASS"],
                               );
-                              $arField["PROPS"][] = array("NAME" => "ID", "VALUE" => $arFields["ID"]); 
+                              $arField["PROPS"][] = array("NAME" => "ID", "VALUE" => $arFields["PRODUCT_ID"]); 
+                              
                               if($arFields["PRODUCT_ID"] != ELEMENT_ID_SPOOL ){
                                 $id = CSaleBasket::Add($arField);  
                               }   
@@ -326,24 +327,43 @@ function MontageBasketUpdate($ID, &$arFields){
                                                     "ID" => "ASC"
                                                 ),
                                             array(
-                                                    "USER_ID" => $USER->GetId(),
+                                                    "FUSER_ID" => CSaleBasket::GetBasketUserID(),
                                                     "LID" => SITE_ID,
                                                     "ORDER_ID" => "NULL",
-                                                    "PRODUCT_ID" => ELEMENT_ID_SPOOL,
+                                                 //   "PRODUCT_ID" => ELEMENT_ID_SPOOL,
                                                 ),
                                             false,
                                             false,
                                             array("ID","PRODUCT_ID", "QUANTITY")
                                         );
-                                    if ($arItems = $dbBasketItems->Fetch()){
-                                            if($arItems["QUANTITY"] > 1){
-                                                $arQuantity = array(
-                                                   "QUANTITY" => $arItems["QUANTITY"] - 1,
-                                                );
-                                                CSaleBasket::Update($arItems["ID"], $arQuantity);
-                                            } else {
-                                                CSaleBasket::Delete($arItems["ID"]);
-                                            }   
+                                    while ($arItems = $dbBasketItems->Fetch()){
+                                        $ratio_item = CCatalogMeasureRatio::getList(Array(), array('IBLOCK_ID'=>$arFields["IBLOCK_ID"], 'PRODUCT_ID'=>$arItems["PRODUCT_ID"]), false, false, array());
+                                        $ar_itmem = $ratio_item->Fetch();
+                                        if($arItems["PRODUCT_ID"] == ELEMENT_ID_SPOOL && $arItems["QUANTITY"] > 1){
+                                            $ratio_update = array("QUANTITY" => $arItems["QUANTITY"] - 1);
+                                            CSaleBasket::Update($arItems["ID"], $ratio_update); 
+                                        } else if(!in_array($arFields["PRODUCT_ID"], $ar_indent_element) && $arItems["PRODUCT_ID"] == ELEMENT_ID_SPOOL){
+
+                                                $dbProp = CSaleBasket::GetPropsList(
+                                                       Array(
+                                                          "ID" => "DESC"
+                                                          ), 
+                                                       Array(
+                                                          "BASKET_ID" => $arItems["ID"],
+                                                       false,
+                                                       false,
+                                                       Array("NAME", "VALUE", "BASKET_ID")
+                                                       
+                                                 ));            
+                                              while($arProp = $dbProp -> GetNext()){
+                                                  if($arProp["NAME"] == "ID" && $arProp["VALUE"] == $arFields["PRODUCT_ID"]){  
+                                                    CSaleBasket::Delete($arProp["BASKET_ID"]);
+                                                  }
+                                              }
+                                        }
+                                        if($arItems["QUANTITY"] >= $ar_itmem["RATIO"] * 10){
+                                            $ar_indent_element[] = $arItems["PRODUCT_ID"];
+                                        }
                                     }
                               }
                      }  
@@ -375,7 +395,7 @@ function MontageBasketUpdate($ID, &$arFields){
                                     "NAME" => $prop_element["NAME"],
                                     "PRODUCT_PROVIDER_CLASS" => $arFields["PRODUCT_PROVIDER_CLASS"],
                                   );
-                              //    $arField["PROPS"][] = $arProps; 
+                                  $arField["PROPS"][] = array("NAME" => "ID", "VALUE" => $arFields["PRODUCT_ID"]); 
                                   if($arFields["PRODUCT_ID"] != ELEMENT_ID_SPOOL ){
                                     $id = CSaleBasket::Add($arField);  
                                   }                           
@@ -386,7 +406,7 @@ function MontageBasketUpdate($ID, &$arFields){
                                                         "ID" => "ASC"
                                                     ),
                                                 array(
-                                                        "USER_ID" => $USER->GetId(),
+                                                        "FUSER_ID" => CSaleBasket::GetBasketUserID(),
                                                         "LID" => SITE_ID,
                                                         "ORDER_ID" => "NULL",
                                                         "PRODUCT_ID" => ELEMENT_ID_SPOOL,
@@ -395,15 +415,34 @@ function MontageBasketUpdate($ID, &$arFields){
                                                 false,
                                                 array("ID","PRODUCT_ID", "QUANTITY")
                                             );
-                                        if ($arItems = $dbBasketItems->Fetch()){  
-                                            if($arItems["QUANTITY"] > 1){
-                                                $arQuantity = array(
-                                                   "QUANTITY" => $arItems["QUANTITY"] - 1,
-                                                );
-                                                CSaleBasket::Update($arItems["ID"], $arQuantity);
-                                            } else {
-                                                CSaleBasket::Delete($arItems["ID"]);
-                                            }                                         
+                                        while ($arItems = $dbBasketItems->Fetch()){
+                                            $ratio_item = CCatalogMeasureRatio::getList(Array(), array('IBLOCK_ID'=>$arFields["IBLOCK_ID"], 'PRODUCT_ID'=>$arItems["PRODUCT_ID"]), false, false, array());
+                                            $ar_itmem = $ratio_item->Fetch();
+                                            if($arItems["PRODUCT_ID"] == ELEMENT_ID_SPOOL && $arItems["QUANTITY"] > 1){
+                                                $ratio_update = array("QUANTITY" => $arItems["QUANTITY"] - 1);
+                                                CSaleBasket::Update($arItems["ID"], $ratio_update); 
+                                            } else if(!in_array($arFields["PRODUCT_ID"], $ar_indent_element) && $arItems["PRODUCT_ID"] == ELEMENT_ID_SPOOL){
+
+                                                    $dbProp = CSaleBasket::GetPropsList(
+                                                           Array(
+                                                              "ID" => "DESC"
+                                                              ), 
+                                                           Array(
+                                                              "BASKET_ID" => $arItems["ID"],
+                                                           false,
+                                                           false,
+                                                           Array("NAME", "VALUE", "BASKET_ID")
+                                                           
+                                                     ));            
+                                                  while($arProp = $dbProp -> GetNext()){
+                                                      if($arProp["NAME"] == "ID" && $arProp["VALUE"] == $arFields["PRODUCT_ID"]){  
+                                                        CSaleBasket::Delete($arProp["BASKET_ID"]);
+                                                      }
+                                                  }
+                                            }
+                                            if($arItems["QUANTITY"] >= $ar_itmem["RATIO"] * 10){
+                                                $ar_indent_element[] = $arItems["PRODUCT_ID"];
+                                            }
                                         }
                                   }
                          } 
@@ -427,7 +466,7 @@ function OnBeforeBasketDeleteHandler($ID) {
                         "ID" => "ASC"
                     ),
                 array(
-                        "USER_ID" => $USER->GetId(),
+                        "FUSER_ID" => CSaleBasket::GetBasketUserID(),
                         "LID" => SITE_ID,
                         "ORDER_ID" => "NULL",
                        // "PRODUCT_ID" => 1064,
@@ -437,9 +476,10 @@ function OnBeforeBasketDeleteHandler($ID) {
                 array("ID","PRODUCT_ID")
             );
         while ($arItem = $dbBasketItem->Fetch()){ 
-
-              if($arItem["PRODUCT_ID"] == ELEMENT_ID_SPOOL){
-                 
+            if($arItems["PRODUCT_ID"] == ELEMENT_ID_SPOOL && $arItems["QUANTITY"] > 1){
+                $ratio_update = array("QUANTITY" => $arItems["QUANTITY"] - 1);
+                CSaleBasket::Update($arItems["ID"], $ratio_update); 
+            } else if($arItem["PRODUCT_ID"] == ELEMENT_ID_SPOOL){
                     $dbProp = CSaleBasket::GetPropsList(
                                Array(
                                   "ID" => "DESC"
@@ -452,15 +492,14 @@ function OnBeforeBasketDeleteHandler($ID) {
                                
                          ));            
                   while($arProp = $dbProp -> GetNext()){
-                       
                       if($arProp["NAME"] == "ID" && $arProp["VALUE"] == $arItems["PRODUCT_ID"]){
                         CSaleBasket::Delete($arProp["BASKET_ID"]);
                       }
                   }
-              }  
+            }
               
         }
      //   die();   
 }
-
+// <----- разделяем товар раздела пленки и добавляем к ней шпулю
 ?>

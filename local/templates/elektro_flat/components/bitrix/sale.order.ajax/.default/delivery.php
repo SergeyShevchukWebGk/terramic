@@ -78,7 +78,7 @@
                     <label class="terminal image_1">
                         <input type="radio" name="type" class="table_d" value="<?=DELIVERY_SAMARA?>"/>
                         <img src="/local/templates/elektro_flat/images/logotip.jpg" >
-                        Доставка транспортной компанией со кслада "Самара"
+                        Доставка транспортной компанией со склада "Самара"
                         <b>Вы можете заказать доставку вашего заказа транспортной компанией</b>
                     </label>
                 </div>
@@ -86,7 +86,8 @@
                 <?$width = ($arParams["SHOW_STORES_IMAGES"] == "Y") ? 800 : 750;
                 $i = 1;
                 foreach($arResult["DELIVERY"] as $delivery_id => $arDelivery){?>
-                 <?if($arDelivery["SORT"] == 28){?>
+                 <?#if($arDelivery["SORT"] == 28){?>
+                 <?if($arDelivery["SORT"] == 24){?>
                     <tr class="stock_delivery">
                     <td valign="top">
                         <?if(count($arDelivery["STORE"]) > 0):
@@ -179,7 +180,7 @@
                     <label class="terminal image_1">
                         <input type="radio" name="type" class="table_d" value="<?=DELIVERY_KRASNODAR?>"/>
                         <img src="/local/templates/elektro_flat/images/logotip.jpg" >
-                        Доставка транспортной компанией со кслада "Краснодар"
+                        Доставка транспортной компанией со склада "Краснодар"
                         <b>Вы можете заказать доставку вашего заказа транспортной компанией</b>
                     </label>
                 </div>
@@ -188,7 +189,8 @@
                 $i = 1;
                 foreach($arResult["DELIVERY"] as $delivery_id => $arDelivery){
                     ?>
-                    <?if($arDelivery["SORT"] == 24){?>
+                    <?if($arDelivery["SORT"] == 28){?>
+                    <?#if($arDelivery["SORT"] == 24){?>
                         <tr class="stock_delivery">
                             <td valign="top">
                                 <?if(count($arDelivery["STORE"]) > 0):
