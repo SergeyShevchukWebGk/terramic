@@ -27,7 +27,7 @@ foreach($arResult["PAY_SYSTEM"] as $key => $arPaySystem) {
         if($arPaySystem["PSA_LOGOTIP"]["WIDTH"] > 80 || $arPaySystem["PSA_LOGOTIP"]["HEIGHT"] > 31) {
             $arFileTmp = CFile::ResizeImageGet(
                 $arPaySystem["PSA_LOGOTIP"],
-                array("width" => 80, "height" => 31),
+                array("width" => 100, "height" => 53),
                 BX_RESIZE_IMAGE_PROPORTIONAL,
                 true
             );

@@ -36,7 +36,7 @@
 								<img src="<?=$arPaySystem["PSA_LOGOTIP"]["SRC"]?>" width="<?=$arPaySystem["PSA_LOGOTIP"]["WIDTH"]?>" height="<?=$arPaySystem["PSA_LOGOTIP"]["HEIGHT"]?>" />
 							<?endif;?>
 						</td>
-						<td valign="top">
+						<td valign="top" style=" vertical-align: middle; ">
 							<input type="hidden" name="PAY_SYSTEM_ID" value="<?=$arPaySystem["ID"]?>">
 							<?if($arParams["SHOW_PAYMENT_SERVICES_NAMES"] != "N"):?>
 								<div class="name">
@@ -66,7 +66,7 @@
 												<img src="<?=$arPaySystem["PSA_LOGOTIP"]["SRC"]?>" width="<?=$arPaySystem["PSA_LOGOTIP"]["WIDTH"]?>" height="<?=$arPaySystem["PSA_LOGOTIP"]["HEIGHT"]?>" />
 											<?endif;?>
 										</td>
-										<td valign="top">
+										<td valign="top" style=" vertical-align: middle; ">
 											<?if($arParams["SHOW_PAYMENT_SERVICES_NAMES"] != "N"):?>
 												<div class="name">
 													<?=$arPaySystem["PSA_NAME"]?>

@@ -407,6 +407,7 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
             <h2><?=GetMessage("SOA_TEMPL_SUM_ADIT_INFO")?></h2>
             <div class="order-info">
                 <div class="order-info_in">
+                
                     <label><?=GetMessage("SOA_TEMPL_SUM_COMMENTS")?></label>
                     <br />
                     <textarea rows="5" cols="100" name="ORDER_DESCRIPTION" id="ORDER_DESCRIPTION"><?=$arResult["USER_VALS"]["ORDER_DESCRIPTION"]?></textarea>

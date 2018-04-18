@@ -502,4 +502,15 @@ function OnBeforeBasketDeleteHandler($ID) {
      //   die();   
 }
 // <----- разделяем товар раздела пленки и добавляем к ней шпулю
+
+AddEventHandler("catalog", "OnBeforeProductAdd", Array("My_Class", "OnBeforeProductAdd")); 
+
+class My_Class { 
+function OnBeforeProductAdd(&$arFields) { 
+    if (@$_REQUEST['mode']=='import') {//импорт из 1с?  
+        $arFields["VAT_INCLUDED"] = "N"; 
+            return true; 
+        } 
+    } 
+} 
 ?>
