@@ -6,7 +6,7 @@ include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/props_format.php");?>
 <div class="order-info">
     <div class="order-info_in">
     <?if($arResult["ORDER_DATA"]["PERSON_TYPE_ID"] != 1){ ?>
-         <p style=" color: red; ">Для юридических лиц и индивидуальных предпринимателей есть возможность приобрести товар с НДС. В данном случае просим вас сообщить об этом нашим менеджерам.</p>
+         <p style=" color: red; ">Для юридических лиц и индивидуальных предпринимателей есть возможность приобрести товар с НДС. Для этого просим вас закончить оформление заказа, будет выставлен счет без НДС, не оплачивайте его, позвоните нам, мы выставим счет с НДС.</p>
     <?}?>
         <?if ($arResult["PERSON_TYPE"][1]["CHECKED"] == "Y") {?>
             <span><?= GetMessage("PASSPORT_DATA_INFO") ?></span>

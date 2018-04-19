@@ -503,14 +503,17 @@ function OnBeforeBasketDeleteHandler($ID) {
 }
 // <----- разделяем товар раздела пленки и добавляем к ней шпулю
 
-AddEventHandler("catalog", "OnBeforeProductAdd", Array("My_Class", "OnBeforeProductAdd")); 
+AddEventHandler("catalog", "OnBeforeProductAdd", "OnBeforeProductAdd"); 
+AddEventHandler("catalog", "OnBeforeProductUpdate", "OnBeforeProductAdd"); 
 
-class My_Class { 
 function OnBeforeProductAdd(&$arFields) { 
+    logger($_REQUEST, $_SERVER["DOCUMENT_ROOT"].'/map/log1.txt');
+    logger($arFields, $_SERVER["DOCUMENT_ROOT"].'/map/log1.txt');
     if (@$_REQUEST['mode']=='import') {//импорт из 1с?  
         $arFields["VAT_INCLUDED"] = "N"; 
+        $arFields["VAT_ID"] = 1; 
             return true; 
         } 
-    } 
 } 
+
 ?>
