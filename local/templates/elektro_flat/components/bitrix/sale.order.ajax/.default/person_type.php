@@ -3,7 +3,14 @@
 <?if(count($arResult["PERSON_TYPE"]) > 1) {?>
 	<?if(empty($_POST["PERSON_TYPE"])){
         $_POST["PERSON_TYPE"] = $_SESSION["PERSON_TYPE_CHECKED"];
+        // устанавливаем radio button на физ. лицо при 1ой загрузке страницы
+        if($personIdFlag = true && $_POST["PERSON_TYPE"] != 1)
+        {
+            $_POST["PERSON_TYPE"] = 1;
+            $personIdFlag = false;      
+        }
         ?>
+        <div style="display: none;"><?arshow($_SESSION)?></div>
         <script type="text/javascript">
             $(function(){
                 submitForm('N');     

@@ -89,6 +89,9 @@ Loc::loadMessages(__FILE__);?>
            setTimeout(native_btn, 2000);
            recalcBasketAjax({});
             });
+          /* $('.myorders .order-info .bx-ui-sls-container input[type="text"]').one("ready", function(){
+           $this.attr("title","");
+           }); */
        });
        </script>
     
