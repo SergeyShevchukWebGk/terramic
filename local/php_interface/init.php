@@ -507,13 +507,19 @@ AddEventHandler("catalog", "OnBeforeProductAdd", "OnBeforeProductAdd");
 AddEventHandler("catalog", "OnBeforeProductUpdate", "OnBeforeProductAdd"); 
 
 function OnBeforeProductAdd(&$arFields) { 
-    logger($_REQUEST, $_SERVER["DOCUMENT_ROOT"].'/map/log1.txt');
-    logger($arFields, $_SERVER["DOCUMENT_ROOT"].'/map/log1.txt');
-    if (@$_REQUEST['mode']=='import') {//импорт из 1с?  
-        $arFields["VAT_INCLUDED"] = "N"; 
-        $arFields["VAT_ID"] = 1; 
-            return true; 
-        } 
+    logger($_REQUEST, $_SERVER["DOCUMENT_ROOT"].'/map/log_2.txt');
 } 
+AddEventHandler("iblock", "OnAfterIBlockElementUpdate","OnAfterIBlockElementUpdateHandler");
 
+ // создаем обработчик события "OnAfterIBlockElementUpdate"
+function OnAfterIBlockElementUpdateHandler(&$arFields) {
+    logger($_REQUEST, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt');
+    if (@$_REQUEST['mode']=='import') {//импорт из 1с
+        Cmodule::IncludeModule('catalog');
+        $arFields["VAT_ID"] = 1;
+        $arFields["VAT_INCLUDED"] = "N";
+        $arField = array('VAT_ID' => 1, "VAT_INCLUDED" => "N");// зарезервированное количество
+        CCatalogProduct::Update($arFields["ID"], $arField); 
+    }
+}
 ?>
