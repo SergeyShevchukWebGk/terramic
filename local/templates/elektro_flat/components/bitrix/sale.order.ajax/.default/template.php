@@ -342,6 +342,21 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                                           
                     //  
                 })
+                
+                function sendThisComment() {
+                var sendComment =  document.getElementById('ORDER_DESCRIPTION').value;
+                console.log("sendComment "+sendComment); 
+                $.ajax({
+                    type: "POST",
+                    datatype: "text",
+                    url: 'https://terramic.ru/ajax/saveOrderComment.php',
+                    data: {sendComment:sendComment},
+                    success: function(respone){
+                        console.log("respone "+respone);
+                    }
+               }); 
+               }
+                
                 BX.ready(function () {
 
                     var submitBtn = BX('fire_event');
@@ -410,7 +425,19 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                 
                     <label><?=GetMessage("SOA_TEMPL_SUM_COMMENTS")?></label>
                     <br />
-                    <textarea rows="5" cols="100" name="ORDER_DESCRIPTION" id="ORDER_DESCRIPTION"><?=$arResult["USER_VALS"]["ORDER_DESCRIPTION"]?></textarea>
+                    <textarea onchange="sendThisComment();" rows="5" cols="100" name="ORDER_DESCRIPTION" id="ORDER_DESCRIPTION"><?/*=$arResult["USER_VALS"]["ORDER_DESCRIPTION"]*/?><?if($arResult["USER_VALS"]["ORDER_DESCRIPTION"] == 0)
+                    {                      
+                            echo trim($_SESSION["ORDER_DESCRIPTION"], " ");                           
+                    }
+                    else
+                    {
+                        $_SESSION["ORDER_DESCRIPTION"] = $arResult["USER_VALS"]["ORDER_DESCRIPTION"];
+                        #echo $arResult["USER_VALS"]["ORDER_DESCRIPTION"];
+                        echo trim($_SESSION["ORDER_DESCRIPTION"], " ");
+                    }?>
+                    <??></textarea> 
+                    <div style="display: none;"><?arshow($_SESSION["ORDER_DESCRIPTION"])?></div>
+                    <div style="display: none;"><?arshow($_POST)?></div>
                     <input type="hidden" name="" value="" />
                 </div>
             </div>

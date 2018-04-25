@@ -89,8 +89,32 @@ Loc::loadMessages(__FILE__);?>
            setTimeout(native_btn, 2000);
            recalcBasketAjax({});
             });
-          /* $('.myorders .order-info .bx-ui-sls-container input[type="text"]').one("ready", function(){
-           $this.attr("title","");
+       /*$("#ORDER_DESCRIPTION").on("change", sendThisShit());
+           function sendThisShit() {
+              var sendComment =  document.getElementById('ORDER_DESCRIPTION').value;
+               console.log("sendComment "+sendComment); 
+               $.ajax({
+                type: "POST",
+                datatype: "text",
+                url: 'https://terramic.ru/ajax/saveOrderComment.php',
+                data: {sendComment:sendComment},
+                success: function(respone){
+                console.log("respone "+respone);
+                }
+               }); 
+           }   */
+
+           /*$("#ORDER_DESCRIPTION").on("change", function(){
+               var sendComment =  $this.val();
+               console.log(sendComment); 
+               $.ajax({
+                type: "POST",
+                url: 'ajax/saveOrderComments.php',
+                data: {sendComment:sendComment},
+                success: function(respone){
+                console.log(respone);
+                }
+                }); 
            }); */
        });
        </script>

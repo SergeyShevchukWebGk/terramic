@@ -10,7 +10,7 @@
             $personIdFlag = false;      
         }
         ?>
-        <div style="display: none;"><?arshow($_SESSION)?></div>
+        <div style="display: none;"><?#arshow($_SESSION)?></div>
         <script type="text/javascript">
             $(function(){
                 submitForm('N');     
