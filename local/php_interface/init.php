@@ -508,7 +508,9 @@ AddEventHandler("catalog", "OnBeforeProductUpdate", "OnBeforeProductAdd");
 
 function OnBeforeProductAdd(&$arFields) { 
     logger($_REQUEST, $_SERVER["DOCUMENT_ROOT"].'/map/log_2.txt');
+    $arFields['VAT_ID'] = "2";
 } 
+
 AddEventHandler("iblock", "OnAfterIBlockElementUpdate","OnAfterIBlockElementUpdateHandler");
 
  // создаем обработчик события "OnAfterIBlockElementUpdate"

@@ -24,6 +24,8 @@
 				}
 			}
 		}
+         unset($_SESSION["ORDER_DESCRIPTION"]); // очищаем комментарий к заказу
+         
 	} else {?>
 		<p>
 			<b><?=GetMessage("SOA_TEMPL_ERROR_ORDER")?></b>
