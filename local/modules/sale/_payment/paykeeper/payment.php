@@ -18,7 +18,7 @@ $tax_sum = 0;
 $dbBasket = CSaleBasket::GetList(
     array("NAME" => "ASC"),
     array("ORDER_ID" => $orderid)
-);
+);     
 while($basket_item_params = $dbBasket->Fetch()) {
     $product_params = CCatalogProduct::GetById($basket_item_params["PRODUCT_ID"]);
     //DEBUG
@@ -80,6 +80,7 @@ if ((int)$price > 0) {
         "tax_sum" => round((float)(($price/118)*18), 2)
     );
 }
+
 $to_hash = $total_sum    .
            $clientid     .
            $orderid      .
