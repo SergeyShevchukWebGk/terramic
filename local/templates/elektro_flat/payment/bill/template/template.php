@@ -112,7 +112,8 @@ $width = $pageWidth - $margin['left'] - $margin['right'];
                     if ($imgWidth > $pageWidth)
                         $imgWidth = $pageWidth * 0.6;
                 ?>
-                <img src="<?=$imgParams['SRC']; ?>" width="200" />
+
+                <img src="<?=$_SERVER["REQUEST_SCHEME"]?>://<?=$_SERVER["HTTP_HOST"].$imgParams['SRC']; ?>" width="200" />
             </td>
             <? } ?>
             <td>
@@ -862,11 +863,11 @@ if($AMOUNT > 0.001){
 <br>
 <?if ($params['BILL_SIGN_SHOW'] == 'Y'):?>
     <? if (!$blank) { ?>
-    <div style="position: relative; "><?=CFile::ShowImage(
-            $params["BILL_PATH_TO_STAMP"],
-        160, 160,
-        'style="position: absolute; left: 40pt; "'
-    ); ?></div>
+    <div style="position: relative; ">
+    <?//=CFile::ShowImage( $params["BILL_PATH_TO_STAMP"], 160, 160, 'style="position: absolute; left: 40pt; "' ); ?>
+    <?$image_p = CFile::GetPath($params["BILL_PATH_TO_STAMP"])?>
+    <img src="<?=$_SERVER["REQUEST_SCHEME"]?>://<?=$_SERVER["HTTP_HOST"].$image_p; ?>" width="110" style="position: absolute; left: 40pt;" />
+    </div>
     <? } ?>
     <div style="position: relative">
         <table class="sign">
@@ -892,7 +893,9 @@ if($AMOUNT > 0.001){
                     <?}?>
                     <td style="width: 160pt; position: relative; display: block;border: 1pt solid #000000; border-width: 0pt 0pt 1pt 0pt; text-align: center; ">
                         <? if (!$blank) { ?>
-                        <?=CFile::ShowImage($params["SELLER_COMPANY_DIR_SIGN"], 200, 50); ?>
+                            <?$image = CFile::GetPath($params["SELLER_COMPANY_DIR_SIGN"])?>
+                            <?//=CFile::ShowImage($params["SELLER_COMPANY_DIR_SIGN"], 200, 50); ?>
+                            <img src="<?=$_SERVER["REQUEST_SCHEME"]?>://<?=$_SERVER["HTTP_HOST"].$image; ?>" width="150" />
                         <? } ?>
                         <span style="font-size: 12px;top: 60px;position: absolute;left: 41%; ">Подпись</span>
 
@@ -920,7 +923,9 @@ if($AMOUNT > 0.001){
 
                 <td style="width: 160pt; position: relative; display: block;border: 1pt solid #000000; border-width: 0pt 0pt 1pt 0pt; text-align: center; ">
                     <? if (!$blank) { ?>
-                    <?=CFile::ShowImage($params["SELLER_COMPANY_ACC_SIGN"], 200, 50); ?>
+                        <?$image = CFile::GetPath($params["SELLER_COMPANY_ACC_SIGN"])?>
+                        <?//=CFile::ShowImage($params["SELLER_COMPANY_ACC_SIGN"], 200, 50); ?>
+                        <img src="<?=$_SERVER["REQUEST_SCHEME"]?>://<?=$_SERVER["HTTP_HOST"].$image; ?>" width="150" />
                     <? } ?>
                     <span style="font-size: 12px;top: 60px;position: absolute;left: 41%; ">Подпись</span>
                 </td>
