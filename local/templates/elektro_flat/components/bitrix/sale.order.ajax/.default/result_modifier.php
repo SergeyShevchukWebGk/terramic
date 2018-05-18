@@ -116,8 +116,12 @@ foreach ($arResult["BASKET_ITEMS"] as $arItems){
             } 
     $i++;
     }
-}  
+}?>
+<div style="display:none">res_mod <?=arshow($arResult["AMOUNT"])?></div>
+<?  
 if($arResult["AMOUNT"] > 0.001){
     $arResult["AMOUNT"] = $arResult["AMOUNT"] / 10;
-}
+} else {
+    $arResult["AMOUNT"] = 0.001;
+    }
 ?>

@@ -335,6 +335,7 @@ while ($arProps = $db_props->Fetch()) {
        $arProps["CODE"] != 'delivery_type' && 
        $arProps["CODE"] != 'agreement'){ 
           if($element > 1){
+             
               if($arProps["CODE"] == 'COMPANY_ADR'){
                   $str = ', <br>';
                   $value_company = $arProps["VALUE"];
@@ -342,7 +343,7 @@ while ($arProps = $db_props->Fetch()) {
                 //  $str = ', <br>';
               }
           }
-          if($arProps["CODE"] == 'COMPANY_ADR_ACT' && empty($arProps["VALUE"])){
+          if($arProps["CODE"] == 'COMPANY_ADR_ACT' && empty(trim($arProps["VALUE"]," "))){
             $str = ', <br>';
             $arProps["VALUE"] = $value_company;
           }
@@ -833,6 +834,8 @@ while ($arItems = $dbBasketItems->Fetch()){
 }  
 if($AMOUNT > 0.001){
     $AMOUNT = $AMOUNT / 10;
+} else{
+    $AMOUNT = 0.001;    
 }
 ?>
 <div class="params">
