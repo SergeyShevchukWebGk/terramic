@@ -317,7 +317,14 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 					<div class="catalog-detail-preview-text" itemprop="description">
 						<?=$arResult["PREVIEW_TEXT"]?>
 					</div>
-				<?endif;
+					<?endif;?>
+                <?//DETAILE_TEXT_DESCRIPTION
+                if(!empty($arResult["PROPERTIES"]["TEXT_DESCRIPTION_PRODUCT"]["VALUE"])):?>
+					<div class="catalog-detail-text-description" itemprop="text-description">
+							<?=html_entity_decode($arResult["PROPERTIES"]["TEXT_DESCRIPTION_PRODUCT"]["VALUE"])?>
+					</div>
+                <?endif;?>
+                <?
 				//DETAIL_GIFT//					
 				if(!empty($arResult["PROPERTIES"]["GIFT"]["FULL_VALUE"])):?>
 					<div class="catalog-detail-gift">

@@ -5012,6 +5012,18 @@ a.catalog_item_toogle_filter_reset{
 	box-sizing:border-box;
 }
 
+/***CATALOG_DETAIL_PREVIEW_DESCRIPTION***/
+.catalog-detail .catalog-detail-text-description{
+	width:100%;
+	float:left;
+	margin:10px 0px 0px 0px;
+	padding:0px 20px;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	text-align: justify;
+}
+
 /***CATALOG_DETAIL_GIFT***/
 .catalog-detail .catalog-detail-gift{
 	width:100%;
@@ -10586,6 +10598,7 @@ table.compare-grid .delay .catalog-item-delayed i:nth-child(2){
 		order:1;
 	}
 	
+
 	/***CATALOG_DETAIL_GIFT***/
 	.catalog-detail .catalog-detail-gift{
 		order:1;
