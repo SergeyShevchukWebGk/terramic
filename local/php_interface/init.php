@@ -515,4 +515,30 @@ function OnBeforeProductAdd($ID, &$arFields) {
 
 } 
 
+// Обработчик события действий перед изменением товара в ИБ[ID] == 23.
+// Сохранение свойства "Текстовое описание товара" елемента при выгрузке из 1С, если это поле отсутствует в выгрузке.
+AddEventHandler("iblock", "OnBeforeIBlockElementUpdate", "SaveTextDescriptionPoduct");
+function SaveTextDescriptionPoduct(&$arFildes){
+    //Получение значения ID информ. блока эл-та, значения св-ва "TEXT_DESCRIPTION_PRODUCT" и ID этого св-ва
+    $item = CIBlockElement::GetList(
+        array(),
+        array("ID" => $arFildes["ID"]),
+        false,
+        false,
+        array("IBLOCK_ID", "PROPERTY_TEXT_DESCRIPTION_PRODUCT")
+    )->fetch();
+    if($item["IBLOCK_ID"] == IBCLICK_CATALOG_ID){
+        //Получение ID свойства "TEXT_DESCRIPTION_PRODUCT"
+        $property = CIBlockProperty::GetList(
+            array(),
+            array("IBLOCK_ID" => IBCLICK_CATALOG_ID, "CODE" => "TEXT_DESCRIPTION_PRODUCT")
+        )->fetch();
+        $property_id = $property["ID"];
+        $property_value_id = $item["PROPERTY_TEXT_DESCRIPTION_PRODUCT_VALUE_ID"];
+        // Если массив с изменениями не содержит поля "TEXT_DESCRIPTION_PRODUCT", то перезаписываем существующее значение
+        if(is_null($arFildes["PROPERTY_VALUES"][$property_id][$property_value_id]["VALUE"])){
+            $arFildes["PROPERTY_VALUES"][$property_id][0]["VALUE"] = $item["PROPERTY_TEXT_DESCRIPTION_PRODUCT_VALUE"];
+        }   
+    }
+}
 ?>
