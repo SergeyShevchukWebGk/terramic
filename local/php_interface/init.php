@@ -209,7 +209,7 @@ function MontageBasketAdd(&$arFields) {
         if($ar_res = $res->GetNext()){
             if($ar_res["IBLOCK_SECTION_ID"] == SECTION_ID_FILM){
                   $arProps = array(
-                    "NAME" => '"Элемент товара',
+                    "NAME" => 'Элемент товара',
                     "CODE" => "id_product",          
                     "VALUE" => $arFields["PRODUCT_ID"].rand(0,1000)
                   );
@@ -234,10 +234,11 @@ function MontageBasketAdd(&$arFields) {
                             "NAME" => $prop_element["NAME"],
                             "PRODUCT_PROVIDER_CLASS" => $arFields["PRODUCT_PROVIDER_CLASS"],
                           );        
-                          $arField["PROPS"][] = array("NAME" => "ID", "VALUE" => $arFields["ID"]); 
+                          $arField["PROPS"][] = array("NAME" => "ID", "VALUE" => $arField["PRODUCT_ID"]); 
                           if($arFields["PRODUCT_ID"] != ELEMENT_ID_SPOOL && $arFields["QUANTITY"] > $ar_fields["RATIO"] * 10){ // проверяем коэффициент количества пленки с метрожом дя добавления
-                            $id = CSaleBasket::Add($arField); // добавляем шпулю в корзине с привязкой по id элемента пленки 
-                          } 
+                            //$id = CSaleBasket::Add($arField); // добавляем шпулю в корзине с привязкой по id элемента пленки 
+                             $id = Add2BasketByProductID($arField["PRODUCT_ID"], 1, false);
+                          }
                     }  
 
             } else {
@@ -315,11 +316,12 @@ function MontageBasketUpdate($ID, &$arFields){
                                     "NAME" => $prop_element["NAME"],
                                     "PRODUCT_PROVIDER_CLASS" => $arFields["PRODUCT_PROVIDER_CLASS"],
                                   );
-                                  $arField["PROPS"][] = array("NAME" => "ID", "VALUE" => $arFields["ID"]); 
+                                  $arField["PROPS"][] = array("NAME" => "ID", "VALUE" => $arField["PRODUCT_ID"]); 
                                   
                                   if($arFields["PRODUCT_ID"] != ELEMENT_ID_SPOOL ){
-                                    $id = CSaleBasket::Add($arField);  
-                                  }   
+                                   // $id = CSaleBasket::Add($arField);
+                                   $id = Add2BasketByProductID($arField["PRODUCT_ID"], 1, false);  
+                                  }  
                                                         
                                 } elseif($arFields["QUANTITY"] < $ar_fields["RATIO"] * 10 && $arFields["PRODUCT_ID"] != ELEMENT_ID_SPOOL && $arFields["QUANTITY"] >= $ar_fields["RATIO"] * 9){
                                         
