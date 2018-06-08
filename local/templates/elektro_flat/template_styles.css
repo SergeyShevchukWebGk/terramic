@@ -5966,6 +5966,14 @@ a.catalog_item_toogle_filter_reset{
 	margin-top:10px;
 }
 
+/***CATALOG_DELIVERY_TEXT***/
+.catalog-delivery_text{
+	display: flex;
+    align-items: flex-end;
+	justify-content: space-between;
+	width: 60%;
+}
+
 /***OFFERS_LIST_CONSTRUCTOR_KIT_ITEMS_RELATED_BIGDATA***/
 .catalog-detail-offers-list,
 .set-constructor,
