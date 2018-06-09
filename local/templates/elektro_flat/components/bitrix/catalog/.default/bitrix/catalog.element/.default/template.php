@@ -1468,7 +1468,11 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 				<li class="tabs__tab">
 					<a href="#tab<?=$i?>"><span><?=GetMessage("CATALOG_ELEMENT_SHOPS")?></span></a>
 				</li>
-			<?endif;?>
+			<?$i++;
+			endif;?>
+			<li class="tabs__tab">
+				<a href="#tab<?=$i?>"><span><?=GetMessage("CATALOG_ELEMENT_DELIVERY_DESCRIPTION")?></span></a>
+			</li>
 		</ul>
 		<?//DETAIL_TEXT_TAB//?>
 		<div class="tabs__box">
@@ -1582,6 +1586,22 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 				<div id="<?=$arItemIDs['STORE'];?>"></div>
 			</div>
 		<?endif;?>
+		<div class="tabs__box">
+			<div class="catalog-delivery_text">
+				<p>
+					<?$APPLICATION->IncludeComponent(
+						"bitrix:main.include",
+						"",
+						Array(
+							"AREA_FILE_SHOW" => "file",
+							"AREA_FILE_SUFFIX" => "inc",
+							"EDIT_TEMPLATE" => "",
+							"PATH" => "/include/inc_delivery_text_catalog_element.php"
+						)
+					);?>
+				</p>
+			</div>
+		</div>
 	</div>	
 	<div class="clr"></div>
 </div>

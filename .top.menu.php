@@ -15,6 +15,13 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
+		"Доставка", 
+		"/help/#razdel1", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
 		"Помощь покупателю", 
 		"/help/", 
 		Array(), 
