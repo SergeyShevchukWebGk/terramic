@@ -595,4 +595,16 @@ function SaveTextDescriptionPoduct(&$arFildes){
         }   
     }
 }
+
+
+AddEventHandler('main', 'OnEpilog', array('CMainHandlers', 'OnEpilogHandler'));  
+class CMainHandlers { 
+	public static function OnEpilogHandler() {
+		$metaOld['title'] = $GLOBALS['APPLICATION']->GetTitle();
+		$metaOld['descr'] = $GLOBALS['APPLICATION']->GetPageProperty('description');
+		if ( empty($metaOld['descr']) AND !empty($metaOld['title']) ) {
+			$GLOBALS['APPLICATION']->SetPageProperty('description', "Компания «Террамика» предлагает лучшие товары по лучшим ценам. " . $metaOld['title'] . ".");
+		}
+	}
+}
 ?>

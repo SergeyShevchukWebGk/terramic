@@ -147,8 +147,7 @@
                                 <td width="0%"></td>
                             <?endif;?>
                             <td>
-                                <?=GetMessage("STOF_PASSWORD")?> <span class="sof-req">*</span> (минимум 6 символов)
-                                <br />
+                                <p style="width: 318px; padding-bottom: 0;">Пароль <span class="sof-req">*</span> (В пароле должны присутствовать 3 вида символов. Латинские символы верхнего регистра (А-Z), латинские символы нижнего регистра (a-z) и цифры (0-9). Пароль должен быть не менее 6 символов) </p>
                                 <input type="password" name="NEW_PASSWORD" size="30"/>
                             </td>
                         </tr>
@@ -178,12 +177,7 @@
                                 </td>
                             </tr>
                         <?endif;?>
-                            <tr>
-                            <td>
 
-                                <p style="width: 318px;">   Пароль должен содержать: латинские символы верхнего регистра (A-Z), латинские символы нижнего регистра (a-z), цифры (0-9).</p>
-                            </td>
-                        </tr>
                         <?if($arResult["AUTH"]["captcha_registration"] == "Y") {?>
                             <tr>
                                 <td>

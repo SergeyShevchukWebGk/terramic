@@ -1,5 +1,5 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Помощь покупателю");?><p>
+$APPLICATION->SetTitle("Доставка");?><p>
  <span id="razdel0">Содержание раздела</span>
 </p>
 <p>

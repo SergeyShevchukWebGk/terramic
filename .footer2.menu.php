@@ -15,13 +15,6 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Автоматизация", 
-		"/catalog/avtomatizatsiya/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
 		"Аксессуары", 
 		"/catalog/aksessuary/", 
 		Array(), 

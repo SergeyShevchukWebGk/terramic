@@ -189,7 +189,7 @@ $APPLICATION->IncludeComponent(
 		<hr class="bxe-light">
 
 		<div class="bx-authform-description-container">
-			<?echo $arResult["GROUP_POLICY"]["PASSWORD_REQUIREMENTS"];?>
+			<?//echo $arResult["GROUP_POLICY"]["PASSWORD_REQUIREMENTS"];?>
 		</div>
 
 		<div class="bx-authform-description-container">
