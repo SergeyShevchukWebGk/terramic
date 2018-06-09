@@ -1584,6 +1584,20 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 		if($arParams["USE_STORE"] == "Y" && ((isset($arResult["OFFERS"]) && !empty($arResult["OFFERS"]) && $arSetting["OFFERS_VIEW"]["VALUE"] != "LIST") || (!isset($arResult["OFFERS"]) || empty($arResult["OFFERS"])))):?>
 			<div class="tabs__box">
 				<div id="<?=$arItemIDs['STORE'];?>"></div>
+					<div class="catalog-delivery_text">
+						<p>
+						<?$APPLICATION->IncludeComponent(
+								"bitrix:main.include",
+								"",
+								Array(
+									"AREA_FILE_SHOW" => "file",
+									"AREA_FILE_SUFFIX" => "inc",
+									"EDIT_TEMPLATE" => "",
+									"PATH" => "/include/inc_delivery_text_availability_catalog_element.php"
+								)
+							);?>
+						</p>
+					</div>
 			</div>
 		<?endif;?>
 		<div class="tabs__box">

@@ -1611,6 +1611,12 @@ button[name="banners-main__item-button"]:after{
 	margin-top:11px;	
 }
 
+.tabs__box .catalog-detail-stores-from:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
 .catalog-item-cards{
 	width:100%;
 	float:left;
