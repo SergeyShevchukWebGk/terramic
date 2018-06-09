@@ -4,10 +4,6 @@ $this->addExternalCss(SITE_TEMPLATE_PATH."/components/bitrix/sale.notice.product
 
 global $arSetting,$arSettingsSolo;
 
-// echo "<pre>";
-// print_r($arResult);
-// echo "</pre>";
-
 $strMainID = $this->GetEditAreaId($arResult["ID"]);
 $arItemIDs = array(
 	"ID" => $strMainID,
