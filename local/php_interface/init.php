@@ -136,6 +136,33 @@ function object_to_array($data)
 //     }
 
 // }
+  function getOrderBillPdf($orderId,$pdfPath){
+   $payment = null;
+   CModule::IncludeModule("sale");
+   if(($order = \Bitrix\Sale\Order::load($orderId))
+      && ($paymentCollection = $order->getPaymentCollection())
+   ){
+      foreach($paymentCollection as $p)
+         if(!$p->isInner()){
+            $payment = $p;
+            break;
+         }
+   }
+   
+   if($payment
+      && ($service = \Bitrix\Sale\PaySystem\Manager::getObjectById($payment->getPaymentSystemId()))
+      && $service->isAffordPdf()
+   ){
+      $context = \Bitrix\Main\Application::getInstance()->getContext();
+      $_REQUEST['pdf'] = 
+      $_REQUEST['GET_CONTENT'] = 'Y';
+      if(($res = $service->initiatePay($payment,$context->getRequest(),\Bitrix\Sale\PaySystem\BaseServiceHandler::STRING))
+         && $res->isSuccess()
+      ){
+         return file_put_contents($pdfPath,$res->getTemplate());
+      }
+   }
+}
 
  //удаление стоимости доставки из заказа, с сохранением примерной стоимости( обработчи удаляет стоимость доставки из способов оплаты и из самого заказа, при этом сохраняет визуальное представления стомисоти)
 \Bitrix\Main\EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved', 'myFunction');
@@ -153,7 +180,7 @@ function myFunction(\Bitrix\Main\Event $event)
                 $APPLICATION->IncludeComponent("bitrix:sale.order.payment", "", Array());
                 $pdf_content = ob_get_contents();
                 ob_clean();
-
+                logger($pdf_content, $_SERVER["DOCUMENT_ROOT"].'/map/.log_1.txt');
                 $fid = CFile::SaveFile(
                     array(
                         'name'      => 'bill_'.$order->getId().'.html',
@@ -166,9 +193,10 @@ function myFunction(\Bitrix\Main\Event $event)
                 );
 
                 $propertyCollection = $order->getPropertyCollection();
-
+                
                 $emailPropValue = $propertyCollection->getUserEmail()->getValue();
-
+                logger($emailPropValue, $_SERVER["DOCUMENT_ROOT"].'/map/.log_2.txt');
+                logger($fid, $_SERVER["DOCUMENT_ROOT"].'/map/.log_3.txt');
                 $event = new CEvent;
                 $event->Send("SDK_BILL_ORDER_SEND", "s1", array("EMAIL_TO" => $emailPropValue), "N", "", array($fid));
             }
