@@ -793,6 +793,7 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 																<input type="text" id="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" data-item="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" data-measure="<?=$arOffer['CATALOG_MEASURE_RATIO']?>" name="quantity" class="quantity" value="<?=$arOffer['CATALOG_MEASURE_RATIO']?>"/>
 																<a href="javascript:void(0)" class="plus" onclick="BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value)+<?=$arOffer["CATALOG_MEASURE_RATIO"]?>;"><span>+</span></a>
 															</div>
+                                                            
 															<input type="hidden" name="ID" class="offer_id" value="<?=$arOffer['ID']?>" />
 															<?$props = array();
 															if(!empty($arOffer["PROPERTIES"]["ARTNUMBER"]["VALUE"])):		
@@ -891,7 +892,10 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 													<a href="javascript:void(0)" class="minus" onclick="if(BX('quantity_<?=$arItemIDs["ID"]?>').value > <?=$arResult["CATALOG_MEASURE_RATIO"]?>) BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)-<?=$arResult["CATALOG_MEASURE_RATIO"]?>;"><span>-</span></a>
 													<input type="text" id="quantity_<?=$arItemIDs['ID']?>" data-item="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" data-measure="<?=$arResult['CATALOG_MEASURE_RATIO']?>" name="quantity" class="quantity" value="<?=$arResult['CATALOG_MEASURE_RATIO']?>"/>
 													<a href="javascript:void(0)" class="plus" onclick="BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)+<?=$arResult["CATALOG_MEASURE_RATIO"]?>;"><span>+</span></a>
-												</div>
+												    <?$cssMeasure = "<span style='font-size: 20px;font-weight: 700;color: #000;padding-left: 5px;'> ".$arResult["CATALOG_MEASURE_NAME"]."</span>";?>
+                                                    <?=$cssMeasure;?>
+                                                </div>
+                                                <pre style="display: none;"><?123?></pre>
 												<input type="hidden" name="ID" class="id" value="<?=$arResult['ID']?>" />
 												<?$props = array();
 												if(!empty($arResult["PROPERTIES"]["ARTNUMBER"]["VALUE"])):				
