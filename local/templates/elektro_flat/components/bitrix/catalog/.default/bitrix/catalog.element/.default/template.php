@@ -673,8 +673,9 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 												<span class="catalog-detail-item-price">
 													<?=number_format($arPrice["DISCOUNT_VALUE"], $price["DECIMALS"], $price["DEC_POINT"], $price["THOUSANDS_SEP"]);?>
 													<span class="unit">
+                                                        <?$cssMeasure = "<span style='font-size: 20px;font-weight: 700;color: #000;'>".$arResult["CATALOG_MEASURE_NAME"]."</span>";?>  
 														<?=$currency?>
-														<?=(!empty($arResult["CATALOG_MEASURE_NAME"])) ? GetMessage("CATALOG_ELEMENT_UNIT")." ".$arResult["CATALOG_MEASURE_NAME"] : "";?>
+														<?=(!empty($arResult["CATALOG_MEASURE_NAME"])) ? GetMessage("CATALOG_ELEMENT_UNIT")." ".$cssMeasure : "";?>
 													</span>
 												</span>
 												<?if($arSetting["REFERENCE_PRICE"]["VALUE"] == "Y" && !empty($arSetting["REFERENCE_PRICE_COEF"]["VALUE"])):?>
