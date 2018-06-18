@@ -136,7 +136,7 @@ function object_to_array($data)
 //     }
 
 // }
-  function getOrderBillPdf($orderId,$pdfPath){
+  function getOrderBillPdf($orderId){
    $payment = null;
    CModule::IncludeModule("sale");
    if(($order = \Bitrix\Sale\Order::load($orderId))
@@ -159,7 +159,7 @@ function object_to_array($data)
       if(($res = $service->initiatePay($payment,$context->getRequest(),\Bitrix\Sale\PaySystem\BaseServiceHandler::STRING))
          && $res->isSuccess()
       ){
-         return file_put_contents($pdfPath,$res->getTemplate());
+     //    return file_put_contents($pdfPath,$res->getTemplate());
       }
    }
 }
@@ -174,13 +174,13 @@ function myFunction(\Bitrix\Main\Event $event)
         $paymentCollection = $order->getPaymentCollection();
         foreach ($paymentCollection as $payment) {
             if (($payment->getPaymentSystemId() == 8) && intval($order->getId()) > 0) {
-                ob_start();
+               /* ob_start();
                 $_REQUEST["ORDER_ID"] = $order->getId();
                 global $APPLICATION;
                 $APPLICATION->IncludeComponent("bitrix:sale.order.payment", "", Array());
                 $pdf_content = ob_get_contents();
                 ob_clean();
-                logger($pdf_content, $_SERVER["DOCUMENT_ROOT"].'/map/.log_1.txt');
+
                 $fid = CFile::SaveFile(
                     array(
                         'name'      => 'bill_'.$order->getId().'.html',
@@ -190,13 +190,14 @@ function myFunction(\Bitrix\Main\Event $event)
                         'content'   => $pdf_content,
                     ),
                     'bills'
-                );
+                );  */
+                getOrderBillPdf($order->getId());
 
+                $fid = $_SERVER["DOCUMENT_ROOT"].'/upload/order_'.$order->getId().'_1.pdf'; 
                 $propertyCollection = $order->getPropertyCollection();
                 
                 $emailPropValue = $propertyCollection->getUserEmail()->getValue();
-                logger($emailPropValue, $_SERVER["DOCUMENT_ROOT"].'/map/.log_2.txt');
-                logger($fid, $_SERVER["DOCUMENT_ROOT"].'/map/.log_3.txt');
+
                 $event = new CEvent;
                 $event->Send("SDK_BILL_ORDER_SEND", "s1", array("EMAIL_TO" => $emailPropValue), "N", "", array($fid));
             }

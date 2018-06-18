@@ -55,7 +55,8 @@ if ($params['BILL_HEADER_SHOW'] == 'Y')
 {
 	if ($params['BILL_PATH_TO_LOGO'])
 	{
-		list($imageHeight, $imageWidth) = $pdf->GetImageSize($params['BILL_PATH_TO_LOGO']);
+        list($imageHeight, $imageWidth) = $pdf->GetImageSize($params['BILL_PATH_TO_LOGO']);
+		list($imageHeight_1, $imageWidth_1) = $pdf->GetImageSize('/local/templates/elektro_flat/images/qr-code.gif');
 
 		if ($imageWidth >= $width)
 		{
@@ -76,42 +77,44 @@ if ($params['BILL_HEADER_SHOW'] == 'Y')
 
 		$pdf->Image($params['BILL_PATH_TO_LOGO'], $pdf->GetX(), $pdf->GetY(), -$imgDpi, -$imgDpi);
 	}
-
+    
 	$pdf->SetFont($fontFamily, 'B', $fontSize);
 
-	$text = CSalePdf::prepareToPdf($params["SELLER_COMPANY_NAME"]);
-	$textWidth = $width - $logoWidth;
+	$text = CSalePdf::prepareToPdf(str_replace("<br>", " ", $params["SELLER_COMPANY_NAME"]));
+	$textWidth = $width - $logoWidth - 60;
 	while ($pdf->GetStringWidth($text))
 	{
 		list($string, $text) = $pdf->splitString($text, $textWidth);
-		$pdf->SetX($pdf->GetX() + $logoWidth);
+		$pdf->SetX($pdf->GetX() + $logoWidth - 30);
 		$pdf->Cell($textWidth, 15, $string, 0, 0, 'L');
 		$pdf->Ln();
 	}
 
-	if ($params["SELLER_COMPANY_ADDRESS"])
-	{
-		$sellerAddr = $params["SELLER_COMPANY_ADDRESS"];
-		if (is_array($sellerAddr))
-			$sellerAddr = implode(', ', $sellerAddr);
-		else
-			$sellerAddr = str_replace(array("\r\n", "\n", "\r"), ', ', strval($sellerAddr));
-		$pdf->SetX($pdf->GetX() + $logoWidth);
-		$pdf->MultiCell(0, 15, CSalePdf::prepareToPdf($sellerAddr), 0, 'L');
-	}
+
 
 	if ($params["SELLER_COMPANY_PHONE"])
 	{
 	$text = CSalePdf::prepareToPdf(Loc::getMessage('SALE_HPS_BILL_SELLER_COMPANY_PHONE', array('#PHONE#' => $params["SELLER_COMPANY_PHONE"])));
-	$textWidth = $width - $logoWidth;
-	while ($pdf->GetStringWidth($text))
-	{
-		list($string, $text) = $pdf->splitString($text, $textWidth);
-		$pdf->SetX($pdf->GetX() + $logoWidth);
-		$pdf->Cell($textWidth, 15, $string, 0, 0, 'L');
-		$pdf->Ln();
-	}
-}
+	$textWidth = $width - $logoWidth - 60;
+	    while ($pdf->GetStringWidth($text)) {
+		    list($string, $text) = $pdf->splitString($text, $textWidth);
+		    $pdf->SetX($pdf->GetX() + $logoWidth - 30);
+		    $pdf->Cell($textWidth, 15, $string, 0, 0, 'L');
+		    $pdf->Ln();
+	    }
+    }
+    if ($params["SELLER_COMPANY_ADDRESS"]) {
+    $text = CSalePdf::prepareToPdf(Loc::getMessage('SALE_HPS_BILL_ADRESS', array('#ADRESS#' => $params["SELLER_COMPANY_ADDRESS"])));
+    $textWidth = $width - $logoWidth - 60;
+        while ($pdf->GetStringWidth($text)) {
+            list($string, $text) = $pdf->splitString($text, $textWidth);
+            $pdf->SetX($pdf->GetX() + $logoWidth - 30);
+            $pdf->Cell($textWidth, 15, $string, 0, 0, 'L');
+            $pdf->Ln();
+        }
+    }
+    
+    $pdf->Image('/local/templates/elektro_flat/images/qr-code.gif', 465, 35, -$imgDpi, -$imgDpi);
 
 	$pdf->Ln();
 	$pdf->SetY(max($y0 + $logoHeight, $pdf->GetY()));
@@ -184,8 +187,8 @@ if ($params['BILL_HEADER_SHOW'] == 'Y')
 
 	$pdf->Ln();
 	$y2 = $pdf->GetY();
-
-$text = CSalePdf::prepareToPdf($params["SELLER_COMPANY_NAME"]);
+    
+    $text = CSalePdf::prepareToPdf($params["BUYER_PERSON_COMPANY_NAME"]);
 	while ($pdf->GetStringWidth($text) > 0)
 	{
 		list($string, $text) = $pdf->splitString($text, 300-5);
@@ -262,9 +265,9 @@ $text = CSalePdf::prepareToPdf($params["SELLER_COMPANY_NAME"]);
 }
 if ($params['BILL_HEADER'])
 {
-	$pdf->SetFont($fontFamily, 'B', $fontSize * 2);
+	$pdf->SetFont($fontFamily, '', $fontSize * 2);
 	$billNo_tmp = CSalePdf::prepareToPdf(
-		$params['BILL_HEADER'].' '.Loc::getMessage('SALE_HPS_BILL_SELLER_TITLE', array('#PAYMENT_NUM#' => $params["ACCOUNT_NUMBER"], '#PAYMENT_DATE#' => $params["PAYMENT_DATE_INSERT"]))
+		$params['BILL_HEADER'].' '.Loc::getMessage('SALE_HPS_BILL_SELLER_TITLE', array('#PAYMENT_NUM#' => $params["ACCOUNT_NUMBER"],'#YEAR#' => date('y'), '#DAY#' => date('z'), '#PAYMENT_DATE#' => $params["PAYMENT_DATE_INSERT"]))
 	);
 
 	$billNo_width = $pdf->GetStringWidth($billNo_tmp);
@@ -287,32 +290,145 @@ if ($params["PAYMENT_DATE_PAY_BEFORE"])
 }
 
 $pdf->Ln();
+$arOrder = CSaleOrder::GetByID($_REQUEST["ORDER_ID"]);
+
 if ($params['BILL_PAYER_SHOW'] == 'Y')
 {
 	if ($params["BUYER_PERSON_COMPANY_NAME"])
 	{
-		$pdf->Write(15, CSalePdf::prepareToPdf(Loc::getMessage('SALE_HPS_BILL_BUYER_NAME', array('#BUYER_NAME#' => $params["BUYER_PERSON_COMPANY_NAME"]))));
-		if ($params["BUYER_PERSON_COMPANY_INN"])
-			$pdf->Write(15, CSalePdf::prepareToPdf(Loc::getMessage('SALE_HPS_BILL_BUYER_PERSON_INN', array('#INN#' => $params["BUYER_PERSON_COMPANY_INN"]))));
-		if ($params["BUYER_PERSON_COMPANY_ADDRESS"])
-		{
-			$buyerAddr = $params["BUYER_PERSON_COMPANY_ADDRESS"];
-			if (is_array($buyerAddr))
-				$buyerAddr = implode(', ', $buyerAddr);
-			else
-				$buyerAddr = str_replace(array("\r\n", "\n", "\r"), ', ', strval($buyerAddr));
-			$pdf->Write(15, CSalePdf::prepareToPdf(sprintf(", %s", $buyerAddr)));
+		$pdf->Write(15, CSalePdf::prepareToPdf(Loc::getMessage('SALE_HPS_BILL_BUYER_NAME', array('#BUYER_NAME#' => ''))));
+
+        if($arOrder["PAY_SYSTEM_ID"] != PAY_SISTEM_NDS){
+            $pdf->Write(15, CSalePdf::prepareToPdf( $params["SELLER_COMPANY_DIRECTOR_POSITION"].' '));
+        }
+            $pdf->Write(15, CSalePdf::prepareToPdf( $params["BUYER_PERSON_COMPANY_NAME_CONTACT"].', '));
+        if ($params["SELLER_COMPANY_INN"]){
+            $pdf->Write(15, CSalePdf::prepareToPdf(Loc::getMessage('SALE_HPS_BILL_BUYER_INN', array('#INN#' => $params["SELLER_COMPANY_INN"]))));
+        }
+        if ($params["SELLER_COMPANY_KPP"]){
+            $pdf->Write(15, CSalePdf::prepareToPdf(sprintf(", %s", Loc::getMessage('SALE_HPS_BILL_KPP', array('#KPP#' => $params["SELLER_COMPANY_KPP"]))."\n")));
+        } else {
+            $pdf->Write(15, CSalePdf::prepareToPdf("\n"));
+        }
+        
+		if ($params["BUYER_PERSON_COMPANY_ADDRESS"]) {
+            $pdf->Write(15, CSalePdf::prepareToPdf("\n"));
+            $pdf->Write(15, Loc::getMessage('SALE_HPS_BILL_ADRESS', array('#ADRESS#' => $params["BUYER_PERSON_COMPANY_ADDRESS"])));
 		}
 		if ($params["BUYER_PERSON_COMPANY_PHONE"])
 			$pdf->Write(15, CSalePdf::prepareToPdf(sprintf(", %s", $params["BUYER_PERSON_COMPANY_PHONE"])));
 		if ($params["BUYER_PERSON_COMPANY_FAX"])
 			$pdf->Write(15, CSalePdf::prepareToPdf(sprintf(", %s", $params["BUYER_PERSON_COMPANY_FAX"])));
-		if ($params["BUYER_PERSON_COMPANY_NAME_CONTACT"])
-			$pdf->Write(15, CSalePdf::prepareToPdf(sprintf(", %s", $params["BUYER_PERSON_COMPANY_NAME_CONTACT"])));
 		$pdf->Ln();
 	}
-}
+}                    
+$pdf->Write(15, CSalePdf::prepareToPdf("\n"));
+// Выведем все свойства заказа с кодом $ID, сгруппированые по группам свойств
+$db_props = CSaleOrderPropsValue::GetOrderProps($_REQUEST["ORDER_ID"]);
+$iGroup = -1;
+$element = 0;
 
+$pdf->Write(15, CSalePdf::prepareToPdf(GetMessage('SALE_HPS_BILL_BUYER'). ' '));
+while ($arProps = $db_props->Fetch()) {
+   if ($iGroup!=IntVal($arProps["PROPS_GROUP_ID"])) {
+      $iGroup = IntVal($arProps["PROPS_GROUP_ID"]);
+   }
+  if($iGroup == 5 || $iGroup == 3){
+    $element++;
+  }
+  
+   if(($iGroup == 5 || $iGroup == 3) && 
+       (!empty($arProps["VALUE"]) || $arProps["CODE"] == 'COMPANY_ADR_ACT') && 
+       $arProps["CODE"] != 'LOCATION' && 
+       $arProps["CODE"] != 'stock' && 
+       $arProps["CODE"] != 'FAX' && 
+       $arProps["CODE"] != 'organization' && 
+       $arProps["CODE"] != 'delivery_type' && 
+       $arProps["CODE"] != 'agreement'){ 
+          if($element > 1){
+             
+              if($arProps["CODE"] == 'COMPANY_ADR'){
+                  $str = "\n";
+                  $value_company = $arProps["VALUE"];
+              } else {
+                //  $str = ', <br>';
+              }
+          }
+          if($arProps["CODE"] == 'COMPANY_ADR_ACT' && empty(trim($arProps["VALUE"]," "))){
+            $str = "\n";
+            $arProps["VALUE"] = $value_company;
+          }
+          $element++;
+
+          if($arProps["CODE"] == "COMPANY"){      
+            $pdf->Write(15, CSalePdf::prepareToPdf(sprintf(" %s", $str. htmlspecialchars($arProps["VALUE"]))));         
+          } else {      
+            $pdf->Write(15, CSalePdf::prepareToPdf(sprintf(", %s", $str. $arProps["NAME"].": ". htmlspecialchars($arProps["VALUE"]))));
+          }
+   } 
+}
+$pdf->Write(15, CSalePdf::prepareToPdf("\n"));
+
+$pdf->SetFont($fontFamily, '', 7);
+if($arOrder["PAY_SYSTEM_ID"] == PAY_SISTEM_NDS){
+    echo GetMessage('');
+    $pdf->Write(10, CSalePdf::prepareToPdf(Loc::getMessage('PAY_SISTEM_TEXT_NDS')));
+} else {
+    $pdf->Write(10, CSalePdf::prepareToPdf(Loc::getMessage('PAY_SISTEM_TEXT_NO_NDS')));
+
+}
+$pdf->Write(15, CSalePdf::prepareToPdf("\n"));
+         
+$pdf->SetFont($fontFamily, 'B', 13);
+//выборка по нескольким свойствам (TERMINAL_DL):
+$dbOrderProps = CSaleOrderPropsValue::GetList(
+        array("SORT" => "ASC"),
+        array("ORDER_ID" => $_REQUEST["ORDER_ID"], "CODE"=>array("LOCATION"))
+    );
+    while ($arOrderProps = $dbOrderProps->GetNext()){
+        $adress_dekivery = $arOrderProps;
+        $location_adress = CSaleLocation::GetByID($adress_dekivery["VALUE"]);
+    };
+$arDeliv = CSaleDelivery::GetByID($arOrder["DELIVERY_ID"]);
+
+if($params["DELIVERY_NAME"] != 'Самовывоз'){
+    $pdf->Write(15, CSalePdf::prepareToPdf(sprintf("%s", Loc::getMessage('SALE_HPS_BILL_DELIVERY_NAME'). ' '. $arDeliv["NAME"]."\n")));
+    $pdf->Write(15, Loc::getMessage('SALE_HPS_BILL_DELIVERY_POST').', '.$location_adress["COUNTRY_NAME"].', '.$location_adress["REGION_NAME"].', '.$location_adress["CITY_NAME"]);
+    
+} else { 
+//выборка по нескольким свойствам (TERMINAL_DL):
+    $dbOrderProps = CSaleOrderPropsValue::GetList(
+        array("SORT" => "ASC"),
+        array("ORDER_ID" => $_REQUEST["ORDER_ID"], "CODE"=>array("stock"))
+    );
+    if ($arOrderProps = $dbOrderProps->GetNext()){
+        $arVal = CSaleOrderPropsVariant::GetByValue($arOrderProps["ORDER_PROPS_ID"], $arOrderProps["VALUE"]);
+    };
+  
+$order = \Bitrix\Sale\Order::load($_REQUEST['ORDER_ID']);
+
+/** @var \Bitrix\Sale\ShipmentCollection $shipmentCollection */
+$shipmentCollection = $order->getShipmentCollection();
+/** @var \Bitrix\Sale\Shipment $shipment */
+
+foreach ($shipmentCollection as $key => $shipment) {
+   
+    $ship_id = $shipment->getStoreId();
+        if($ship_id != 0){
+            $rsStore = CCatalogStore::GetList(array(), array('ID' => $ship_id), false, false, array()); 
+            if ($arStore = $rsStore->Fetch()){   
+                $store = $arStore;
+            }
+
+        }
+  
+}    
+      
+    $pdf->Write(15, Loc::getMessage('DELIVERY_S').$store["ADDRESS"]);
+
+}               
+$pdf->Write(15, CSalePdf::prepareToPdf("\n"));
+$pdf->SetFont($fontFamily, '', 10);
 $arCurFormat = CCurrencyLang::GetCurrencyFormat($params['CURRENCY']);
 $currency = preg_replace('/(^|[^&])#/', '${1}', $arCurFormat['FORMAT_STRING']);
 	$currency = strip_tags($currency);
@@ -908,13 +1024,13 @@ if ($params['BILL_SIGN_SHOW'] == 'Y')
 
 $dest = 'I';
 if ($_REQUEST['GET_CONTENT'] == 'Y')
-	$dest = 'S';
+	$dest = 'F';
 else if ($_REQUEST['DOWNLOAD'] == 'Y')
 	$dest = 'D';
-
+           
 return $pdf->Output(
 	sprintf(
-		'Schet No %s ot %s.pdf',
+		$_SERVER["DOCUMENT_ROOT"].'/upload/order_%s.pdf',
 		str_replace(
 			array(
 				chr(0), chr(1), chr(2), chr(3), chr(4), chr(5), chr(6), chr(7), chr(8), chr(9), chr(10), chr(11),
@@ -927,5 +1043,5 @@ return $pdf->Output(
 		),
 		ConvertDateTime($params['PAYMENT_DATE_INSERT'], 'YYYY-MM-DD')
 	), $dest
-);
+);  
 ?>
