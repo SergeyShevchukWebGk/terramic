@@ -29,6 +29,7 @@ define('STOCK_LOCATION_ID', 4592);  // склад в краснодаре
 define('STOCK_LOCATION_ID_2', 4593);  // склад в самаре
 define('SECTION_ID_FILM', 151);  // id раздела с пленкой
 define('ELEMENT_ID_SPOOL', 1064);  // id товара шпуля
+define('PROP_FOR_TERRAMIC', 732);  // id товара шпуля
 
 
 define('NEW_ORDER_STATUS_INDIVIDUAL_CARD_PAY', 'a');  // статус для новых заказов физлиц оплачивающих картой
@@ -232,10 +233,21 @@ function export_city(){
 AddEventHandler("sale", "OnBeforeBasketAdd", "MontageBasketAdd");
 
 function MontageBasketAdd(&$arFields) {
-    // Выведем актуальную корзину для текущего пользователя        
+    // Выведем актуальную корзину для текущего пользователя
+    //logger($arFields, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt');        
         $res = CIBlockElement::GetByID($arFields["PRODUCT_ID"]);
+        $getProp = CIBlockElement::GetProperty(
+          IBCLICK_CATALOG_ID,
+          $arFields["PRODUCT_ID"],
+          Array("sort"=>"asc"),
+          Array('CODE' => 'RAZMOTKA')
+        );
+        if($spoolProps = $getProp -> GetNext()){
+            $getSpoolProps['VALUE'] = $spoolProps['VALUE'];             
+        }
+        logger($getSpoolProps, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt'); 
         if($ar_res = $res->GetNext()){
-            if($ar_res["IBLOCK_SECTION_ID"] == SECTION_ID_FILM){                
+            if($ar_res["IBLOCK_SECTION_ID"] == SECTION_ID_FILM && $getSpoolProps['VALUE'] == PROP_FOR_TERRAMIC){                
                      $arProps = array(
                         "NAME" => 'Элемент товара',
                         "CODE" => "id_product",          
@@ -282,7 +294,7 @@ function MontageBasketAdd(&$arFields) {
             } else {
                 $ar_section = CIBlockSection::GetByID($ar_res["IBLOCK_SECTION_ID"]);
                 if($section = $ar_section->GetNext()){
-                    if($section["IBLOCK_SECTION_ID"] == SECTION_ID_FILM){
+                    if($section["IBLOCK_SECTION_ID"] == SECTION_ID_FILM && $getSpoolProps['VALUE'] == PROP_FOR_TERRAMIC){
                       $arProps = array(
                         "NAME" => '"Элемент товара',
                         "CODE" => "id_product",          
