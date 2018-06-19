@@ -340,8 +340,17 @@ function MontageBasketUpdate($ID, &$arFields){
 
         if(!is_int($arFields["ORDER_ID"])){ // если заказа еще не создан
             $res = CIBlockElement::GetByID($arFields["PRODUCT_ID"]);
+             $getProp = CIBlockElement::GetProperty(
+                  IBCLICK_CATALOG_ID,
+                  $arFields["PRODUCT_ID"],
+                  Array("sort"=>"asc"),
+                  Array('CODE' => 'RAZMOTKA')
+              );
+            if($spoolProps = $getProp -> GetNext()){
+                $getSpoolProps['VALUE'] = $spoolProps['VALUE'];             
+            }
             if($ar_res = $res->GetNext()){
-                if($ar_res["IBLOCK_SECTION_ID"] == SECTION_ID_FILM){
+                if($ar_res["IBLOCK_SECTION_ID"] == SECTION_ID_FILM && $getSpoolProps['VALUE'] == PROP_FOR_TERRAMIC){
                         $rsPrices = CPrice::GetList(array(), array( 'PRODUCT_ID' => $ar_res["ID"],'CATALOG_GROUP_ID' => 3));
                         if ($arPrice = $rsPrices->Fetch()) {
                             $ar_res = CCatalogProduct::GetByID($arFields["PRODUCT_ID"]);
@@ -436,7 +445,7 @@ function MontageBasketUpdate($ID, &$arFields){
                 } else {
                     $ar_section = CIBlockSection::GetByID($ar_res["IBLOCK_SECTION_ID"]);
                     if($section = $ar_section->GetNext()){
-                        if($section["IBLOCK_SECTION_ID"] == SECTION_ID_FILM){
+                        if($section["IBLOCK_SECTION_ID"] == SECTION_ID_FILM && $getSpoolProps['VALUE'] == PROP_FOR_TERRAMIC){
                         $rsPrices = CPrice::GetList(array(), array( 'PRODUCT_ID' => $ar_res["ID"],'CATALOG_GROUP_ID' => 3));
                             if ($arPrice = $rsPrices->Fetch()) {
                                 $ar_res = CCatalogProduct::GetByID($arFields["PRODUCT_ID"]);
