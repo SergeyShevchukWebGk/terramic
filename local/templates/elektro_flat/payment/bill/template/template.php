@@ -629,7 +629,7 @@ if ($params['BILL_TOTAL_SHOW'] == 'Y')
         {
             $cells[++$n] = array();
             for ($i = 0; $i < $columnCount; $i++)
-                $cells[$n][$arColumnKeys[$i]] = null;
+                $cells[$n][$arColumnKeys[$i]] = null;      
             $cells[$n][$arColumnKeys[$columnCount-2]] = htmlspecialcharsbx(sprintf(
                     "%s%s%s:",
                     ($tax["IS_IN_PRICE"] == "Y") ? Loc::getMessage('SALE_HPS_BILL_INCLUDING') : "",

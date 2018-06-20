@@ -138,14 +138,15 @@ function object_to_array($data)
 
 // }
   function getOrderBillPdf($orderId){
-   $payment = null;
-   CModule::IncludeModule("sale");
+   $payment = null;       
+   CModule::IncludeModule("sale");  
    if(($order = \Bitrix\Sale\Order::load($orderId))
       && ($paymentCollection = $order->getPaymentCollection())
    ){
+
       foreach($paymentCollection as $p)
          if(!$p->isInner()){
-            $payment = $p;
+            $payment = $p;   
             break;
          }
    }
