@@ -296,7 +296,7 @@ if ($params['BILL_PAYER_SHOW'] == 'Y')
 {
 	if ($params["BUYER_PERSON_COMPANY_NAME"])
 	{
-		$pdf->Write(15, CSalePdf::prepareToPdf(Loc::getMessage('SALE_HPS_BILL_BUYER_NAME', array('#BUYER_NAME#' => ''))));
+		$pdf->Write(15, CSalePdf::prepareToPdf(Loc::getMessage('_NAME', array('#BUYER_NAME#' => ''))));
 
         if($arOrder["PAY_SYSTEM_ID"] != PAY_SISTEM_NDS){
             $pdf->Write(15, CSalePdf::prepareToPdf( $params["SELLER_COMPANY_DIRECTOR_POSITION"].' '));
@@ -321,7 +321,11 @@ if ($params['BILL_PAYER_SHOW'] == 'Y')
 			$pdf->Write(15, CSalePdf::prepareToPdf(sprintf(", %s", $params["BUYER_PERSON_COMPANY_FAX"])));
 		$pdf->Ln();
 	}
-}                    
+}     
+
+CModule::IncludeModule('sale');   
+CModule::IncludeModule('iblock');
+            
 $pdf->Write(15, CSalePdf::prepareToPdf("\n"));
 // Выведем все свойства заказа с кодом $ID, сгруппированые по группам свойств
 $db_props = CSaleOrderPropsValue::GetOrderProps($_REQUEST["ORDER_ID"]);
@@ -424,7 +428,7 @@ foreach ($shipmentCollection as $key => $shipment) {
   
 }    
       
-    $pdf->Write(15, Loc::getMessage('DELIVERY_S').$store["ADDRESS"]);
+    $pdf->Write(15, Loc::getMessage('DELIVERY_S').' '.$store["ADDRESS"]);
 
 }               
 $pdf->Write(15, CSalePdf::prepareToPdf("\n"));
@@ -865,7 +869,7 @@ for ($n = 1; $n <= $rowsCnt; $n++)
 $pdf->Ln();
 
 // Выведем актуальную корзину для текущего пользователя
-CModule::IncludeModule('iblock');
+
 $WIDTH = 0;
 $AMOUNT = 0;
 $dbBasketItems = CSaleBasket::GetList(
@@ -942,7 +946,11 @@ if ($params['BILL_TOTAL_SHOW'] == 'Y')
 	$pdf->SetFont($fontFamily, 'B', $fontSize);
 	if (in_array($params['CURRENCY'], array("RUR", "RUB")))
 	{
-		$pdf->Write(15, CSalePdf::prepareToPdf(Number2Word_Rus($params['SUM'])));
+        $text_width = CSalePdf::prepareToPdf(Number2Word_Rus($params['SUM']));
+        list($string, $text_width) = $pdf->splitString($text_width, 305);
+        $pdf->SetX($pdf->GetX() );         
+        $pdf->Cell(300, 10, $string, 0, 0, 'L');
+		//$pdf->Write(15, CSalePdf::prepareToPdf(Number2Word_Rus($params['SUM'])));
 	}
 	else
 	{
@@ -955,11 +963,11 @@ if ($params['BILL_TOTAL_SHOW'] == 'Y')
         $pdf->SetFont($fontFamily, '', $fontSize);
 
         $text_amount = CSalePdf::prepareToPdf(Loc::getMessage('SALE_HPS_BILL_AMOUNT'));
-        $textWidth = 60;
+        $textWidth = 0;
             while ($pdf->GetStringWidth($text_amount)) {
                 list($string, $text_amount) = $pdf->splitString($text_amount, 305);
                 $pdf->SetX($pdf->GetX() );         
-                $pdf->Cell(305, 10, $string, 0, 0, 'R');
+                $pdf->Cell(140, 10, $string, 0, 0, 'R');
                 $pdf->Cell($textWidth, 10, $AMOUNT, 0, 0, 'R');
                 $pdf->Ln();
             }
@@ -1032,8 +1040,10 @@ if ($params['BILL_SIGN_SHOW'] == 'Y')
         $sellerDirPos = CSalePdf::prepareToPdf($params["SELLER_COMPANY_DIRECTOR_POSITION"]);
 
          if ($params["SELLER_COMPANY_DIRECTOR_NAME"] && $arOrder["PAY_SYSTEM_ID"] != PAY_SISTEM_NDS) { 
-            $pdf->Write(10, CSalePdf::prepareToPdf($params["SELLER_COMPANY_DIRECTOR_POSITION"]));; 
-            $pdf->Write(10, CSalePdf::prepareToPdf($params["SELLER_COMPANY_DIRECTOR_NAME"]));; 
+            $text_width = CSalePdf::prepareToPdf($params["SELLER_COMPANY_DIRECTOR_POSITION"].' '.$params["SELLER_COMPANY_DIRECTOR_NAME"]);
+            list($string, $text_width) = $pdf->splitString($text_width, 100);
+            $pdf->SetX($pdf->GetX() );         
+            $pdf->Cell(150, 10, $string, 0, 0, 'L');
         } else { 
             $pdf->Write(10, CSalePdf::prepareToPdf(Loc::getMessage('RK_MESSAGE').'                     '. $sellerDirPos));
             $pdf->Ln();
@@ -1077,7 +1087,14 @@ if ($params['BILL_SIGN_SHOW'] == 'Y')
 		
         $y2 = $pdf->GetY();
 		$pdf->Line($x1, $y2, $x2, $y2);
-
+        
+        $pdf->SetFont($fontFamily, 'B', $fontSize);
+         if ($params["SELLER_COMPANY_DIRECTOR_NAME"] && $arOrder["PAY_SYSTEM_ID"] != PAY_SISTEM_NDS) { 
+            $text_width = CSalePdf::prepareToPdf('предприниматель '.$params["SELLER_COMPANY_DIRECTOR_NAME"]);
+            list($string, $text_width) = $pdf->splitString($text_width, 250);
+            $pdf->SetX($pdf->GetX() );         
+            $pdf->Cell(150, 20, $string, 0, 0, 'L');
+         }
         $pdf->Ln();
         $pdf->Ln();
         $pdf->Write(15, CSalePdf::prepareToPdf("\n"));

@@ -137,7 +137,7 @@ function object_to_array($data)
 //     }
 
 // }
-  function getOrderBillPdf($orderId){
+function getOrderBillPdf($orderId){
    $payment = null;       
    CModule::IncludeModule("sale");  
    if(($order = \Bitrix\Sale\Order::load($orderId))
@@ -158,6 +158,7 @@ function object_to_array($data)
       $context = \Bitrix\Main\Application::getInstance()->getContext();
       $_REQUEST['pdf'] = 
       $_REQUEST['GET_CONTENT'] = 'Y';
+      $_REQUEST['ORDER_ID'] = $orderId;
       if(($res = $service->initiatePay($payment,$context->getRequest(),\Bitrix\Sale\PaySystem\BaseServiceHandler::STRING))
          && $res->isSuccess()
       ){
