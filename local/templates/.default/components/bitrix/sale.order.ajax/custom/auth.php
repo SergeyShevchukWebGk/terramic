@@ -111,6 +111,9 @@
 								<input type="text" name="NEW_LAST_NAME" size="40" value="<?=$arResult["AUTH"]["NEW_LAST_NAME"]?>"/>
 							</td>
 						</tr>
+
+						<tr>
+
 						<tr>
 							<td>
 								E-Mail <span class="sof-req">*</span>

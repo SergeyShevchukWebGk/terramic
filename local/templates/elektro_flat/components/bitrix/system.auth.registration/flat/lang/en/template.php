@@ -2,6 +2,7 @@
 $MESS["AUTH_REGISTER"] = "Register";
 $MESS["AUTH_NAME"] = "Name";
 $MESS["AUTH_LAST_NAME"] = "Last Name";
+$MESS["AUTH_SECOND_NAME"] = "Second Name";
 $MESS["AUTH_LOGIN_MIN"] = "Login (min. 3 char.)";
 $MESS["AUTH_CONFIRM"] = "Password confirmation";
 $MESS["CAPTCHA_REGF_PROMT"] = "Type text from image";

@@ -111,6 +111,15 @@
                                 <input type="text" name="NEW_LAST_NAME" size="40" value="<?=$arResult["AUTH"]["NEW_LAST_NAME"]?>"/>
                             </td>
                         </tr>
+
+                        <tr>
+                            <td>
+                                <?=GetMessage("STOF_SECONDNAME")?> <?/*<span class="sof-req">*</span>*/?>
+                                <br />
+                                <input type="text" name="NEW_SECOND_NAME" size="40" value="<?=$arResult["AUTH"]["NEW_SECOND_NAME"]?>"/>
+                            </td>
+                        </tr>
+
                         <tr>
                             <td>
                                 E-Mail <span class="sof-req">*</span>

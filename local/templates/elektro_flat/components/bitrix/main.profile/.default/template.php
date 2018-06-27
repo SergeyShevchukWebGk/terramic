@@ -1,4 +1,7 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<!-- <pre>
+<?//var_dump($arResult);?>
+</pre> -->
 
 <?=ShowError($arResult["strProfileError"]);?>
 <?if($arResult['DATA_SAVED'] == 'Y')
@@ -21,6 +24,14 @@
 				
 				<?=GetMessage('LAST_NAME')?><br>
 				<input type="text" name="LAST_NAME" maxlength="50" class="input_text_style" value="<?=$arResult["arUser"]["LAST_NAME"]?>" />
+				<br><br>
+
+				<?=GetMessage('SECOND_NAME')?><br>
+				<input type="text" name="SECOND_NAME" maxlength="50" class="input_text_style" value="<?=$arResult["arUser"]["SECOND_NAME"]?>" />
+				<br><br>
+
+				<?=GetMessage('EMAIL')?><br>
+				<input type="text" name="EMAIL" maxlength="50" class="input_text_style" value="<?=$arResult["arUser"]["EMAIL"]?>" />
 				<br><br>
 
 				<?=GetMessage('PERSONAL_PHOTO')?><br>
