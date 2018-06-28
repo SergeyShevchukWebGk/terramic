@@ -92,6 +92,9 @@ global $arSetting,$arSettingsSolo;
 				<div class="catalog-item-info">							
 					<?//ITEM_PREVIEW_PICTURE//?>
 					<div class="item-image-cont">
+                    <?if($arElement["PROPERTIES"]["RAZMOTKA"]["VALUE"]){?>
+                        <span class="razmotka">&#9988;</span>
+                    <?}?>
 						<div class="item-image">								
 							<meta content="<?=(is_array($arElement['PREVIEW_PICTURE']) ? $arElement['PREVIEW_PICTURE']['SRC'] : SITE_TEMPLATE_PATH.'/images/no-photo.jpg');?>" itemprop="image" />
 							<a href="<?=$arElement['DETAIL_PAGE_URL']?>">

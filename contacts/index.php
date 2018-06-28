@@ -8,7 +8,8 @@ $APPLICATION->SetTitle("Контакты");?><h2>
 	 Адрес: Самарская область, с. Кинель-Черкассы, ул.Казакова 37а.
 </p>
 <p>
-	 Тел.: +7 (846) 233-52-03
+	 Тел.: 
+<a href="tel:+78462335203">+7 (846) 233-52-03</a>
 </p>
 <p>
 	 E-mail: <a href="mailto:zakaz@terramic.ru">zakaz@terramic.ru</a>
@@ -55,7 +56,8 @@ $APPLICATION->SetTitle("Контакты");?><h2>
 	 Адрес: Самарская область, с. Кинель-Черкассы, ул.Казакова 37а.
 </p>
 <p>
-	 Тел.: +7 (846) 233-52-03
+	 Тел.:
+<a href="tel:+78462335203">+7 (846) 233-52-03</a>
 </p>
 <p>
 	 E-mail: <a href="mailto:zakaz@terramic.ru">zakaz@terramic.ru</a><br>
@@ -88,16 +90,17 @@ $APPLICATION->SetTitle("Контакты");?><h2>
 		"MAP_WIDTH" => "100%",
 		"OPTIONS" => array(0=>"ENABLE_DBLCLICK_ZOOM",1=>"ENABLE_DRAGGING",)
 	)
-);?>&nbsp; <br>
+);?>  <br>
 <hr>
 <h2><br>
  </h2>
-<h2>Филиал ООО «ТЕРРАМИК»</h2>
- &nbsp;&nbsp;<br>
+<h2>ИП Вертянкина Татьяна Викторовна</h2>
+   <br>
  Адрес: Краснодарский край, Усть-Лабинский район, станица Воронежская, ул.Садовая 5а<br>
  <br>
 <p>
-	 Тел.: +7 (861) 212-12-01
+	 Тел.:
+<a href="tel:+78612121201">+7 (861) 212-12-01</a>
 </p>
 <p>
 	 E-mail: <a href="mailto:zakaz@terramic.ru">zakaz@terramic.ru</a><br>

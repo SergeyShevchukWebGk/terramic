@@ -557,7 +557,7 @@ function OnBeforeBasketDeleteHandler($ID) {
                 array("ID","PRODUCT_ID")
             );
         while ($arItem = $dbBasketItem->Fetch()){
-            //logger($arItem, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt');
+            logger($arItem, $_SERVER["DOCUMENT_ROOT"].'/map/log_1_delete_shpool.txt');
             if($arItems["PRODUCT_ID"] == ELEMENT_ID_SPOOL && $arItems["QUANTITY"] > 1){
                 $ratio_update = array("QUANTITY" => $arItems["QUANTITY"] - 1);
                 CSaleBasket::Update($arItems["ID"], $ratio_update); 
