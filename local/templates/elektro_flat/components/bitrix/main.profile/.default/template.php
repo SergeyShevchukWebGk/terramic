@@ -23,6 +23,14 @@
 				<input type="text" name="LAST_NAME" maxlength="50" class="input_text_style" value="<?=$arResult["arUser"]["LAST_NAME"]?>" />
 				<br><br>
 
+				<?=GetMessage('SECOND_NAME')?><br>
+				<input type="text" name="SECOND_NAME" maxlength="50" class="input_text_style" value="<?=$arResult["arUser"]["SECOND_NAME"]?>" />
+				<br><br>
+
+				<?=GetMessage('EMAIL')?><br>
+				<input type="text" name="EMAIL" maxlength="50" class="input_text_style" value="<?=$arResult["arUser"]["EMAIL"]?>" />
+				<br><br>
+
 				<?=GetMessage('PERSONAL_PHOTO')?><br>
 				<?if(empty($arResult["arUser"]["PERSONAL_PHOTO"])):?>
 					<input type="file" name="PERSONAL_PHOTO" size="20" class="typefile" />

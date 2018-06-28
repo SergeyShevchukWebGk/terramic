@@ -493,10 +493,11 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
 
 <?if(CSaleLocation::isLocationProEnabled()):?>
     <div style="display: none">
-        <?$APPLICATION->IncludeComponent("bitrix:sale.location.selector.steps", ".default",
-            array(),
-            false
-        );?>
+        <?$APPLICATION->IncludeComponent("bitrix:sale.location.selector.steps", ".default", Array(
+	
+	),
+	false
+);?>
         <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.location.selector.search", 
 	"geolocation", 

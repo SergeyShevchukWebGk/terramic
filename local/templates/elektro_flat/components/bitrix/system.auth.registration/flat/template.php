@@ -59,6 +59,13 @@ if(!empty($arParams["~AUTH_RESULT"])):
 		</div>
 
 		<div class="bx-authform-formgroup-container">
+			<div class="bx-authform-label-container"><?=GetMessage("AUTH_SECOND_NAME")?></div>
+			<div class="bx-authform-input-container">
+				<input type="text" name="USER_SECOND_NAME" maxlength="255" value="<?=$arResult["USER_SECOND_NAME"]?>" />
+			</div>
+		</div>
+
+		<div class="bx-authform-formgroup-container">
 			<div class="bx-authform-label-container"><span class="bx-authform-starrequired">*</span><?=GetMessage("AUTH_LOGIN_MIN")?></div>
 			<div class="bx-authform-input-container">
 				<input type="text" name="USER_LOGIN" maxlength="255" value="<?=$arResult["USER_LOGIN"]?>" />

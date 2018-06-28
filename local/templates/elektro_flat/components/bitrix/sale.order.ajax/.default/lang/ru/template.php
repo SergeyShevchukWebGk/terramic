@@ -49,6 +49,7 @@ $MESS['STOF_FORGET_PASSWORD'] = "Напомнить пароль";
 $MESS['STOF_LOGIN_AS_USER'] = "Войти как пользователь:";
 $MESS['STOF_NAME'] = "Имя";
 $MESS['STOF_LASTNAME'] = "Фамилия";
+$MESS['STOF_SECONDNAME'] = "Отчество";
 $MESS['STOF_MY_PASSWORD'] = "Задать логин и пароль";
 $MESS['STOF_RE_PASSWORD'] = "Повтор пароля";
 $MESS['STOF_SYS_PASSWORD'] = "Сгенерировать логин и пароль";
