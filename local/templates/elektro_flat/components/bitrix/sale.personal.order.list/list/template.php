@@ -207,8 +207,9 @@ else
                                         /** @var \Bitrix\Sale\Shipment $shipment */
                                         // получаем адрес склада самовывоза
                                         foreach ($shipmentCollection as $key => $shipment) { 
-                                           
-                                            $ship_id = $shipment->getStoreId();
+                                             if ($shipment->isSystem())
+                                                    continue;
+                                             $ship_id = $shipment->getStoreId();
                                                 if($ship_id != 0){  
                                                     $rsStore = CCatalogStore::GetList(array(), array('ID' => $ship_id), false, false, array()); 
                                                     while ($arStore = $rsStore->Fetch()){   
@@ -216,9 +217,11 @@ else
                                                     }
 
                                                 }
-                                                                              
-                                        }                                
+                                             $number_id = $shipment->getField('DELIVERY_DOC_NUM');
+                                             $date_shipment = $shipment->getField('DELIVERY_DOC_DATE');                               
+                                        }  
 										foreach($val["ORDER"]["ORDER_PROPS"] as $orderProps) {?>
+                                        
                                         <?if($orderProps["CODE"] != "delivery_type"){?>
 											<tr>
 												<?
@@ -257,10 +260,20 @@ else
 										<?}
                                         }
 									}?>
-									<?if(strlen($val["ORDER"]["USER_DESCRIPTION"])>0):?>
+                                    <?if(strlen($val["ORDER"]["USER_DESCRIPTION"])>0):?>
+                                        <tr>
+                                            <td class="field-name"><?=GetMessage("STPOL_ORDER_USER_COMMENT")?></td>
+                                            <td class="field-value"><?=$val["ORDER"]["USER_DESCRIPTION"]?></td>
+                                        </tr>
+                                    <?endif;?>    
+									<?if($number_id):?>
 										<tr>
-											<td class="field-name"><?=GetMessage("STPOL_ORDER_USER_COMMENT")?></td>
-											<td class="field-value"><?=$val["ORDER"]["USER_DESCRIPTION"]?></td>
+                                            <td class="field-name"><?=GetMessage("SHIPMENT_ID")?></td>
+                                            <td class="field-value"><?=$number_id?></td>
+                                        </tr>
+                                        <tr>
+											<td class="field-name"><?=GetMessage("DATE_SHIPMENT")?></td>
+											<td class="field-value"><?=date('d.m.Y', $date_shipment->getTimestamp())?></td>
 										</tr>
 									<?endif;?>
 								</table>
