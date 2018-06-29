@@ -90,7 +90,7 @@ if(!empty($arResult["ITEMS"])):
        function native_btn(){             
             $('button[name="add2basket"] i').removeClass("fa-check");
             $('button[name="add2basket"] i').addClass("fa-shopping-cart");
-            $('button[name="add2basket"] span').text("В корзину");
+            $('button[name="add2basket"] span').text("Р’ РєРѕСЂР·РёРЅСѓ");
             $('button[name="add2basket"]').prop("disabled", false);
             }
        $(document).ready(function(){
@@ -174,6 +174,9 @@ if(!empty($arResult["ITEMS"])):
 						<div class="catalog-item-info">
 							<?//ITEM_PREVIEW_PICTURE//?>
 							<div class="item-image-cont">
+                                <?if($arItem["PROPERTIES"]["RAZMOTKA"]["VALUE"]){?>
+                                    <span class="razmotka">Размотка</span>
+                                <?}?>
 								<div class="item-image">
 									<a href="<?=$arItem['DETAIL_PAGE_URL']?>">
 										<?if(is_array($arItem["PREVIEW_PICTURE"])):?>

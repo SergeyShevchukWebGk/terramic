@@ -78,6 +78,9 @@ global $arSetting,$arSettingsSolo;
 				<div class="catalog-item-info">							
 					<?//ITEM_PREVIEW_PICTURE//?>
 					<div class="item-image-cont">
+                        <?if($arElement["PROPERTIES"]["RAZMOTKA"]["VALUE"]){?>
+                            <span class="razmotka">Размотка</span>
+                        <?}?>
 						<div class="item-image">
 							<a href="<?=$arElement['DETAIL_PAGE_URL']?>">
 								<?if(is_array($arElement["PREVIEW_PICTURE"])):?>

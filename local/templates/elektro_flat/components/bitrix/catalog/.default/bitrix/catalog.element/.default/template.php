@@ -211,6 +211,9 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 					//DETAIL_PICTURE//
 					else:?>	
 						<div class="detail_picture">
+                            <?if($arResult["PROPERTIES"]["RAZMOTKA"]["VALUE"]){?>
+                                <span class="razmotka_detail">Размотка</span>
+                            <?}?>
 							<meta content="<?=is_array($arResult['DETAIL_IMG']) ? $arResult['DETAIL_PICTURE']['SRC'] : SITE_TEMPLATE_PATH.'/images/no-photo.jpg'?>" itemprop="image" />
 							<?if(is_array($arResult["DETAIL_IMG"])):?>
 								<a rel="lightbox" class="catalog-detail-images fancybox" href="<?=$arResult['DETAIL_PICTURE']['SRC']?>"> 
