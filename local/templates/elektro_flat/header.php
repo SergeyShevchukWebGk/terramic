@@ -438,6 +438,17 @@ Loc::loadMessages(__FILE__);?>
 								false
 								);?>
 							</div>
+
+                            <?$APPLICATION->IncludeComponent("bitrix:main.include", "",
+                                array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "PATH" => SITE_DIR."include/razmotka.php",
+                                    "AREA_FILE_RECURSIVE" => "N",
+                                    "EDIT_MODE" => "html",
+                                ),
+                                false,
+                                array("HIDE_ICONS" => "Y")
+                                );?>
 							<?$APPLICATION->IncludeComponent("bitrix:main.include", "",
 								array(
 									"AREA_FILE_SHOW" => "file",

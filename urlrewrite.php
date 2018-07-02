@@ -69,6 +69,14 @@ $arUrlRewrite=array (
     'CONDITION' => '#^/catalog/#',
     'RULE' => '',
     'ID' => 'bitrix:catalog',
+    'PATH' => '/catalog/razmotka/index.php',
+    'SORT' => 100,
+  ),
+  11 => 
+  array (
+    'CONDITION' => '#^/catalog/#',
+    'RULE' => '',
+    'ID' => 'bitrix:catalog',
     'PATH' => '/catalog/index.php',
     'SORT' => 100,
   ),
