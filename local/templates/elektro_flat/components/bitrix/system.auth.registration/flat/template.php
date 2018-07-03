@@ -90,7 +90,8 @@ document.getElementById('bx_auth_secure').style.display = '';
 			<div class="bx-authform-label-container"><span class="bx-authform-starrequired">*</span><?=GetMessage("AUTH_CONFIRM")?></div>
 			<div class="bx-authform-input-container">
 <?if($arResult["SECURE_AUTH"]):?>
-				<div class="bx-authform-psw-protected" id="bx_auth_secure_conf" style="display:none"><div class="bx-authform-psw-protected-desc"><span></span><?echo GetMessage("AUTH_SECURE_NOTE")?></div></div>
+				<div class="bx-authform-psw-protected" id="bx_auth_secure_conf" style="display:none">
+					<div class="bx-authform-psw-protected-desc"><span></span><?echo GetMessage("AUTH_SECURE_NOTE")?></div></div>
 
 <script type="text/javascript">
 document.getElementById('bx_auth_secure_conf').style.display = '';

@@ -7759,6 +7759,19 @@ table.compare-grid .delay .catalog-item-delayed i:nth-child(2){
 	padding:10px;
 }
 
+.myorders .person_type_in,
+.myorders .order-info_in,
+.personal .personal-info_in,
+.bx-authform-label-container{
+	width: 380px;
+}
+
+.myorders .person_type_in,
+.myorders .order-info_in,
+.personal .personal-info_in span{
+	color: #d93333;
+}
+
 .myorders .order-info_in table .store{
 	width:100%;
 	display:table;
