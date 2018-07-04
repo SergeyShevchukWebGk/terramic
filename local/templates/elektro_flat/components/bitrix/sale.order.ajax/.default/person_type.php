@@ -1,7 +1,6 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 
 <?if(count($arResult["PERSON_TYPE"]) > 1) {?>
-<div style="display: none;"><?arshow($_SESSION["PERSON_TYPE_CHECKED"])?></div>
 <div style="display: none;"><?arshow($_POST)?></div>
 <div style="display: none;"><?arshow($arResult["PERSON_TYPE"])?></div>
 	<?if(empty($_POST["PERSON_TYPE"])){
