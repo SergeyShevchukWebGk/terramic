@@ -47,6 +47,9 @@ if(!function_exists("showFilePropertyField")) {
 if(!function_exists("PrintPropsForm")) {
     function PrintPropsForm($arSource = array(), $locationTemplate = ".default") {
         $group = '0';
+        // echo("<pre>");
+        // print_r($arSource);
+        // echo("</pre>");
         if(!empty($arSource)) {
             foreach($arSource as $arProperties) {
 
@@ -198,14 +201,14 @@ if(!function_exists("PrintPropsForm")) {
                                 <?endif;?>
                             </div>
                             <?   
-                            $value = '';?><?                                    
-                                if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 8 && $arProperties["CODE"] == 'COMPANY_ADR_ACT'){
-                                   //  $value = 'Самарская область, с. Кинель-Черкассы, ул.Казакова 37а.';
-                                } else  if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 3 && $arProperties["CODE"] == 'COMPANY_ADR_ACT'){
-                                     //$value = 'Краснодарский край, Усть-Лабинский район, станица Воронежская, ул.Садовая 5а.';
-                                } else if($_POST["DELIVERY_ID"] != DELIVERY_STOCK && $arProperties["CODE"] == 'COMPANY_ADR_ACT'){
-                                   //  $value = ' ';
-                                };
+                            $value = '';        
+                            if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 8 && $arProperties["CODE"] == 'COMPANY_ADR_ACT'){
+                                 $value = 'Самарская область, с. Кинель-Черкассы, ул.Казакова 37а.';
+                            } else  if($_POST["DELIVERY_ID"] == DELIVERY_STOCK && $_POST["BUYER_STORE"] == 3 && $arProperties["CODE"] == 'COMPANY_ADR_ACT'){
+                                 $value = 'Краснодарский край, Усть-Лабинский район, станица Воронежская, ул.Садовая 5а';
+                            } else if($_POST["DELIVERY_ID"] != DELIVERY_STOCK && $arProperties["CODE"] == 'COMPANY_ADR_ACT'){
+                                 $value = ' ';
+                            };
                             ?>
                             <div class="block">  
                                 <textarea rows="<?=$arProperties["SIZE2"]?>" cols="<?=$arProperties["SIZE1"]?>" name="<?=$arProperties["FIELD_NAME"]?>" id="<?=$arProperties["FIELD_NAME"]?>" placeholder="<?=$arProperties["DESCRIPTION"]?>"><?=($value )?$value:$arProperties["VALUE"]?></textarea>
