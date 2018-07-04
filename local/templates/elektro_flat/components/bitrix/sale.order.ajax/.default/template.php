@@ -241,16 +241,16 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
                     // проставление транспортной компании
                      if(check_val == 1){
                         $('.transport_service select option').removeAttr('selected');
-                        $('.transport_service select option:nth-child(4)').attr("selected", "selected");  // кит
+                        $('.transport_service select option:nth-child(3)').attr("selected", "selected");
                      } else if(check_val == 2){
                         $('.transport_service select option').removeAttr('selected');
-                        $('.transport_service select option:nth-child(3)').attr("selected", "selected"); // байкал сервис
+                        $('.transport_service select option:nth-child(1)').attr("selected", "selected");
                      } else if(check_val == 3){
                         $('.transport_service select option').removeAttr('selected');
-                        $('.transport_service select option:nth-child(1)').attr("selected", "selected");   // деловые линии
+                        $('.transport_service select option:nth-child(4)').attr("selected", "selected");
                      } else if(check_val == 4){
                         $('.transport_service select option').removeAttr('selected');
-                        $('.transport_service select option:nth-child(2)').attr("selected", "selected");     // ПЭК
+                        $('.transport_service select option:nth-child(2)').attr("selected", "selected");
                      }
 
                 }
@@ -493,11 +493,10 @@ CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));?>
 
 <?if(CSaleLocation::isLocationProEnabled()):?>
     <div style="display: none">
-        <?$APPLICATION->IncludeComponent("bitrix:sale.location.selector.steps", ".default", Array(
-	
-	),
-	false
-);?>
+        <?$APPLICATION->IncludeComponent("bitrix:sale.location.selector.steps", ".default",
+            array(),
+            false
+        );?>
         <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.location.selector.search", 
 	"geolocation", 
