@@ -52,12 +52,13 @@
 		<h2><?=GetMessage("MAIN_PSWD")?></h2>
 		<div class="personal-info">
 			<div class="personal-info_in">
-				<?=GetMessage('NEW_PASSWORD_REQ')?><br>
+			<div class="bx-authform-label-container"><span class="bx-authform-starrequired">*</span><?=GetMessage("AUTH_PASSWORD_REQ")?></div><br>
 				<input type="password" name="NEW_PASSWORD" maxlength="50" class="input_text_style" value="" autocomplete="off" />
 				<br><br>
 
-				<?=GetMessage('NEW_PASSWORD_CONFIRM')?><br>
+				<span class="bx-authform-starrequired">*</span><?=GetMessage('NEW_PASSWORD_CONFIRM')?><br>
 				<input type="password" name="NEW_PASSWORD_CONFIRM" maxlength="50" class="input_text_style" value="" autocomplete="off" />
+
 			</div>
 		</div>
 

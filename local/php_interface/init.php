@@ -419,7 +419,7 @@ function MontageBasketUpdate($ID, &$arFields){
                                                 $ratio_update = array("QUANTITY" => $arItems["QUANTITY"] - 1);
                                                 CSaleBasket::Update($arItems["ID"], $ratio_update); 
                                             } else if(!in_array($arFields["PRODUCT_ID"], $ar_indent_element) && $arItems["PRODUCT_ID"] == ELEMENT_ID_SPOOL){
-
+                                                   logger(date().' '.$arFields, $_SERVER["DOCUMENT_ROOT"].'/map/log_del.txt');
                                                     $dbProp = CSaleBasket::GetPropsList(
                                                            Array(
                                                               "ID" => "DESC"
@@ -499,7 +499,7 @@ function MontageBasketUpdate($ID, &$arFields){
                                                     $ratio_update = array("QUANTITY" => $arItems["QUANTITY"] - 1);
                                                     CSaleBasket::Update($arItems["ID"], $ratio_update); 
                                                 } else if(!in_array($arFields["PRODUCT_ID"], $ar_indent_element) && $arItems["PRODUCT_ID"] == ELEMENT_ID_SPOOL){
-
+                                                   logger(date().' '.$arFields, $_SERVER["DOCUMENT_ROOT"].'/map/log_del_2.txt');
                                                         $dbProp = CSaleBasket::GetPropsList(
                                                                Array(
                                                                   "ID" => "DESC"
@@ -562,6 +562,8 @@ function OnBeforeBasketDeleteHandler($ID) {
                 $ratio_update = array("QUANTITY" => $arItems["QUANTITY"] - 1);
                 CSaleBasket::Update($arItems["ID"], $ratio_update); 
             } else if($arItem["PRODUCT_ID"] == ELEMENT_ID_SPOOL){
+                    logger(date().' '.$arFields, $_SERVER["DOCUMENT_ROOT"].'/map/log_del_3.txt');
+
                     $dbProp = CSaleBasket::GetPropsList(
                                Array(
                                   "ID" => "DESC"
