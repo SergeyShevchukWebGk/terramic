@@ -90,7 +90,7 @@ if(!empty($arResult["ITEMS"])):
        function native_btn(){             
             $('button[name="add2basket"] i').removeClass("fa-check");
             $('button[name="add2basket"] i').addClass("fa-shopping-cart");
-            $('button[name="add2basket"] span').text("Р’ РєРѕСЂР·РёРЅСѓ");
+            $('button[name="add2basket"] span').text("В корзину");
             $('button[name="add2basket"]').prop("disabled", false);
             }
        $(document).ready(function(){
