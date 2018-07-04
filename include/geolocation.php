@@ -17,6 +17,13 @@
 	)
 );?>
 */?>
+
+
+
+
+
+
+
 <div class="telephone">
 	<table cellpadding="1" cellspacing="1">
 	<tbody>
@@ -32,10 +39,10 @@
  <i class="fa fa-phone"></i>Волгоград:
 			</p>
 			<p>
- <i class="fa fa-phone"></i>Viber:
+ <i class="fab fa-viber"></i>Viber:
 			</p>
 			<p>
- <i class="fa fa-phone"></i>WhatsApp:
+ <i class="fab fa-whatsapp"></i>WhatsApp:
 			</p>
 		</td>
 		<td>
