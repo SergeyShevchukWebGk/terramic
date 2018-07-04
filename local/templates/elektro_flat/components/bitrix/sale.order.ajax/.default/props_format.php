@@ -47,8 +47,6 @@ if(!function_exists("showFilePropertyField")) {
 if(!function_exists("PrintPropsForm")) {
     function PrintPropsForm($arSource = array(), $locationTemplate = ".default") {
         $group = '0';
-        // print_r($arSource);
-        // echo("</pre>");
         if(!empty($arSource)) {
             foreach($arSource as $arProperties) {
 
