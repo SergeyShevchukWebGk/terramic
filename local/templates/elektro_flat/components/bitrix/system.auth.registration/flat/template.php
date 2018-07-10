@@ -14,12 +14,17 @@
  * @var CBitrixComponentTemplate $this
  */
 
+
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
 //one css for all system.auth.* forms
 $APPLICATION->SetAdditionalCSS("/bitrix/css/main/system.auth/flat/style.css");
 ?>
 <div class="bx-authform">
+
+<pre>
+<?var_dump($arResult);?>
+</pre>
 
 <?
 if(!empty($arParams["~AUTH_RESULT"])):
@@ -121,7 +126,6 @@ $APPLICATION->IncludeComponent(
 ?>
 			</div>
 		</div>
-
 	<?endforeach;?>
 <?endif;?>
 <?if ($arResult["USE_CAPTCHA"] == "Y"):?>
@@ -156,6 +160,7 @@ $APPLICATION->IncludeComponent(
 							"fields" => array(
 								rtrim(GetMessage("AUTH_NAME"), ":"),
 								rtrim(GetMessage("AUTH_LAST_NAME"), ":"),
+								rtrim(GetMessage("AUTH_SECOND_NAME"), ":"),
 								rtrim(GetMessage("AUTH_LOGIN_MIN"), ":"),
 								rtrim(GetMessage("AUTH_PASSWORD_REQ"), ":"),
 								rtrim(GetMessage("AUTH_EMAIL"), ":"),
@@ -176,7 +181,7 @@ $APPLICATION->IncludeComponent(
                       "IS_LOADED" => $arParams["USER_CONSENT_IS_LOADED"],
                       "REPLACE" => array(
                        'button_caption' => 'Регистрация',
-                       'fields' => array('Имя','Фамилия','Email')
+                       'fields' => array('Имя','Фамилия','Отчество','Email')
                       ),
                   )
                  );?>

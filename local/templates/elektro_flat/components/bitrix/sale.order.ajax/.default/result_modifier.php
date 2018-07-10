@@ -79,11 +79,11 @@ if(!$USER->IsAuthorized() && CModule::IncludeModule("socialservices")) {
     }
 }
 
-// Выведем актуальную корзину для текущего пользователя
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 CModule::IncludeModule('iblock');
 foreach ($arResult["BASKET_ITEMS"] as $arItems){
     $k = 0;
-    while( $k < 12){  // перебираем все свойства с объемами товара
+    while( $k < 12){  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         if($k == 0){
             $params_width = 'VES_KG'; 
         } else {
@@ -91,7 +91,7 @@ foreach ($arResult["BASKET_ITEMS"] as $arItems){
         }
         $width_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => $params_width));
             while ($am = $width_number->Fetch()){
-                if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
+                if(!empty($am["VALUE_ENUM"])){  //  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ 
                     $number = floatval(str_replace(",", ".", $am["VALUE_ENUM"]));   
                     $number = $number * $arItems["QUANTITY"];                            
                     $arResult["WIDTH"] += $number;   
@@ -100,7 +100,7 @@ foreach ($arResult["BASKET_ITEMS"] as $arItems){
     $k++;
     }
     $i = 0;
-    while( $i < 12){  // перебираем все свойства с объемами товара
+    while( $i < 12){  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         if($k == 0){
             $params_amount = 'OBEM_M3'; 
         } else {
@@ -108,7 +108,7 @@ foreach ($arResult["BASKET_ITEMS"] as $arItems){
         }
         $amount_number = CIBlockElement::GetProperty(IBCLICK_CATALOG_ID, $arItems["PRODUCT_ID"], array(), array("CODE" => $params_amount));
             while ($am = $amount_number->Fetch()){
-                if(!empty($am["VALUE_ENUM"])){  //  проверим чтобюы они были 
+                if(!empty($am["VALUE_ENUM"])){  //  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ 
                     $number_am = floatval(str_replace(",", ".", $am["VALUE_ENUM"])) * 10; 
                     $number_am = $number_am * $arItems["QUANTITY"];                                                          
                     $arResult["AMOUNT"] += $number_am;   
@@ -124,4 +124,9 @@ if($arResult["AMOUNT"] > 0.001){
 } else {
     $arResult["AMOUNT"] = 0.001;
     }
+
+if ($arResult["POST"]["NEW_SECOND_NAME"]){
+    $arResult["AUTH"]["NEW_SECOND_NAME"] = $arResult["POST"]["NEW_SECOND_NAME"];
+}
+
 ?>
