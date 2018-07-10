@@ -21,11 +21,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 $APPLICATION->SetAdditionalCSS("/bitrix/css/main/system.auth/flat/style.css");
 ?>
 <div class="bx-authform">
-
-<pre>
-<?var_dump($arResult);?>
-</pre>
-
 <?
 if(!empty($arParams["~AUTH_RESULT"])):
 	$text = str_replace(array("<br>", "<br />"), "\n", $arParams["~AUTH_RESULT"]["MESSAGE"]);
