@@ -211,6 +211,9 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 					//DETAIL_PICTURE//
 					else:?>	
 						<div class="detail_picture">
+                            <?if($arResult["PROPERTIES"]["RAZMOTKA"]["VALUE"]){?>
+                                <span class="razmotka_detail">Размотка</span>
+                            <?}?>
 							<meta content="<?=is_array($arResult['DETAIL_IMG']) ? $arResult['DETAIL_PICTURE']['SRC'] : SITE_TEMPLATE_PATH.'/images/no-photo.jpg'?>" itemprop="image" />
 							<?if(is_array($arResult["DETAIL_IMG"])):?>
 								<a rel="lightbox" class="catalog-detail-images fancybox" href="<?=$arResult['DETAIL_PICTURE']['SRC']?>"> 
@@ -317,7 +320,14 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 					<div class="catalog-detail-preview-text" itemprop="description">
 						<?=$arResult["PREVIEW_TEXT"]?>
 					</div>
-				<?endif;
+					<?endif;?>
+                <?//DETAILE_TEXT_DESCRIPTION
+                if(!empty($arResult["PROPERTIES"]["TEXT_DESCRIPTION_PRODUCT"]["VALUE"])):?>
+					<div class="catalog-detail-text-description" itemprop="text-description">
+							<?=html_entity_decode($arResult["PROPERTIES"]["TEXT_DESCRIPTION_PRODUCT"]["VALUE"])?>
+					</div>
+                <?endif;?>
+                <?
 				//DETAIL_GIFT//					
 				if(!empty($arResult["PROPERTIES"]["GIFT"]["FULL_VALUE"])):?>
 					<div class="catalog-detail-gift">
@@ -666,8 +676,9 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 												<span class="catalog-detail-item-price">
 													<?=number_format($arPrice["DISCOUNT_VALUE"], $price["DECIMALS"], $price["DEC_POINT"], $price["THOUSANDS_SEP"]);?>
 													<span class="unit">
+                                                        <?$cssMeasure = "<span style='font-size: 20px;font-weight: 700;color: #000;'>".$arResult["CATALOG_MEASURE_NAME"]."</span>";?>  
 														<?=$currency?>
-														<?=(!empty($arResult["CATALOG_MEASURE_NAME"])) ? GetMessage("CATALOG_ELEMENT_UNIT")." ".$arResult["CATALOG_MEASURE_NAME"] : "";?>
+														<?=(!empty($arResult["CATALOG_MEASURE_NAME"])) ? GetMessage("CATALOG_ELEMENT_UNIT")." ".$cssMeasure : "";?>
 													</span>
 												</span>
 												<?if($arSetting["REFERENCE_PRICE"]["VALUE"] == "Y" && !empty($arSetting["REFERENCE_PRICE_COEF"]["VALUE"])):?>
@@ -785,6 +796,7 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 																<input type="text" id="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" data-item="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" data-measure="<?=$arOffer['CATALOG_MEASURE_RATIO']?>" name="quantity" class="quantity" value="<?=$arOffer['CATALOG_MEASURE_RATIO']?>"/>
 																<a href="javascript:void(0)" class="plus" onclick="BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs['ID'].'_'.$arOffer["ID"]?>').value)+<?=$arOffer["CATALOG_MEASURE_RATIO"]?>;"><span>+</span></a>
 															</div>
+                                                            
 															<input type="hidden" name="ID" class="offer_id" value="<?=$arOffer['ID']?>" />
 															<?$props = array();
 															if(!empty($arOffer["PROPERTIES"]["ARTNUMBER"]["VALUE"])):		
@@ -883,7 +895,10 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 													<a href="javascript:void(0)" class="minus" onclick="if(BX('quantity_<?=$arItemIDs["ID"]?>').value > <?=$arResult["CATALOG_MEASURE_RATIO"]?>) BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)-<?=$arResult["CATALOG_MEASURE_RATIO"]?>;"><span>-</span></a>
 													<input type="text" id="quantity_<?=$arItemIDs['ID']?>" data-item="quantity_<?=$arItemIDs['ID'].'_'.$arOffer['ID']?>" data-measure="<?=$arResult['CATALOG_MEASURE_RATIO']?>" name="quantity" class="quantity" value="<?=$arResult['CATALOG_MEASURE_RATIO']?>"/>
 													<a href="javascript:void(0)" class="plus" onclick="BX('quantity_<?=$arItemIDs["ID"]?>').value = parseFloat(BX('quantity_<?=$arItemIDs["ID"]?>').value)+<?=$arResult["CATALOG_MEASURE_RATIO"]?>;"><span>+</span></a>
-												</div>
+												    <?$cssMeasure = "<span style='font-size: 20px;font-weight: 700;color: #000;padding-left: 5px;'> ".$arResult["CATALOG_MEASURE_NAME"]."</span>";?>
+                                                    <?=$cssMeasure;?>
+                                                </div>
+                                                <pre style="display: none;"><?123?></pre>
 												<input type="hidden" name="ID" class="id" value="<?=$arResult['ID']?>" />
 												<?$props = array();
 												if(!empty($arResult["PROPERTIES"]["ARTNUMBER"]["VALUE"])):				
@@ -1461,7 +1476,11 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 				<li class="tabs__tab">
 					<a href="#tab<?=$i?>"><span><?=GetMessage("CATALOG_ELEMENT_SHOPS")?></span></a>
 				</li>
-			<?endif;?>
+			<?$i++;
+			endif;?>
+			<li class="tabs__tab">
+				<a href="#tab<?=$i?>"><span><?=GetMessage("CATALOG_ELEMENT_DELIVERY_DESCRIPTION")?></span></a>
+			</li>
 		</ul>
 		<?//DETAIL_TEXT_TAB//?>
 		<div class="tabs__box">
@@ -1573,8 +1592,38 @@ $strTitle = (isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_TI
 		if($arParams["USE_STORE"] == "Y" && ((isset($arResult["OFFERS"]) && !empty($arResult["OFFERS"]) && $arSetting["OFFERS_VIEW"]["VALUE"] != "LIST") || (!isset($arResult["OFFERS"]) || empty($arResult["OFFERS"])))):?>
 			<div class="tabs__box">
 				<div id="<?=$arItemIDs['STORE'];?>"></div>
+					<div class="catalog-delivery_text">
+						<p>
+						<?$APPLICATION->IncludeComponent(
+								"bitrix:main.include",
+								"",
+								Array(
+									"AREA_FILE_SHOW" => "file",
+									"AREA_FILE_SUFFIX" => "inc",
+									"EDIT_TEMPLATE" => "",
+									"PATH" => "/include/inc_delivery_text_availability_catalog_element.php"
+								)
+							);?>
+						</p>
+					</div>
 			</div>
 		<?endif;?>
+		<div class="tabs__box">
+			<div class="catalog-delivery_text">
+				<p>
+					<?$APPLICATION->IncludeComponent(
+						"bitrix:main.include",
+						"",
+						Array(
+							"AREA_FILE_SHOW" => "file",
+							"AREA_FILE_SUFFIX" => "inc",
+							"EDIT_TEMPLATE" => "",
+							"PATH" => "/include/inc_delivery_text_catalog_element.php"
+						)
+					);?>
+				</p>
+			</div>
+		</div>
 	</div>	
 	<div class="clr"></div>
 </div>

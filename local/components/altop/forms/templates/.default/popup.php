@@ -73,11 +73,12 @@ if($arResult["ELEMENT"]["ID"] > 0):?>
 	</div>
 </form>
 
-<script type="text/javascript">	
+<script type="text/javascript">
 	<?foreach($arResult["IBLOCK"]["PROPERTIES"] as $arProp):
 		//MASK//
 		if($arProp["CODE"] == "PHONE" && !empty($arParams["PHONE_MASK"])):?>
 			var input = $("#<?=$formId?>").find("[name='<?=$arProp['CODE']?>']");
+
 			if(!!input)
 				input.inputmask("<?=$arParams['PHONE_MASK']?>");
 		<?endif;

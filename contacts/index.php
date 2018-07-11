@@ -8,7 +8,8 @@ $APPLICATION->SetTitle("Контакты");?><h2>
 	 Адрес: Самарская область, с. Кинель-Черкассы, ул.Казакова 37а.
 </p>
 <p>
-	 Тел.: +7 (846) 233-52-03
+	 Тел.: 
+<a href="tel:+78462335203">+7 (846) 233-52-03</a>
 </p>
 <p>
 	 E-mail: <a href="mailto:zakaz@terramic.ru">zakaz@terramic.ru</a>
@@ -55,7 +56,8 @@ $APPLICATION->SetTitle("Контакты");?><h2>
 	 Адрес: Самарская область, с. Кинель-Черкассы, ул.Казакова 37а.
 </p>
 <p>
-	 Тел.: +7 (846) 233-52-03
+	 Тел.:
+<a href="tel:+78462335203">+7 (846) 233-52-03</a>
 </p>
 <p>
 	 E-mail: <a href="mailto:zakaz@terramic.ru">zakaz@terramic.ru</a><br>
@@ -76,28 +78,39 @@ $APPLICATION->SetTitle("Контакты");?><h2>
 </p>
 <h2>Схема проезда</h2>
  <?$APPLICATION->IncludeComponent(
-	"bitrix:map.yandex.view",
-	".default",
-	Array(
+	"bitrix:map.yandex.view", 
+	".default", 
+	array(
 		"COMPONENT_TEMPLATE" => ".default",
-		"CONTROLS" => array(0=>"ZOOM",1=>"TYPECONTROL",2=>"SCALELINE",),
+		"CONTROLS" => array(
+			0 => "ZOOM",
+			1 => "TYPECONTROL",
+			2 => "SCALELINE",
+		),
 		"INIT_MAP_TYPE" => "MAP",
-		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.44690848043717;s:10:\"yandex_lon\";d:51.50868554232785;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:51.508707;s:3:\"LAT\";d:53.446806;s:4:\"TEXT\";s:27:\"ООО «ТЕРРАМИК»\";}}}",
+		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.44690848043428;s:10:\"yandex_lon\";d:51.508685542328;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:51.508707;s:3:\"LAT\";d:53.446806;s:4:\"TEXT\";s:32:\"ИП Вертянкина Т.В.\";}}}",
 		"MAP_HEIGHT" => "350",
 		"MAP_ID" => "1",
 		"MAP_WIDTH" => "100%",
-		"OPTIONS" => array(0=>"ENABLE_DBLCLICK_ZOOM",1=>"ENABLE_DRAGGING",)
-	)
-);?>&nbsp; <br>
+		"OPTIONS" => array(
+			0 => "ENABLE_DBLCLICK_ZOOM",
+			1 => "ENABLE_DRAGGING",
+		),
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
+	),
+	false
+);?>  <br>
 <hr>
 <h2><br>
  </h2>
-<h2>Филиал ООО «ТЕРРАМИК»</h2>
- &nbsp;&nbsp;<br>
+<h2>ИП Вертянкина Татьяна Викторовна</h2>
+   <br>
  Адрес: Краснодарский край, Усть-Лабинский район, станица Воронежская, ул.Садовая 5а<br>
  <br>
 <p>
-	 Тел.: +7 (861) 212-12-01
+	 Тел.:
+<a href="tel:+78612121201">+7 (861) 212-12-01</a>
 </p>
 <p>
 	 E-mail: <a href="mailto:zakaz@terramic.ru">zakaz@terramic.ru</a><br>
@@ -110,24 +123,83 @@ $APPLICATION->SetTitle("Контакты");?><h2>
 </p>
 <h2>Схема проезда</h2>
  <?$APPLICATION->IncludeComponent(
-	"bitrix:map.yandex.view",
-	".default",
-	Array(
+	"bitrix:map.yandex.view", 
+	".default", 
+	array(
 		"COMPONENT_TEMPLATE" => ".default",
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
-		"CONTROLS" => array(0=>"ZOOM",1=>"TYPECONTROL",2=>"SCALELINE",),
+		"CONTROLS" => array(
+			0 => "ZOOM",
+			1 => "TYPECONTROL",
+			2 => "SCALELINE",
+		),
 		"INIT_MAP_TYPE" => "MAP",
-		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:45.20922036060809;s:10:\"yandex_lon\";d:39.54602833163461;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:39.543357085887;s:3:\"LAT\";d:45.207657361904;s:4:\"TEXT\";s:174:\"ООО «ТЕРРАМИК»###RN###Краснодарский край, Усть-Лабинский район, станица Воронежская, ул.Садовая 5а\";}}}",
+		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:45.20729400083192;s:10:\"yandex_lon\";d:39.54450483691498;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:39.543357085887;s:3:\"LAT\";d:45.207657361904;s:4:\"TEXT\";s:32:\"ИП Вертянкина Т.В.\";}}}",
 		"MAP_HEIGHT" => "305",
 		"MAP_ID" => "1",
 		"MAP_WIDTH" => "100%",
-		"OPTIONS" => array(0=>"ENABLE_DBLCLICK_ZOOM",1=>"ENABLE_DRAGGING",)
-	)
+		"OPTIONS" => array(
+			0 => "ENABLE_DBLCLICK_ZOOM",
+			1 => "ENABLE_DRAGGING",
+		)
+	),
+	false
 );?> <br>
 <hr>
 <h2><br>
  </h2>
+
+<h2>Скоро открытие в г. Волгограде</h2>
+<h2>ИП Вертянкина Татьяна Викторовна</h2>
+   <br>
+ Адрес: Волгоградская область, Волгоград, р-н Ворошиловский, Академическая улица, 22<br>
+ <br>
+<p>
+	 Тел.:
+<a href="tel:+78442459700">+7 (844) 245-97-00</a>
+</p>
+<p>
+	 E-mail: <a href="mailto:zakaz@terramic.ru">zakaz@terramic.ru</a><br>
+</p>
+<p>
+	 Часы работы:
+</p>
+<p>
+	 ПН-ВС 09:00-18:00 Без перерыва
+</p>
+<h2>Схема проезда</h2>
+ <?$APPLICATION->IncludeComponent(
+	"bitrix:map.yandex.view", 
+	".default", 
+	array(
+		"COMPONENT_TEMPLATE" => ".default",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO",
+		"CONTROLS" => array(
+			0 => "ZOOM",
+			1 => "TYPECONTROL",
+			2 => "SCALELINE",
+		),
+		"INIT_MAP_TYPE" => "MAP",
+		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:48.69823168985084;s:10:\"yandex_lon\";d:44.493780258403014;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:44.493993559524;s:3:\"LAT\";d:48.698080795949;s:4:\"TEXT\";s:32:\"ИП Вертянкина Т.В.\";}}}",
+		"MAP_HEIGHT" => "305",
+		"MAP_ID" => "1",
+		"MAP_WIDTH" => "100%",
+		"OPTIONS" => array(
+			0 => "ENABLE_DBLCLICK_ZOOM",
+			1 => "ENABLE_DRAGGING",
+		)
+	),
+	false
+);?> <br>
+<hr>
+<h2><br>
+ </h2>
+
+
+
+
 <h2>Форма обратной связи</h2>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:main.feedback",

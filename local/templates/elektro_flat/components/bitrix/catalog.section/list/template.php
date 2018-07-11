@@ -525,6 +525,7 @@ global $arSetting,$arSettingsSolo;
 		echo $arResult["NAV_STRING"];
 	endif;?>	
 </div>
+
 <div class="clr"></div>
 
 <?//POPUP_JS//	

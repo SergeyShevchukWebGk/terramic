@@ -175,7 +175,6 @@ if(is_array($arElementsNew) && !empty($arElementsNew)) {
 		<?endforeach;?>
 	</div>
 	<div class="clr"></div>	
-	
 	<?//SECTION//?>
 	<?$APPLICATION->IncludeComponent("bitrix:catalog.section", $view, 
 		Array(

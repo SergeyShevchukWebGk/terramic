@@ -1,65 +1,91 @@
-<?
-$arUrlRewrite = array(
-	array(
-		"CONDITION" => "#^/online/([\\.\\-0-9a-zA-Z]+)(/?)([^/]*)#",
-		"RULE" => "alias=\$1",
-		"ID" => "",
-		"PATH" => "/desktop_app/router.php",
-	),
-	array(
-		"CONDITION" => "#^/bitrix/services/ymarket/#",
-		"RULE" => "",
-		"ID" => "",
-		"PATH" => "/bitrix/services/ymarket/index.php",
-	),
-	array(
-		"CONDITION" => "#^/online/(/?)([^/]*)#",
-		"RULE" => "",
-		"ID" => "",
-		"PATH" => "/desktop_app/router.php",
-	),
-	array(
-		"CONDITION" => "#^/stssync/calendar/#",
-		"RULE" => "",
-		"ID" => "bitrix:stssync.server",
-		"PATH" => "/bitrix/services/stssync/calendar/index.php",
-	),
-	array(
-		"CONDITION" => "#^/personal/order/#",
-		"RULE" => "",
-		"ID" => "bitrix:sale.personal.order",
-		"PATH" => "/personal/order/index.php",
-	),
-	array(
-		"CONDITION" => "#^/promotions/#",
-		"RULE" => "",
-		"ID" => "bitrix:news",
-		"PATH" => "/promotions/index.php",
-	),
-	array(
-		"CONDITION" => "#^/vendors/#",
-		"RULE" => "",
-		"ID" => "bitrix:news",
-		"PATH" => "/vendors/index.php",
-	),
-	array(
-		"CONDITION" => "#^/reviews/#",
-		"RULE" => "",
-		"ID" => "bitrix:news",
-		"PATH" => "/reviews/index.php",
-	),
-	array(
-		"CONDITION" => "#^/catalog/#",
-		"RULE" => "",
-		"ID" => "bitrix:catalog",
-		"PATH" => "/catalog/index.php",
-	),
-	array(
-		"CONDITION" => "#^/news/#",
-		"RULE" => "",
-		"ID" => "bitrix:news",
-		"PATH" => "/news/index.php",
-	),
+<?php
+$arUrlRewrite=array (
+  0 => 
+  array (
+    'CONDITION' => '#^/online/([\\.\\-0-9a-zA-Z]+)(/?)([^/]*)#',
+    'RULE' => 'alias=$1',
+    'ID' => '',
+    'PATH' => '/desktop_app/router.php',
+    'SORT' => 100,
+  ),
+  1 => 
+  array (
+    'CONDITION' => '#^/bitrix/services/ymarket/#',
+    'RULE' => '',
+    'ID' => '',
+    'PATH' => '/bitrix/services/ymarket/index.php',
+    'SORT' => 100,
+  ),
+  2 => 
+  array (
+    'CONDITION' => '#^/online/(/?)([^/]*)#',
+    'RULE' => '',
+    'ID' => '',
+    'PATH' => '/desktop_app/router.php',
+    'SORT' => 100,
+  ),
+  3 => 
+  array (
+    'CONDITION' => '#^/stssync/calendar/#',
+    'RULE' => '',
+    'ID' => 'bitrix:stssync.server',
+    'PATH' => '/bitrix/services/stssync/calendar/index.php',
+    'SORT' => 100,
+  ),
+  4 => 
+  array (
+    'CONDITION' => '#^/personal/order/#',
+    'RULE' => '',
+    'ID' => 'bitrix:sale.personal.order',
+    'PATH' => '/personal/order/index.php',
+    'SORT' => 100,
+  ),
+  5 => 
+  array (
+    'CONDITION' => '#^/promotions/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/promotions/index.php',
+    'SORT' => 100,
+  ),
+  6 => 
+  array (
+    'CONDITION' => '#^/vendors/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/vendors/index.php',
+    'SORT' => 100,
+  ),
+  7 => 
+  array (
+    'CONDITION' => '#^/reviews/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/reviews/index.php',
+    'SORT' => 100,
+  ),
+  11 => 
+  array (
+    'CONDITION' => '#^/catalog/#',
+    'RULE' => '',
+    'ID' => 'bitrix:catalog',
+    'PATH' => '/catalog/index.php',
+    'SORT' => 100,
+  ),
+  12 => 
+  array (
+    'CONDITION' => '#^\\??(.*)#',
+    'RULE' => '&$1',
+    'ID' => 'bitrix:catalog.section',
+    'PATH' => '/catalog/razmotka/index.php',
+    'SORT' => 100,
+  ),
+  9 => 
+  array (
+    'CONDITION' => '#^/news/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/news/index.php',
+    'SORT' => 100,
+  ),
 );
-
-?>

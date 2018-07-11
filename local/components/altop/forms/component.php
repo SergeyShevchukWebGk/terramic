@@ -35,6 +35,7 @@ $arParams["CAPTCHA_CODE"] = $arParams["IS_AUTHORIZED"] != "Y" && $arParams["USE_
 $arParams["PHONE_MASK"] = $arSetting["FORMS_PHONE_MASK"]["VALUE"];
 $arParams["VALIDATE_PHONE_MASK"] = $arSetting["FORMS_VALIDATE_PHONE_MASK"]["VALUE"];
 
+
 $arParams["PARAMS_STRING"] = strtr(base64_encode(addslashes(gzcompress(serialize($arParams),9))), '+/=', '-_,');
 
 if($this->StartResultCache()) {

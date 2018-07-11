@@ -23,6 +23,14 @@
 				<input type="text" name="LAST_NAME" maxlength="50" class="input_text_style" value="<?=$arResult["arUser"]["LAST_NAME"]?>" />
 				<br><br>
 
+				<?=GetMessage('SECOND_NAME')?><br>
+				<input type="text" name="SECOND_NAME" maxlength="50" class="input_text_style" value="<?=$arResult["arUser"]["SECOND_NAME"]?>" />
+				<br><br>
+
+				<?=GetMessage('EMAIL')?><br>
+				<input type="text" name="EMAIL" maxlength="50" class="input_text_style" value="<?=$arResult["arUser"]["EMAIL"]?>" />
+				<br><br>
+
 				<?=GetMessage('PERSONAL_PHOTO')?><br>
 				<?if(empty($arResult["arUser"]["PERSONAL_PHOTO"])):?>
 					<input type="file" name="PERSONAL_PHOTO" size="20" class="typefile" />
@@ -44,12 +52,13 @@
 		<h2><?=GetMessage("MAIN_PSWD")?></h2>
 		<div class="personal-info">
 			<div class="personal-info_in">
-				<?=GetMessage('NEW_PASSWORD_REQ')?><br>
+			<div class="bx-authform-label-container"><span class="bx-authform-starrequired">*</span><?=GetMessage("AUTH_PASSWORD_REQ")?></div><br>
 				<input type="password" name="NEW_PASSWORD" maxlength="50" class="input_text_style" value="" autocomplete="off" />
 				<br><br>
 
-				<?=GetMessage('NEW_PASSWORD_CONFIRM')?><br>
+				<span class="bx-authform-starrequired">*</span><?=GetMessage('NEW_PASSWORD_CONFIRM')?><br>
 				<input type="password" name="NEW_PASSWORD_CONFIRM" maxlength="50" class="input_text_style" value="" autocomplete="off" />
+
 			</div>
 		</div>
 
