@@ -1,4 +1,6 @@
-<?$APPLICATION->IncludeComponent("altop:forms", "",
+<?$APPLICATION->IncludeComponent(
+	"altop:forms", 
+	"Back_call", 
 	array(
 		"IBLOCK_TYPE" => "forms",
 		"IBLOCK_ID" => "1",
@@ -8,7 +10,8 @@
 		"ELEMENT_PRICE" => "",
 		"BUTTON_ID" => "callbackAnch",
 		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "36000000"
+		"CACHE_TIME" => "36000000",
+		"COMPONENT_TEMPLATE" => "Back_call"
 	),
 	false
 );?>
