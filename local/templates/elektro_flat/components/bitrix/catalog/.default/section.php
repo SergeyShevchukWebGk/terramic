@@ -1,103 +1,103 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
 use Bitrix\Main\Loader,
-	Bitrix\Iblock,
-	Bitrix\Main\Localization\Loc,
-	Bitrix\Main\ModuleManager;
+Bitrix\Iblock,
+Bitrix\Main\Localization\Loc,
+Bitrix\Main\ModuleManager;
 
 if(!Loader::includeModule("iblock"))
 	return;
 
-Loc::loadMessages(__FILE__);
+	Loc::loadMessages(__FILE__);
 
-global $arSetting;
+	global $arSetting;
 
 //CURRENT_SECTION//
-$arFilter = array(
-	"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-	"ACTIVE" => "Y",
-	"GLOBAL_ACTIVE" => "Y"
-);
-if(0 < intval($arResult["VARIABLES"]["SECTION_ID"])) {
-	$arFilter["ID"] = $arResult["VARIABLES"]["SECTION_ID"];
-} elseif("" != $arResult["VARIABLES"]["SECTION_CODE"]) {
-	$arFilter["=CODE"] = $arResult["VARIABLES"]["SECTION_CODE"];
-}
+	$arFilter = array(
+		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+		"ACTIVE" => "Y",
+		"GLOBAL_ACTIVE" => "Y"
+	);
+	if(0 < intval($arResult["VARIABLES"]["SECTION_ID"])) {
+		$arFilter["ID"] = $arResult["VARIABLES"]["SECTION_ID"];
+	} elseif("" != $arResult["VARIABLES"]["SECTION_CODE"]) {
+		$arFilter["=CODE"] = $arResult["VARIABLES"]["SECTION_CODE"];
+	}
 
-$arSelect = array("ID", "IBLOCK_ID", "IBLOCK_SECTION_ID", "NAME", "PICTURE", "DESCRIPTION", "DEPTH_LEVEL", "UF_BANNER", "UF_BANNER_URL", "UF_BACKGROUND_IMAGE", "UF_PREVIEW", "UF_VIEW");
+	$arSelect = array("ID", "IBLOCK_ID", "IBLOCK_SECTION_ID", "NAME", "PICTURE", "DESCRIPTION", "DEPTH_LEVEL", "UF_BANNER", "UF_BANNER_URL", "UF_BACKGROUND_IMAGE", "UF_PREVIEW", "UF_VIEW");
 
-$cache_id = md5(serialize($arFilter));
-$cache_dir = "/catalog/section";
-$obCache = new CPHPCache();
-if($obCache->InitCache($arParams["CACHE_TIME"], $cache_id, $cache_dir)) {
-	$arCurSection = $obCache->GetVars();
-} elseif($obCache->StartDataCache()) {
-	$rsSections = CIBlockSection::GetList(array(), $arFilter, false, $arSelect);
-	global $CACHE_MANAGER;
-	$CACHE_MANAGER->StartTagCache($cache_dir);
-	$CACHE_MANAGER->RegisterTag("iblock_id_".$arParams["IBLOCK_ID"]);
-	if($arSection = $rsSections->Fetch()) {
-		$arCurSection["ID"] = $arSection["ID"];
-		$arCurSection["NAME"] = $arSection["NAME"];
-		if($arSection["PICTURE"] > 0)
-			$arCurSection["PICTURE"] = CFile::GetFileArray($arSection["PICTURE"]);
-		$arCurSection["DESCRIPTION"] = $arSection["DESCRIPTION"];
-		$arCurSection["BANNER"] = array(
-			"PICTURE" => $arSection["UF_BANNER"] > 0 ? CFile::GetFileArray($arSection["UF_BANNER"]) : "",
-			"URL" => $arSection["UF_BANNER_URL"]
-		);
-		$arCurSection["PREVIEW"] = $arSection["UF_PREVIEW"];
-		if($arSection["UF_VIEW"] > 0) {
-			$UserField = CUserFieldEnum::GetList(array(), array("ID" => $arSection["UF_VIEW"]));
-			if($UserFieldAr = $UserField->Fetch()) {
-				$arCurSection["VIEW"] = $UserFieldAr["XML_ID"];
-			}
-		}
-		if(($arSection["UF_BACKGROUND_IMAGE"] <= 0 || $arSection["UF_VIEW"] <= 0) && $arSection["DEPTH_LEVEL"] > 1) {
-			if($arSection["DEPTH_LEVEL"] > 2) {
-				$rsParentSectionPath = CIBlockSection::GetNavChain($arSection["IBLOCK_ID"], $arSection["IBLOCK_SECTION_ID"]);
-				while($arParentSectionPath = $rsParentSectionPath->GetNext()) {
-					$parentSectionPathIds[] = $arParentSectionPath["ID"];
+	$cache_id = md5(serialize($arFilter));
+	$cache_dir = "/catalog/section";
+	$obCache = new CPHPCache();
+	if($obCache->InitCache($arParams["CACHE_TIME"], $cache_id, $cache_dir)) {
+		$arCurSection = $obCache->GetVars();
+	} elseif($obCache->StartDataCache()) {
+		$rsSections = CIBlockSection::GetList(array(), $arFilter, false, $arSelect);
+		global $CACHE_MANAGER;
+		$CACHE_MANAGER->StartTagCache($cache_dir);
+		$CACHE_MANAGER->RegisterTag("iblock_id_".$arParams["IBLOCK_ID"]);
+		if($arSection = $rsSections->Fetch()) {
+			$arCurSection["ID"] = $arSection["ID"];
+			$arCurSection["NAME"] = $arSection["NAME"];
+			if($arSection["PICTURE"] > 0)
+				$arCurSection["PICTURE"] = CFile::GetFileArray($arSection["PICTURE"]);
+			$arCurSection["DESCRIPTION"] = $arSection["DESCRIPTION"];
+			$arCurSection["BANNER"] = array(
+				"PICTURE" => $arSection["UF_BANNER"] > 0 ? CFile::GetFileArray($arSection["UF_BANNER"]) : "",
+				"URL" => $arSection["UF_BANNER_URL"]
+			);
+			$arCurSection["PREVIEW"] = $arSection["UF_PREVIEW"];
+			if($arSection["UF_VIEW"] > 0) {
+				$UserField = CUserFieldEnum::GetList(array(), array("ID" => $arSection["UF_VIEW"]));
+				if($UserFieldAr = $UserField->Fetch()) {
+					$arCurSection["VIEW"] = $UserFieldAr["XML_ID"];
 				}
-			} else {
-				$parentSectionPathIds = $arSection["IBLOCK_SECTION_ID"];
 			}
-			if(!empty($parentSectionPathIds)) {
-				$rsSections = CIBlockSection::GetList(
-					array("DEPTH_LEVEL" => "DESC"),
-					array("IBLOCK_ID" => $arSection["IBLOCK_ID"], "ACTIVE" => "Y", "GLOBAL_ACTIVE" => "Y", "ID" => $parentSectionPathIds),
-					false,
-					array("ID", "IBLOCK_ID", "DEPTH_LEVEL", "UF_BACKGROUND_IMAGE", "UF_VIEW")
-				);
-				while($arSection = $rsSections->GetNext()) {
-					if(!isset($arCurSection["BACKGROUND_IMAGE"]) && $arSection["UF_BACKGROUND_IMAGE"] > 0) {
-						$arCurSection["BACKGROUND_IMAGE"] = CFile::GetFileArray($arSection["UF_BACKGROUND_IMAGE"]);
+			if(($arSection["UF_BACKGROUND_IMAGE"] <= 0 || $arSection["UF_VIEW"] <= 0) && $arSection["DEPTH_LEVEL"] > 1) {
+				if($arSection["DEPTH_LEVEL"] > 2) {
+					$rsParentSectionPath = CIBlockSection::GetNavChain($arSection["IBLOCK_ID"], $arSection["IBLOCK_SECTION_ID"]);
+					while($arParentSectionPath = $rsParentSectionPath->GetNext()) {
+						$parentSectionPathIds[] = $arParentSectionPath["ID"];
 					}
-					if(!isset($arCurSection["VIEW"]) && $arSection["UF_VIEW"] > 0) {
-						$UserField = CUserFieldEnum::GetList(array(), array("ID" => $arSection["UF_VIEW"]));
-						if($UserFieldAr = $UserField->Fetch()) {
-							$arCurSection["VIEW"] = $UserFieldAr["XML_ID"];
+				} else {
+					$parentSectionPathIds = $arSection["IBLOCK_SECTION_ID"];
+				}
+				if(!empty($parentSectionPathIds)) {
+					$rsSections = CIBlockSection::GetList(
+						array("DEPTH_LEVEL" => "DESC"),
+						array("IBLOCK_ID" => $arSection["IBLOCK_ID"], "ACTIVE" => "Y", "GLOBAL_ACTIVE" => "Y", "ID" => $parentSectionPathIds),
+						false,
+						array("ID", "IBLOCK_ID", "DEPTH_LEVEL", "UF_BACKGROUND_IMAGE", "UF_VIEW")
+					);
+					while($arSection = $rsSections->GetNext()) {
+						if(!isset($arCurSection["BACKGROUND_IMAGE"]) && $arSection["UF_BACKGROUND_IMAGE"] > 0) {
+							$arCurSection["BACKGROUND_IMAGE"] = CFile::GetFileArray($arSection["UF_BACKGROUND_IMAGE"]);
+						}
+						if(!isset($arCurSection["VIEW"]) && $arSection["UF_VIEW"] > 0) {
+							$UserField = CUserFieldEnum::GetList(array(), array("ID" => $arSection["UF_VIEW"]));
+							if($UserFieldAr = $UserField->Fetch()) {
+								$arCurSection["VIEW"] = $UserFieldAr["XML_ID"];
+							}
 						}
 					}
 				}
 			}
+			$ipropValues = new \Bitrix\Iblock\InheritedProperty\SectionValues($arSection["IBLOCK_ID"], $arSection["ID"]);
+			$arCurSection["IPROPERTY_VALUES"] = $ipropValues->getValues();
 		}
-		$ipropValues = new \Bitrix\Iblock\InheritedProperty\SectionValues($arSection["IBLOCK_ID"], $arSection["ID"]);
-		$arCurSection["IPROPERTY_VALUES"] = $ipropValues->getValues();
+		$CACHE_MANAGER->EndTagCache();
+		$obCache->EndDataCache($arCurSection);
 	}
-	$CACHE_MANAGER->EndTagCache();
-	$obCache->EndDataCache($arCurSection);
-}
 
-if(isset($arCurSection) && !empty($arCurSection)) {
+	if(isset($arCurSection) && !empty($arCurSection)) {
 	//BANNER//
-	if(is_array($arCurSection["BANNER"]["PICTURE"])):?>
+		if(is_array($arCurSection["BANNER"]["PICTURE"])):?>
 		<div class="catalog-item-banner">
 			<a href="<?=!empty($arCurSection["BANNER"]["URL"]) ? $arCurSection["BANNER"]["URL"] : 'javascript:void(0)'?>">
 				<img src="<?=$arCurSection['BANNER']['PICTURE']['SRC']?>" width="<?=$arCurSection['BANNER']['PICTURE']['WIDTH']?>" height="<?=$arCurSection['BANNER']['PICTURE']['HEIGHT']?>" alt="<?=$arCurSection['NAME']?>" title="<?=$arCurSection['NAME']?>" />
 			</a>
 		</div>
-	<?endif;
+		<?endif;
 
 	//SUBSECTION//?>
 	<?$APPLICATION->IncludeComponent("bitrix:catalog.section.list", "subsection",
@@ -121,23 +121,23 @@ if(isset($arCurSection) && !empty($arCurSection)) {
 			"DISPLAY_IMG_HEIGHT" =>	"50"
 		),
 		$component
-	);?>
+		);?>
 
 	<?//PREVIEW//
 	if(!empty($arCurSection["PREVIEW"])):
 		if(!$_REQUEST["PAGEN_1"] || empty($_REQUEST["PAGEN_1"]) || $_REQUEST["PAGEN_1"] <= 1):?>
-			<div class="catalog_preview">
-				<?=$arCurSection["PREVIEW"];?>
-			</div>
+		<div class="catalog_preview">
+			<?=$arCurSection["PREVIEW"];?>
+		</div>
 		<?endif;
 	endif;
 
-    $page = explode('/', $APPLICATION->GetCurPage());
+	$page = explode('/', $APPLICATION->GetCurPage());
 	//FILTER//
 	if($arParams["USE_FILTER"] == "Y" && 
-        $arSetting["SMART_FILTER_VISIBILITY"]["VALUE"] != "DISABLE" &&
-        $_SESSION["Filter"] == "Y" &&
-        ($page[2] != 'aksessuary_1' && $page[2] != 'aksessuary')):?>
+		$arSetting["SMART_FILTER_VISIBILITY"]["VALUE"] != "DISABLE" &&
+		$_SESSION["Filter"] == "Y" &&
+		($page[2] != 'aksessuary_1' && $page[2] != 'aksessuary')):?>
 
 		<?$APPLICATION->IncludeComponent("bitrix:catalog.smart.filter", "elektro",
 			Array(
@@ -165,55 +165,55 @@ if(isset($arCurSection) && !empty($arCurSection)) {
 			),
 			$component,
 			array("HIDE_ICONS" => "Y")
-		);?>
+			);?>
 
-		<div class="filter_indent<?=($arSetting['SMART_FILTER_LOCATION']['VALUE'] == 'VERTICAL') ? ' vertical' : '';?> clr"></div>
+			<div class="filter_indent<?=($arSetting['SMART_FILTER_LOCATION']['VALUE'] == 'VERTICAL') ? ' vertical' : '';?> clr"></div>
 
-		<?global $arSmartFilter;
-	else:
-		$arSmartFilter = array(
-			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-			"ACTIVE" => "Y",
-			"INCLUDE_SUBSECTIONS" => "Y",
-			"SECTION_ID" => $arCurSection["ID"]
-		);
-	endif;
-} else {
+			<?global $arSmartFilter;
+		else:
+			$arSmartFilter = array(
+				"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+				"ACTIVE" => "Y",
+				"INCLUDE_SUBSECTIONS" => "Y",
+				"SECTION_ID" => $arCurSection["ID"]
+			);
+		endif;
+	} else {
 	//PRODUCT_TYPE//
-	$productTypeFound = false;
-	$arproductType = array("newproduct", "saleleader", "discount");
-	if(in_array($arResult["VARIABLES"]["SECTION_CODE"], $arproductType)) {
-		$productTypeFound = true;
-		$arCurSection["NAME"] = Loc::getMessage($arResult["VARIABLES"]["SECTION_CODE"]."_TITLE");
-		$arSmartFilter = array(
-			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-			"ACTIVE" => "Y",
-			"!PROPERTY_".strtoupper($arResult["VARIABLES"]["SECTION_CODE"]) => false
-		);
-		global $arrFilter;
-		$arrFilter = $arSmartFilter;
+		$productTypeFound = false;
+		$arproductType = array("newproduct", "saleleader", "discount");
+		if(in_array($arResult["VARIABLES"]["SECTION_CODE"], $arproductType)) {
+			$productTypeFound = true;
+			$arCurSection["NAME"] = Loc::getMessage($arResult["VARIABLES"]["SECTION_CODE"]."_TITLE");
+			$arSmartFilter = array(
+				"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+				"ACTIVE" => "Y",
+				"!PROPERTY_".strtoupper($arResult["VARIABLES"]["SECTION_CODE"]) => false
+			);
+			global $arrFilter;
+			$arrFilter = $arSmartFilter;
+		}
 	}
-}
 
 //COUNT//
-$cache_id = md5(serialize($arSmartFilter));
-$cache_dir = "/catalog/amount";
-$obCache = new CPHPCache();
-if($obCache->InitCache($arParams["CACHE_TIME"], $cache_id, $cache_dir)) {
-	$count = $obCache->GetVars();
-} elseif($obCache->StartDataCache()) {
-	global $CACHE_MANAGER;
-	$CACHE_MANAGER->StartTagCache($cache_dir);
-	$CACHE_MANAGER->RegisterTag("iblock_id_".$arParams["IBLOCK_ID"]);
-	$count = CIBlockElement::GetList(array(), $arSmartFilter, array(), false);
-	$CACHE_MANAGER->EndTagCache();
-	$obCache->EndDataCache($count);
-}?>
+	$cache_id = md5(serialize($arSmartFilter));
+	$cache_dir = "/catalog/amount";
+	$obCache = new CPHPCache();
+	if($obCache->InitCache($arParams["CACHE_TIME"], $cache_id, $cache_dir)) {
+		$count = $obCache->GetVars();
+	} elseif($obCache->StartDataCache()) {
+		global $CACHE_MANAGER;
+		$CACHE_MANAGER->StartTagCache($cache_dir);
+		$CACHE_MANAGER->RegisterTag("iblock_id_".$arParams["IBLOCK_ID"]);
+		$count = CIBlockElement::GetList(array(), $arSmartFilter, array(), false);
+		$CACHE_MANAGER->EndTagCache();
+		$obCache->EndDataCache($count);
+	}?>
 
-<div class="count_items">
-	<label><?=Loc::getMessage("COUNT_ITEMS")?></label>
-	<span><?=$count?></span>
-</div>
+	<div class="count_items">
+		<label><?=Loc::getMessage("COUNT_ITEMS")?></label>
+		<span><?=$count?></span>
+	</div>
 
 <?//SORT//
 $arAvailableSort = array(
@@ -251,12 +251,12 @@ if($_REQUEST["order"] == "desc") {
 <div class="catalog-item-sorting">
 	<label><span class="full"><?=Loc::getMessage("SECT_SORT_LABEL_FULL")?></span><span class="short"><?=Loc::getMessage("SECT_SORT_LABEL_SHORT")?></span>:</label>
 	<?foreach($arAvailableSort as $key => $val):
-		$className = $sort == $val[0] ? "selected" : "";
-		if($className)
-			$className .= $sort_order == "asc" ? " asc" : " desc";
-		$newSort = $sort == $val[0] ? $sort_order == "desc" ? "asc" : "desc" : $arAvailableSort[$key][1];?>
+	$className = $sort == $val[0] ? "selected" : "";
+	if($className)
+		$className .= $sort_order == "asc" ? " asc" : " desc";
+	$newSort = $sort == $val[0] ? $sort_order == "desc" ? "asc" : "desc" : $arAvailableSort[$key][1];?>
 
-		<a href="<?=$APPLICATION->GetCurPageParam("sort=".$key."&amp;order=".$newSort, array("sort", "order"))?>" class="<?=$className?>" rel="nofollow"><?=Loc::getMessage("SECT_SORT_".$key)?></a>
+	<a href="<?=$APPLICATION->GetCurPageParam("sort=".$key."&amp;order=".$newSort, array("sort", "order"))?>" class="<?=$className?>" rel="nofollow"><?=Loc::getMessage("SECT_SORT_".$key)?></a>
 	<?endforeach;?>
 </div>
 
@@ -282,8 +282,8 @@ if($_REQUEST["limit"] == "900") {
 	<label><span class="full"><?=Loc::getMessage("SECT_COUNT_LABEL_FULL")?></span><span class="short"><?=Loc::getMessage("SECT_COUNT_LABEL_SHORT")?></span>:</label>
 	<?foreach($arAvailableLimit as $val):?>
 		<a href="<?=$APPLICATION->GetCurPageParam("limit=".$val, array("limit"))?>" <?if($limit==$val) echo " class='selected'";?> rel="nofollow"><?if($val=="900"): echo Loc::getMessage("SECT_COUNT_ALL"); else: echo $val; endif;?></a>
-	<?endforeach;?>
-</div>
+		<?endforeach;?>
+	</div>
 
 <?//VIEW//
 $arAvailableView = array("table", "list", "price");
@@ -308,16 +308,33 @@ if($_REQUEST["view"] == "price") {
 		<a href="<?=$APPLICATION->GetCurPageParam("view=".$val, array("view"))?>" class="<?=$val?><?if($view==$val) echo ' selected';?>" title="<?=Loc::getMessage('SECT_VIEW_'.$val)?>" rel="nofollow">
 			<?if($val == "table"):?>
 				<i class="fa fa-th-large"></i>
-			<?elseif($val == "list"):?>
-				<i class="fa fa-list"></i>
-			<?elseif($val == "price"):?>
-				<i class="fa fa-align-justify"></i>
-			<?endif?>
-		</a>
-	<?endforeach;?>
-</div>
-<div class="clr"></div>
+				<?elseif($val == "list"):?>
+					<i class="fa fa-list"></i>
+					<?elseif($val == "price"):?>
+						<i class="fa fa-align-justify"></i>
+						<?endif?>
+					</a>
+					<?endforeach;?>
+				</div>
+				<div class="clr"></div>
+<?//DESCRIPTION//
+if(!empty($arCurSection["DESCRIPTION"]) && strstr($arCurSection["DESCRIPTION"],'<!--pageBreak-->') !== false):
+	if(!$_REQUEST["PAGEN_1"] || empty($_REQUEST["PAGEN_1"]) || $_REQUEST["PAGEN_1"] <= 1):?>
+	<div class="catalog_description">
+		<?
+		if (preg_match('#^(.*)<\!--pageBreak-->(.*)$#siU', $arCurSection["DESCRIPTION"] , $text_descr)){
 
+			echo $text_descr[1];
+		}	
+
+		?>
+
+
+		
+	</div>
+	<?endif;
+endif;
+?>
 <?//SECTION//?>
 <?$intSectionID = $APPLICATION->IncludeComponent("bitrix:catalog.section", $view,
 	array(
@@ -396,16 +413,28 @@ if($_REQUEST["view"] == "price") {
 		"DISPLAY_IMG_HEIGHT" =>	$arParams["DISPLAY_IMG_HEIGHT"],
 		"PROPERTY_CODE_MOD" => $arParams["PROPERTY_CODE_MOD"]
 	),
-	false,
-	array("HIDE_ICONS" => "Y")
+false,
+array("HIDE_ICONS" => "Y")
 );?>
 
 <?//DESCRIPTION//
 if(!empty($arCurSection["DESCRIPTION"])):
 	if(!$_REQUEST["PAGEN_1"] || empty($_REQUEST["PAGEN_1"]) || $_REQUEST["PAGEN_1"] <= 1):?>
-		<div class="catalog_description">
-			<?=$arCurSection["DESCRIPTION"];?>
-		</div>
+	<div class="catalog_description">
+		<? if (strstr($arCurSection["DESCRIPTION"],'<!--pageBreak-->') !== false){
+        if (preg_match('#^(.*)<\!--pageBreak-->(.*)$#siU',$arCurSection["DESCRIPTION"] , $text_descr)){
+
+          echo $text_descr[2];
+        }
+
+
+      }
+      else {
+        echo $arCurSection["DESCRIPTION"];
+      }?>
+
+		<?//=$arCurSection["DESCRIPTION"];?>
+	</div>
 	<?endif;
 endif;
 
@@ -424,64 +453,64 @@ if($obCache->InitCache($arParams["CACHE_TIME"], serialize($recomCacheID), "/cata
 }
 if(!empty($arRecomData)):
 	if(ModuleManager::isModuleInstalled("sale") && (!isset($arParams["USE_BIG_DATA"]) || $arParams["USE_BIG_DATA"] != "N")):?>
-		<?$APPLICATION->IncludeComponent("bitrix:catalog.bigdata.products", ".default",
-			array(
-				"DISPLAY_IMG_WIDTH" => $arParams["DISPLAY_IMG_WIDTH"],
-				"DISPLAY_IMG_HEIGHT" => $arParams["DISPLAY_IMG_HEIGHT"],
-				"SHARPEN" => $arParams["SHARPEN"],
-				"DISPLAY_COMPARE" => $arParams["USE_COMPARE"],
-				"SHOW_POPUP" => "Y",
-				"LINE_ELEMENT_COUNT" => "4",
-				"TEMPLATE_THEME" => "",
-				"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
-				"BASKET_URL" => $arParams["BASKET_URL"],
-				"ACTION_VARIABLE" => $arParams["ACTION_VARIABLE"],
-				"PRODUCT_ID_VARIABLE" => $arParams["PRODUCT_ID_VARIABLE"],
-				"PRODUCT_QUANTITY_VARIABLE" => $arParams["PRODUCT_QUANTITY_VARIABLE"],
-				"ADD_PROPERTIES_TO_BASKET" => $arParams["ADD_PROPERTIES_TO_BASKET"],
-				"PRODUCT_PROPS_VARIABLE" => $arParams["PRODUCT_PROPS_VARIABLE"],
-				"PARTIAL_PRODUCT_PROPERTIES" => $arParams["PARTIAL_PRODUCT_PROPERTIES"],
-				"SHOW_OLD_PRICE" => "",
-				"SHOW_DISCOUNT_PERCENT" => "",
-				"PRICE_CODE" => $arParams["PRICE_CODE"],
-				"SHOW_PRICE_COUNT" => $arParams["SHOW_PRICE_COUNT"],
-				"PRODUCT_SUBSCRIPTION" => "",
-				"PRICE_VAT_INCLUDE" => $arParams["PRICE_VAT_INCLUDE"],
-				"USE_PRODUCT_QUANTITY" => $arParams["USE_PRODUCT_QUANTITY"],
-				"SHOW_NAME" => "Y",
-				"SHOW_IMAGE" => "Y",
-				"MESS_BTN_BUY" => "",
-				"MESS_BTN_DETAIL" => "",
-				"MESS_BTN_SUBSCRIBE" => "",
-				"MESS_NOT_AVAILABLE" => "",
-				"PAGE_ELEMENT_COUNT" => "4",
-				"SHOW_FROM_SECTION" => "Y",
-				"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-				"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-				"DEPTH" => "2",
-				"CACHE_TYPE" => $arParams["CACHE_TYPE"],
-				"CACHE_TIME" => $arParams["CACHE_TIME"],
-				"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
-				"SHOW_PRODUCTS_".$arParams["IBLOCK_ID"] => "Y",
-				"ADDITIONAL_PICT_PROP_".$arParams["IBLOCK_ID"] => "",
-				"LABEL_PROP_".$arParams["IBLOCK_ID"] => "",
-				"HIDE_NOT_AVAILABLE" => $arParams["HIDE_NOT_AVAILABLE"],
-				"CONVERT_CURRENCY" => $arParams["CONVERT_CURRENCY"],
-				"CURRENCY_ID" => $arParams["CURRENCY_ID"],
-				"SECTION_ID" => $intSectionID,
-				"SECTION_CODE" => "",
-				"SECTION_ELEMENT_ID" => "",
-				"SECTION_ELEMENT_CODE" => "",
-				"ID" => "",
-				"PROPERTY_CODE_".$arParams["IBLOCK_ID"] => "",
-				"PROPERTY_CODE_MOD" => $arParams["PROPERTY_CODE_MOD"],
-				"CART_PROPERTIES_".$arParams["IBLOCK_ID"] => "",
-				"RCM_TYPE" => $arParams["BIG_DATA_RCM_TYPE"],
-				"OFFER_TREE_PROPS_".$arRecomData["OFFER_IBLOCK_ID"] => $arParams["LIST_OFFERS_PROPERTY_CODE"],
-				"ADDITIONAL_PICT_PROP_".$arRecomData["OFFER_IBLOCK_ID"] => ""
-			),
-			false,
-			array("HIDE_ICONS" => "Y")
+	<?$APPLICATION->IncludeComponent("bitrix:catalog.bigdata.products", ".default",
+		array(
+			"DISPLAY_IMG_WIDTH" => $arParams["DISPLAY_IMG_WIDTH"],
+			"DISPLAY_IMG_HEIGHT" => $arParams["DISPLAY_IMG_HEIGHT"],
+			"SHARPEN" => $arParams["SHARPEN"],
+			"DISPLAY_COMPARE" => $arParams["USE_COMPARE"],
+			"SHOW_POPUP" => "Y",
+			"LINE_ELEMENT_COUNT" => "4",
+			"TEMPLATE_THEME" => "",
+			"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
+			"BASKET_URL" => $arParams["BASKET_URL"],
+			"ACTION_VARIABLE" => $arParams["ACTION_VARIABLE"],
+			"PRODUCT_ID_VARIABLE" => $arParams["PRODUCT_ID_VARIABLE"],
+			"PRODUCT_QUANTITY_VARIABLE" => $arParams["PRODUCT_QUANTITY_VARIABLE"],
+			"ADD_PROPERTIES_TO_BASKET" => $arParams["ADD_PROPERTIES_TO_BASKET"],
+			"PRODUCT_PROPS_VARIABLE" => $arParams["PRODUCT_PROPS_VARIABLE"],
+			"PARTIAL_PRODUCT_PROPERTIES" => $arParams["PARTIAL_PRODUCT_PROPERTIES"],
+			"SHOW_OLD_PRICE" => "",
+			"SHOW_DISCOUNT_PERCENT" => "",
+			"PRICE_CODE" => $arParams["PRICE_CODE"],
+			"SHOW_PRICE_COUNT" => $arParams["SHOW_PRICE_COUNT"],
+			"PRODUCT_SUBSCRIPTION" => "",
+			"PRICE_VAT_INCLUDE" => $arParams["PRICE_VAT_INCLUDE"],
+			"USE_PRODUCT_QUANTITY" => $arParams["USE_PRODUCT_QUANTITY"],
+			"SHOW_NAME" => "Y",
+			"SHOW_IMAGE" => "Y",
+			"MESS_BTN_BUY" => "",
+			"MESS_BTN_DETAIL" => "",
+			"MESS_BTN_SUBSCRIBE" => "",
+			"MESS_NOT_AVAILABLE" => "",
+			"PAGE_ELEMENT_COUNT" => "4",
+			"SHOW_FROM_SECTION" => "Y",
+			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+			"DEPTH" => "2",
+			"CACHE_TYPE" => $arParams["CACHE_TYPE"],
+			"CACHE_TIME" => $arParams["CACHE_TIME"],
+			"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+			"SHOW_PRODUCTS_".$arParams["IBLOCK_ID"] => "Y",
+			"ADDITIONAL_PICT_PROP_".$arParams["IBLOCK_ID"] => "",
+			"LABEL_PROP_".$arParams["IBLOCK_ID"] => "",
+			"HIDE_NOT_AVAILABLE" => $arParams["HIDE_NOT_AVAILABLE"],
+			"CONVERT_CURRENCY" => $arParams["CONVERT_CURRENCY"],
+			"CURRENCY_ID" => $arParams["CURRENCY_ID"],
+			"SECTION_ID" => $intSectionID,
+			"SECTION_CODE" => "",
+			"SECTION_ELEMENT_ID" => "",
+			"SECTION_ELEMENT_CODE" => "",
+			"ID" => "",
+			"PROPERTY_CODE_".$arParams["IBLOCK_ID"] => "",
+			"PROPERTY_CODE_MOD" => $arParams["PROPERTY_CODE_MOD"],
+			"CART_PROPERTIES_".$arParams["IBLOCK_ID"] => "",
+			"RCM_TYPE" => $arParams["BIG_DATA_RCM_TYPE"],
+			"OFFER_TREE_PROPS_".$arRecomData["OFFER_IBLOCK_ID"] => $arParams["LIST_OFFERS_PROPERTY_CODE"],
+			"ADDITIONAL_PICT_PROP_".$arRecomData["OFFER_IBLOCK_ID"] => ""
+		),
+		false,
+		array("HIDE_ICONS" => "Y")
 		);?>
 	<?endif;
 endif;
@@ -524,4 +553,4 @@ endif;
 //CANONICAL//
 if(!empty($_REQUEST["sort"]) || !empty($_REQUEST["order"]) || !empty($_REQUEST["limit"]) || !empty($_REQUEST["view"]) || !empty($_REQUEST["action"]) || !empty($_REQUEST["set_filter"]) || !empty($_REQUEST["PAGEN_1"])):
 	$APPLICATION->AddHeadString("<link rel='canonical' href='".$APPLICATION->GetCurPage()."'>");
-endif;?>
+	endif;?>

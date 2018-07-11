@@ -5342,6 +5342,12 @@ table.compare-grid .delay a.catalog-item-delayed .delay_text{
 	color:#000;
 }
 
+.FontWeight{
+	font-size:14px;
+	font-weight:700;
+	color:#000;
+}
+
 .myorders .order-info .label .star{
 	font-size:14px;
 	font-weight:700;
@@ -7206,3 +7212,4 @@ table.compare-grid .delay a.catalog-item-delayed .delay_text{
 		font-size:14px;
 	}
 }
+

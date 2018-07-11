@@ -21,4 +21,6 @@ $MESS ['STPOL_REPEAT_ORDER'] = "Повторить заказ";
 $MESS ['STPOL_CANCEL_ORDER'] = "Отменить заказ";
 $MESS ['STPOL_DETAIL_ORDER'] = "Подробнее о заказе";
 $MESS ['STPOL_NO_ORDERS_NEW'] = "У вас еще нет заказов на нашем сайте.";
+$MESS ['SHIPMENT_ID'] = "№ Экспедиторской расписки";
+$MESS ['DATE_SHIPMENT'] = "Дата Экспедиторской расписки";
 ?>

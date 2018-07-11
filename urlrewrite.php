@@ -64,12 +64,20 @@ $arUrlRewrite=array (
     'PATH' => '/reviews/index.php',
     'SORT' => 100,
   ),
-  8 => 
+  11 => 
   array (
     'CONDITION' => '#^/catalog/#',
     'RULE' => '',
     'ID' => 'bitrix:catalog',
     'PATH' => '/catalog/index.php',
+    'SORT' => 100,
+  ),
+  12 => 
+  array (
+    'CONDITION' => '#^\\??(.*)#',
+    'RULE' => '&$1',
+    'ID' => 'bitrix:catalog.section',
+    'PATH' => '/catalog/razmotka/index.php',
     'SORT' => 100,
   ),
   9 => 

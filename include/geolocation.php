@@ -17,6 +17,13 @@
 	)
 );?>
 */?>
+
+
+
+
+
+
+
 <div class="telephone">
 	<table cellpadding="1" cellspacing="1">
 	<tbody>
@@ -31,16 +38,28 @@
 			<p>
  <i class="fa fa-phone"></i>Волгоград:
 			</p>
+			<p>
+ <i class="fab fa-viber"></i>Viber:
+			</p>
+			<p>
+ <i class="fab fa-whatsapp"></i>WhatsApp:
+			</p>
 		</td>
 		<td>
 			<p>
-				 7 (846) 233-52-03
+				 <a href="tel:+78462335203"> +7 (846) 233-52-03   </a>
 			</p>
 			<p>
-				 7 (861) 212-12-01
+				 <a href="tel:+78612121201"> +7 (861) 212-12-01   </a>
 			</p>
 			<p>
-				 7 (844) 245-97-00 
+				 <a href="tel:+78442459700"> +7 (844) 245-97-00   </a> 
+			</p>
+			<p>
+				 <a href="viber://chat?number=79272948409"> +7 (927) 294-84-09   </a> 
+			</p>
+			<p>
+				 <a href="whatsapp://send?phone=79272948409"> +7 (927) 294-84-09   </a> 
 			</p>
 		</td>
 	</tr>

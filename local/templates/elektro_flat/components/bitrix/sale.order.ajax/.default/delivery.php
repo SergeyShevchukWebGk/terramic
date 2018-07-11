@@ -78,7 +78,7 @@
                     <label class="terminal image_1">
                         <input type="radio" name="type" class="table_d" value="<?=DELIVERY_SAMARA?>"/>
                         <img src="/local/templates/elektro_flat/images/logotip.jpg" >
-                        Доставка транспортной компанией со склада "Самара"
+                        <span class="FontWeight">Отправка со склада "Самара"</span>
                         <b>Вы можете заказать доставку вашего заказа транспортной компанией</b>
                     </label>
                 </div>
@@ -180,7 +180,7 @@
                     <label class="terminal image_1">
                         <input type="radio" name="type" class="table_d" value="<?=DELIVERY_KRASNODAR?>"/>
                         <img src="/local/templates/elektro_flat/images/logotip.jpg" >
-                        Доставка транспортной компанией со склада "Краснодар"
+                            <span class="FontWeight">Отправка со склада "Краснодар"</span>
                         <b>Вы можете заказать доставку вашего заказа транспортной компанией</b>
                     </label>
                 </div>

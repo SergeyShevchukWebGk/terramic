@@ -866,11 +866,12 @@ ul.left-menu > li.parentMore > ul.submenuMore > li.parent ul{
 
 /***MENU_NEW_LEADER_DISCOUNT***/
 ul.new_leader_disc{
-	width:100%;
-	float:left;
-	margin:12px 0px 0px 0px;
-	padding:0px;
-	list-style:none;
+    width: 112%;
+    float: left;
+    margin: 12px 0px 0px 0px;
+    padding: 0px;
+    list-style: none;
+    margin-left: -23px;
 }
 
 .clvh ul.new_leader_disc{
@@ -891,11 +892,11 @@ ul.new_leader_disc li:last-child{
 ul.new_leader_disc li a{
 	display:block;
 	margin:0px;
-	padding:8px 0px 8px 57px;
+	padding:8px 0px 8px 87px;
 }
 
 ul.new_leader_disc li a .icon{
-	width:42px;
+	width: 72px;
 	height:22px;
 	position:absolute;
 	left:-2px;
@@ -7759,6 +7760,15 @@ table.compare-grid .delay .catalog-item-delayed i:nth-child(2){
 	padding:10px;
 }
 
+ .personal-info_in
+.bx-authform-label-container{
+	width: 380px;
+}
+
+ .personal-info_in span{
+	color: #d93333;
+}
+
 .myorders .order-info_in table .store{
 	width:100%;
 	display:table;
@@ -12268,4 +12278,28 @@ table.compare-grid .delay .catalog-item-delayed i:nth-child(2){
     color: #cc0000;
     top: -2px;
     position: relative;
+}
+.item-image-cont{
+    position: relative;
+}
+.razmotka{
+position: absolute;
+    width: 90px;
+    height: 19px;
+    background-color: #0c9a88;
+    color: #fff;
+    display: block;
+    right: 8px;
+    z-index: 10;
+    text-align: center;
+    padding-top: 1px;
+}
+.razmotka:after{
+    content: '';
+    border: 10px solid transparent;
+    border-right: 9px solid #fff;
+    right: 0;
+    display: block;
+    position: absolute;
+    top: 0;
 }

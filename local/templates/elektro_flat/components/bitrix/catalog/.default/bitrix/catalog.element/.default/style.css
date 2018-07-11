@@ -8,3 +8,24 @@
 .catalog-detail-property {
     width: 45% !important;
 }
+.razmotka_detail{
+    position: absolute;
+    width: 90px;
+    height: 19px;
+    background-color: #0c9a88;
+    color: #fff;
+    display: block;
+    right: -2px;
+    z-index: 10;
+    text-align: center;
+    padding-top: 1px;
+}
+.razmotka_detail:after {
+    content: '';
+    border: 10px solid transparent;
+    border-right: 9px solid #fff;
+    right: 0;
+    display: block;
+    position: absolute;
+    top: 0;
+}

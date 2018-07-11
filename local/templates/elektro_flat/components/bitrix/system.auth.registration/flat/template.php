@@ -14,13 +14,13 @@
  * @var CBitrixComponentTemplate $this
  */
 
+
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
 //one css for all system.auth.* forms
 $APPLICATION->SetAdditionalCSS("/bitrix/css/main/system.auth/flat/style.css");
 ?>
 <div class="bx-authform">
-
 <?
 if(!empty($arParams["~AUTH_RESULT"])):
 	$text = str_replace(array("<br>", "<br />"), "\n", $arParams["~AUTH_RESULT"]["MESSAGE"]);
@@ -89,7 +89,8 @@ document.getElementById('bx_auth_secure').style.display = '';
 			<div class="bx-authform-label-container"><span class="bx-authform-starrequired">*</span><?=GetMessage("AUTH_CONFIRM")?></div>
 			<div class="bx-authform-input-container">
 <?if($arResult["SECURE_AUTH"]):?>
-				<div class="bx-authform-psw-protected" id="bx_auth_secure_conf" style="display:none"><div class="bx-authform-psw-protected-desc"><span></span><?echo GetMessage("AUTH_SECURE_NOTE")?></div></div>
+				<div class="bx-authform-psw-protected" id="bx_auth_secure_conf" style="display:none">
+					<div class="bx-authform-psw-protected-desc"><span></span><?echo GetMessage("AUTH_SECURE_NOTE")?></div></div>
 
 <script type="text/javascript">
 document.getElementById('bx_auth_secure_conf').style.display = '';
@@ -127,7 +128,6 @@ $APPLICATION->IncludeComponent(
 ?>
 			</div>
 		</div>
-
 	<?endforeach;?>
 <?endif;?>
 <?if ($arResult["USE_CAPTCHA"] == "Y"):?>
@@ -162,6 +162,7 @@ $APPLICATION->IncludeComponent(
 							"fields" => array(
 								rtrim(GetMessage("AUTH_NAME"), ":"),
 								rtrim(GetMessage("AUTH_LAST_NAME"), ":"),
+								rtrim(GetMessage("AUTH_SECOND_NAME"), ":"),
 								rtrim(GetMessage("AUTH_LOGIN_MIN"), ":"),
 								rtrim(GetMessage("AUTH_PASSWORD_REQ"), ":"),
 								rtrim(GetMessage("AUTH_EMAIL"), ":"),
@@ -182,7 +183,7 @@ $APPLICATION->IncludeComponent(
                       "IS_LOADED" => $arParams["USER_CONSENT_IS_LOADED"],
                       "REPLACE" => array(
                        'button_caption' => 'Регистрация',
-                       'fields' => array('Имя','Фамилия','Email')
+                       'fields' => array('Имя','Фамилия','Отчество','Email')
                       ),
                   )
                  );?>

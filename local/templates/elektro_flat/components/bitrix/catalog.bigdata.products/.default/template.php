@@ -174,6 +174,9 @@ if(!empty($arResult["ITEMS"])):
 						<div class="catalog-item-info">
 							<?//ITEM_PREVIEW_PICTURE//?>
 							<div class="item-image-cont">
+                                <?if($arItem["PROPERTIES"]["RAZMOTKA"]["VALUE"]){?>
+                                    <span class="razmotka">Размотка</span>
+                                <?}?>
 								<div class="item-image">
 									<a href="<?=$arItem['DETAIL_PAGE_URL']?>">
 										<?if(is_array($arItem["PREVIEW_PICTURE"])):?>

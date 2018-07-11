@@ -137,7 +137,7 @@ function object_to_array($data)
 //     }
 
 // }
-  function getOrderBillPdf($orderId){
+function getOrderBillPdf($orderId){
    $payment = null;       
    CModule::IncludeModule("sale");  
    if(($order = \Bitrix\Sale\Order::load($orderId))
@@ -158,6 +158,7 @@ function object_to_array($data)
       $context = \Bitrix\Main\Application::getInstance()->getContext();
       $_REQUEST['pdf'] = 
       $_REQUEST['GET_CONTENT'] = 'Y';
+      $_REQUEST['ORDER_ID'] = $orderId;
       if(($res = $service->initiatePay($payment,$context->getRequest(),\Bitrix\Sale\PaySystem\BaseServiceHandler::STRING))
          && $res->isSuccess()
       ){
@@ -418,7 +419,7 @@ function MontageBasketUpdate($ID, &$arFields){
                                                 $ratio_update = array("QUANTITY" => $arItems["QUANTITY"] - 1);
                                                 CSaleBasket::Update($arItems["ID"], $ratio_update); 
                                             } else if(!in_array($arFields["PRODUCT_ID"], $ar_indent_element) && $arItems["PRODUCT_ID"] == ELEMENT_ID_SPOOL){
-
+                                                   logger(date().' '.$arFields, $_SERVER["DOCUMENT_ROOT"].'/map/log_del.txt');
                                                     $dbProp = CSaleBasket::GetPropsList(
                                                            Array(
                                                               "ID" => "DESC"
@@ -498,7 +499,7 @@ function MontageBasketUpdate($ID, &$arFields){
                                                     $ratio_update = array("QUANTITY" => $arItems["QUANTITY"] - 1);
                                                     CSaleBasket::Update($arItems["ID"], $ratio_update); 
                                                 } else if(!in_array($arFields["PRODUCT_ID"], $ar_indent_element) && $arItems["PRODUCT_ID"] == ELEMENT_ID_SPOOL){
-
+                                                   logger(date().' '.$arFields, $_SERVER["DOCUMENT_ROOT"].'/map/log_del_2.txt');
                                                         $dbProp = CSaleBasket::GetPropsList(
                                                                Array(
                                                                   "ID" => "DESC"
@@ -556,11 +557,13 @@ function OnBeforeBasketDeleteHandler($ID) {
                 array("ID","PRODUCT_ID")
             );
         while ($arItem = $dbBasketItem->Fetch()){
-            //logger($arItem, $_SERVER["DOCUMENT_ROOT"].'/map/log.txt');
+            logger($arItem, $_SERVER["DOCUMENT_ROOT"].'/map/log_1_delete_shpool.txt');
             if($arItems["PRODUCT_ID"] == ELEMENT_ID_SPOOL && $arItems["QUANTITY"] > 1){
                 $ratio_update = array("QUANTITY" => $arItems["QUANTITY"] - 1);
                 CSaleBasket::Update($arItems["ID"], $ratio_update); 
             } else if($arItem["PRODUCT_ID"] == ELEMENT_ID_SPOOL){
+                    logger(date().' '.$arFields, $_SERVER["DOCUMENT_ROOT"].'/map/log_del_3.txt');
+
                     $dbProp = CSaleBasket::GetPropsList(
                                Array(
                                   "ID" => "DESC"
