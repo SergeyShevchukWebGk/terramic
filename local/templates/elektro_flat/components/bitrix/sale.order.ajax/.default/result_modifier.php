@@ -124,4 +124,5 @@ if($arResult["AMOUNT"] > 0.001){
 } else {
     $arResult["AMOUNT"] = 0.001;
     }
+if($arResult["AUTH"]["NEW_SECOND_NAME"] = $arResult["POST"]["NEW_SECOND_NAME"]);
 ?>
